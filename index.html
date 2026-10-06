@@ -47,13 +47,20 @@ button{font:inherit;color:inherit}
 
 /* top bar + bottom bar (guided navigation, no tab strip) */
 .topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--rule);margin-inline:-18px;padding:10px 18px;display:flex;align-items:center;gap:10px;min-height:56px}
-.topbar .back{border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:8px 14px;font-size:16px;font-weight:500;cursor:pointer;white-space:nowrap}
+.topbar .back{display:inline-flex;align-items:center;gap:6px;border:0;background:var(--wash);color:var(--jade-deep);border-radius:999px;padding:8px 15px 8px 11px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;line-height:1.2;transition:background .15s,transform .1s}
+.topbar .back svg{width:18px;height:18px;flex:none}
+.topbar .back:hover{background:#dcebe4}.topbar .back:active{transform:scale(.97)}
 .topbar .where{font-family:var(--display);font-weight:700;font-size:18px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bottombar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--paper);border-top:1px solid var(--rule);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
 .bottombar .in{max-width:640px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.bottombar button{border:1px solid var(--rule);background:var(--paper);border-radius:12px;padding:12px 8px;font-size:16px;font-weight:700;cursor:pointer;line-height:1.3}
-.bottombar button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.bottombar button small{display:block;font-weight:400;font-size:13px;opacity:.8}
+.bottombar button{display:flex;align-items:center;gap:10px;min-width:0;min-height:58px;border:0;background:var(--tint);color:var(--ink);border-radius:16px;padding:9px 14px 9px 10px;font-size:17px;font-weight:700;cursor:pointer;line-height:1.25;text-align:left;transition:transform .1s,filter .15s}
+.bottombar button.primary{background:var(--jade);color:#fff;justify-content:flex-end;text-align:right;padding:9px 10px 9px 14px;box-shadow:0 3px 10px rgba(18,112,93,.28)}
+.bottombar button:active{transform:scale(.97)}.bottombar button:hover{filter:brightness(.97)}
+.bottombar .ic{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--paper);color:var(--jade)}
+.bottombar .ic svg{width:18px;height:18px}
+.bottombar button.primary .ic{background:rgba(255,255,255,.2);color:#fff}
+.bottombar .lb{min-width:0}
+.bottombar button small{display:block;font-weight:500;font-size:12.5px;opacity:.72;letter-spacing:.02em}
 .bottombar button:disabled{visibility:hidden}
 .has-bottom{padding-bottom:110px}
 /* home */
@@ -252,7 +259,6 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);line-height:1.6}
 .tile .ttl{font-size:18.5px}
 .bottombar button.primary{background:var(--jade);border-color:var(--jade)}
 .bottombar button.primary:hover{background:var(--jade-deep)}
-.topbar .back{background:var(--tint);border-color:transparent}
 .note{background:var(--wash)}
 .sched li.meal .what{color:var(--lantern)}
 @media (prefers-reduced-motion:reduce){.daybtn,.helpbtn{transition:none}}
@@ -302,7 +308,8 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .gmapbtn:hover{background:#FAFBFC}
 .gmapnote{margin:6px 6px 0;color:var(--muted)}
 .topbar{background:var(--bg);border-bottom:0}
-.topbar .back{background:var(--paper);border:0;font-weight:600;font-size:15px}
+.topbar .back{background:var(--paper);color:var(--jade);border:0;font-weight:700;font-size:15px;box-shadow:0 1px 4px rgba(0,30,80,.07)}
+.topbar .back:hover{background:var(--paper);filter:brightness(.97)}
 .topbar .where{font-family:var(--body);font-size:17px;letter-spacing:-.02em}
 .panel{padding-top:20px}
 .kicker{font-size:14px;font-weight:600;letter-spacing:0;color:var(--jade);margin-left:4px}
@@ -331,7 +338,9 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .tile .more{color:var(--muted);font-size:13px}
 .tile .ph .zhname{color:var(--jade)}
 .bottombar{background:rgba(242,244,246,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:0}
-.bottombar button{border:0;background:var(--paper);border-radius:16px;font-weight:600;padding:13px 8px}
+.bottombar button{border:0;background:var(--paper);border-radius:16px;font-weight:700;box-shadow:0 1px 4px rgba(0,30,80,.06)}
+.bottombar .ic{background:var(--bg)}
+.bottombar button.primary{box-shadow:0 4px 12px rgba(49,130,246,.3)}
 .bottombar button.primary{background:var(--jade);color:#fff}
 .bottombar button.primary:hover{background:var(--jade-deep)}
 .sheet{border-radius:24px 24px 0 0}
@@ -401,10 +410,11 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .sched .mv{white-space:normal;flex-wrap:wrap;row-gap:0;overflow:visible}
 .sched .mv em{overflow:visible;text-overflow:clip;white-space:nowrap}
 </style>
-</head><body>
+</head>
+<body>
 
 <div class="wrap">
-  <div class="topbar" id="topbar" hidden><button type="button" class="back" id="backBtn">‹ 처음으로</button><span class="where" id="where"></span></div>
+  <div class="topbar" id="topbar" hidden><button type="button" class="back" id="backBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-5.5h4V20"/></svg>처음으로</button><span class="where" id="where"></span></div>
   <main id="panels"></main>
   <footer>
     지도의 위치와 경로는 대략이에요. 일정은 날씨와 사정에 따라 바뀔 수 있어요.
@@ -544,14 +554,14 @@ const FOODS={
 };
 const DAYS=[
  {id:'day1',smap:{'11:15': 'https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%20%E7%AC%AC%E4%B8%80%E8%88%AA%E5%BB%88', '14:00': 'https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E7%8E%8B%E7%85%AE%E7%93%9C%20%E8%8F%AF%E8%A5%BF%E8%A1%9717-4%E8%99%9F', '14:50': 'https://www.google.com/maps/search/?api=1&query=%E8%89%8B%E8%88%BA%E9%BE%8D%E5%B1%B1%E5%AF%BA', '15:15': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97', '16:30': 'https://www.google.com/maps/search/?api=1&query=%E4%B8%AD%E6%AD%A3%E7%B4%80%E5%BF%B5%E5%A0%82', '17:30': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97101%E8%A7%80%E6%99%AF%E5%8F%B0', '19:30': 'https://www.google.com/maps/search/?api=1&query=KiKi%E9%A4%90%E5%BB%B3%20ATT%204%20FUN%20%E4%BF%A1%E7%BE%A9%E5%BA%97', '21:15': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97','13:50': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97'},gmap:'https://www.google.com/maps/dir/?api=1&origin=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97%20%E8%89%8B%E8%88%BA%E5%A4%A7%E9%81%93167%E8%99%9F&destination=KiKi%E9%A4%90%E5%BB%B3%20ATT%204%20FUN%20%E4%BF%A1%E7%BE%A9%E5%BA%97&travelmode=driving&waypoints=%E5%B0%8F%E7%8E%8B%E7%85%AE%E7%93%9C%20%E8%8F%AF%E8%A5%BF%E8%A1%9717-4%E8%99%9F%7C%E4%B8%AD%E6%AD%A3%E7%B4%80%E5%BF%B5%E5%A0%82%7C%E5%8F%B0%E5%8C%97101%E8%A7%80%E6%99%AF%E5%8F%B0',tab:'1일차',date:'11월 7일 토요일',zhd:'十一月七日 星期六',title:'타이베이 300년, 하루의 시간 여행',lead:'청나라 이주민이 처음 터를 잡은 완화의 옛 절 용산사에서 출발해, 근현대 대만의 상징 중정기념당을 지나, 오늘의 타이베이를 한눈에 내려다보는 101 전망대까지. 도시가 걸어온 300년을 하루에 따라가요.',map:'img/day1.jpg',cap:'번호 순서대로 다녀요.',
-  sched:[['09:35','김해공항 출발','제주항공 7C6151 · 서울팀은 인천에서 진에어 LJ0171'],['11:15','타오위안 공항 1터미널 도착','서울팀은 11:30 도착 · 공항에서 만나요'],['13:00','밴으로 숙소까지','40~50분','move'],['13:50','호텔 로비에 캐리어 맡기기','체크인은 15:00부터 · 점심·용산사 다녀와서'],['13:52','걸어서 식당까지','8분','move'],['14:00','점심 · 샤오왕주과','루러우판과 맑은 고깃국','meal'],['14:45','걸어서 용산사로','3분','move'],['14:50','용산사 구경','15~20분'],['15:10','걸어서 숙소로','5분','move'],['15:15','체크인하고 쉬기','맡긴 캐리어 찾아 방으로'],['16:15','우버XL로 중정기념당','10분 · 약 1만 원','move'],['16:30','중정기념당','17:00 정각 본당 밖 계단 앞 의장대 시범 (비 오면 없음)'],['17:15','우버XL로 101까지','15분 · 약 1.5만 원','move'],['17:30','101 전망대 야경',''],['19:20','걸어서 키키까지','3분','move'],['19:30','저녁 · 키키 레스토랑','혜영이도 여기서 만나요 · 예약 자리는 10분만 잡아 줘요','meal'],['21:15','우버XL로 숙소까지','20분 · 약 1.9만 원','move']],
+  sched:[['09:35','김해공항 출발','제주항공 7C6151 · 서울팀은 인천에서 진에어 LJ0171'],['11:15','타오위안 공항 1터미널 도착','서울팀은 11:30 도착 · 공항에서 만나요'],['13:00','밴으로 숙소까지','40~50분','move'],['13:50','호텔 로비에 캐리어 맡기기','체크인은 15:00부터 · 점심·용산사 다녀와서'],['13:52','걸어서 식당까지','8분','move'],['14:00','점심 · 샤오왕주과','루러우판과 맑은 고깃국','meal'],['14:45','걸어서 용산사로','3분','move'],['14:50','용산사 구경','15~20분'],['15:10','걸어서 숙소로','5분','move'],['15:15','체크인하고 쉬기','맡긴 캐리어 찾아 방으로'],['16:15','우버XL로 중정기념당','10분 · 약 1만 원','move'],['16:30','중정기념당','17:00 정각 본당 밖 계단 앞 의장대 시범 (비 오면 없음)'],['17:15','지하철 또는 우버로 101까지','빨간선 직통 10분 · 우버 약 1.5만 원','move'],['17:30','101 전망대 야경',''],['19:20','걸어서 키키까지','3분','move'],['19:30','저녁 · 키키 레스토랑','혜영이도 여기서 만나요 · 예약 자리는 10분만 잡아 줘요','meal'],['21:15','우버XL로 숙소까지','20분 · 약 1.9만 원','move']],
   places:['hotel','longshan','cks','t101'],foods:['lurou','kiki']},
  {id:'day2',smap:{'08:30': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97', '10:50': 'https://www.google.com/maps/search/?api=1&query=%E7%89%9B%E5%BA%97%E7%B2%BE%E7%87%89%E7%89%9B%E8%82%89%E9%BA%B5%20%E6%98%86%E6%98%8E%E8%A1%9791%E8%99%9F', '13:00': 'https://www.google.com/maps/search/?api=1&query=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92', '15:00': 'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97', '17:15': 'https://www.google.com/maps/search/?api=1&query=%E4%B9%9D%E4%BB%BD%E8%80%81%E8%A1%97', '20:00': 'https://www.google.com/maps/search/?api=1&query=%E6%B7%BB%E5%A5%BD%E9%81%8B%20%E6%9D%BE%E5%B1%B1%E8%BB%8A%E7%AB%99%E5%BA%97', '20:50': 'https://www.google.com/maps/search/?api=1&query=%E9%A5%92%E6%B2%B3%E8%A1%97%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82'},walks:[['예류 지질공원','https://www.google.com/maps/dir/?api=1&origin=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%20%E9%81%8A%E5%AE%A2%E4%B8%AD%E5%BF%83&destination=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%20%E9%81%8A%E5%AE%A2%E4%B8%AD%E5%BF%83&travelmode=walking&waypoints=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%20%E8%95%88%E7%8B%80%E5%B2%A9%7C%E9%87%8E%E6%9F%B3%20%E5%A5%B3%E7%8E%8B%E9%A0%AD%7C%E9%87%8E%E6%9F%B3%20%E4%BB%99%E5%A5%B3%E9%9E%8B','yehliu'],['스펀 옛거리','https://www.google.com/maps/dir/?api=1&origin=%E5%8D%81%E5%88%86%E8%BB%8A%E7%AB%99&destination=%E5%8D%81%E5%88%86%E6%BA%9C%E5%93%A5%E7%87%92%E7%83%A4%E9%9B%9E%E7%BF%85%E5%8C%85%E9%A3%AF%20%E6%96%B0%E5%8C%97%E5%B8%82%E5%B9%B3%E6%BA%AA%E5%8D%80%E5%8D%81%E5%88%86%E8%A1%9752%E8%99%9F&travelmode=walking&waypoints=%E5%90%89%E7%A5%A5%E5%A4%A9%E7%87%88%20%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%7C%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%20%E9%BB%91%E8%B1%AC%E8%82%89%E9%A6%99%E8%85%B8','shifen'], ['지우펀 마을','https://www.google.com/maps/dir/?api=1&origin=7-ELEVEN%20%E4%B9%9D%E4%BB%BD%E9%96%80%E5%B8%82&destination=%E6%98%87%E5%B9%B3%E6%88%B2%E9%99%A2%20%E6%96%B0%E5%8C%97%E5%B8%82%E7%91%9E%E8%8A%B3%E5%8D%80&travelmode=walking&waypoints=%E9%98%BF%E7%8F%A0%E9%9B%AA%E5%9C%A8%E7%87%92%20%E4%B9%9D%E4%BB%BD%7C%E9%98%BF%E5%A6%B9%E8%8C%B6%E6%A8%93%20%E4%B9%9D%E4%BB%BD','jiufen']],gmap:'https://www.google.com/maps/dir/?api=1&origin=%E7%89%9B%E5%BA%97%E7%B2%BE%E7%87%89%E7%89%9B%E8%82%89%E9%BA%B5%20%E6%98%86%E6%98%8E%E8%A1%9791%E8%99%9F&destination=%E9%A5%92%E6%B2%B3%E8%A1%97%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82&travelmode=driving&waypoints=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%7C%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%7C%E4%B9%9D%E4%BB%BD%E8%80%81%E8%A1%97',tab:'2일차',date:'11월 8일 일요일',zhd:'十一月八日 星期日',title:'바다가 빚고, 탄광이 키운 북쪽 해안',lead:'수천 년 파도가 깎아 낸 예류의 버섯 바위에서 시작해, 석탄을 나르던 철길 위로 소원 천등을 띄우는 스펀을 지나, 금광 붐이 남긴 산비탈 마을 지우펀의 홍등 야경을 보고, 라오허제 야시장에서 하루를 마무리해요.',map:'img/day2.jpg',cap:'바닷가에서 산골까지, 북쪽 해안을 한 바퀴 돌아요.',
   sched:[['08:30','호텔 조식','가볍게','meal'],['10:30','걸어서 우육면집까지','20분 · 평지','move'],['10:50','점심 · 뉴뎬 우육면','11:00 오픈 · 번호표 받고 기다리기','meal'],['12:00','밴 타고 출발','식당 앞 탑승 · 8시간','move'],['13:00','예류 지질공원','바닷바람이 세요 · 약 1시간'],['14:00','밴으로 스펀까지','약 1시간','move'],['15:00','스펀 · 천등 날리기','닭날개 볶음밥 · 흑돼지 소시지'],['16:15','밴으로 지우펀까지','약 1시간','move'],['17:15','지우펀','해 진 뒤 홍등 야경 · 찻집에서 쉬어 가기'],['19:00','밴으로 송산역까지','약 1시간','move'],['20:00','저녁 · 팀호완','차슈번과 딤섬 · 2차는 야시장에서','meal'],['20:50','라오허제 야시장','후추빵 · 약재갈비탕 · 컷과일'],['21:50','우버XL로 숙소까지','25분 · 약 2.1만 원','move']],
   note:'방문 순서는 그날 날씨와 길 사정에 따라 기사님이 조금 바꿀 수 있어요.',
   places:['yehliu','shifen','jiufen','raohe'],foods:['beef','wing','sausage','peanut','charsiu','pepper','ribs','fruit']},
  {id:'day3',smap:{'08:00': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97', '11:00': 'https://www.google.com/maps/search/?api=1&query=%E7%83%8F%E4%BE%86%E5%8F%B0%E8%BB%8A%20%E7%83%8F%E4%BE%86%E7%AB%99', '12:00': 'https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E5%9C%B0%E7%BE%8E%E9%A3%9F%E5%B1%8B%20%E7%83%8F%E4%BE%86%E8%A1%9720%E8%99%9F', '13:00': 'https://www.google.com/maps/search/?api=1&query=%E7%83%8F%E4%BE%86%E8%80%81%E8%A1%97', '15:00': 'https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E9%96%80%E7%94%BA', '19:00': 'https://www.google.com/maps/search/?api=1&query=%E7%84%A1%E8%80%81%E9%8D%8B%20%E8%A5%BF%E9%96%80%E7%94%BA%E5%BA%97', '20:30': 'https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E5%85%84%E5%A6%B9%E9%9B%AA%E8%8A%B1%E5%86%B0%20%E8%A5%BF%E9%96%80%E7%B8%BD%E5%BA%97'},walks:[['우라이 마을','https://www.google.com/maps/dir/?api=1&origin=%E7%83%8F%E4%BE%86%E8%80%81%E8%A1%97&destination=%E7%83%8F%E4%BE%86%E7%80%91%E5%B8%83&travelmode=walking&waypoints=%E7%83%8F%E4%BE%86%E5%8F%B0%E8%BB%8A%20%E7%83%8F%E4%BE%86%E7%AB%99','wulai']],gmap:'https://www.google.com/maps/dir/?api=1&origin=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97%20%E8%89%8B%E8%88%BA%E5%A4%A7%E9%81%93167%E8%99%9F&destination=%E7%84%A1%E8%80%81%E9%8D%8B%20%E8%A5%BF%E9%96%80%E7%94%BA%E5%BA%97&travelmode=driving&waypoints=%E7%83%8F%E4%BE%86%E5%8F%B0%E8%BB%8A%20%E7%83%8F%E4%BE%86%E7%AB%99%7C%E5%B1%B1%E5%9C%B0%E7%BE%8E%E9%A3%9F%E5%B1%8B%20%E7%83%8F%E4%BE%86%7C%E8%A5%BF%E9%96%80%E7%94%BA',tab:'3일차',date:'11월 9일 월요일',zhd:'十一月九日 星期一',title:'타이야족의 온천 마을, 그리고 대만의 명동',lead:'원주민 말로 \'김이 나는 뜨거운 물\'이라는 우라이에서 꼬마기차를 타고 폭포를 만나요. 오후엔 숙소에서 쉬고, 저녁엔 타이베이 젊음의 거리 시먼딩에서 가족 만찬을 즐겨요.',map:'img/day3.jpg',cap:'오후엔 숙소 근처 시먼딩만 다녀요. 지하철 한 정거장이에요.',
-  sched:[['08:00','호텔 조식','','meal'],['10:00','밴 타고 우라이로','6시간 · ~16:00','move'],['11:00','우라이 꼬마기차 · 우라이 폭포','옛거리 끝 다리 건너 탑승 · 편도 약 10분'],['12:00','점심 · 산지메이스우','토종닭과 산골 요리','meal'],['13:00','우라이 옛거리 산책','멧돼지 소시지 맛보기'],['15:00','호텔에서 휴식 또는 자유시간','4시간 · 시먼딩 추천 간식·장소 8곳 눌러서 보기'],['19:00','가족 저녁 · 우라오궈 훠궈','매운 국물·하얀 국물 반반 냄비','meal','ok'],['20:30','망고빙수','식당에서 걸어서 3분','opt'],['21:15','우버XL로 숙소까지','5분 · 약 8천 원','move']],
+  sched:[['08:00','호텔 조식','','meal'],['10:00','밴 타고 우라이로','6시간 · ~16:00','move'],['11:00','우라이 꼬마기차 · 우라이 폭포','옛거리 끝 다리 건너 탑승 · 편도 약 10분'],['12:00','점심 · 산지메이스우','토종닭과 산골 요리','meal'],['13:00','우라이 옛거리 산책','멧돼지 소시지 맛보기'],['15:00','호텔에서 휴식 또는 자유시간','4시간 · 시먼딩 추천 간식·장소 8곳 눌러서 보기'],['19:00','가족 저녁 · 우라오궈 훠궈','매운 국물·하얀 국물 반반 냄비','meal','ok'],['20:30','망고빙수','식당에서 걸어서 3분','opt'],['21:15','지하철 또는 우버로 숙소까지','MRT 1정거장 · 우버 약 8천 원','move']],
   places:['wulai','trolley','wulaifall','wulaist','ximen'],foods:['chicken','boar','gopchang','boba','hotpot','mango']},
  {id:'day4',smap:{'07:00': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97', '09:30': 'https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%20%E7%AC%AC%E4%B8%80%E8%88%AA%E5%BB%88', '10:00': 'https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%20%E7%AC%AC%E4%B8%80%E8%88%AA%E5%BB%88%20%E7%BE%8E%E9%A3%9F%E8%A1%97'},gmap:'https://www.google.com/maps/dir/?api=1&origin=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97%20%E8%89%8B%E8%88%BA%E5%A4%A7%E9%81%93167%E8%99%9F&destination=%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%20%E7%AC%AC%E4%B8%80%E8%88%AA%E5%BB%88&travelmode=driving',tab:'4일차',date:'11월 10일 화요일',zhd:'十一月十日 星期二',title:'다시 만날 날을 약속하며',lead:'공항에서 6명이 함께 마지막 식사를 하고, 각자의 집으로 돌아가요. 전날 밤 짐을 싸 두면 아침이 여유로워요.',map:'img/day4.jpg',cap:'숙소에서 공항까지 차로 한 번에 가요.',
   sched:[['07:00','호텔 조식','시간이 빠듯하면 간단히','meal'],['08:00','체크아웃','여권과 충전기 꼭 확인'],['08:20','밴으로 공항까지','45~60분','move'],['09:30','공항 도착, 짐 부치기',''],['10:00','6명 함께 아점','공항 지하 1층 푸드코트 · 각자 고르기','meal'],['12:15','부산행 출발','제주항공 7C6152 · 1터미널 · 김해 15:45 도착'],['13:35','서울팀 출발','제주항공 7C6102 · 1터미널 · 인천 1터미널 17:00 도착']],
@@ -639,6 +649,13 @@ const ORDER=['home','day1','day2','day3','day4'];
 const NAMES={home:'처음 화면',day1:'1일차 · 11월 7일',day2:'2일차 · 11월 8일',day3:'3일차 · 11월 9일',day4:'4일차 · 11월 10일',cards:'중국어 카드',info:'알아둘 것 · 연락처'};
 const topbar=$('#topbar'),bottombar=$('#bottombar'),prevBtn=$('#prevBtn'),nextBtn=$('#nextBtn');
 let prevTo=null,nextTo=null;
+const SV=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const IC={home:SV('<path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-5.5h4V20"/>'),l:SV('<path d="m15 5-7 7 7 7"/>'),r:SV('<path d="m9 5 7 7-7 7"/>')};
+const ic=k=>`<span class="ic">${IC[k]}</span>`;
+const homeL=ic('home')+'<span class="lb"><small>전체 일정</small>처음으로</span>';
+const prevL=t=>ic('l')+`<span class="lb"><small>이전</small>${t}</span>`;
+const nextL=t=>`<span class="lb"><small>다음</small>${t}</span>`+ic('r');
+const homeR='<span class="lb"><small>전체 일정</small>처음으로</span>'+ic('home');
 function setBtn(btn,to,label){if(!to){btn.disabled=true;btn.textContent='';return}btn.disabled=false;btn.innerHTML=label;}
 let cur=null;
 function show(id,fromPop){if(!built[id])id='home';
@@ -647,9 +664,9 @@ function show(id,fromPop){if(!built[id])id='home';
   $('#where').textContent=NAMES[id];
   const i=ORDER.indexOf(id);
   if(i>0){prevTo=i===1?'home':ORDER[i-1];nextTo=i<4?ORDER[i+1]:'home';
-    setBtn(prevBtn,prevTo,i===1?'‹ 처음으로':`‹ 이전<small>${i-1}일차</small>`);
-    setBtn(nextBtn,nextTo,i<4?`다음 ›<small>${i+1}일차</small>`:'처음으로');}
-  else{prevTo='home';nextTo=id==='cards'?'info':'cards';setBtn(prevBtn,prevTo,'‹ 처음으로');setBtn(nextBtn,nextTo,id==='cards'?'알아둘 것 ›':'중국어 카드 ›');}
+    setBtn(prevBtn,prevTo,i===1?homeL:prevL(`${i-1}일차`));
+    setBtn(nextBtn,nextTo,i<4?nextL(`${i+1}일차`):homeR);}
+  else{prevTo='home';nextTo=id==='cards'?'info':'cards';setBtn(prevBtn,prevTo,homeL);setBtn(nextBtn,nextTo,nextL(id==='cards'?'알아둘 것':'중국어 카드'));}
   window.scrollTo(0,0);
   if(!fromPop){try{if(cur===null)history.replaceState({p:id},'','#'+id);else if(cur!==id)history.pushState({p:id},'','#'+id)}catch(e){}}
   cur=id;
@@ -704,4 +721,6 @@ function zup(e){const p=ptr.get(e.pointerId);ptr.delete(e.pointerId);if(ptr.size
 zst.addEventListener('pointerup',zup);zst.addEventListener('pointercancel',zup);
 window.addEventListener('resize',()=>{if(!zv.hidden)zfitNow()});
 </script>
-</body></html>
+
+</body>
+</html>
