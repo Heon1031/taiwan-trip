@@ -18,8 +18,8 @@
 /* Layout: white guidebook page. Sticky tab bar on top; one tab panel at a time: map first, then schedule, then tap-to-open place and food tiles. Single light theme on purpose (white paper look). */
 :root{
   color-scheme:light;
-  --paper:#FFFFFF; --ink:#1A1F1D; --muted:#5E6864; --rule:#E6EAE8; --tint:#F5F7F6;
-  --jade:#12705D; --lantern:#B23F2B;
+  --paper:#FFFFFF; --ink:#18201D; --muted:#5B6661; --rule:#E3E8E5; --tint:#F3F6F4; --wash:#EAF2EE;
+  --jade:#12705D; --jade-deep:#0C5244; --lantern:#B23F2B; --lantern-wash:#FBEDEA;
   --display:"Gowun Batang","Nanum Myeongjo",serif;
   --body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
   --zh:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
@@ -85,6 +85,15 @@ button{font:inherit;color:inherit}
 .map{margin:20px 0 0;border:1px solid var(--rule);border-radius:12px;overflow:hidden;background:#fff}
 .map{cursor:zoom-in}
 .sheet.mapview img{max-height:none;object-fit:contain;background:#fff}
+.zv{position:fixed;inset:0;z-index:30;background:#1b1f1d;display:flex;flex-direction:column}
+.zv[hidden]{display:none}
+.zv-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) 12px 10px;background:#1b1f1d;color:#cfd5d2}
+.zv-bar button{min-height:44px;min-width:44px;padding:0 16px;border-radius:999px;border:0;background:#fff;color:#1a1f1d;font-size:17px;font-weight:700;cursor:pointer}
+.zv-z{display:flex;gap:8px}
+.zv-hint{font-size:13px;flex:1;text-align:center}
+@media (max-width:420px){.zv-hint{display:none}}
+.zv-stage{flex:1;position:relative;overflow:hidden;touch-action:none;background:#fff}
+#zvImg{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none;user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
 .map figcaption{font-size:14px;color:var(--muted);padding:8px 12px;border-top:1px solid var(--rule)}
 
 .h3{font-family:var(--display);font-size:21px;margin:30px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
@@ -202,6 +211,45 @@ button{font:inherit;color:inherit}
 
 footer{margin-top:40px;font-size:12px;color:var(--muted);line-height:1.6}
 @media (prefers-reduced-motion:reduce){.tile .ph img{transition:none}}
+
+/* refined layer */
+.ask{display:flex;align-items:baseline;gap:10px;font-size:22px;margin:34px 0 14px}
+.ask::after{content:attr(data-zh);font-family:var(--zh);font-size:13px;font-weight:500;letter-spacing:.2em;color:var(--lantern)}
+.h3{display:flex;align-items:baseline;gap:10px;border-bottom:0;padding-bottom:0;margin:36px 0 14px;font-size:22px}
+.h3::after{content:attr(data-zh);font-family:var(--zh);font-size:13px;font-weight:500;letter-spacing:.2em;color:var(--lantern)}
+.h3::before{content:'';flex:none;width:7px;height:7px;border-radius:2px;background:var(--lantern);transform:translateY(-3px) rotate(45deg)}
+.ask::before{content:'';flex:none;width:7px;height:7px;border-radius:2px;background:var(--lantern);transform:translateY(-3px) rotate(45deg)}
+.hello{min-height:300px;border-radius:22px;padding:22px 22px 24px;gap:4px;background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(8,20,16,.72)),url('img/hero.jpg') center 30%/cover}
+.hello .eyebrow{font-family:var(--zh);font-size:13px;letter-spacing:.32em;color:rgba(255,255,255,.85);font-weight:500}
+.hello h1{font-size:32px;letter-spacing:-.01em}
+.daybtns{gap:10px}
+.daybtn{grid-template-columns:84px 1fr auto;gap:14px;padding:10px 12px 10px 10px;border-radius:18px;transition:border-color .2s,background .2s}
+.daybtn:hover{border-color:var(--jade);background:var(--wash)}
+.daybtn .thumb{position:relative;width:84px;height:84px;border-radius:13px;overflow:hidden;background:var(--tint)}
+.daybtn .thumb img{width:100%;height:100%;object-fit:cover}
+.daybtn .thumb b{position:absolute;left:6px;bottom:6px;background:var(--paper);color:var(--lantern);font-family:var(--display);font-size:14px;line-height:1;padding:5px 7px 4px;border-radius:7px}
+.daybtn .thumb b small{font-family:var(--body);font-size:11px;font-weight:500;color:var(--muted);margin-left:2px}
+.daybtn .txt{font-family:var(--display);font-size:19px}
+.daybtn .txt small{font-family:var(--body);line-height:1.45;margin-top:2px}
+.helpbtn{background:var(--wash);transition:background .2s}
+.helpbtn:hover{background:#DFEDE6}
+.howto{background:var(--lantern-wash);color:#6d3226}
+.kicker{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.kicker .zhd{font-family:var(--zh);font-weight:500;letter-spacing:.14em;color:var(--muted);font-size:13px}
+.panel h2{font-size:31px;letter-spacing:-.01em;margin-top:6px}
+.lead{font-size:17px;line-height:1.75}
+.map{border-radius:16px}
+.tile .ph{border-radius:14px}
+.tile .ttl{font-size:18.5px}
+.bottombar button.primary{background:var(--jade);border-color:var(--jade)}
+.bottombar button.primary:hover{background:var(--jade-deep)}
+.topbar .back{background:var(--tint);border-color:transparent}
+.note{background:var(--wash)}
+.sched li.meal .what{color:var(--lantern)}
+@media (prefers-reduced-motion:reduce){.daybtn,.helpbtn{transition:none}}
+.gmapbtn{display:block;margin-top:10px;text-align:center;padding:13px 14px;border-radius:14px;background:var(--wash);color:var(--jade-deep);font-weight:700;font-size:16px;text-decoration:none}
+.gmapbtn:hover{background:#DFEDE6}
+.gmapnote{margin:6px 2px 0;font-size:13px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -218,6 +266,10 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);line-height:1.6}
 <nav class="bottombar" id="bottombar" hidden aria-label="다음 화면"><div class="in"><button type="button" id="prevBtn"></button><button type="button" class="primary" id="nextBtn"></button></div></nav>
 <div class="pop" id="pop" hidden role="dialog" aria-modal="true" aria-labelledby="popTitle">
   <div class="sheet" id="sheet"></div>
+</div>
+<div class="zv" id="zv" hidden role="dialog" aria-modal="true" aria-label="지도 크게 보기">
+  <div class="zv-bar"><button type="button" id="zvClose">‹ 닫기</button><span class="zv-hint">두 손가락으로 벌려 확대 · 두 번 톡톡</span><span class="zv-z"><button type="button" id="zvOut" aria-label="축소">−</button><button type="button" id="zvIn" aria-label="확대">+</button></span></div>
+  <div class="zv-stage" id="zvStage"><img id="zvImg" alt="" draggable="false"></div>
 </div>
 <div class="card-ov" id="cardOv" hidden role="dialog" aria-modal="true" aria-labelledby="cardCn">
   <div class="in"><div class="ko" id="cardKo"></div><div class="cn" id="cardCn"></div><div class="ko" id="cardSub"></div><button type="button" id="cardClose">닫기</button></div>
@@ -321,17 +373,17 @@ const FOODS={
   tips:[]}
 };
 const DAYS=[
- {id:'day1',tab:'1일차',date:'11월 7일 토요일',title:'타이베이 300년, 하루의 시간 여행',lead:'청나라 이주민이 처음 터를 잡은 완화의 옛 절 용산사에서 출발해, 근현대 대만의 상징 중정기념당을 지나, 오늘의 타이베이를 한눈에 내려다보는 101 전망대까지. 도시가 걸어온 300년을 하루에 따라가요.',map:'img/day1.jpg',cap:'번호 순서대로 다녀요.',
+ {id:'day1',gmap:'https://www.google.com/maps/dir/?api=1&origin=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97%20%E8%89%8B%E8%88%BA%E5%A4%A7%E9%81%93167%E8%99%9F&destination=KiKi%E9%A4%90%E5%BB%B3%20ATT%204%20FUN%20%E4%BF%A1%E7%BE%A9%E5%BA%97&travelmode=driving&waypoints=%E5%B0%8F%E7%8E%8B%E7%85%AE%E7%93%9C%20%E8%8F%AF%E8%A5%BF%E8%A1%9717-4%E8%99%9F%7C%E4%B8%AD%E6%AD%A3%E7%B4%80%E5%BF%B5%E5%A0%82%7C%E5%8F%B0%E5%8C%97101%E8%A7%80%E6%99%AF%E5%8F%B0',tab:'1일차',date:'11월 7일 토요일',zhd:'十一月七日 星期六',title:'타이베이 300년, 하루의 시간 여행',lead:'청나라 이주민이 처음 터를 잡은 완화의 옛 절 용산사에서 출발해, 근현대 대만의 상징 중정기념당을 지나, 오늘의 타이베이를 한눈에 내려다보는 101 전망대까지. 도시가 걸어온 300년을 하루에 따라가요.',map:'img/day1.jpg',cap:'번호 순서대로 다녀요.',
   sched:[['09:35','김해공항 출발','제주항공 7C6151'],['11:15','타오위안 공항 도착','서울팀도 비슷한 시간에 도착해 공항에서 만나요'],['13:00','차로 숙소까지','40~50분','move'],['14:00','점심 · 샤오왕주과','숙소에서 걸어서 8분 · 루러우판과 맑은 고깃국','meal'],['14:50','용산사 구경','식당에서 걸어서 3분, 15~20분'],['15:15','체크인하고 쉬기',''],['16:30','중정기념당','17:00 정각 의장대 행사'],['17:30','101 전망대 야경',''],['19:00','저녁 · 키키 레스토랑','혜영이도 여기서 만나요','meal'],['21:00','숙소로','원하면 편의점 차예단(찻잎 달걀) 맛보기']],
   places:['hotel','longshan','cks','t101'],foods:['lurou','kiki']},
- {id:'day2',tab:'2일차',date:'11월 8일 일요일',title:'바다가 빚고, 탄광이 키운 북쪽 해안',lead:'수천 년 파도가 깎아 낸 예류의 버섯 바위에서 시작해, 석탄을 나르던 철길 위로 소원 천등을 띄우는 스펀을 지나, 금광 붐이 남긴 산비탈 마을 지우펀의 홍등 야경을 보고, 라오허제 야시장에서 하루를 마무리해요.',map:'img/day2.jpg',cap:'바닷가에서 산골까지, 북쪽 해안을 한 바퀴 돌아요.',
+ {id:'day2',gmap:'https://www.google.com/maps/dir/?api=1&origin=%E7%89%9B%E5%BA%97%E7%B2%BE%E7%87%89%E7%89%9B%E8%82%89%E9%BA%B5%20%E6%98%86%E6%98%8E%E8%A1%9791%E8%99%9F&destination=%E9%A5%92%E6%B2%B3%E8%A1%97%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82&travelmode=driving&waypoints=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%7C%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%7C%E4%B9%9D%E4%BB%BD%E8%80%81%E8%A1%97',tab:'2일차',date:'11월 8일 일요일',zhd:'十一月八日 星期日',title:'바다가 빚고, 탄광이 키운 북쪽 해안',lead:'수천 년 파도가 깎아 낸 예류의 버섯 바위에서 시작해, 석탄을 나르던 철길 위로 소원 천등을 띄우는 스펀을 지나, 금광 붐이 남긴 산비탈 마을 지우펀의 홍등 야경을 보고, 라오허제 야시장에서 하루를 마무리해요.',map:'img/day2.jpg',cap:'바닷가에서 산골까지, 북쪽 해안을 한 바퀴 돌아요.',
   sched:[['08:30','호텔 조식','가볍게','meal'],['10:40','택시로 우육면집까지','약 5분','move'],['10:50','점심 · 뉴뎬 우육면','11:00 오픈 · 번호표 받고 기다리기','meal'],['12:00','밴 타고 출발','8시간 · ~20:00','move'],['13:00','예류 지질공원','바닷바람이 세요 · 약 1시간'],['14:00','차로 스펀까지','약 1시간','move'],['15:00','스펀 · 천등 날리기','닭날개 볶음밥 · 흑돼지 소시지'],['16:15','차로 지우펀까지','약 1시간','move'],['17:15','지우펀','해 진 뒤 홍등 야경 · 찻집에서 쉬어 가기'],['19:00','차로 송산역까지','약 1시간','move'],['20:00','저녁 · 팀호완','차슈번과 딤섬 · 2차는 야시장에서','meal'],['20:50','라오허제 야시장','후추빵 · 약재갈비탕 · 컷과일'],['21:50','택시로 숙소까지','약 25분','move']],
   note:'방문 순서는 그날 날씨와 길 사정에 따라 기사님이 조금 바꿀 수 있어요.',
   places:['yehliu','shifen','jiufen','raohe'],foods:['beef','wing','peanut','charsiu']},
- {id:'day3',tab:'3일차',date:'11월 9일 월요일',title:'타이야족의 온천 마을, 그리고 대만의 명동',lead:'원주민 말로 \'김이 나는 뜨거운 물\'이라는 우라이에서 꼬마기차를 타고 폭포를 만나요. 오후엔 숙소에서 쉬고, 저녁엔 타이베이 젊음의 거리 시먼딩에서 가족 만찬을 즐겨요.',map:'img/day3.jpg',cap:'오후엔 숙소 근처 시먼딩만 다녀요. 지하철 한 정거장이에요.',
+ {id:'day3',gmap:'https://www.google.com/maps/dir/?api=1&origin=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97%20%E8%89%8B%E8%88%BA%E5%A4%A7%E9%81%93167%E8%99%9F&destination=%E7%84%A1%E8%80%81%E9%8D%8B%20%E8%A5%BF%E9%96%80%E7%94%BA%E5%BA%97&travelmode=driving&waypoints=%E7%83%8F%E4%BE%86%E5%8F%B0%E8%BB%8A%20%E7%83%8F%E4%BE%86%E7%AB%99%7C%E5%B1%B1%E5%9C%B0%E7%BE%8E%E9%A3%9F%E5%B1%8B%20%E7%83%8F%E4%BE%86%7C%E8%A5%BF%E9%96%80%E7%94%BA',tab:'3일차',date:'11월 9일 월요일',zhd:'十一月九日 星期一',title:'타이야족의 온천 마을, 그리고 대만의 명동',lead:'원주민 말로 \'김이 나는 뜨거운 물\'이라는 우라이에서 꼬마기차를 타고 폭포를 만나요. 오후엔 숙소에서 쉬고, 저녁엔 타이베이 젊음의 거리 시먼딩에서 가족 만찬을 즐겨요.',map:'img/day3.jpg',cap:'오후엔 숙소 근처 시먼딩만 다녀요. 지하철 한 정거장이에요.',
   sched:[['08:00','호텔 조식','','meal'],['10:00','밴 타고 우라이로','6시간 · ~16:00','move'],['11:00','꼬마기차 타고 폭포 구경',''],['12:00','점심 · 산지메이스우','토종닭과 산골 요리','meal'],['13:00','우라이 옛거리 산책','멧돼지 소시지 맛보기'],['15:00','숙소에서 씻고 쉬기',''],['16:30','다 같이 시먼딩 산책','대만의 명동 · 곱창국수와 흑당 버블티 맛보기'],['19:00','가족 저녁 · 무라오궈 훠궈','매운 국물·하얀 국물 반반 냄비','meal'],['20:30','망고빙수','식당에서 걸어서 3분','opt']],
   places:['wulai','ximen'],foods:['chicken','boar','gopchang','boba','hotpot','mango']},
- {id:'day4',tab:'4일차',date:'11월 10일 화요일',title:'다시 만날 날을 약속하며',lead:'공항에서 6명이 함께 마지막 식사를 하고, 각자의 집으로 돌아가요. 전날 밤 짐을 싸 두면 아침이 여유로워요.',map:'img/day4.jpg',cap:'숙소에서 공항까지 차로 한 번에 가요.',
+ {id:'day4',gmap:'https://www.google.com/maps/dir/?api=1&origin=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97%20%E8%89%8B%E8%88%BA%E5%A4%A7%E9%81%93167%E8%99%9F&destination=%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%20%E7%AC%AC%E4%B8%80%E8%88%AA%E5%BB%88&travelmode=driving',tab:'4일차',date:'11월 10일 화요일',zhd:'十一月十日 星期二',title:'다시 만날 날을 약속하며',lead:'공항에서 6명이 함께 마지막 식사를 하고, 각자의 집으로 돌아가요. 전날 밤 짐을 싸 두면 아침이 여유로워요.',map:'img/day4.jpg',cap:'숙소에서 공항까지 차로 한 번에 가요.',
   sched:[['07:00','호텔 조식','시간이 빠듯하면 간단히','meal'],['08:00','체크아웃','여권과 충전기 꼭 확인'],['08:20','차로 공항까지','45~60분','move'],['09:30','공항 도착, 짐 부치기',''],['10:00','6명 함께 아점','공항 지하 1층 푸드코트 · 각자 고르기','meal'],['12:15','부산행 출발','제주항공 7C6152 · 김해 15:45 도착'],['13:35','서울팀 출발','부산팀을 배웅하고 출발해요']],
   places:[],foods:['court']}
 ];
@@ -362,27 +414,27 @@ function tile(key,src){const d=src[key];const b=el('button','tile');b.type='butt
   b.addEventListener('click',()=>openSheet(d));return b}
 
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><h1>대만 가족여행 3박 4일</h1><p>2026년 11월 7일(토) ~ 10일(화)<br>가족 6명</p></div><div class="ask">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="eyebrow">臺北 · 九份 · 烏來</span><h1>대만 가족여행 3박 4일</h1><p>2026년 11월 7일(토) ~ 10일(화)<br>가족 6명</p></div><div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
     const b=el('button','daybtn'+(i===todayIdx?' today':''));b.type='button';
-    b.innerHTML=`<span class="num">${7+i}일<small>${w}요일</small></span><span class="txt">${i+1}일차${i===todayIdx?'<span class="badge">오늘</span>':''}<small>${t}<br>${s}</small></span><span class="arrow">›</span>`;
+    b.innerHTML=`<span class="thumb"><img src="${['img/101.jpg','img/jiufen.jpg','img/wulai.jpg','img/f_court.jpg'][i]}" alt="" loading="lazy"><b>${7+i}일<small>${w}</small></b></span><span class="txt">${i+1}일차${i===todayIdx?'<span class="badge">오늘</span>':''}<small>${t}<br>${s}</small></span><span class="arrow">›</span>`;
     b.addEventListener('click',()=>show(DAYS[i].id));g.appendChild(b)});
   p.appendChild(g);
-  p.appendChild(el('div','ask','필요할 때 보세요'));
+  p.appendChild((e=>{e.dataset.zh='便覽';return e})(el('div','ask','필요할 때 보세요')));
   const h=el('div','helpbtns');
   [['cards','중국어 카드','말이 안 통할 때 보여주는 카드'],['info','알아둘 것 · 연락처','날씨, 옷차림, 숙소 연락처']].forEach(([id,t,s])=>{const b=el('button','helpbtn');b.type='button';b.innerHTML=`${t}<small>${s}</small>`;b.addEventListener('click',()=>show(id));h.appendChild(b)});
   p.appendChild(h);
-  p.appendChild(el('div','ask','전체 동선'));
+  p.appendChild((e=>{e.dataset.zh='路線';return e})(el('div','ask','전체 동선')));
   p.appendChild(el('figure','map','<img src="img/overview.jpg" alt="4일 동안의 전체 동선 지도"><figcaption>파랑 1일차 · 주황 2일차 · 초록 3일차 · 회색 4일차 · 누르면 크게 보여요</figcaption>'));
-  p.appendChild(el('div','ask','대만은 어떤 나라'));p.appendChild(el('div','theme','<ul><li><b>나라 이름</b><span>중화민국 (中華民國)</span><small>수도 타이베이 · 인구 약 2,300만 명 · 경상도보다 조금 큰 섬</small></li><li><b>말과 글</b><span>중국어 · 대만어</span><small>한자는 획이 많은 번체자를 써요</small></li><li><b>역사</b><span>청나라 → 일본 통치 → 1949년 국민당 정부</span><small>1987년 이후 민주화, 국민이 직접 총통을 뽑아요</small></li><li><b>한국과 닮은 점</b><span>일본 통치 · 빠른 경제 성장 · 민주화</span><small>반도체 회사 TSMC의 나라예요</small></li><li><b>생활</b><span>시차 1시간 · 110V</span><small>대만달러 NT$1 ≈ 42원 · 치안이 좋고 친절해요</small></li></ul>'));
-  p.appendChild(el('div','ask','이번 여행에서 보는 타이베이'));p.appendChild(el('div','theme','<p>4일 동안 옛 도심부터 근현대사, 새 도심, 북쪽 바다와 남쪽 산까지 타이베이와 대만 북부를 고루 봐요.</p><ul><li><b>옛 타이베이</b><span>용산사 · 숙소 동네 완화 · 시먼딩</span><small>300년 전 이주민이 처음 자리 잡은 강가 동네</small></li><li><b>근현대 대만</b><span>중정기념당</span><small>1949년 이후 대만의 역사와 민주화</small></li><li><b>오늘의 타이베이</b><span>101 전망대</span><small>새 도심 신이와 야경</small></li><li><b>바다와 산</b><span>예류 · 우라이</span><small>파도가 깎은 해안, 산속 온천과 폭포</small></li><li><b>광산 마을</b><span>지우펀 · 스펀</span><small>금과 석탄을 캐던 마을이 관광지로</small></li><li><b>사람 사는 거리</b><span>라오허제 야시장 · 시먼딩</span><small>현지 사람들의 저녁 풍경</small></li></ul>'));
-  p.appendChild(el('div','ask','이번 여행에서 맛보는 대만'));p.appendChild(el('div','theme','<p>밥, 국수, 딤섬, 훠궈, 야시장 간식, 디저트까지 대만 대표 음식을 겹치지 않게 한 번씩 맛봐요.</p><ul><li><b>대만 국민 밥상</b><span>루러우판 · 맑은 고깃국</span><small>1일차 점심</small></li><li><b>대만식 가정 요리</b><span>계란두부 튀김</span><small>1일차 저녁 키키</small></li><li><b>대표 국수</b><span>우육면</span><small>2일차 점심 · 미쉐린 빕구르망</small></li><li><b>길거리 간식</b><span>흑돼지 소시지 · 닭날개 볶음밥 · 땅콩 아이스크림롤 · 후추빵</span><small>2일차</small></li><li><b>딤섬</b><span>차슈번 · 새우만두</span><small>2일차 저녁</small></li><li><b>산골 음식</b><span>토종닭 · 산나물</span><small>3일차 우라이</small></li><li><b>시먼딩 간식</b><span>곱창국수 · 흑당 버블티</span><small>3일차</small></li><li><b>훠궈와 망고빙수</b><span>반반 냄비 · 눈꽃빙수</span><small>3일차 저녁</small></li></ul>'));
+  p.appendChild((e=>{e.dataset.zh='臺灣';return e})(el('div','ask','대만은 어떤 나라')));p.appendChild(el('div','theme','<ul><li><b>나라 이름</b><span>중화민국 (中華民國)</span><small>수도 타이베이 · 인구 약 2,300만 명 · 경상도보다 조금 큰 섬</small></li><li><b>말과 글</b><span>중국어 · 대만어</span><small>한자는 획이 많은 번체자를 써요</small></li><li><b>역사</b><span>청나라 → 일본 통치 → 1949년 국민당 정부</span><small>1987년 이후 민주화, 국민이 직접 총통을 뽑아요</small></li><li><b>한국과 닮은 점</b><span>일본 통치 · 빠른 경제 성장 · 민주화</span><small>반도체 회사 TSMC의 나라예요</small></li><li><b>생활</b><span>시차 1시간 · 110V</span><small>대만달러 NT$1 ≈ 42원 · 치안이 좋고 친절해요</small></li></ul>'));
+  p.appendChild((e=>{e.dataset.zh='看';return e})(el('div','ask','이번 여행에서 보는 타이베이')));p.appendChild(el('div','theme','<p>4일 동안 옛 도심부터 근현대사, 새 도심, 북쪽 바다와 남쪽 산까지 타이베이와 대만 북부를 고루 봐요.</p><ul><li><b>옛 타이베이</b><span>용산사 · 숙소 동네 완화 · 시먼딩</span><small>300년 전 이주민이 처음 자리 잡은 강가 동네</small></li><li><b>근현대 대만</b><span>중정기념당</span><small>1949년 이후 대만의 역사와 민주화</small></li><li><b>오늘의 타이베이</b><span>101 전망대</span><small>새 도심 신이와 야경</small></li><li><b>바다와 산</b><span>예류 · 우라이</span><small>파도가 깎은 해안, 산속 온천과 폭포</small></li><li><b>광산 마을</b><span>지우펀 · 스펀</span><small>금과 석탄을 캐던 마을이 관광지로</small></li><li><b>사람 사는 거리</b><span>라오허제 야시장 · 시먼딩</span><small>현지 사람들의 저녁 풍경</small></li></ul>'));
+  p.appendChild((e=>{e.dataset.zh='吃';return e})(el('div','ask','이번 여행에서 맛보는 대만')));p.appendChild(el('div','theme','<p>밥, 국수, 딤섬, 훠궈, 야시장 간식, 디저트까지 대만 대표 음식을 겹치지 않게 한 번씩 맛봐요.</p><ul><li><b>대만 국민 밥상</b><span>루러우판 · 맑은 고깃국</span><small>1일차 점심</small></li><li><b>대만식 가정 요리</b><span>계란두부 튀김</span><small>1일차 저녁 키키</small></li><li><b>대표 국수</b><span>우육면</span><small>2일차 점심 · 미쉐린 빕구르망</small></li><li><b>길거리 간식</b><span>흑돼지 소시지 · 닭날개 볶음밥 · 땅콩 아이스크림롤 · 후추빵</span><small>2일차</small></li><li><b>딤섬</b><span>차슈번 · 새우만두</span><small>2일차 저녁</small></li><li><b>산골 음식</b><span>토종닭 · 산나물</span><small>3일차 우라이</small></li><li><b>시먼딩 간식</b><span>곱창국수 · 흑당 버블티</span><small>3일차</small></li><li><b>훠궈와 망고빙수</b><span>반반 냄비 · 눈꽃빙수</span><small>3일차 저녁</small></li></ul>'));
   p.appendChild(el('div','howto','날짜를 누르시면 그날 지도와 일정이 나와요. 일정이나 사진을 누르시면 자세한 설명이 나와요.'));
   return p}
 
 function dayPanel(d){const p=el('section','panel');
-  p.innerHTML=`<span class="kicker">${d.date}</span><h2>${d.title}</h2><p class="lead">${d.lead}</p><figure class="map" data-map="${d.map}" data-title="${d.tab} 동선 지도"><img src="${d.map}" alt="${d.tab} 동선 지도"><figcaption>${d.cap} · 지도를 누르면 크게 보여요</figcaption></figure><h3 class="h3">일정</h3>`;
+  p.innerHTML=`<span class="kicker">${d.date}<span class="zhd">${d.zhd||""}</span></span><h2>${d.title}</h2><p class="lead">${d.lead}</p><figure class="map" data-map="${d.map}" data-title="${d.tab} 동선 지도"><img src="${d.map}" alt="${d.tab} 동선 지도"><figcaption>${d.cap} · 지도를 누르면 크게 보여요</figcaption></figure>${d.gmap?`<a class="gmapbtn" href="${d.gmap}" target="_blank" rel="noopener">구글 지도에서 하루 경로 보기 ›</a><p class="gmapnote">차로 가는 순서대로 찍혀 열려요. 실제 이동은 밴·택시 기준이에요.</p>`:''}<h3 class="h3" data-zh="行程">일정</h3>`;
   const ol=el('ol','sched');
   d.sched.forEach(([t,w,s,k])=>{if(k==='move'){const li=el('li','move');li.innerHTML=`<time>${t}</time><i class="dot mvdot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15V8a2 2 0 0 1 2-2h10l4 4h1a1 1 0 0 1 1 1v4h-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 15h2m4 0h6" stroke="currentColor" stroke-width="1.8"/><circle cx="7" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></i><div class="mv"><span>${esc(w)}</span>${s?`<em>${esc(s)}</em>`:''}</div>`;ol.appendChild(li);return}const link=findLink(w);const li=el('li',(k==='meal'?'meal ':'')+(k==='opt'?'optrow ':'')+(link?'tap':''));
     li.innerHTML=`<time>${t}</time><i class="dot"></i><div class="what">${esc(w)}${k==='opt'?'<span class="opt">원하면</span>':''}${s?`<small>${esc(s)}</small>`:''}${link?'<span class="more">자세히 보기 ›</span>':''}</div>`;
@@ -390,8 +442,8 @@ function dayPanel(d){const p=el('section','panel');
     ol.appendChild(li)});
   p.appendChild(ol);
   if(d.note)p.appendChild(el('div','note',esc(d.note)));
-  if(d.places.length){p.appendChild(el('h3','h3','가는 곳'));const g=el('div','tiles');d.places.forEach((k,i)=>{const t=tile(k,PLACES);if(d.places.length%2&&i===0)t.classList.add('wide');g.appendChild(t)});p.appendChild(g)}
-  if(d.foods.length){p.appendChild(el('h3','h3','먹는 것'));const g=el('div','tiles');d.foods.forEach((k,i)=>{const t=tile(k,FOODS);if(d.foods.length%2&&i===0)t.classList.add('wide');g.appendChild(t)});p.appendChild(g)}
+  if(d.places.length){p.appendChild((e=>{e.dataset.zh='去處';return e})(el('h3','h3','가는 곳')));const g=el('div','tiles');d.places.forEach((k,i)=>{const t=tile(k,PLACES);if(d.places.length%2&&i===0)t.classList.add('wide');g.appendChild(t)});p.appendChild(g)}
+  if(d.foods.length){p.appendChild((e=>{e.dataset.zh='美食';return e})(el('h3','h3','먹는 것')));const g=el('div','tiles');d.foods.forEach((k,i)=>{const t=tile(k,FOODS);if(d.foods.length%2&&i===0)t.classList.add('wide');g.appendChild(t)});p.appendChild(g)}
   return p}
 
 function cardsPanel(){const p=el('section','panel');p.innerHTML=`<span class="kicker">말이 안 통할 때</span><h2>보여주는 중국어 카드</h2><p class="lead">필요한 카드를 누르면 화면 가득 크게 떠요. 그대로 보여주시면 돼요.</p>`;
@@ -405,7 +457,7 @@ function infoPanel(){const p=el('section','panel');
   <div class="tip"><h3>돈</h3><ul><li>대만 돈은 '달러(NT$)'예요. 1달러가 약 42원이에요.</li><li>야시장 간식이나 작은 가게는 현금만 받기도 해요.</li></ul></div>
   <div class="tip"><h3>시간과 전기</h3><ul><li>한국보다 1시간 늦어요. 휴대폰 시계는 저절로 바뀌어요.</li><li>콘센트 모양이 달라요(11자). 충전할 땐 어댑터를 끼워요.</li></ul></div>
   <div class="tip"><h3>다닐 때</h3><ul><li>오토바이가 정말 많아요. 길을 건널 땐 신호를 꼭 지켜요.</li><li>가족과 떨어지면 그 자리에서 기다리며 전화하세요.</li><li>숙소: 시저 메트로 타이베이 (台北凱達大飯店), 용산사역 바로 앞</li></ul></div>
-  <h3 class="h3">연락처</h3>`;
+  <h3 class="h3" data-zh="聯絡">연락처</h3>`;
   [['숙소 · 시저 메트로 타이베이','台北市萬華區艋舺大道167號','+886-2-2306-6777','+886223066777'],['대만 경찰','사고·도난','110','110'],['구급차·소방','아프거나 다쳤을 때','119','119'],['외교부 영사콜센터','24시간 · 한국어 · 여권 분실 등','+82-2-3210-0404','+82232100404']].forEach(([w,s,n,c])=>{
     const r=el('div','ct');r.innerHTML=`<div class="who">${w}<small>${s}</small><span class="num">${n}</span></div>`;const b=el('button',null,'복사');b.type='button';
     b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c);b.textContent='복사됨'}catch(e){const s=r.querySelector('.num');const rg=document.createRange();rg.selectNodeContents(s);const sl=getSelection();sl.removeAllRanges();sl.addRange(rg);b.textContent='길게 눌러 복사'}setTimeout(()=>b.textContent='복사',2000)});
@@ -418,7 +470,8 @@ const NAMES={home:'처음 화면',day1:'1일차 · 11월 7일',day2:'2일차 · 
 const topbar=$('#topbar'),bottombar=$('#bottombar'),prevBtn=$('#prevBtn'),nextBtn=$('#nextBtn');
 let prevTo=null,nextTo=null;
 function setBtn(btn,to,label){if(!to){btn.disabled=true;btn.textContent='';return}btn.disabled=false;btn.innerHTML=label;}
-function show(id){if(!built[id])id='home';
+let cur=null;
+function show(id,fromPop){if(!built[id])id='home';
   panels.replaceChildren(built[id]);
   const home=id==='home';topbar.hidden=home;bottombar.hidden=home;document.querySelector('.wrap').classList.toggle('has-bottom',!home);
   $('#where').textContent=NAMES[id];
@@ -428,9 +481,10 @@ function show(id){if(!built[id])id='home';
     setBtn(nextBtn,nextTo,i<4?`다음 ›<small>${i+1}일차</small>`:'처음으로');}
   else{prevTo='home';nextTo=id==='cards'?'info':'cards';setBtn(prevBtn,prevTo,'‹ 처음으로');setBtn(nextBtn,nextTo,id==='cards'?'알아둘 것 ›':'중국어 카드 ›');}
   window.scrollTo(0,0);
-  try{history.replaceState(null,'','#'+id)}catch(e){}
+  if(!fromPop){try{if(cur===null)history.replaceState({p:id},'','#'+id);else if(cur!==id)history.pushState({p:id},'','#'+id)}catch(e){}}
+  cur=id;
 }
-panels.addEventListener('click',e=>{const f=e.target.closest('.map');if(!f)return;const img=f.querySelector('img');openSheet({img:img.getAttribute('src'),title:img.alt,lbl:'지도',zh:'',text:['손가락 두 개로 벌리면 더 크게 볼 수 있어요.'],map:true})});
+panels.addEventListener('click',e=>{const f=e.target.closest('.map');if(!f)return;const img=f.querySelector('img');openViewer(img.getAttribute('src'),img.alt)});
 prevBtn.addEventListener('click',()=>prevTo&&show(prevTo));
 nextBtn.addEventListener('click',()=>nextTo&&show(nextTo));
 $('#backBtn').addEventListener('click',()=>show('home'));
@@ -439,14 +493,45 @@ show((location.hash||'').slice(1)||'home');
 /* ---------- popups ---------- */
 const pop=$('#pop'),sheet=$('#sheet');let lastFocus=null;
 function openSheet(d){lastFocus=document.activeElement;sheet.classList.toggle('mapview',!!d.map);
-  sheet.innerHTML=`${d.img?`<img src="${d.img}" alt="${esc(d.title)}">`:''}<div class="in"><span class="lbl">${esc(d.lbl)}</span><h3 id="popTitle">${esc(d.title)}</h3><span class="zhn">${esc(d.zh)}</span>${d.spice?`<p class="spice">${esc(d.spice)}</p>`:''}${d.key?`<p class="key">${esc(d.key)}</p>`:''}${d.text.map(t=>`<p>${esc(t)}</p>`).join('')}${d.tips&&d.tips.length?`<ul>${d.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}${d.shop?`<div class="shop"><b>${esc(d.shop.name)}</b><span>${esc(d.shop.addr)}</span><span>${esc(d.shop.hours)}</span><a href="${d.shop.map}" target="_blank" rel="noopener">구글 지도에서 보기 ›</a></div>`:''}${d.route?`<div class="route"><h4>현장 지도 · 걷는 동선</h4><a class="rlink" href="${d.route.img}" target="_blank" rel="noopener"><img class="rmap" src="${d.route.img}" alt="${esc(d.title)} 걷는 동선 지도" loading="lazy"></a><small>지도를 누르면 크게 보여요</small><ol>${d.route.steps.map(r=>`<li><time>${esc(r[0])}</time><div><b>${esc(r[1])}</b><span>${esc(r[2])}</span>${r[3]?`<a class="pinl" href="${r[3]}" target="_blank" rel="noopener">구글 지도 ›</a>`:''}</div></li>`).join('')}</ol><a class="dirbtn" href="${d.route.map}" target="_blank" rel="noopener">걷는 경로를 구글 지도로 열기 ›</a><small>간략 지도예요. 실제 거리·방향과 조금 달라요.</small></div>`:''}${d.note?`<p class="note2">${esc(d.note)}</p>`:''}${d.ref?'<span class="credit">참고 사진 (같은 종류 음식의 예시)</span>':''}</div><button type="button" class="close">닫기</button>`;
-  sheet.querySelector('.close').addEventListener('click',closeSheet);pop.hidden=false;sheet.scrollTop=0;sheet.querySelector('.close').focus({preventScroll:true})}
-function closeSheet(){pop.hidden=true;lastFocus&&lastFocus.focus()}
-pop.addEventListener('click',e=>{if(e.target===pop)closeSheet()});
+  sheet.innerHTML=`${d.img?`<img src="${d.img}" alt="${esc(d.title)}">`:''}<div class="in"><span class="lbl">${esc(d.lbl)}</span><h3 id="popTitle">${esc(d.title)}</h3><span class="zhn">${esc(d.zh)}</span>${d.spice?`<p class="spice">${esc(d.spice)}</p>`:''}${d.key?`<p class="key">${esc(d.key)}</p>`:''}${d.text.map(t=>`<p>${esc(t)}</p>`).join('')}${d.tips&&d.tips.length?`<ul>${d.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}${d.shop?`<div class="shop"><b>${esc(d.shop.name)}</b><span>${esc(d.shop.addr)}</span><span>${esc(d.shop.hours)}</span><a href="${d.shop.map}" target="_blank" rel="noopener">구글 지도에서 보기 ›</a></div>`:''}${d.route?`<div class="route"><h4>현장 지도 · 걷는 동선</h4><a class="rlink" href="${d.route.img}" target="_blank" rel="noopener"><img class="rmap" src="${d.route.img}" alt="${esc(d.title)} 걷는 동선 지도" loading="lazy"></a><small>지도를 누르면 크게 보고 확대할 수 있어요</small><ol>${d.route.steps.map(r=>`<li><time>${esc(r[0])}</time><div><b>${esc(r[1])}</b><span>${esc(r[2])}</span>${r[3]?`<a class="pinl" href="${r[3]}" target="_blank" rel="noopener">구글 지도 ›</a>`:''}</div></li>`).join('')}</ol><a class="dirbtn" href="${d.route.map}" target="_blank" rel="noopener">걷는 경로를 구글 지도로 열기 ›</a><small>간략 지도예요. 실제 거리·방향과 조금 달라요.</small></div>`:''}${d.note?`<p class="note2">${esc(d.note)}</p>`:''}${d.ref?'<span class="credit">참고 사진 (같은 종류 음식의 예시)</span>':''}</div><button type="button" class="close">닫기</button>`;
+  sheet.querySelector('.close').addEventListener('click',closeTop);pop.hidden=false;sheet.scrollTop=0;sheet.querySelector('.close').focus({preventScroll:true});
+  openLayer(()=>{pop.hidden=true;lastFocus&&lastFocus.focus()})}
+const closeSheet=closeTop;
+pop.addEventListener('click',e=>{if(e.target===pop){closeTop();return}const a=e.target.closest('a.rlink');if(a){e.preventDefault();const im=a.querySelector('img');openViewer(a.getAttribute('href'),im?im.alt:'')}});
 const cov=$('#cardOv');
-function openCard(c){$('#cardKo').textContent=c.ko;const cn=$('#cardCn');cn.replaceChildren();c.cn.split('\n').forEach((l,j)=>{const d=el('div');d.textContent=l;if(j)d.style.fontSize='0.55em';cn.appendChild(d)});$('#cardSub').textContent=c.sub;cov.hidden=false;$('#cardClose').focus()}
-$('#cardClose').addEventListener('click',()=>cov.hidden=true);
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!cov.hidden)cov.hidden=true;else if(!pop.hidden)closeSheet()}});
+function openCard(c){$('#cardKo').textContent=c.ko;const cn=$('#cardCn');cn.replaceChildren();c.cn.split('\n').forEach((l,j)=>{const d=el('div');d.textContent=l;if(j)d.style.fontSize='0.55em';cn.appendChild(d)});$('#cardSub').textContent=c.sub;cov.hidden=false;$('#cardClose').focus();openLayer(()=>{cov.hidden=true})}
+$('#cardClose').addEventListener('click',()=>closeTop());
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeTop()});
+
+/* layers + back button: every popup adds a history step, so the phone's back button closes it first */
+const layers=[];let skipPop=0;
+function openLayer(fn){let h=false;try{history.pushState({p:cur,layer:1},'',location.hash);h=true}catch(e){}layers.push({fn,h})}
+function closeTop(fromPop){const L=layers.pop();if(!L)return;L.fn();if(fromPop!==true&&L.h){skipPop++;try{history.back()}catch(e){skipPop--}}}
+window.addEventListener('popstate',e=>{if(skipPop){skipPop--;return}if(layers.length){closeTop(true);return}const id=(e.state&&e.state.p)||(location.hash||'').slice(1)||'home';show(id,true)});
+
+/* map viewer: pinch / drag / double-tap / wheel / buttons */
+const zv=$('#zv'),zst=$('#zvStage'),zim=$('#zvImg');let zs=1,zx=0,zy=0,zfit=1;const ptr=new Map();let pinch=null,lastTap=0,tapPt=null;
+function zclamp(){const W=zst.clientWidth,H=zst.clientHeight,w=zim.naturalWidth*zs,h=zim.naturalHeight*zs;
+  zx=w<=W?(W-w)/2:Math.min(0,Math.max(W-w,zx));zy=h<=H?(H-h)/2:Math.min(0,Math.max(H-h,zy))}
+function zapply(){zclamp();zim.style.transform=`translate(${zx}px,${zy}px) scale(${zs})`}
+function zfitNow(){const W=zst.clientWidth,H=zst.clientHeight;zfit=Math.min(W/zim.naturalWidth,H/zim.naturalHeight);zs=zfit;zx=0;zy=0;zapply()}
+function zoomAt(px,py,ns){ns=Math.max(zfit,Math.min(zfit*6,ns));zx=px-(px-zx)*(ns/zs);zy=py-(py-zy)*(ns/zs);zs=ns;zapply()}
+function rel(e){const r=zst.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
+function openViewer(src,alt){zim.onload=zfitNow;zim.alt=alt||'지도';zim.src=src;zv.hidden=false;if(zim.complete&&zim.naturalWidth)zfitNow();$('#zvClose').focus();openLayer(()=>{zv.hidden=true})}
+$('#zvClose').addEventListener('click',()=>closeTop());
+$('#zvIn').addEventListener('click',()=>zoomAt(zst.clientWidth/2,zst.clientHeight/2,zs*1.6));
+$('#zvOut').addEventListener('click',()=>zoomAt(zst.clientWidth/2,zst.clientHeight/2,zs/1.6));
+zst.addEventListener('wheel',e=>{e.preventDefault();const p=rel(e);zoomAt(p.x,p.y,zs*Math.exp(-e.deltaY*0.0015))},{passive:false});
+zst.addEventListener('pointerdown',e=>{zst.setPointerCapture(e.pointerId);ptr.set(e.pointerId,rel(e));
+  if(ptr.size===2){const [a,b]=[...ptr.values()];pinch={d:Math.hypot(a.x-b.x,a.y-b.y),mx:(a.x+b.x)/2,my:(a.y+b.y)/2,s:zs,x:zx,y:zy}}});
+zst.addEventListener('pointermove',e=>{if(!ptr.has(e.pointerId))return;const prev=ptr.get(e.pointerId),p=rel(e);ptr.set(e.pointerId,p);
+  if(ptr.size>=2&&pinch){const [a,b]=[...ptr.values()];const d=Math.hypot(a.x-b.x,a.y-b.y),mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+    const ns=Math.max(zfit,Math.min(zfit*6,pinch.s*d/pinch.d));zx=mx-(pinch.mx-pinch.x)*(ns/pinch.s);zy=my-(pinch.my-pinch.y)*(ns/pinch.s);zs=ns;zapply()}
+  else if(ptr.size===1){zx+=p.x-prev.x;zy+=p.y-prev.y;zapply()}});
+function zup(e){const p=ptr.get(e.pointerId);ptr.delete(e.pointerId);if(ptr.size<2)pinch=null;
+  if(e.type==='pointerup'&&p&&ptr.size===0){const t=Date.now();if(t-lastTap<320&&tapPt&&Math.hypot(p.x-tapPt.x,p.y-tapPt.y)<30){zoomAt(p.x,p.y,zs>zfit*1.2?zfit:zfit*2.5);lastTap=0}else{lastTap=t;tapPt=p}}}
+zst.addEventListener('pointerup',zup);zst.addEventListener('pointercancel',zup);
+window.addEventListener('resize',()=>{if(!zv.hidden)zfitNow()});
 </script>
 
 </body>
