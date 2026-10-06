@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#F2F4F6">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="대만 여행">
@@ -13,9 +13,9 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>대만 가족여행 안내서</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+TC:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@500;700&display=swap">
 <style>
-/* Layout: white guidebook page. Sticky tab bar on top; one tab panel at a time: map first, then schedule, then tap-to-open place and food tiles. Single light theme on purpose (white paper look). */
+/* Layout: Toss-style app page. Light grey ground, white rounded cards, bold sans headings, blue accent. One panel at a time. Sticky tab bar on top; one tab panel at a time: map first, then schedule, then tap-to-open place and food tiles. Single light theme on purpose (white paper look). */
 :root{
   color-scheme:light;
   --paper:#FFFFFF; --ink:#18201D; --muted:#5B6661; --rule:#E3E8E5; --tint:#F3F6F4; --wash:#EAF2EE;
@@ -250,6 +250,95 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);line-height:1.6}
 .gmapbtn{display:block;margin-top:10px;text-align:center;padding:13px 14px;border-radius:14px;background:var(--wash);color:var(--jade-deep);font-weight:700;font-size:16px;text-decoration:none}
 .gmapbtn:hover{background:#DFEDE6}
 .gmapnote{margin:6px 2px 0;font-size:13px;color:var(--muted)}
+
+/* ===== Toss-style layer (overrides above) ===== */
+:root{
+  --bg:#F2F4F6; --paper:#FFFFFF; --ink:#191F28; --sub:#4E5968; --muted:#8B95A1; --rule:#E5E8EB; --tint:#F2F4F6; --wash:#E8F3FF;
+  --jade:#3182F6; --jade-deep:#1B64DA; --lantern:#F04452; --lantern-wash:#FFF0F1;
+  --display:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+html,body{background:var(--bg)}
+body{color:var(--ink);letter-spacing:-.01em}
+h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
+.ask::before,.ask::after,.h3::before,.h3::after{content:none}
+.ask,.h3{display:block;font-size:20px;font-weight:700;margin:32px 4px 12px;padding:0;border:0;letter-spacing:-.03em}
+.hello{min-height:260px;border-radius:24px;margin-top:16px;padding:22px;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.55)),url('img/hero.jpg') center 30%/cover}
+.hello h1{font-size:28px;font-weight:800;text-shadow:none}
+.hello p{font-size:16px;font-weight:500}
+.daybtns{gap:10px}
+.daybtn{border:0;background:var(--paper);border-radius:20px;padding:14px;grid-template-columns:64px 1fr auto;gap:14px}
+.daybtn:hover{background:#FAFBFC;border:0}
+.daybtn .thumb{width:64px;height:64px;border-radius:16px}
+.daybtn .thumb b{display:none}
+.daybtn .txt{font-family:var(--body);font-size:17px;font-weight:700;letter-spacing:-.02em}
+.daybtn .txt::before{content:attr(data-date);display:block;font-size:13px;font-weight:600;color:var(--jade);margin-bottom:1px}
+.daybtn .txt small{font-size:14px;color:var(--sub);font-weight:400}
+.daybtn .arrow{color:#C5CBD3;font-size:22px}
+.daybtn.today{box-shadow:0 0 0 2px var(--jade) inset}
+.badge{background:var(--jade)}
+.helpbtns{gap:10px}
+.helpbtn{background:var(--paper);border-radius:20px;padding:18px 16px;font-size:17px;letter-spacing:-.02em}
+.helpbtn:hover{background:#FAFBFC}
+.helpbtn small{color:var(--sub);font-size:13.5px}
+.howto{background:var(--paper);color:var(--sub);border-radius:16px;font-size:14px}
+.theme p{color:var(--sub);margin:0 4px 12px;font-size:15.5px}
+.theme ul{border:0;border-radius:20px;background:var(--paper)}
+.theme li{padding:14px 18px;border-top:1px solid #F2F4F6}
+.theme li b{color:var(--sub);font-weight:500}
+.theme li span{font-weight:600}
+.theme li small{color:var(--muted)}
+.map{border:0;border-radius:20px;background:var(--paper)}
+.map figcaption{border-top:0;color:var(--muted);font-size:13px;padding:10px 16px 14px}
+.gmapbtn{background:var(--paper);color:var(--jade);border-radius:16px;font-size:15.5px}
+.gmapbtn:hover{background:#FAFBFC}
+.gmapnote{margin:6px 6px 0;color:var(--muted)}
+.topbar{background:var(--bg);border-bottom:0}
+.topbar .back{background:var(--paper);border:0;font-weight:600;font-size:15px}
+.topbar .where{font-family:var(--body);font-size:17px;letter-spacing:-.02em}
+.panel{padding-top:20px}
+.kicker{font-size:14px;font-weight:600;letter-spacing:0;color:var(--jade);margin-left:4px}
+.panel h2{font-size:27px;font-weight:800;margin:6px 4px 0;letter-spacing:-.035em}
+.lead{color:var(--sub);font-size:16px;line-height:1.7;margin:10px 4px 0}
+.sched{background:var(--paper);border-radius:20px;padding:12px 16px 12px 14px}
+.sched .dot{box-shadow:0 0 0 3px var(--paper)}
+.sched li::before{border-left-color:#E5E8EB}
+.sched li.move::before{border-left-color:#D1D6DB}
+.sched .mvdot{background:var(--paper);color:#B0B8C1}
+.sched time{color:var(--ink);font-weight:700}
+.sched li.move time{color:var(--muted)}
+.sched .what{font-weight:600;font-size:16.5px;letter-spacing:-.02em}
+.sched li.meal .what{color:var(--ink)}
+.sched .what small{color:var(--muted);font-size:14px}
+.sched .mv{color:var(--muted)}
+.sched .more::after{color:#C5CBD3}
+.opt{border:0;background:var(--tint);color:var(--sub)}
+.note{background:var(--paper);border-radius:16px;color:var(--sub);font-size:15px}
+.tiles{gap:12px}
+.tile{background:var(--paper);border-radius:20px;padding:0 0 14px;overflow:hidden;gap:4px}
+.tile .ph{border-radius:0}
+.tile .lbl,.tile .ttl,.tile .more{padding:0 14px}
+.tile .lbl{margin-top:8px;font-size:12.5px;font-weight:600;color:var(--jade)}
+.tile .ttl{font-family:var(--body);font-size:16.5px;font-weight:700;letter-spacing:-.02em}
+.tile .more{color:var(--muted);font-size:13px}
+.tile .ph .zhname{color:var(--jade)}
+.bottombar{background:rgba(242,244,246,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:0}
+.bottombar button{border:0;background:var(--paper);border-radius:16px;font-weight:600;padding:13px 8px}
+.bottombar button.primary{background:var(--jade);color:#fff}
+.bottombar button.primary:hover{background:var(--jade-deep)}
+.sheet{border-radius:24px 24px 0 0}
+.sheet h3{font-family:var(--body);font-weight:800;font-size:23px;letter-spacing:-.03em}
+.sheet .lbl{color:var(--jade);font-weight:600}
+.sheet .spice{color:var(--lantern);background:var(--lantern-wash)}
+.sheet .shop{border:0;background:var(--tint);border-radius:16px}
+.sheet .shop a,.sheet .route a{color:var(--jade)}
+.sheet .route a.dirbtn{background:var(--jade);color:#fff;border-radius:16px}
+.sheet .route time{color:var(--jade)}
+.sheet .close{border:0;background:var(--tint);border-radius:16px;font-weight:600}
+.ct button{border:0;background:var(--tint);color:var(--jade);font-weight:600}
+.fact{background:var(--paper);border-radius:16px}
+.card-ov button{border:0;border-radius:16px;background:var(--jade);color:#fff;font-weight:600}
+.zv-bar button{border-radius:14px}
+:focus-visible{outline-color:var(--jade)}
 </style>
 </head>
 <body>
@@ -298,7 +387,7 @@ const PLACES={
   tips:['언덕길이 있어요. 천천히 걸어요']},
  shifen:{img:'img/shifen.jpg',lbl:'천등 마을',title:'스펀',zh:'十分',key:'석탄 기찻길 위에서 소원 천등 날리기',
   text:['1921년 일본이 석탄을 실어 나르려고 놓은 핑시선 기찻길이 지금도 마을 한가운데를 지나요. 군산 경암동 철길마을처럼 철길 바로 옆에 가게가 늘어서 있어요.','천등은 옛날 산으로 피신한 마을 사람들에게 \'이제 안전하니 내려오라\'고 알리던 신호였어요. 지금은 큰 종이 등에 소원을 적어 하늘로 날려요.'],
-  tips:['기차가 오면 가게 쪽으로 비켜 서요','붓과 먹은 가게에서 빌려줘요'],route:{img:'img/r_shifen.jpg',map:'https://www.google.com/maps/dir/?api=1&origin=%E5%8D%81%E5%88%86%E8%BB%8A%E7%AB%99&destination=%E5%8D%81%E5%88%86%E6%BA%9C%E5%93%A5%E7%87%92%E7%83%A4%E9%9B%9E%E7%BF%85%E5%8C%85%E9%A3%AF%20%E6%96%B0%E5%8C%97%E5%B8%82%E5%B9%B3%E6%BA%AA%E5%8D%80%E5%8D%81%E5%88%86%E8%A1%9752%E8%99%9F&travelmode=walking&waypoints=%E9%98%BF%E7%BE%8E%E7%9A%84%E9%A3%9F%E5%A0%82%20%E6%96%B0%E5%8C%97%E5%B8%82%E5%B9%B3%E6%BA%AA%E5%8D%80%E5%8D%81%E5%88%86%E8%A1%9757%E8%99%9F',steps:[['15:00', '차에서 내려 옛거리로', '기사님이 내려준 곳에서 철길 쪽으로', 'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97'], ['15:05', '철길 위에서 천등 날리기', '기차가 오면 가게 쪽으로 비켜 서요', 'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%20%E5%A4%A9%E7%87%88'], ['15:45', '리우거 닭날개 볶음밥 · 흑돼지 소시지', '걸으며 먹는 간식', 'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E6%BA%9C%E5%93%A5%E7%87%92%E7%83%A4%E9%9B%9E%E7%BF%85%E5%8C%85%E9%A3%AF%20%E5%8D%81%E5%88%86%E8%A1%9752%E8%99%9F'], ['16:15', '차로 돌아가 승차', '시간이 남으면 징안 출렁다리 사진']]}},
+  tips:['기차가 오면 가게 쪽으로 비켜 서요','붓과 먹은 가게에서 빌려줘요'],route:{img:'img/r_shifen.jpg',map:'https://www.google.com/maps/dir/?api=1&origin=%E5%8D%81%E5%88%86%E8%BB%8A%E7%AB%99&destination=%E5%8D%81%E5%88%86%E6%BA%9C%E5%93%A5%E7%87%92%E7%83%A4%E9%9B%9E%E7%BF%85%E5%8C%85%E9%A3%AF%20%E6%96%B0%E5%8C%97%E5%B8%82%E5%B9%B3%E6%BA%AA%E5%8D%80%E5%8D%81%E5%88%86%E8%A1%9752%E8%99%9F&travelmode=walking',steps:[['15:00', '차에서 내려 옛거리로', '기사님이 내려준 곳에서 철길 쪽으로', 'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97'], ['15:05', '철길 위에서 천등 날리기', '기차가 오면 가게 쪽으로 비켜 서요', 'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%20%E5%A4%A9%E7%87%88'], ['15:45', '리우거 닭날개 볶음밥 · 흑돼지 소시지', '걸으며 먹는 간식', 'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E6%BA%9C%E5%93%A5%E7%87%92%E7%83%A4%E9%9B%9E%E7%BF%85%E5%8C%85%E9%A3%AF%20%E5%8D%81%E5%88%86%E8%A1%9752%E8%99%9F'], ['16:15', '차로 돌아가 승차', '시간이 남으면 징안 출렁다리 사진']]}},
  houtong:{img:'img/houtong.jpg',lbl:'고양이 마을',title:'허우통',zh:'猴硐',key:'대만 최대 탄광 마을이 고양이 마을로',
   text:['한때 대만에서 석탄을 가장 많이 캐던 마을이었는데, 1990년 탄광이 문을 닫고 사람들이 떠났어요.','2008년쯤 주민과 봉사자들이 남은 고양이들을 돌보기 시작하면서 지금의 \'고양이 마을\'이 됐어요. 태백 같은 옛 탄광 마을이 새 모습으로 바뀐 곳이에요.'],
   tips:['고양이는 눈으로만 봐요'],note:'시간이 빠듯하면 지나쳐도 돼요.'},
@@ -414,11 +503,11 @@ function tile(key,src){const d=src[key];const b=el('button','tile');b.type='butt
   b.addEventListener('click',()=>openSheet(d));return b}
 
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="eyebrow">臺北 · 九份 · 烏來</span><h1>대만 가족여행 3박 4일</h1><p>2026년 11월 7일(토) ~ 10일(화)<br>가족 6명</p></div><div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><h1>대만 가족여행 3박 4일</h1><p>2026년 11월 7일(토) ~ 10일(화)<br>가족 6명</p></div><div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
     const b=el('button','daybtn'+(i===todayIdx?' today':''));b.type='button';
-    b.innerHTML=`<span class="thumb"><img src="${['img/101.jpg','img/jiufen.jpg','img/wulai.jpg','img/f_court.jpg'][i]}" alt="" loading="lazy"><b>${7+i}일<small>${w}</small></b></span><span class="txt">${i+1}일차${i===todayIdx?'<span class="badge">오늘</span>':''}<small>${t}<br>${s}</small></span><span class="arrow">›</span>`;
+    b.innerHTML=`<span class="thumb"><img src="${['img/101.jpg','img/jiufen.jpg','img/wulai.jpg','img/f_court.jpg'][i]}" alt="" loading="lazy"><b>${7+i}일<small>${w}</small></b></span><span class="txt" data-date="11월 ${7+i}일 ${w}요일">${i+1}일차${i===todayIdx?'<span class="badge">오늘</span>':''}<small>${t}<br>${s}</small></span><span class="arrow">›</span>`;
     b.addEventListener('click',()=>show(DAYS[i].id));g.appendChild(b)});
   p.appendChild(g);
   p.appendChild((e=>{e.dataset.zh='便覽';return e})(el('div','ask','필요할 때 보세요')));
@@ -434,7 +523,7 @@ function homePanel(){const p=el('section','panel');
   return p}
 
 function dayPanel(d){const p=el('section','panel');
-  p.innerHTML=`<span class="kicker">${d.date}<span class="zhd">${d.zhd||""}</span></span><h2>${d.title}</h2><p class="lead">${d.lead}</p><figure class="map" data-map="${d.map}" data-title="${d.tab} 동선 지도"><img src="${d.map}" alt="${d.tab} 동선 지도"><figcaption>${d.cap} · 지도를 누르면 크게 보여요</figcaption></figure>${d.gmap?`<a class="gmapbtn" href="${d.gmap}" target="_blank" rel="noopener">구글 지도에서 하루 경로 보기 ›</a><p class="gmapnote">차로 가는 순서대로 찍혀 열려요. 실제 이동은 밴·택시 기준이에요.</p>`:''}<h3 class="h3" data-zh="行程">일정</h3>`;
+  p.innerHTML=`<span class="kicker">${d.date}</span><h2>${d.title}</h2><p class="lead">${d.lead}</p><figure class="map" data-map="${d.map}" data-title="${d.tab} 동선 지도"><img src="${d.map}" alt="${d.tab} 동선 지도"><figcaption>${d.cap} · 지도를 누르면 크게 보여요</figcaption></figure>${d.gmap?`<a class="gmapbtn" href="${d.gmap}" target="_blank" rel="noopener">구글 지도에서 하루 경로 보기 ›</a><p class="gmapnote">차로 가는 순서대로 찍혀 열려요. 실제 이동은 밴·택시 기준이에요.</p>`:''}<h3 class="h3" data-zh="行程">일정</h3>`;
   const ol=el('ol','sched');
   d.sched.forEach(([t,w,s,k])=>{if(k==='move'){const li=el('li','move');li.innerHTML=`<time>${t}</time><i class="dot mvdot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15V8a2 2 0 0 1 2-2h10l4 4h1a1 1 0 0 1 1 1v4h-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 15h2m4 0h6" stroke="currentColor" stroke-width="1.8"/><circle cx="7" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></i><div class="mv"><span>${esc(w)}</span>${s?`<em>${esc(s)}</em>`:''}</div>`;ol.appendChild(li);return}const link=findLink(w);const li=el('li',(k==='meal'?'meal ':'')+(k==='opt'?'optrow ':'')+(link?'tap':''));
     li.innerHTML=`<time>${t}</time><i class="dot"></i><div class="what">${esc(w)}${k==='opt'?'<span class="opt">원하면</span>':''}${s?`<small>${esc(s)}</small>`:''}${link?'<span class="more">자세히 보기 ›</span>':''}</div>`;
