@@ -170,6 +170,8 @@ button{font:inherit;color:inherit}
 
 /* chinese cards */
 .zh-grid{display:grid;gap:10px}
+.zh-h{font-family:var(--body);font-size:15px;font-weight:700;color:var(--jade);margin:16px 0 0;letter-spacing:0}
+.zh-h:first-child{margin-top:0}
 .zh{display:grid;gap:2px;text-align:left;border:1px solid var(--rule);border-radius:12px;background:var(--paper);padding:14px 16px;cursor:pointer}
 .zh:hover{border-color:var(--jade)}
 .zh .ko{font-size:15px;color:var(--muted)}
@@ -568,14 +570,31 @@ const DAYS=[
   places:[],foods:['court']}
 ];
 const CARDS=[
- {ko:'숙소로 가주세요',cn:'請帶我到這家飯店\n台北凱達大飯店\n台北市萬華區艋舺大道167號',sub:'택시 기사님께 보여주세요'},
- {ko:'고수 빼주세요',cn:'不要香菜',sub:'부야오 샹차이'},
- {ko:'안 맵게 해주세요',cn:'不要辣',sub:'부야오 라'},
- {ko:'화장실이 어디예요?',cn:'請問洗手間在哪裡？',sub:'칭원 시서우지엔 짜이 나리?'},
- {ko:'이거 주세요',cn:'我要這個',sub:'워 야오 쩌거 (손가락으로 가리키며)'},
- {ko:'얼마예요?',cn:'多少錢？',sub:'뚜어샤오 치엔?'},
- {ko:'물 좀 주세요',cn:'請給我一杯水',sub:'칭 게이 워 이뻬이 수이'},
- {ko:'가족과 떨어졌어요. 이 번호로 전화해 주세요',cn:'我和家人走散了\n請幫我打這個電話',sub:'휴대폰에서 가족 번호를 같이 보여주세요'}
+ {g:'인사',ko:'안녕하세요',cn:'你好',sub:'니하오'},
+ {g:'인사',ko:'감사합니다',cn:'謝謝',sub:'씨에씨에'},
+ {g:'인사',ko:'실례합니다 / 죄송합니다',cn:'不好意思',sub:'뿌하오이쓰 (길 비켜달라고 할 때도 써요)'},
+ {g:'인사',ko:'괜찮아요',cn:'沒關係',sub:'메이관시'},
+ {g:'인사',ko:'우리는 한국 사람이에요',cn:'我們是韓國人',sub:'워먼 스 한궈런'},
+ {g:'이동',ko:'숙소로 가주세요',cn:'請帶我到這家飯店\n台北凱達大飯店\n台北市萬華區艋舺大道167號',sub:'택시 기사님께 보여주세요'},
+ {g:'이동',ko:'여기서 세워 주세요',cn:'請在這裡停車',sub:'칭 짜이 쩌리 팅처'},
+ {g:'이동',ko:'화장실이 어디예요?',cn:'請問洗手間在哪裡？',sub:'칭원 시서우지엔 짜이 나리?'},
+ {g:'식당',ko:'예약했어요',cn:'我們有訂位\n訂位人：＿＿＿',sub:'워먼 여우 띵웨이 · 예약자 이름을 같이 보여주세요'},
+ {g:'식당',ko:'6명이에요',cn:'我們六個人',sub:'워먼 리우거런'},
+ {g:'식당',ko:'이거 주세요',cn:'我要這個',sub:'워 야오 쩌거 (손가락으로 가리키며)'},
+ {g:'식당',ko:'고수 빼주세요',cn:'不要香菜',sub:'부야오 샹차이'},
+ {g:'식당',ko:'안 맵게 해주세요',cn:'不要辣',sub:'부야오 라'},
+ {g:'식당',ko:'물 좀 주세요',cn:'請給我一杯水',sub:'칭 게이 워 이뻬이 수이'},
+ {g:'식당',ko:'덜 달게, 얼음 적게 해주세요 (음료 주문할 때)',cn:'半糖少冰',sub:'반탕 샤오삥 · 대만 음료는 기본이 아주 달아요'},
+ {g:'식당',ko:'포장해 주세요',cn:'外帶',sub:'와이따이 (야시장에서 들고 갈 때)'},
+ {g:'식당',ko:'맛있어요!',cn:'好吃！',sub:'하오츠!'},
+ {g:'식당',ko:'계산해 주세요',cn:'請幫我結帳',sub:'칭 빵 워 지에짱'},
+ {g:'쇼핑',ko:'얼마예요?',cn:'多少錢？',sub:'뚜어샤오 치엔?'},
+ {g:'쇼핑',ko:'카드 돼요?',cn:'可以刷卡嗎？',sub:'커이 쑤아카 마?'},
+ {g:'쇼핑',ko:'봉투 주세요',cn:'請給我袋子',sub:'칭 게이 워 다이즈 (봉투는 보통 유료예요)'},
+ {g:'쇼핑',ko:'그냥 구경하는 거예요',cn:'我只是看看',sub:'워 즈스 칸칸'},
+ {g:'급할 때',ko:'가족과 떨어졌어요. 이 번호로 전화해 주세요',cn:'我和家人走散了\n請幫我打這個電話',sub:'휴대폰에서 가족 번호를 같이 보여주세요'},
+ {g:'급할 때',ko:'약국이 어디예요?',cn:'請問藥局在哪裡？',sub:'칭원 야오쥐 짜이 나리?'},
+ {g:'급할 때',ko:'도와주세요',cn:'請幫幫我',sub:'칭 빵빵 워'}
 ];
 
 /* ---------- render ---------- */
@@ -628,8 +647,8 @@ function dayPanel(d){const p=el('section','panel');
 
 function cardsPanel(){const p=el('section','panel');p.innerHTML=`<span class="kicker">말이 안 통할 때</span><h2>보여주는 중국어 카드</h2><p class="lead">필요한 카드를 누르면 화면 가득 크게 떠요. 그대로 보여주시면 돼요.</p>`;
   const g=el('div','zh-grid');g.style.marginTop='18px';
-  CARDS.forEach(c=>{const b=el('button','zh');b.type='button';b.innerHTML=`<span class="ko">${esc(c.ko)}</span><span class="cn">${esc(c.cn.split('\n')[0])}</span>`;b.addEventListener('click',()=>openCard(c));g.appendChild(b)});
-  p.appendChild(g);p.appendChild(el('div','note','<b>택시 타실 때</b>는 맨 위 \'숙소로 가주세요\' 카드를 보여주세요. 숙소 주소가 함께 나와요.'));return p}
+  let lastG='';CARDS.forEach(c=>{if(c.g!==lastG){lastG=c.g;g.appendChild(el('h3','zh-h',esc(c.g)))}const b=el('button','zh');b.type='button';b.innerHTML=`<span class="ko">${esc(c.ko)}</span><span class="cn">${esc(c.cn.split('\n')[0])}</span>`;b.addEventListener('click',()=>openCard(c));g.appendChild(b)});
+  p.appendChild(g);p.appendChild(el('div','note','<b>택시 타실 때</b>는 \'이동\'의 \'숙소로 가주세요\' 카드를 보여주세요. 숙소 주소가 함께 나와요.'));return p}
 function infoPanel(){const p=el('section','panel');
   p.innerHTML=`<span class="kicker">떠나시기 전에</span><h2>꼭 알아둘 것</h2>
   <div class="tip"><h3>날씨와 옷차림</h3><ul><li>낮 25도, 밤 20도 정도로 한국 초가을 날씨예요.</li><li>2일차 바닷가(예류·지우펀)는 비와 바람이 잦아요.</li><li>반팔에 얇은 긴팔을 겹쳐 입고, 가디건이나 얇은 패딩을 챙겨요. 실내 에어컨이 세요.</li><li>접이식 우산, 미끄럽지 않은 편한 신발</li></ul></div>
