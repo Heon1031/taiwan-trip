@@ -691,6 +691,10 @@ html.big .bottombar .in{zoom:1.06}
 .a2h[data-os="i"] .br.n .bt{justify-content:center}
 .a2h[data-os="ic"] .bb.n{display:none}
 .a2h[data-os="ic"] .ctop{display:block}
+.a2h-ph .kbti{display:none}.a2h-ph .kbti .kb{width:16px;height:16px;border-radius:50%;background:#F2F4F6;display:grid;place-items:center;font-size:10px;font-weight:700}.a2h-ph .kbti .ky{width:16px;height:16px;border-radius:50%;background:#FEE500;flex:none}
+.a2h:is([data-os="i"],[data-os="ic"]) .kbt{display:none}.a2h:is([data-os="i"],[data-os="ic"]) .kbti{display:flex}
+.a2h-ph .kbb{color:#191F28}
+.a2h-steps li{cursor:pointer}
 /* tap positions */
 .a2h[data-f="1"] .tap{left:105px;top:115px}
 .a2h:is([data-os="a"],[data-os="s"])[data-f="2"] .tap{left:174px;top:24px}
@@ -701,7 +705,7 @@ html.big .bottombar .in{zoom:1.06}
 .a2h[data-os="s"][data-f="4"] .tap{left:162px;top:313px}
 .a2h[data-os="s"][data-f="5"] .tap{left:31px;top:178px}
 .a2h[data-os="s"][data-f="6"] .tap{left:60px;top:308px}
-.a2h:is([data-os="i"],[data-os="ic"])[data-f="2"] .tap{left:166px;top:313px}
+.a2h:is([data-os="i"],[data-os="ic"])[data-f="2"] .tap{left:168px;top:312px}
 .a2h:is([data-os="i"],[data-os="ic"])[data-f="3"] .tap{left:120px;top:278px}
 .a2h[data-os="i"][data-f="4"] .tap{left:95px;top:313px}
 .a2h[data-os="ic"][data-f="4"] .tap{left:174px;top:24px}
@@ -1038,9 +1042,10 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   w.querySelectorAll('.ovm-zb button').forEach(b=>b.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;if(+b.dataset.z>0)zoomAt(2,W/2,H/2);else zoomAt(1/2,W/2,H/2)}));
   return w}
 
-const A2H={s:['카카오톡에서 받은 링크를 눌러요','오른쪽 위 점 세 개(⋮) → ‘다른 브라우저로 열기’','삼성 인터넷 오른쪽 아래 ≡ → ‘현재 페이지 추가’','‘홈 화면’ → ‘추가’를 누르면 바탕화면에 아이콘이 생겨요'],
- ic:['카카오톡에서 받은 링크를 눌러요','오른쪽 아래 점 세 개(⋯) → ‘다른 브라우저로 열기’','크롬 주소창 오른쪽 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’를 누르면 바탕화면에 아이콘이 생겨요'],a:['카카오톡에서 받은 링크를 눌러요','오른쪽 위 점 세 개(⋮) → ‘다른 브라우저로 열기’','크롬에서 다시 ⋮ → ‘홈 화면에 추가’','‘추가’를 누르면 바탕화면에 아이콘이 생겨요'],
- i:['카카오톡에서 받은 링크를 눌러요','오른쪽 아래 점 세 개(⋯) → ‘다른 브라우저로 열기’','사파리 아래 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’를 누르면 바탕화면에 아이콘이 생겨요']};
+const A2H={a:['카톡에서 링크 누르기','오른쪽 위 ⋮ → ‘다른 브라우저로 열기’','크롬 ⋮ → ‘홈 화면에 추가’','‘추가’ → 바탕화면에 아이콘 완성'],
+ s:['카톡에서 링크 누르기','오른쪽 위 ⋮ → ‘다른 브라우저로 열기’','오른쪽 아래 ≡ → ‘현재 페이지 추가’','‘홈 화면’ → ‘추가’ → 아이콘 완성'],
+ i:['카톡에서 링크 누르기','오른쪽 아래 공유 버튼 → ‘다른 브라우저로 열기’','사파리 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’ → 아이콘 완성'],
+ ic:['카톡에서 링크 누르기','오른쪽 아래 공유 버튼 → ‘다른 브라우저로 열기’','크롬 주소창 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’ → 아이콘 완성']};
 const A2HSTEP=[0,1,2,2,3,3,4,4];
 function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/CriOS/.test(ua)?'ic':'i'):(/SamsungBrowser/.test(ua)?'s':'a');const w=el('div','a2h');w.dataset.os=os;w.dataset.f='1';
   const SHR='<svg class="shr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5v10h14V11h-1"/></svg>';
@@ -1048,7 +1053,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   w.innerHTML=`<div class="a2h-tabs"><button type="button" data-os="a">갤럭시 크롬</button><button type="button" data-os="s">갤럭시 삼성인터넷</button><button type="button" data-os="i">아이폰 사파리</button><button type="button" data-os="ic">아이폰 크롬</button></div>
   <div class="a2h-ph" aria-hidden="true">
    <div class="sc kt"><div class="hd">‹ 우리 가족 (6)</div><div class="msg"><span class="av"></span><div><div class="nm">헌주</div><div class="bub">대만 여행 안내서예요!</div><div class="lk"><i></i><b>여섯 식구 첫 여행</b><span>heon1031.github.io</span></div></div></div><div class="me">고마워!</div></div>
-   <div class="sc br kbr"><div class="bt kbt"><span class="x">✕</span><span class="url">여섯 식구 첫 여행</span><span class="dots">⋮</span></div>${PG}<div class="bb kbb"><span>‹</span><span>›</span><span>↻</span><span>⋯</span></div></div>
+   <div class="sc br kbr"><div class="bt kbt"><span class="x">✕</span><span class="url">여섯 식구 첫 여행</span><span class="dots">⋮</span></div><div class="bt kbti"><span class="kb">‹</span><span class="url">heon1031.github..</span><span class="ky"></span><span class="kb">˅</span></div>${PG}<div class="bb kbb"><span>←</span><span>→</span><span>↻</span>${SHR}</div></div>
    <div class="sc br n"><div class="bt"><span class="url">heon1031.github.io</span><span class="ctop">${SHR}</span><span class="dots">⋮</span></div>${PG}<div class="bb n"><span>‹</span><span>›</span>${SHR}<span>▢</span><span>⧉</span></div><div class="bb sbb"><span>‹</span><span>›</span><span>⌂</span><span>▢</span><span>≡</span></div></div>
    <div class="lay smenu"><span class="hl"><i></i>현재 페이지 추가</span><span><i></i>북마크</span><span><i></i>방문 기록</span><span><i></i>다운로드</span><span><i></i>공유</span><span><i></i>설정</span><span><i></i>광고 차단</span><span><i></i>다크 모드</span></div>
    <div class="lay sadd"><b class="t">추가할 위치</b><b>북마크</b><b>퀵 액세스</b><b class="hl">홈 화면</b></div>
@@ -1056,16 +1061,18 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
    <div class="lay menu kmenu kmenu-i"><b>링크 복사</b><b>공유하기</b><b class="hl">다른 브라우저로 열기</b></div>
    <div class="lay menu cmenu"><b>새 탭</b><b>북마크</b><b>방문 기록</b><b>공유</b><b class="hl">홈 화면에 추가</b><b>설정</b></div>
    <div class="lay shs"><div class="row"><i></i><i></i><i></i><i></i><i></i></div><b>복사</b><b>읽기 목록에 추가</b><b>즐겨찾기 추가</b><b class="hl">홈 화면에 추가</b><b>페이지에서 찾기</b></div>
-   <div class="lay dlg"><div><b>홈 화면에 추가</b><img src="icon-192.png" alt=""><span>대만 여행</span><div class="bs"><span style="color:#8B95A1">취소</span><span>추가</span></div></div></div>
-   <div class="lay iadd" style="inset:0"><div class="nav"><span>취소</span><b>홈 화면에 추가</b><span>추가</span></div><div class="card"><img src="icon-192.png" alt=""><div><b>대만 여행</b><br><span style="color:#8B95A1">heon1031.github.io</span></div></div></div>
-   <div class="sc home"><span><i></i>전화</span><span><i></i>카톡</span><span><i></i>카메라</span><span><i></i>사진</span><span><i></i>지도</span><span><i></i>날씨</span><span class="me"><img src="icon-192.png" alt="">대만 여행</span></div>
+   <div class="lay dlg"><div><b>홈 화면에 추가</b><img src="icon-192.png?v=2" alt=""><span>대만 여행</span><div class="bs"><span style="color:#8B95A1">취소</span><span>추가</span></div></div></div>
+   <div class="lay iadd" style="inset:0"><div class="nav"><span>취소</span><b>홈 화면에 추가</b><span>추가</span></div><div class="card"><img src="icon-192.png?v=2" alt=""><div><b>대만 여행</b><br><span style="color:#8B95A1">heon1031.github.io</span></div></div></div>
+   <div class="sc home"><span><i></i>전화</span><span><i></i>카톡</span><span><i></i>카메라</span><span><i></i>사진</span><span><i></i>지도</span><span><i></i>날씨</span><span class="me"><img src="icon-192.png?v=2" alt="">대만 여행</span></div>
    <i class="tap"></i></div>
   <ol class="a2h-steps"></ol>
-  <p class="a2h-note">어떤 브라우저인지 모르면: 카톡에서 ‘다른 브라우저로 열기’를 눌렀을 때 열리는 앱이 그 휴대폰의 기본 브라우저예요. 그 이름의 탭을 보면 돼요. 카카오톡 안에서 바로 열면 홈 화면 추가가 안 돼요. 바탕화면 아이콘으로 열면 앱처럼 화면이 넓고, 인터넷이 약한 곳에서도 열려요.</p>`;
+  <p class="a2h-note">카톡 안에서는 추가가 안 돼요. 다른 브라우저로 연 뒤, 그 브라우저 탭을 보세요.</p>`;
   const ol=w.querySelector('.a2h-steps');
   const draw=()=>{const st=A2H[w.dataset.os],cur=A2HSTEP[+w.dataset.f];ol.innerHTML=st.map((t,i)=>`<li class="${cur===i+1?'on':''}">${t}</li>`).join('')};
-  w.querySelectorAll('.a2h-tabs button').forEach(b=>b.addEventListener('click',()=>{w.dataset.os=b.dataset.os;w.dataset.f='1';draw()}));
-  draw();const tm=setInterval(()=>{if(!w.isConnected){clearInterval(tm);return}w.dataset.f=String(+w.dataset.f%7+1);draw()},1900);
+  
+  draw();let tm=0;const run=()=>{clearInterval(tm);tm=setInterval(()=>{if(!w.isConnected){clearInterval(tm);return}w.dataset.f=String(+w.dataset.f%7+1);draw()},1900)};run();
+  w.querySelectorAll('.a2h-tabs button').forEach(b=>b.addEventListener('click',()=>{w.dataset.os=b.dataset.os;w.dataset.f='1';draw();run()}));
+  ol.addEventListener('click',e=>{const li=e.target.closest('li');if(!li)return;const n=[...ol.children].indexOf(li);w.dataset.f=String([1,2,4,6][n]);draw();run()});
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
