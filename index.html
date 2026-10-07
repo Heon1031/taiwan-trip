@@ -426,13 +426,21 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .ovm-in{position:absolute;inset:0;transform-origin:0 0}
 .ovm-in img{display:block;width:100%;height:100%;pointer-events:none;-webkit-user-drag:none}
 .ovsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.ovm-in{--k:.72;--dz:0;--dp:0;--dq:0}
+.ovm-in{--k:.92;--dz:0;--dp:0;--dq:0}
 .ovm-in.lo .ovsvg .p .l .s{opacity:0}
-.ovsvg .spot .ps{opacity:var(--dq)}
+.ovsvg .spot .ps{opacity:var(--dq)}.ovsvg .spot.early .ps{opacity:var(--dp)}
+.ovsvg g.wkg{stroke:none!important;opacity:var(--dz)}
+.ovsvg .wkg.d1 .wk{stroke:#3182F6}.ovsvg .wkg.d1 .wl{fill:#1B64DA}
+.ovsvg .wk{fill:none;stroke:#F07C1E;stroke-width:calc(7px*var(--k));stroke-dasharray:calc(4px*var(--k)) calc(12px*var(--k));stroke-linecap:round}
+.ovsvg .wl{font-size:40px;font-weight:800;fill:#C25E0C;paint-order:stroke;stroke:#fff;stroke-width:10px;stroke-linejoin:round;font-family:var(--body)}
+.ovsvg .wl .s{font-size:34px;font-weight:600;fill:#6B7684}
+.ovm-go{position:relative;margin:12px 12px 0;width:calc(100% - 24px);display:flex;align-items:center;gap:6px;border:0;border-radius:12px;padding:7px 10px;background:rgba(255,255,255,.94);box-shadow:none;background:var(--tint);font:inherit;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;line-height:1.3;padding:6px 9px}
+.ovm-go svg{width:16px;height:16px;flex:none;color:var(--gc)}
+.ovm-go em{font-style:normal;color:var(--muted);font-weight:600}
 .ovsvg .xm .l{opacity:calc(1 - var(--dq))}
-.ovsvg .spot circle{fill:#fff;stroke:#1FA463;stroke-width:6px}
-.ovsvg .spot text{font-size:30px;font-weight:700;fill:#333D4B;paint-order:stroke;stroke:#fff;stroke-width:9px;stroke-linejoin:round;font-family:var(--body)}
-.ovm[data-f]:not([data-f="0"]):not([data-f="3"]) .ovsvg .spot{display:none}
+.ovsvg .spot circle{fill:#fff;stroke:#1FA463;stroke-width:6px}.ovsvg .spot.fix circle{fill:#1FA463}
+.ovsvg .spot text{font-size:40px;font-weight:700;fill:#333D4B;paint-order:stroke;stroke:#fff;stroke-width:9px;stroke-linejoin:round;font-family:var(--body)}
+.ovm[data-f]:not([data-f="0"]):not([data-f="3"]) .ovsvg :is(.spot,.fz){display:none}
 .ovsvg .r{fill:none;stroke-width:calc(12px*var(--k));stroke-linecap:round;transition:stroke .2s,opacity .2s}
 .ovsvg .r.dash{stroke-dasharray:calc(22px*var(--k)) calc(18px*var(--k));stroke-width:calc(9px*var(--k))}
 .ovsvg .ps{transform:scale(var(--k))}
@@ -443,10 +451,12 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .ovsvg .fz{fill:rgba(31,164,99,.10);stroke:#1FA463;stroke-width:calc(5px*var(--k));stroke-dasharray:calc(14px*var(--k)) calc(10px*var(--k));opacity:calc(var(--dp)*(1 - var(--dq)))}
 .ovsvg .p.det.opt circle{fill:#fff;stroke-width:9px}.ovsvg .p.det.opt.d3 circle{stroke:#1FA463}
 .ovsvg .st circle{fill:#fff;stroke:#8B95A1;stroke-width:5}
-.ovsvg .st text{opacity:var(--dp);font-size:30px;font-weight:600;fill:#8B95A1;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:9px;stroke-linejoin:round;font-family:var(--body)}
+.ovsvg .st text{opacity:var(--dp);font-size:34px;font-weight:600;fill:#8B95A1;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:9px;stroke-linejoin:round;font-family:var(--body)}
 .ovsvg .dg text{font-size:40px;font-weight:800;fill:#B9B09A;text-anchor:middle;font-family:var(--body);letter-spacing:.04em}
 .ovsvg .p.det circle{r:22px}
 .ovsvg .p.det .n{font-size:26px}
+.ovsvg .hid{visibility:hidden}
+
 .ovsvg .r.d1{stroke:#3182F6}.ovsvg .r.d2{stroke:#F07C1E}.ovsvg .r.d3{stroke:#1FA463}.ovsvg .r.d4{stroke:#8A8F98}
 .ovsvg .p circle{stroke:#fff;stroke-width:7;transition:fill .2s}
 .ovsvg .p.d1 circle{fill:#3182F6}.ovsvg .p.d2 circle{fill:#F07C1E}.ovsvg .p.d3 circle{fill:#1FA463}.ovsvg .p.d4 circle{fill:#8A8F98}
@@ -815,13 +825,16 @@ const OVR=[[1,'airport','hotel',-.12,0],[1,'hotel','cks',.35,0],[1,'cks','t101',
  [2,'hotel','yehliu',-.12,0],[2,'yehliu','shifen',-.12,0],[2,'shifen','jiufen',-.15,0],[2,'jiufen','raohe',.1,0],
  [3,'hotel','wulai',.15,0],[3,'hotel','ximen',.4,0],
  [4,'hotel','airport',-.12,0]];
-const OVPIN=[[1,'cks','1','중정기념당','',0,1],[1,'t101','2','타이베이 101','키키 저녁',1,0],
- [2,'yehliu','1','예류 지질공원','',1,0],[2,'shifen','2','스펀','천등',1,0],[2,'jiufen','3','지우펀','홍등 야경',1,0],[2,'raohe','4','라오허제 야시장','팀호완',1,-1],
+const OVPIN=[[1,'cks','3','중정기념당','',0,1],[1,'t101','4','타이베이 101','키키 저녁',1,0],
+ [2,'yehliu','2','예류 지질공원','',1,0],[2,'shifen','3','스펀','천등',1,0],[2,'jiufen','4','지우펀','홍등 야경',1,0],[2,'raohe','5','라오허제 야시장','팀호완',1,-1],
  [3,'wulai','1','우라이','꼬마기차·폭포',1,0],[3,'ximen','2','시먼딩','자유시간 · 우라오궈',0,-1],
  ['4 d1','airport','✈','타오위안 공항 T1','',1,-1]];
 const OVD={x0:121.48,x1:121.60,y0:25.015,y1:25.068};
-const OVDET=[[1,[121.4999,25.0372],'용산사','',-1,0],[2,[121.5036,25.0410],'뉴뎬 우육면','',-1,0],[3,[121.5205,25.0527],'치이카와 매장','자유시간 · 원하면',1,0,1]];
-const OVSPOT=[['홍러우',121.5068,25.0420,-1],['무지개 횡단보도',121.5076,25.0421,1],['완녠빌딩',121.5058,25.0441,-1],['돈키호테',121.5056,25.0430,-1],['아종면선',121.5077,25.0438,1],['망고빙수',121.5078,25.04325,1],['행복당 밀크티',121.5079,25.0452,1],['지하상가 입구',121.5097,25.0446,1],['우라오궈 (저녁)',121.5086,25.0427,1]];
+const OVDET=[[1,[121.4999,25.0372],'용산사','식당에서 걸어서 3분',-1,0,0,'2'],[1,[121.5003,25.0363],'샤오왕주과 (점심)','숙소에서 걸어서 8분',1,0,0,'1'],[2,[121.5036,25.0410],'뉴뎬 우육면 (점심)','',-1,0,0,'1']];
+const OVSPOT=[['홍러우',121.5068,25.0420,-1],['무지개 횡단보도',121.5076,25.0421,1],['완녠빌딩',121.5058,25.0441,-1],['돈키호테',121.5056,25.0430,-1],['아종면선',121.5077,25.0438,1],['망고빙수',121.5078,25.04325,1],['행복당 밀크티',121.5079,25.0452,1],['지하상가 입구',121.5097,25.0446,1],['우라오궈 (저녁)',121.5086,25.0427,1,1],['치이카와 매장',121.5205,25.0527,1,0,1]];
+const OVWALK=[[2,[121.5013,25.0333],[121.5036,25.0410],'걸어서 20분','택시 5분 · 약 1.4km',1],
+ [1,[121.5013,25.0333],[121.5003,25.0363],'','',1,-.25],[1,[121.5003,25.0363],[121.4999,25.0372],'','',1,0],[1,[121.4999,25.0372],[121.5013,25.0333],'숙소까지 5분','',-1,.45]];
+const OVGO={1:['숙소 → ① 점심 → ② 용산사 → 숙소','모두 걸어서 · 8분 · 3분 · 5분',121.5003,25.0352,40],2:['숙소 → ① 우육면 점심','걸어서 20분 · 택시 5분',121.50245,25.03715,11,1]};
 const OVDG=[['완화구',121.492,25.026],['중정구',121.516,25.026],['다안구',121.543,25.024],['신이구',121.580,25.027],['중산구',121.534,25.061],['다퉁구',121.513,25.062],['쑹산구',121.560,25.061]];
 const OVMRT=[['#0070BD',[[121.4999,25.0354],[121.5082,25.0421],[121.5172,25.0462],[121.5232,25.0448],[121.5328,25.0423],[121.5438,25.0416],[121.5513,25.0414],[121.5577,25.0413],[121.5651,25.0411],[121.5764,25.0408],[121.5824,25.0450]]],
  ['#E3002C',[[121.5172,25.0462],[121.5162,25.0414],[121.5183,25.0326],[121.5287,25.0339],[121.5353,25.0330],[121.5434,25.0330],[121.5525,25.0333],[121.5637,25.0331],[121.5706,25.0328]]],
@@ -833,38 +846,60 @@ function ovSvg(){let r='',pins='';
   const pinG=(cls,d,k,n,t,sub,ax,ay,rr)=>{const [x,y]=ovP(...(OVPT[k]||k));const anc=ax>0?'start':ax<0?'end':'middle';const lx=ax*(rr+18),ly=ay>0?rr+62:ay<0?(sub?-rr-66:-rr-20):14;
     return `<g class="p d${d}${cls}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><circle r="${rr}"/><text class="n" y="${rr*.4|0}">${n}</text><text class="l" x="${lx}" y="${ly}" text-anchor="${anc}">${t}${sub?`<tspan class="s" x="${lx}" dy="46">${sub}</tspan>`:''}</text></g></g>`};
   OVPIN.forEach(([d,k,n,t,sub,ax,ay])=>{pins+=pinG(k==='ximen'?' xm':'',d,k,n,t,sub,ax,ay,30)});
-  OVDET.forEach(([d,ll,t,sub,ax,ay,o])=>{pins+=pinG(' det'+(o?' opt':''),d,ll,'',t,sub,ax,ay,22)});
+  OVDET.forEach(([d,ll,t,sub,ax,ay,o,n])=>{pins+=pinG(' det'+(o?' opt':''),d,ll,n||'',t,sub,ax,ay,22)});
   const [dx0,dy0]=ovP(OVD.x0,OVD.y1),[dx1,dy1]=ovP(OVD.x1,OVD.y0);
   let det=`<image class="det" href="img/ovdetail.png" x="${dx0.toFixed(1)}" y="${dy0.toFixed(1)}" width="${(dx1-dx0).toFixed(1)}" height="${(dy1-dy0).toFixed(1)}" preserveAspectRatio="none"/><g class="det">`;
   OVDG.forEach(([t,lo,la])=>{const [x,y]=ovP(lo,la);det+=`<g class="dg" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><text y="14">${t}</text></g></g>`});
   OVMRT.forEach(([c,pts])=>{const pp=pts.map(q=>ovP(...q).map(v=>v.toFixed(1)).join(',')).join(' ');det+=`<polyline class="mrt" points="${pp}"/><polyline class="mrt2" points="${pp}"/>`});
   OVST.forEach(([t,lo,la])=>{const [x,y]=ovP(lo,la);det+=`<g class="st" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><circle r="11"/>${t?`<text y="46">${t}</text>`:''}</g></g>`});
   {const [fx,fy]=ovP(121.5070,25.0432);det+=`<circle class="fz" cx="${fx.toFixed(1)}" cy="${fy.toFixed(1)}" r="9"/>`}
-  let spots='<g class="det">';OVSPOT.forEach(([t,lo,la,ax])=>{const [x,y]=ovP(lo,la);spots+=`<g class="spot" transform="translate(${x.toFixed(2)} ${y.toFixed(2)})"><g class="ps"><circle r="12"/><text x="${ax*24}" y="10" text-anchor="${ax>0?'start':'end'}">${t}</text></g></g>`});
-  spots+='</g>';det+='</g>';
+  let spots='<g class="det">',walks='<g class="det">';OVSPOT.forEach(([t,lo,la,ax,fx,ea])=>{const [x,y]=ovP(lo,la);spots+=`<g class="spot${fx?' fix':''}${ea?' early':''}" transform="translate(${x.toFixed(2)} ${y.toFixed(2)})"><g class="ps"><circle r="12"/><text x="${ax*24}" y="10" text-anchor="${ax>0?'start':'end'}">${t}</text></g></g>`});
+  OVWALK.forEach(([d,a,b,t1,t2,ax,rad])=>{const [x1,y1]=ovP(...a),[x2,y2]=ovP(...b);rad=rad||0;const qx=(x1+x2)/2-rad*(y2-y1),qy=(y1+y2)/2+rad*(x2-x1);const mx=(x1+x2)/4+qx/2,my=(y1+y2)/4+qy/2;
+    const t=.58,L=(p,q)=>p+(q-p)*t,ax1=L(x1,qx),ay1=L(y1,qy),bx1=L(qx,x2),by1=L(qy,y2),sx=L(ax1,bx1),sy=L(ay1,by1),F=v=>v.toFixed(2);
+    walks+=`<g class="r d${d} wkg"><path class="wk" d="M${F(x1)} ${F(y1)} Q${F(ax1)} ${F(ay1)} ${F(sx)} ${F(sy)}" marker-end="url(#ah${d})"/><path class="wk" d="M${F(sx)} ${F(sy)} Q${F(bx1)} ${F(by1)} ${F(x2)} ${F(y2)}"/></g>`;
+    spots+=`<g class="r d${d} wkg"><g transform="translate(${mx.toFixed(2)} ${my.toFixed(2)})"><g class="ps"><text class="wl" x="${ax*22}" y="12" text-anchor="${ax>0?'start':'end'}">${t1}${t2?`<tspan class="s" x="${ax*22}" dy="38">${t2}</tspan>`:''}</text></g></g></g>`});
+  spots+='</g>';walks+='</g>';det+='</g>';
   const [hx,hy]=ovP(...OVPT.hotel);
   const defs=OVC.map((c,i)=>`<marker id="ah${i+1}" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${c}" class="ahp"/></marker>`).join('');
-  return `<svg class="ovsvg" viewBox="0 0 ${OVX.W} ${OVX.H}" aria-hidden="true"><defs>${defs}</defs>${det}${r}${pins}${spots}<g class="hotel" transform="translate(${hx.toFixed(1)} ${hy.toFixed(1)})"><g class="ps"><rect x="-30" y="-30" width="60" height="60" rx="12"/><text y="14">H</text><text class="l" x="-46" y="14" text-anchor="end">숙소</text></g></g></svg>`}
+  return `<svg class="ovsvg" viewBox="0 0 ${OVX.W} ${OVX.H}" aria-hidden="true"><defs>${defs}</defs>${det}${r}${walks}${pins}${spots}<g class="hotel" transform="translate(${hx.toFixed(1)} ${hy.toFixed(1)})"><g class="ps"><rect x="-30" y="-30" width="60" height="60" rx="12"/><text y="14">H</text><text class="l" x="-46" y="14" text-anchor="end">숙소</text></g></g></svg>`}
+const ovF=sc=>sc<1.8?.92+.08*(sc-1)/.8:Math.min(2.1,1+(sc-1.8)*.08);
+function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>parseFloat(inn.style.getPropertyValue(n)||'0');
+  const own=e=>e.closest('g.p,g.hotel,g.spot,g.st,g.dg,g.wkg');
+  const over=(r,o)=>placed.some(q=>q.o!==o&&r.left<q.r.right+pad&&r.right>q.r.left-pad&&r.top<q.r.bottom+pad&&r.bottom>q.r.top-pad);
+  const vis=e=>{const r=e.getBoundingClientRect();return r.width>0?r:null};
+  inn.querySelectorAll('.ovsvg .hid').forEach(e=>e.classList.remove('hid'));
+  const obs=e=>{const r=vis(e);if(r)placed.push({r,o:own(e)})};
+  inn.querySelectorAll('.ovsvg .p:not(.det) circle,.ovsvg .hotel rect').forEach(obs);
+  if(vr('--dp')>.3)inn.querySelectorAll('.ovsvg .p.det circle').forEach(obs);
+  if(vr('--dq')>.3)inn.querySelectorAll('.ovsvg .spot:not(.early) circle').forEach(obs);if(vr('--dp')>.3)inn.querySelectorAll('.ovsvg .spot.early circle').forEach(obs);
+  const dq=vr('--dq');
+  const groups=[['.ovsvg .hotel .l',1],['.ovsvg .p:not(.det):not(.xm) .l',1],['.ovsvg .xm .l',1-dq],['.ovsvg .p.det .l',vr('--dp')],['.ovsvg .wl',vr('--dz')],['.ovsvg .spot.early text',vr('--dp')],['.ovsvg .spot:not(.early) text',dq],['.ovsvg .st text',vr('--dp')],['.ovsvg .dg text',vr('--dz')]];
+  const act=e=>{if(f==='0'||!f)return true;const g=e.closest('.p,.r,.spot');return !g||g.classList.contains('d'+f)||g.classList.contains('spot')};
+  const order=[];groups.forEach(([sel,v])=>{if(v<.3)return;inn.querySelectorAll(sel).forEach(e=>order.push(e))});
+  order.sort((a,b)=>act(b)-act(a));
+  order.forEach(e=>{const r=vis(e);if(!r)return;const o=own(e);if(over(r,o))e.classList.add('hid');else placed.push({r,o})})}
 function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.dataset.f=solo||'0';
   w.innerHTML=`<div class="ovm-vp"><div class="ovm-in${solo?'':' lo'}"><img src="img/ovbase.jpg" alt="4일 동안의 전체 동선 지도" draggable="false">${ovSvg()}</div>
    <div class="ovm-zb"><button type="button" data-z="1" aria-label="확대">+</button><button type="button" data-z="-1" aria-label="축소">−</button></div></div>
+   ${OVGO[solo]?`<button type="button" class="ovm-go${OVGO[solo][5]?' top':''}" style="--gc:${OVC[solo-1]}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2" fill="currentColor"/><path d="M10 21l2-6 3 3v4M8 12l2-4h4l2 4 2 1M12 8l-1 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${OVGO[solo][0]}<br><em>${OVGO[solo][1]} ›</em></span></button>`:''}
    ${solo?'':`<div class="ovm-f">${['전체','1일차','2일차','3일차','4일차'].map((t,i)=>`<button type="button" data-f="${i}" class="${i?'':'on'}" style="--c:${i?OVC[i-1]:'var(--ink)'}">${t}</button>`).join('')}</div>`}
-   <p class="ovm-hint">${solo?(cap?cap+' ':'')+'두 손가락으로 벌리면 확대돼요':'두 손가락으로 벌리면 확대돼요 · 날짜를 누르면 그날 길만 보여요'}<br>회색 철길 선은 지하철 · 빈 동그라미는 원하면 가는 곳</p>`;
-  w.querySelectorAll('.ovm-f button').forEach(b=>b.addEventListener('click',()=>{w.dataset.f=b.dataset.f;w.querySelectorAll('.ovm-f button').forEach(x=>x.classList.toggle('on',x===b))}));
+   <p class="ovm-hint">${solo&&cap?cap+'<br>':''}회색 선은 지하철</p>`;
+  w.querySelectorAll('.ovm-f button').forEach(b=>b.addEventListener('click',()=>{w.dataset.f=b.dataset.f;w.querySelectorAll('.ovm-f button').forEach(x=>x.classList.toggle('on',x===b));requestAnimationFrame(()=>ovCollide(w,w.querySelector('.ovm-in')))}));
   /* pinch / drag zoom */
-  const OVMAX=50,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
+  let cq=0;const OVMAX=80,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
   const clamp=()=>{const W=vp.clientWidth,H=vp.clientHeight;sc=Math.min(OVMAX,Math.max(1,sc));tx=Math.min(0,Math.max(W-W*sc,tx));ty=Math.min(0,Math.max(H-H*sc,ty))};
-  const apply=()=>{clamp();inn.style.transform=`translate(${tx}px,${ty}px) scale(${sc})`;inn.style.setProperty('--k',(Math.min(Math.pow(sc,-.85),1.486/sc)*Math.min(1,.72+.28*(sc-1))).toFixed(4));inn.style.setProperty('--dq',Math.min(1,Math.max(0,(sc-16)/6)).toFixed(3));inn.classList.toggle('lo',!solo&&sc<1.8);inn.style.setProperty('--dz',Math.min(1,Math.max(0,(sc-2.6)/1.8)).toFixed(3));inn.style.setProperty('--dp',Math.min(1,Math.max(0,(sc-5)/2)).toFixed(3));inn.classList.toggle('dp',sc>5.2);vp.style.touchAction=sc>1.01?'none':'pan-y';vp.classList.toggle('zoomed',sc>1.01)};
+  const apply=()=>{clamp();inn.style.transform=`translate(${tx}px,${ty}px) scale(${sc})`;if(!cq){cq=requestAnimationFrame(()=>{cq=0;ovCollide(w,inn)})}inn.style.setProperty('--k',(ovF(sc)/sc).toFixed(4));inn.style.setProperty('--dq',Math.min(1,Math.max(0,(sc-16)/6)).toFixed(3));inn.classList.toggle('lo',!solo&&sc<1.8);inn.style.setProperty('--dz',Math.min(1,Math.max(0,(sc-2.6)/1.8)).toFixed(3));inn.style.setProperty('--dp',Math.min(1,Math.max(0,(sc-5)/2)).toFixed(3));inn.classList.toggle('dp',sc>5.2);vp.style.touchAction=sc>1.01?'none':'pan-y';vp.classList.toggle('zoomed',sc>1.01)};
   const zoomAt=(f,cx,cy)=>{const ns=Math.min(OVMAX,Math.max(1,sc*f));tx=cx-(cx-tx)*ns/sc;ty=cy-(cy-ty)*ns/sc;sc=ns;apply()};
   const home={s:1,cx:.5,cy:.5};
   if(solo){const d=+solo,ps=[];OVR.forEach(r=>{if(r[0]===d){ps.push(ovP(...OVPT[r[1]]),ovP(...OVPT[r[2]]))}});OVPIN.forEach(r=>{if((' '+r[0]+' ').includes(' '+d+' ')||String(r[0]).includes('d'+d))ps.push(ovP(...OVPT[r[1]]))});OVDET.forEach(r=>{if(r[0]===d)ps.push(ovP(...r[1]))});
     const xs=ps.map(q=>q[0]),ys=ps.map(q=>q[1]);const bx0=Math.min(...xs)-90,bx1=Math.max(...xs)+330,by0=Math.min(...ys)-110,by1=Math.max(...ys)+130;
     home.s=Math.max(1,Math.min(OVMAX,OVX.W/(bx1-bx0),OVX.H/(by1-by0)));home.cx=(bx0+bx1)/2/OVX.W;home.cy=(by0+by1)/2/OVX.H}
   let touched=false;const goHome=()=>{const W=vp.clientWidth,H=vp.clientHeight;if(!W)return;sc=home.s;tx=W/2-home.cx*W*sc;ty=H/2-home.cy*H*sc;apply()};
-  if(solo&&'ResizeObserver' in window){new ResizeObserver(()=>{if(!touched)goHome()}).observe(vp)}
+  if('ResizeObserver' in window){new ResizeObserver(()=>{if(!touched){solo?goHome():(sc=1,tx=0,ty=0,apply())}else apply()}).observe(vp)}
   vp.addEventListener('pointerdown',()=>{touched=true},true);
   const rel=e=>{const r=vp.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top]};
-  vp.addEventListener('pointerdown',e=>{if(e.target.closest('.ovm-zb'))return;pts.set(e.pointerId,rel(e));try{vp.setPointerCapture(e.pointerId)}catch(_){}
+  {const go=w.querySelector('.ovm-go');if(go)go.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;const g=OVGO[solo];const [px,py]=ovP(g[2],g[3]);const cx=px/OVX.W*W,cy=py/OVX.H*H;sc=g[4];tx=W/2-cx*sc;ty=H/2-cy*sc;touched=true;apply()})}
+  vp.addEventListener('pointerdown',e=>{if(e.target.closest('.ovm-zb,.ovm-go'))return;pts.set(e.pointerId,rel(e));try{vp.setPointerCapture(e.pointerId)}catch(_){}
     if(pts.size===2){const [a,b]=[...pts.values()];pin={d:Math.hypot(a[0]-b[0],a[1]-b[1]),s:sc}}else{last=rel(e);const now=Date.now();if(now-lastTap<300){const [x,y]=rel(e);sc>home.s*1.05?goHome():zoomAt(3,x,y);lastTap=0}else lastTap=now}});
   vp.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,rel(e));
     if(pts.size===2&&pin){const [a,b]=[...pts.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);const cx=(a[0]+b[0])/2,cy=(a[1]+b[1])/2;zoomAt((pin.s*d/pin.d)/sc,cx,cy);e.preventDefault()}
