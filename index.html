@@ -7,20 +7,23 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="대만 여행">
-<meta name="description" content="2026년 11월 7일~10일 대만 가족여행 안내서">
+<meta name="description" content="2026년 11월 7일~10일 여섯 식구 첫 여행 · 대만 3박 4일 안내서">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="대만 가족여행">
-<meta property="og:title" content="대만 가족여행 안내서">
-<meta property="og:description" content="2026년 11월 7일~10일 · 일정, 맛집, 걷는 동선, 지도">
+<meta property="og:site_name" content="여섯 식구 첫 여행">
+<meta property="og:title" content="여섯 식구 첫 여행 · 대만 3박 4일 안내서">
+<meta property="og:description" content="2026년 11월 7일(토) ~ 10일(화)">
 <meta property="og:url" content="https://heon1031.github.io/taiwan-trip/">
-<meta property="og:image" content="https://heon1031.github.io/taiwan-trip/og.jpg">
+<meta property="og:image" content="https://heon1031.github.io/taiwan-trip/og.jpg?v=3">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<title>대만 가족여행 안내서</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@500;700&display=swap">
+<title>여섯 식구 첫 여행</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@500;700&display=swap">
 <style>
@@ -417,6 +420,47 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .sheet .tile .warn{display:block;padding:0 16px 14px;margin-top:-6px;font-size:12.5px;font-weight:600;color:#D6303A}
 .sched .mv{white-space:normal;flex-wrap:wrap;row-gap:0;overflow:visible}
 .sched .mv em{overflow:visible;text-overflow:clip;white-space:nowrap}
+/* ui pass 10/7 */
+.hello .sub1{font-size:19px;font-weight:700;color:#fff;margin-top:-2px}
+.daybtn.hrow .thumb{width:72px;height:72px}
+.daybtn.hrow{grid-template-columns:72px 1fr auto}
+.daybtn.hrow .bub{display:grid;place-items:center;background:var(--wash);color:var(--jade)}
+.daybtn.hrow .bub svg{width:46px;height:46px}
+.daybtn.hrow .txt{font-size:17px}
+.daybtn.hrow .txt small{font-size:14px}
+.sheet .xbar{display:none}
+.sheet .shead{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;height:56px;padding:0 12px 0 20px;pointer-events:none;transition:background .2s,box-shadow .2s}
+.sheet .shead>*{pointer-events:auto}
+.sheet.hasimg .shead{margin-bottom:-56px}
+.sheet .stitle{flex:1;min-width:0;font-size:17px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .2s;pointer-events:none}
+.sheet .shead.solid{background:var(--paper);box-shadow:0 1px 0 var(--rule)}
+.sheet .shead.solid .stitle{opacity:1}
+.sheet .xclose{margin:0;flex:none}
+.sheet .shead.solid .xclose,.sheet:not(.hasimg) .xclose{background:var(--tint);color:var(--ink);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.sheet .grab{position:absolute;left:50%;top:7px;width:40px;height:5px;margin-left:-20px;border-radius:3px;background:rgba(255,255,255,.9);box-shadow:0 0 0 1px rgba(0,0,0,.06);pointer-events:none}
+.sheet:not(.hasimg) .grab,.sheet .shead.solid .grab{background:#D1D6DB;box-shadow:none}
+.sheet:not(.hasimg) .shead+.in{padding-top:2px}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:none}}
+@keyframes popFade{from{background:rgba(20,26,24,0)}}
+.pop:not([hidden]){animation:popFade .22s ease}
+.pop:not([hidden]) .sheet{animation:sheetUp .3s cubic-bezier(.2,.8,.2,1)}
+@media (min-width:700px){@keyframes sheetUp{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}}
+@media (prefers-reduced-motion:reduce){.pop:not([hidden]),.pop:not([hidden]) .sheet{animation:none}}
+.sched li.move{align-items:start}
+.sched li.move time{padding-top:2px}
+.sched .mv{display:block;white-space:normal;overflow:visible;line-height:1.4;padding:1px 0}
+.sched .mv span{display:block;overflow:visible;text-overflow:clip}
+.sched .mv em{display:block;white-space:normal;font-size:12.5px;margin-top:1px;opacity:.85}
+.sched .mv em::before{content:none}
+.tile{align-content:start}
+.tip{background:var(--paper);border-radius:20px;padding:18px 20px;margin-top:12px;border-bottom:0}
+.tip h3{font-size:18px;margin-bottom:6px}
+.tip li{margin:4px 0;line-height:1.6}
+.ctcard{background:var(--paper);border-radius:20px;padding:4px 20px}
+.ctcard .ct:last-child{border-bottom:0}
+.ct .acts{display:flex;flex-direction:column;gap:6px;align-items:stretch}
+.ct .call{display:block;text-align:center;padding:8px 16px;border-radius:999px;background:var(--jade);color:#fff;font-size:15px;font-weight:700;text-decoration:none}
+.ct .acts button{padding:6px 14px}
 </style>
 </head>
 <body>
@@ -620,23 +664,23 @@ function tile(key,src){const d=src[key];const b=el('button','tile');b.type='butt
   b.innerHTML=`<div class="ph">${d.img?`<img src="${d.img}" alt="${esc(d.title)}" loading="lazy">`:`<div class="zhname">${esc(d.zhTile)}</div>`}</div><span class="lbl">${esc(d.lbl)}</span><span class="ttl">${esc(d.title)}</span><span class="more">${esc(d.key||'')}</span>`;
   b.addEventListener('click',()=>openSheet(d));return b}
 
+const THEMES={taiwan:['臺灣','대만은 어떤 나라',`<ul><li><b>나라 이름</b><span>중화민국 (中華民國)</span><small>수도 타이베이 · 인구 약 2,300만 명 · 경상도보다 조금 큰 섬</small></li><li><b>말과 글</b><span>중국어 · 대만어</span><small>한자는 획이 많은 번체자를 써요</small></li><li><b>역사</b><span>청나라 → 일본 통치 → 1949년 국민당 정부</span><small>1987년 이후 민주화, 국민이 직접 총통을 뽑아요</small></li><li><b>한국과 닮은 점</b><span>일본 통치 · 빠른 경제 성장 · 민주화</span><small>반도체 회사 TSMC의 나라예요</small></li><li><b>생활</b><span>시차 1시간 · 110V</span><small>대만달러 NT$1 ≈ 42원 · 치안이 좋고 친절해요</small></li></ul>`],see:['看','이번 여행에서 보는 타이베이',`<p>4일 동안 옛 도심부터 근현대사, 새 도심, 북쪽 바다와 남쪽 산까지 타이베이와 대만 북부를 고루 봐요.</p><ul><li><b>옛 타이베이</b><span>용산사 · 숙소 동네 완화 · 시먼딩</span><small>300년 전 이주민이 처음 자리 잡은 강가 동네</small></li><li><b>근현대 대만</b><span>중정기념당</span><small>1949년 이후 대만의 역사와 민주화</small></li><li><b>오늘의 타이베이</b><span>101 전망대</span><small>타이베이의 강남과 야경</small></li><li><b>바다와 산</b><span>예류 · 우라이</span><small>파도가 깎은 해안, 산속 온천과 폭포</small></li><li><b>광산 마을</b><span>지우펀 · 스펀</span><small>금과 석탄을 캐던 마을이 관광지로</small></li><li><b>사람 사는 거리</b><span>라오허제 야시장 · 시먼딩</span><small>현지 사람들의 저녁 풍경</small></li></ul>`],eat:['吃','이번 여행에서 맛보는 대만',`<p>밥, 국수, 딤섬, 훠궈, 야시장 간식, 디저트까지 대만 대표 음식을 겹치지 않게 한 번씩 맛봐요.</p><ul><li><b>대만 국민 밥상</b><span>루러우판 · 맑은 고깃국</span><small>1일차 점심</small></li><li><b>대만식 가정 요리</b><span>계란두부 튀김</span><small>1일차 저녁 키키</small></li><li><b>대표 국수</b><span>우육면</span><small>2일차 점심 · 미쉐린 빕구르망</small></li><li><b>길거리 간식</b><span>흑돼지 소시지 · 닭날개 볶음밥 · 땅콩 아이스크림롤 · 후추빵</span><small>2일차</small></li><li><b>딤섬</b><span>차슈번 · 새우만두</span><small>2일차 저녁</small></li><li><b>산골 음식</b><span>토종닭 · 산나물</span><small>3일차 우라이</small></li><li><b>시먼딩 간식</b><span>곱창국수 · 흑당 버블티</span><small>3일차</small></li><li><b>훠궈와 망고빙수</b><span>반반 냄비 · 눈꽃빙수</span><small>3일차 저녁</small></li></ul>`]};
+function themePanel(k){const [zh,t,html]=THEMES[k];const p=el('section','panel');p.innerHTML=`<span class="kicker">필요할 때 보세요</span><h2>${t}</h2><div class="theme" style="margin-top:18px">${html}</div>`;return p}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><h1>대만 가족여행 3박 4일</h1><p>2026년 11월 7일(토) ~ 10일(화)<br>가족 6명</p></div><div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><h1>여섯 식구 첫 여행</h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div><div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
     const b=el('button','daybtn'+(i===todayIdx?' today':''));b.type='button';
     b.innerHTML=`<span class="thumb"><img src="${['img/101.jpg','img/jiufen.jpg','img/wulaivil.jpg','img/f_court.jpg'][i]}" alt="" loading="lazy"><b>${7+i}일<small>${w}</small></b></span><span class="txt" data-date="11월 ${7+i}일 ${w}요일">${i+1}일차${i===todayIdx?'<span class="badge">오늘</span>':''}<small>${t}<br>${s}</small></span><span class="arrow">›</span>`;
     b.addEventListener('click',()=>show(DAYS[i].id));g.appendChild(b)});
   p.appendChild(g);
-  p.appendChild((e=>{e.dataset.zh='便覽';return e})(el('div','ask','필요할 때 보세요')));
-  const h=el('div','helpbtns');
-  [['cards','중국어 카드','말이 안 통할 때 보여주는 카드'],['info','알아둘 것 · 연락처','날씨, 옷차림, 숙소 연락처']].forEach(([id,t,s])=>{const b=el('button','helpbtn');b.type='button';b.innerHTML=`${t}<small>${s}</small>`;b.addEventListener('click',()=>show(id));h.appendChild(b)});
-  p.appendChild(h);
   p.appendChild((e=>{e.dataset.zh='路線';return e})(el('div','ask','전체 동선')));
-  p.appendChild(el('figure','map','<img src="img/overview.jpg" alt="4일 동안의 전체 동선 지도"><figcaption>파랑 1일차 · 주황 2일차 · 초록 3일차 · 회색 4일차 · 누르면 크게 보여요</figcaption>'));
-  p.appendChild((e=>{e.dataset.zh='臺灣';return e})(el('div','ask','대만은 어떤 나라')));p.appendChild(el('div','theme','<ul><li><b>나라 이름</b><span>중화민국 (中華民國)</span><small>수도 타이베이 · 인구 약 2,300만 명 · 경상도보다 조금 큰 섬</small></li><li><b>말과 글</b><span>중국어 · 대만어</span><small>한자는 획이 많은 번체자를 써요</small></li><li><b>역사</b><span>청나라 → 일본 통치 → 1949년 국민당 정부</span><small>1987년 이후 민주화, 국민이 직접 총통을 뽑아요</small></li><li><b>한국과 닮은 점</b><span>일본 통치 · 빠른 경제 성장 · 민주화</span><small>반도체 회사 TSMC의 나라예요</small></li><li><b>생활</b><span>시차 1시간 · 110V</span><small>대만달러 NT$1 ≈ 42원 · 치안이 좋고 친절해요</small></li></ul>'));
-  p.appendChild((e=>{e.dataset.zh='看';return e})(el('div','ask','이번 여행에서 보는 타이베이')));p.appendChild(el('div','theme','<p>4일 동안 옛 도심부터 근현대사, 새 도심, 북쪽 바다와 남쪽 산까지 타이베이와 대만 북부를 고루 봐요.</p><ul><li><b>옛 타이베이</b><span>용산사 · 숙소 동네 완화 · 시먼딩</span><small>300년 전 이주민이 처음 자리 잡은 강가 동네</small></li><li><b>근현대 대만</b><span>중정기념당</span><small>1949년 이후 대만의 역사와 민주화</small></li><li><b>오늘의 타이베이</b><span>101 전망대</span><small>타이베이의 강남과 야경</small></li><li><b>바다와 산</b><span>예류 · 우라이</span><small>파도가 깎은 해안, 산속 온천과 폭포</small></li><li><b>광산 마을</b><span>지우펀 · 스펀</span><small>금과 석탄을 캐던 마을이 관광지로</small></li><li><b>사람 사는 거리</b><span>라오허제 야시장 · 시먼딩</span><small>현지 사람들의 저녁 풍경</small></li></ul>'));
-  p.appendChild((e=>{e.dataset.zh='吃';return e})(el('div','ask','이번 여행에서 맛보는 대만')));p.appendChild(el('div','theme','<p>밥, 국수, 딤섬, 훠궈, 야시장 간식, 디저트까지 대만 대표 음식을 겹치지 않게 한 번씩 맛봐요.</p><ul><li><b>대만 국민 밥상</b><span>루러우판 · 맑은 고깃국</span><small>1일차 점심</small></li><li><b>대만식 가정 요리</b><span>계란두부 튀김</span><small>1일차 저녁 키키</small></li><li><b>대표 국수</b><span>우육면</span><small>2일차 점심 · 미쉐린 빕구르망</small></li><li><b>길거리 간식</b><span>흑돼지 소시지 · 닭날개 볶음밥 · 땅콩 아이스크림롤 · 후추빵</span><small>2일차</small></li><li><b>딤섬</b><span>차슈번 · 새우만두</span><small>2일차 저녁</small></li><li><b>산골 음식</b><span>토종닭 · 산나물</span><small>3일차 우라이</small></li><li><b>시먼딩 간식</b><span>곱창국수 · 흑당 버블티</span><small>3일차</small></li><li><b>훠궈와 망고빙수</b><span>반반 냄비 · 눈꽃빙수</span><small>3일차 저녁</small></li></ul>'));
+  p.appendChild(el('figure','map','<img src="img/overview.jpg" alt="4일 동안의 전체 동선 지도" loading="lazy"><figcaption>파랑 1일차 · 주황 2일차 · 초록 3일차 · 회색 4일차 · 누르면 크게 보여요</figcaption>'));
+  p.appendChild((e=>{e.dataset.zh='便覽';return e})(el('div','ask','필요할 때 보세요')));
+  const h=el('div','daybtns');
+  const BUB='<span class="thumb bub"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 9h28a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H22l-8 7v-7h-4a5 5 0 0 1-5-5V14a5 5 0 0 1 5-5z" fill="currentColor"/><rect x="22.2" y="14" width="3.6" height="10" rx="1.8" fill="#fff"/><circle cx="24" cy="28.6" r="2.1" fill="#fff"/></svg></span>';
+  [['cards','img/raohe.jpg','중국어 카드','말이 안 통할 때 보여주는 카드'],['info',null,'알아둘 것 · 연락처','날씨, 옷차림, 돈, 연락처'],['taiwan','img/cks.jpg','대만은 어떤 나라','나라 이름, 말과 글, 역사'],['see','img/longshan.jpg','이번 여행에서 보는 타이베이','옛 도심부터 바다와 산까지'],['eat','img/f_beef.jpg','이번 여행에서 맛보는 대만','우육면, 딤섬, 훠궈, 야시장 간식']].forEach(([id,im,t,sub])=>{const b=el('button','daybtn hrow');b.type='button';b.innerHTML=`${im?`<span class="thumb"><img src="${im}" alt="" loading="lazy"></span>`:BUB}<span class="txt">${t}<small>${sub}</small></span><span class="arrow">›</span>`;b.addEventListener('click',()=>show(id));h.appendChild(b)});
+  p.appendChild(h);
   p.appendChild(el('div','howto','날짜를 누르시면 그날 지도와 일정이 나와요. 일정이나 사진을 누르시면 자세한 설명이 나와요.'));
   return p}
 
@@ -665,15 +709,16 @@ function infoPanel(){const p=el('section','panel');
   <div class="tip"><h3>시간과 전기</h3><ul><li>한국보다 1시간 늦어요. 휴대폰 시계는 저절로 바뀌어요.</li><li>콘센트 모양이 달라요(11자). 충전할 땐 어댑터를 끼워요.</li></ul></div>
   <div class="tip"><h3>다닐 때</h3><ul><li>오토바이가 정말 많아요. 길을 건널 땐 신호를 꼭 지켜요.</li><li>가족과 떨어지면 그 자리에서 기다리며 전화하세요.</li><li>숙소: 시저 메트로 타이베이 (台北凱達大飯店), 용산사역 바로 앞</li></ul></div>
   <h3 class="h3" data-zh="聯絡">연락처</h3>`;
+  const cc=el('div','ctcard');p.appendChild(cc);
   [['숙소 · 시저 메트로 타이베이','台北市萬華區艋舺大道167號','+886-2-2306-6777','+886223066777'],['대만 경찰','사고·도난','110','110'],['구급차·소방','아프거나 다쳤을 때','119','119'],['외교부 영사콜센터','24시간 · 한국어 · 여권 분실 등','+82-2-3210-0404','+82232100404']].forEach(([w,s,n,c])=>{
-    const r=el('div','ct');r.innerHTML=`<div class="who">${w}<small>${s}</small><span class="num">${n}</span></div>`;const b=el('button',null,'복사');b.type='button';
+    const r=el('div','ct');r.innerHTML=`<div class="who">${w}<small>${s}</small><span class="num">${n}</span></div><div class="acts"><a class="call" href="tel:${c.startsWith('+')||c.length<5?c:'+'+c}">전화</a></div>`;const b=el('button',null,'복사');b.type='button';
     b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c);b.textContent='복사됨'}catch(e){const s=r.querySelector('.num');const rg=document.createRange();rg.selectNodeContents(s);const sl=getSelection();sl.removeAllRanges();sl.addRange(rg);b.textContent='길게 눌러 복사'}setTimeout(()=>b.textContent='복사',2000)});
-    r.appendChild(b);p.appendChild(r)});
+    r.querySelector('.acts').appendChild(b);cc.appendChild(r)});
   p.appendChild(el('div','note','가족 전화번호는 카카오톡 가족방에서 바로 걸 수 있어요.'));return p}
 
-const built={home:homePanel(),cards:cardsPanel(),info:infoPanel()};DAYS.forEach(d=>built[d.id]=dayPanel(d));
+const built={home:homePanel(),cards:cardsPanel(),info:infoPanel(),taiwan:themePanel('taiwan'),see:themePanel('see'),eat:themePanel('eat')};DAYS.forEach(d=>built[d.id]=dayPanel(d));
 const ORDER=['home','day1','day2','day3','day4'];
-const NAMES={home:'처음 화면',day1:'1일차 · 11월 7일',day2:'2일차 · 11월 8일',day3:'3일차 · 11월 9일',day4:'4일차 · 11월 10일',cards:'중국어 카드',info:'알아둘 것 · 연락처'};
+const NAMES={home:'처음 화면',day1:'1일차 · 11월 7일',day2:'2일차 · 11월 8일',day3:'3일차 · 11월 9일',day4:'4일차 · 11월 10일',cards:'중국어 카드',info:'알아둘 것 · 연락처',taiwan:'대만은 어떤 나라',see:'보는 타이베이',eat:'맛보는 대만'};
 const topbar=$('#topbar'),bottombar=$('#bottombar'),prevBtn=$('#prevBtn'),nextBtn=$('#nextBtn');
 let prevTo=null,nextTo=null;
 const SV=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -693,7 +738,7 @@ function show(id,fromPop){if(!built[id])id='home';
   if(i>0){prevTo=i===1?'home':ORDER[i-1];nextTo=i<4?ORDER[i+1]:'home';
     setBtn(prevBtn,prevTo,i===1?homeL:prevL(`${i-1}일차`));
     setBtn(nextBtn,nextTo,i<4?nextL(`${i+1}일차`):homeR);}
-  else{prevTo='home';nextTo=id==='cards'?'info':'cards';setBtn(prevBtn,prevTo,homeL);setBtn(nextBtn,nextTo,nextL(id==='cards'?'알아둘 것':'중국어 카드'));}
+  else{const HELP=['cards','info','taiwan','see','eat'],HN={cards:'중국어 카드',info:'알아둘 것',taiwan:'대만은 어떤 나라',see:'보는 타이베이',eat:'맛보는 대만'};const hi=HELP.indexOf(id);prevTo='home';nextTo=hi>=0&&hi<HELP.length-1?HELP[hi+1]:'home';setBtn(prevBtn,prevTo,homeL);setBtn(nextBtn,nextTo,nextTo==='home'?homeR:nextL(HN[nextTo]));}
   window.scrollTo(0,0);
   if(!fromPop){try{if(cur===null)history.replaceState({p:id},'','#'+id);else if(cur!==id)history.pushState({p:id},'','#'+id)}catch(e){}}
   cur=id;
@@ -706,12 +751,21 @@ show((location.hash||'').slice(1)||'home');
 
 /* ---------- popups ---------- */
 const pop=$('#pop'),sheet=$('#sheet');let lastFocus=null;
-function openSheet(d,o){const wasOpen=!pop.hidden;const R=!!(o&&o.route);const RT=d.route?`<div class="route"><h4>현장 지도 · 걷는 동선</h4><p class="rhint">번호는 지도 위 번호와 같아요 · P는 차 타고 내리는 곳</p><a class="rlink" href="${d.route.img}" target="_blank" rel="noopener"><img class="rmap" src="${d.route.img}" alt="${esc(d.title)} 걷는 동선 지도" loading="lazy"></a><small>지도를 누르면 크게 보고 확대할 수 있어요</small><ol>${(()=>{let n=0;return d.route.steps.map(r=>{const P=/내리|내려|승차/.test(r[1]);const bn=P?'P':++n;return `<li><time>${esc(r[0])}</time><div><b><em class="nb${P?' p':''}">${bn}</em>${esc(r[1])}</b><span>${esc(r[2])}</span>${r[3]?`<a class="pinl" href="${r[3]}" target="_blank" rel="noopener">구글 지도 ›</a>`:''}</div></li>`}).join('')})()}</ol>${d.route.map?`<div class="walks in-sheet"><div class="walks-h">구글 지도로 경로 보기</div><a href="${d.route.map}" target="_blank" rel="noopener"><span>도보</span>${esc(d.title)} 경로<i>›</i></a><p class="walks-note">여러 곳을 잇는 경로라 앱에서는 선이 작게 보여요. 한 곳씩 갈 때는 위 번호마다 있는 “구글 지도”를 누르세요.</p></div>`:''}<small>간략 지도예요. 실제 거리·방향과 조금 달라요.</small></div>`:'';lastFocus=document.activeElement;sheet.classList.toggle('mapview',!!d.map);
-  sheet.innerHTML=`<div class="xbar"><button type="button" class="xclose" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>닫기</button></div>${o&&o.back?`<button type="button" class="backsub">‹ ${esc(o.back.title)}</button>`:''}${d.img&&!R?`<img${d.fit?' class="fit"':''} src="${d.img}" alt="${esc(d.title)}">`:''}<div class="in"><span class="lbl">${esc(d.lbl)}</span><h3 id="popTitle">${esc(d.title)}</h3>${d.zh?`<span class="zhn">${esc(d.zh)}</span>`:''}${R?RT+'<h4 class="about">장소 이야기</h4>':''}${d.route&&!R?'<button class="jumpr" type="button">걷는 동선 · 현장 지도 보기 ↓</button>':''}${d.spice?`<p class="spice">${esc(d.spice)}</p>`:''}${d.key?`<p class="key">${esc(d.key)}</p>`:''}${d.text.map(t=>`<p>${esc(t)}</p>`).join('')}${d.subs?`<div class="tiles subs">${d.subs.map(k=>{const x=PLACES[k]||FOODS[k];return `<button type="button" class="tile" data-sub="${k}"><div class="ph"><img src="${x.img}" alt="${esc(x.title)}" loading="lazy"></div><span class="lbl">${esc(x.near||'')}</span><span class="ttl">${esc(x.title)}</span><span class="more">${esc(x.key)}</span>${x.warn?`<span class="warn">${esc(x.warn)}</span>`:''}</button>`}).join('')}</div>`:''}${d.opts?`<div class="opts">${d.opts.map(o=>`<div class="optc"><img src="${o[0]}" alt="${esc(o[1])}" loading="lazy"><div class="optb"><b>${esc(o[1])}</b><span class="optz">${esc(o[2])}</span><p>${esc(o[3])}</p><small>${esc(o[4])}</small><a href="${o[5]}" target="_blank" rel="noopener">지도 보기 ›</a></div></div>`).join('')}</div>`:''}${d.tips&&d.tips.length?`<ul>${d.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}${d.shop?`<div class="shop"><b>${esc(d.shop.name)}</b><span>${esc(d.shop.addr)}</span><span>${esc(d.shop.hours)}</span><a href="${d.shop.map}" target="_blank" rel="noopener">구글 지도에서 보기 ›</a></div>`:''}${d.gm?`<div class="walks in-sheet maps"><div class="walks-h">구글 지도에서 보기</div><a href="${d.gm}" target="_blank" rel="noopener"><span>장소</span>${esc(d.mapName||d.title)}<i>›</i></a>${(d.spots||[]).map(x=>`<a href="${x[3]}" target="_blank" rel="noopener"><span>${esc(x[0])}</span><b>${esc(x[1])}<small>${esc(x[2])}</small></b><i>›</i></a>`).join('')}</div>`:''}${R?'':RT}${d.note?`<p class="note2">${esc(d.note)}</p>`:''}${d.ref?'<span class="credit">참고 사진 (같은 종류 음식의 예시)</span>':''}</div><button type="button" class="close">닫기</button>`;
+function openSheet(d,o){const wasOpen=!pop.hidden;const R=!!(o&&o.route);const RT=d.route?`<div class="route"><h4>현장 지도 · 걷는 동선</h4><p class="rhint">번호는 지도 위 번호와 같아요 · P는 차 타고 내리는 곳</p><a class="rlink" href="${d.route.img}" target="_blank" rel="noopener"><img class="rmap" src="${d.route.img}" alt="${esc(d.title)} 걷는 동선 지도" loading="lazy"></a><small>지도를 누르면 크게 보고 확대할 수 있어요</small><ol>${(()=>{let n=0;return d.route.steps.map(r=>{const P=/내리|내려|승차/.test(r[1]);const bn=P?'P':++n;return `<li><time>${esc(r[0])}</time><div><b><em class="nb${P?' p':''}">${bn}</em>${esc(r[1])}</b><span>${esc(r[2])}</span>${r[3]?`<a class="pinl" href="${r[3]}" target="_blank" rel="noopener">구글 지도 ›</a>`:''}</div></li>`}).join('')})()}</ol>${d.route.map?`<div class="walks in-sheet"><div class="walks-h">구글 지도로 경로 보기</div><a href="${d.route.map}" target="_blank" rel="noopener"><span>도보</span>${esc(d.title)} 경로<i>›</i></a><p class="walks-note">여러 곳을 잇는 경로라 앱에서는 선이 작게 보여요. 한 곳씩 갈 때는 위 번호마다 있는 “구글 지도”를 누르세요.</p></div>`:''}<small>간략 지도예요. 실제 거리·방향과 조금 달라요.</small></div>`:'';lastFocus=document.activeElement;sheet.classList.toggle('mapview',!!d.map);sheet.classList.toggle('hasimg',!!(d.img&&!R));sheet.style.transform='';
+  sheet.innerHTML=`<div class="shead"><span class="grab" aria-hidden="true"></span><b class="stitle">${esc(d.title)}</b><button type="button" class="xclose" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>닫기</button></div>${o&&o.back?`<button type="button" class="backsub">‹ ${esc(o.back.title)}</button>`:''}${d.img&&!R?`<img${d.fit?' class="fit"':''} src="${d.img}" alt="${esc(d.title)}">`:''}<div class="in"><span class="lbl">${esc(d.lbl)}</span><h3 id="popTitle">${esc(d.title)}</h3>${d.zh?`<span class="zhn">${esc(d.zh)}</span>`:''}${R?RT+'<h4 class="about">장소 이야기</h4>':''}${d.route&&!R?'<button class="jumpr" type="button">걷는 동선 · 현장 지도 보기 ↓</button>':''}${d.spice?`<p class="spice">${esc(d.spice)}</p>`:''}${d.key?`<p class="key">${esc(d.key)}</p>`:''}${d.text.map(t=>`<p>${esc(t)}</p>`).join('')}${d.subs?`<div class="tiles subs">${d.subs.map(k=>{const x=PLACES[k]||FOODS[k];return `<button type="button" class="tile" data-sub="${k}"><div class="ph"><img src="${x.img}" alt="${esc(x.title)}" loading="lazy"></div><span class="lbl">${esc(x.near||'')}</span><span class="ttl">${esc(x.title)}</span><span class="more">${esc(x.key)}</span>${x.warn?`<span class="warn">${esc(x.warn)}</span>`:''}</button>`}).join('')}</div>`:''}${d.opts?`<div class="opts">${d.opts.map(o=>`<div class="optc"><img src="${o[0]}" alt="${esc(o[1])}" loading="lazy"><div class="optb"><b>${esc(o[1])}</b><span class="optz">${esc(o[2])}</span><p>${esc(o[3])}</p><small>${esc(o[4])}</small><a href="${o[5]}" target="_blank" rel="noopener">지도 보기 ›</a></div></div>`).join('')}</div>`:''}${d.tips&&d.tips.length?`<ul>${d.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}${d.shop?`<div class="shop"><b>${esc(d.shop.name)}</b><span>${esc(d.shop.addr)}</span><span>${esc(d.shop.hours)}</span><a href="${d.shop.map}" target="_blank" rel="noopener">구글 지도에서 보기 ›</a></div>`:''}${d.gm?`<div class="walks in-sheet maps"><div class="walks-h">구글 지도에서 보기</div><a href="${d.gm}" target="_blank" rel="noopener"><span>장소</span>${esc(d.mapName||d.title)}<i>›</i></a>${(d.spots||[]).map(x=>`<a href="${x[3]}" target="_blank" rel="noopener"><span>${esc(x[0])}</span><b>${esc(x[1])}<small>${esc(x[2])}</small></b><i>›</i></a>`).join('')}</div>`:''}${R?'':RT}${d.note?`<p class="note2">${esc(d.note)}</p>`:''}${d.ref?'<span class="credit">참고 사진 (같은 종류 음식의 예시)</span>':''}</div><button type="button" class="close">닫기</button>`;
   sheet.querySelector('.close').addEventListener('click',closeTop);sheet.querySelector('.xclose').addEventListener('click',closeTop);const jr=sheet.querySelector('.jumpr');if(jr)jr.addEventListener('click',()=>sheet.querySelector('.route').scrollIntoView({behavior:'smooth',block:'start'}));sheet.querySelectorAll('[data-sub]').forEach(b=>b.addEventListener('click',()=>openSheet(PLACES[b.dataset.sub]||FOODS[b.dataset.sub],{back:d})));const bk=sheet.querySelector('.backsub');if(bk)bk.addEventListener('click',()=>openSheet(o.back));
-  pop.hidden=false;sheet.scrollTop=0;sheet.querySelector('.close').focus({preventScroll:true});
-  if(!wasOpen){document.documentElement.classList.add('lock');openLayer(()=>{pop.hidden=true;document.documentElement.classList.remove('lock');lastFocus&&lastFocus.focus({preventScroll:true})})}}
+  pop.hidden=false;sheet.scrollTop=0;sheadSync();sheet.querySelector('.close').focus({preventScroll:true});
+  if(!wasOpen)openLayer(()=>{pop.hidden=true;lastFocus&&lastFocus.focus({preventScroll:true})})}
 const closeSheet=closeTop;
+function sheadSync(){const h=sheet.querySelector('.shead');if(!h)return;const im=sheet.classList.contains('hasimg')?sheet.querySelector(':scope > img'):null;const th=im?im.offsetHeight-64:48;h.classList.toggle('solid',sheet.scrollTop>th)}
+sheet.addEventListener('scroll',sheadSync,{passive:true});
+(()=>{let y0=null,dy=0,drag=false;
+  sheet.addEventListener('touchstart',e=>{if(sheet.scrollTop>0||e.touches.length>1){y0=null;return}y0=e.touches[0].clientY;dy=0;drag=false},{passive:true});
+  sheet.addEventListener('touchmove',e=>{if(y0==null)return;dy=e.touches[0].clientY-y0;if(!drag){if(dy>8&&sheet.scrollTop<=0){drag=true;sheet.style.transition='none'}else if(dy<-4){y0=null;return}else return}
+    if(drag){e.preventDefault();sheet.style.transform=`translateY(${Math.max(0,dy)}px)`}},{passive:false});
+  sheet.addEventListener('touchend',()=>{if(!drag){y0=null;return}drag=false;y0=null;sheet.style.transition='transform .2s ease';
+    if(dy>110){sheet.style.transform='translateY(100%)';setTimeout(()=>{closeTop();sheet.style.transition='';sheet.style.transform=''},190)}else{sheet.style.transform='';setTimeout(()=>{sheet.style.transition=''},210)}});
+})();
 pop.addEventListener('click',e=>{if(e.target===pop){closeTop();return}const a=e.target.closest('a.rlink');if(a){e.preventDefault();const im=a.querySelector('img');openViewer(a.getAttribute('href'),im?im.alt:'')}});
 const cov=$('#cardOv');
 function openCard(c){$('#cardKo').textContent=c.ko;const cn=$('#cardCn');cn.replaceChildren();c.cn.split('\n').forEach((l,j)=>{const d=el('div');d.textContent=l;if(j)d.style.fontSize='0.55em';cn.appendChild(d)});$('#cardSub').textContent=c.sub;cov.hidden=false;$('#cardClose').focus();openLayer(()=>{cov.hidden=true})}
@@ -719,9 +773,13 @@ $('#cardClose').addEventListener('click',()=>closeTop());
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeTop()});
 
 /* layers + back button: every popup adds a history step, so the phone's back button closes it first */
-const layers=[];let skipPop=0;
-function openLayer(fn){let h=false;try{history.pushState({p:cur,layer:1},'',location.hash);h=true}catch(e){}layers.push({fn,h})}
-function closeTop(fromPop){const L=layers.pop();if(!L)return;L.fn();if(fromPop!==true&&L.h){skipPop++;try{history.back()}catch(e){skipPop--}}}
+const layers=[];let skipPop=0;let lockY=0;
+try{history.scrollRestoration='manual'}catch(e){}
+function lockBody(){lockY=window.scrollY;const b=document.body.style;b.position='fixed';b.top=(-lockY)+'px';b.left='0';b.right='0';b.width='100%';document.documentElement.classList.add('lock')}
+function unlockBody(){const b=document.body.style;b.position='';b.top='';b.left='';b.right='';b.width='';document.documentElement.classList.remove('lock');window.scrollTo(0,lockY)}
+pop.addEventListener('touchmove',e=>{if(!e.target.closest('.sheet'))e.preventDefault()},{passive:false});
+function openLayer(fn){if(!layers.length)lockBody();let h=false;try{history.pushState({p:cur,layer:1},'',location.hash);h=true}catch(e){}layers.push({fn,h})}
+function closeTop(fromPop){const L=layers.pop();if(!L)return;L.fn();if(!layers.length)unlockBody();if(fromPop!==true&&L.h){skipPop++;try{history.back()}catch(e){skipPop--}}}
 window.addEventListener('popstate',e=>{if(skipPop){skipPop--;return}if(layers.length){closeTop(true);return}const id=(e.state&&e.state.p)||(location.hash||'').slice(1)||'home';show(id,true)});
 
 /* map viewer: pinch / drag / double-tap / wheel / buttons */
