@@ -1065,7 +1065,9 @@ function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>
   const vis=e=>{const r=e.getBoundingClientRect();return r.width>0?r:null};
   inn.querySelectorAll('.ovsvg .hid').forEach(e=>e.classList.remove('hid'));
   const obs=e=>{const r=vis(e);if(r)placed.push({r,o:own(e)})};
-  inn.querySelectorAll('.ovsvg .p:not(.det) circle,.ovsvg .hotel rect').forEach(obs);
+  inn.querySelectorAll('.ovsvg .hotel rect').forEach(obs);
+  {const act0=g=>(f==='0'||!f||g.classList.contains('d'+f))?1:0;const ps=[...inn.querySelectorAll('.ovsvg .p:not(.det)')].sort((a,b)=>act0(b)-act0(a));
+   const solo1=f&&f!=='0';ps.forEach(g=>{const c=g.querySelector('circle');const r=c&&vis(c);if(!r)return;const R={left:r.left-2,right:r.right+2,top:r.top-2,bottom:r.bottom+2};if(over(R,g))g.classList.add('hid');else placed.push({r,o:g})})}
   const circ=(sel)=>inn.querySelectorAll(sel).forEach(c=>{const g=c.closest('g.p,g.spot');const r=vis(c);if(!r)return;if(over(r,g))g.classList.add('hid');else placed.push({r,o:g})});
   if(vr('--dp')>.3)circ('.ovsvg .p.det circle');
   
