@@ -684,7 +684,7 @@ html.big .bottombar .in{zoom:1.06}
 .a2h:is([data-os="i"],[data-os="ic"])[data-f="6"] .iadd{opacity:1;z-index:3}
 .a2h[data-f="7"] .home span.me{transform:none}
 .a2h[data-f="7"] .tap{opacity:0}
-.a2h:is([data-os="a"],[data-os="s"]) :is(.shs,.iadd,.kmenu-i,.kbb,.bb.n){display:none}
+.a2h:is([data-os="a"],[data-os="s"]) :is(.shs,.iadd,.kmenu-i,.kbb,.bb.n){display:none}.a2h:is([data-os="i"],[data-os="ic"]) .kbba{display:none}.a2h-ph .kbba{color:#191F28}
 .a2h:is([data-os="i"],[data-os="ic"]) :is(.cmenu,.dlg,.kmenu-a,.br.n .dots,.kbt .dots,.smenu,.sadd,.sbb){display:none}
 .a2h[data-os="a"] :is(.smenu,.sadd,.sbb){display:none}
 .a2h[data-os="s"] :is(.cmenu,.dlg,.br.n .dots){display:none}
@@ -695,10 +695,17 @@ html.big .bottombar .in{zoom:1.06}
 .a2h:is([data-os="i"],[data-os="ic"]) .kbt{display:none}.a2h:is([data-os="i"],[data-os="ic"]) .kbti{display:flex}
 .a2h-ph .kbb{color:#191F28}
 .a2h-steps li{cursor:pointer}
+.a2h-ph .ksh{left:0;right:0;bottom:0;height:170px;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -4px 16px rgba(0,0,0,.15);padding:14px 6px;transform:translateY(100%)}
+.a2h-ph .ksh .apps{display:flex;justify-content:space-between;padding:0 4px 10px}
+.a2h-ph .ksh .apps span{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:7.5px;border-radius:8px;padding:2px}
+.a2h-ph .ksh .apps i{width:28px;height:28px;border-radius:8px;background:#E5E8EB}
+.a2h-ph .ksh .sf i{background:linear-gradient(#5AC8FA,#1E88E5)}.a2h-ph .ksh .cr i{background:conic-gradient(#EA4335 0 33%,#FBBC05 0 66%,#34A853 0)}
+.a2h[data-os="i"] .ksh .sf,.a2h[data-os="ic"] .ksh .cr{background:#E8F3FF;color:#1B64DA;font-weight:800}
+.a2h-ph .ksh b{display:block;font-weight:500;padding:6px 10px;font-size:9.5px}
 /* tap positions */
 .a2h[data-f="1"] .tap{left:105px;top:115px}
-.a2h:is([data-os="a"],[data-os="s"])[data-f="2"] .tap{left:174px;top:24px}
-.a2h:is([data-os="a"],[data-os="s"])[data-f="3"] .tap{left:125px;top:132px}
+.a2h:is([data-os="a"],[data-os="s"])[data-f="2"] .tap{left:166px;top:312px}
+.a2h:is([data-os="a"],[data-os="s"])[data-f="3"] .tap{left:120px;top:283px}
 .a2h[data-os="a"][data-f="4"] .tap{left:174px;top:24px}
 .a2h[data-os="a"][data-f="5"] .tap{left:120px;top:160px}
 .a2h[data-os="a"][data-f="6"] .tap{left:152px;top:211px}
@@ -706,7 +713,7 @@ html.big .bottombar .in{zoom:1.06}
 .a2h[data-os="s"][data-f="5"] .tap{left:31px;top:178px}
 .a2h[data-os="s"][data-f="6"] .tap{left:60px;top:308px}
 .a2h:is([data-os="i"],[data-os="ic"])[data-f="2"] .tap{left:168px;top:312px}
-.a2h:is([data-os="i"],[data-os="ic"])[data-f="3"] .tap{left:120px;top:278px}
+.a2h[data-os="i"][data-f="3"] .tap{left:28px;top:200px}.a2h[data-os="ic"][data-f="3"] .tap{left:66px;top:200px}
 .a2h[data-os="i"][data-f="4"] .tap{left:95px;top:313px}
 .a2h[data-os="ic"][data-f="4"] .tap{left:174px;top:24px}
 .a2h:is([data-os="i"],[data-os="ic"])[data-f="5"] .tap{left:90px;top:289px}
@@ -720,6 +727,7 @@ html.big .bottombar .in{zoom:1.06}
 .a2h-steps li.on::before{background:var(--jade);color:#fff}
 .a2h-note{margin:14px 0 0;font-size:14px;color:var(--sub);line-height:1.6}
 .sched .pay{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;font-size:12px;font-weight:700;background:#E8F3FF;color:#1B64DA;vertical-align:2px}.sched .pay.cash{background:#FFF4E5;color:#C25E0C}
+.ovm-approx{font-size:12px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -1011,7 +1019,7 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
    <div class="ovm-zb"><button type="button" data-z="1" aria-label="확대">+</button><button type="button" data-z="-1" aria-label="축소">−</button></div></div>
    ${OVGO[solo]?`<button type="button" class="ovm-go${OVGO[solo][5]?' top':''}" style="--gc:${OVC[solo-1]}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2" fill="currentColor"/><path d="M10 21l2-6 3 3v4M8 12l2-4h4l2 4 2 1M12 8l-1 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${OVGO[solo][0]}<br><em>${OVGO[solo][1]} ›</em></span></button>`:''}
    ${solo?'':`<div class="ovm-f">${['전체','1일차','2일차','3일차','4일차'].map((t,i)=>`<button type="button" data-f="${i}" class="${i?'':'on'}" style="--c:${i?OVC[i-1]:'var(--ink)'}">${t}</button>`).join('')}</div>`}
-   <p class="ovm-hint">${solo&&cap?cap+'<br>':''}<span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="1" y1="5" x2="29" y2="5" stroke="#B4BAC2" stroke-width="5"/><line x1="1" y1="5" x2="29" y2="5" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/></svg>지하철</span><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="2" y1="5" x2="28" y2="5" stroke="#6B7684" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/></svg>숙소로 돌아가는 길</span></p>`;
+   <p class="ovm-hint">${solo&&cap?cap+'<br>':''}<span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="1" y1="5" x2="29" y2="5" stroke="#B4BAC2" stroke-width="5"/><line x1="1" y1="5" x2="29" y2="5" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/></svg>지하철</span><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="2" y1="5" x2="28" y2="5" stroke="#6B7684" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/></svg>숙소로 돌아가는 길</span><br><span class="ovm-approx">지도의 위치와 경로는 대략이에요</span></p>`;
   w.querySelectorAll('.ovm-f button').forEach(b=>b.addEventListener('click',()=>{w.dataset.f=b.dataset.f;w.querySelectorAll('.ovm-f button').forEach(x=>x.classList.toggle('on',x===b));requestAnimationFrame(()=>ovCollide(w,w.querySelector('.ovm-in')))}));
   /* pinch / drag zoom */
   let cq=0;const OVMAX=80,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in'),svg=w.querySelector('.ovsvg');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
@@ -1042,10 +1050,10 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   w.querySelectorAll('.ovm-zb button').forEach(b=>b.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;if(+b.dataset.z>0)zoomAt(2,W/2,H/2);else zoomAt(1/2,W/2,H/2)}));
   return w}
 
-const A2H={a:['카톡에서 링크 누르기','오른쪽 위 ⋮ → ‘다른 브라우저로 열기’','크롬 ⋮ → ‘홈 화면에 추가’','‘추가’ → 바탕화면에 아이콘 완성'],
- s:['카톡에서 링크 누르기','오른쪽 위 ⋮ → ‘다른 브라우저로 열기’','오른쪽 아래 ≡ → ‘현재 페이지 추가’','‘홈 화면’ → ‘추가’ → 아이콘 완성'],
- i:['카톡에서 링크 누르기','오른쪽 아래 공유 버튼 → ‘다른 브라우저로 열기’','사파리 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’ → 아이콘 완성'],
- ic:['카톡에서 링크 누르기','오른쪽 아래 공유 버튼 → ‘다른 브라우저로 열기’','크롬 주소창 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’ → 아이콘 완성']};
+const A2H={a:['카톡에서 링크 누르기','오른쪽 아래 ⋮ → ‘다른 브라우저로 열기’','크롬 ⋮ → ‘홈 화면에 추가’','‘추가’ → 바탕화면에 아이콘 완성'],
+ s:['카톡에서 링크 누르기','오른쪽 아래 ⋮ → ‘다른 브라우저로 열기’','오른쪽 아래 ≡ → ‘현재 페이지 추가’','‘홈 화면’ → ‘추가’ → 아이콘 완성'],
+ i:['카톡에서 링크 누르기','오른쪽 아래 공유 버튼 → Safari 선택','사파리 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’ → 아이콘 완성'],
+ ic:['카톡에서 링크 누르기','오른쪽 아래 공유 버튼 → Chrome 선택','크롬 주소창 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’ → 아이콘 완성']};
 const A2HSTEP=[0,1,2,2,3,3,4,4];
 function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/CriOS/.test(ua)?'ic':'i'):(/SamsungBrowser/.test(ua)?'s':'a');const w=el('div','a2h');w.dataset.os=os;w.dataset.f='1';
   const SHR='<svg class="shr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5v10h14V11h-1"/></svg>';
@@ -1053,12 +1061,12 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   w.innerHTML=`<div class="a2h-tabs"><button type="button" data-os="a">갤럭시 크롬</button><button type="button" data-os="s">갤럭시 삼성인터넷</button><button type="button" data-os="i">아이폰 사파리</button><button type="button" data-os="ic">아이폰 크롬</button></div>
   <div class="a2h-ph" aria-hidden="true">
    <div class="sc kt"><div class="hd">‹ 우리 가족 (6)</div><div class="msg"><span class="av"></span><div><div class="nm">헌주</div><div class="bub">대만 여행 안내서예요!</div><div class="lk"><i></i><b>여섯 식구 첫 여행</b><span>heon1031.github.io</span></div></div></div><div class="me">고마워!</div></div>
-   <div class="sc br kbr"><div class="bt kbt"><span class="x">✕</span><span class="url">여섯 식구 첫 여행</span><span class="dots">⋮</span></div><div class="bt kbti"><span class="kb">‹</span><span class="url">heon1031.github..</span><span class="ky"></span><span class="kb">˅</span></div>${PG}<div class="bb kbb"><span>←</span><span>→</span><span>↻</span>${SHR}</div></div>
+   <div class="sc br kbr"><div class="bt kbt"><span class="x">✕</span><span class="url">여섯 식구 첫 여행</span></div><div class="bt kbti"><span class="kb">‹</span><span class="url">heon1031.github..</span><span class="ky"></span><span class="kb">˅</span></div>${PG}<div class="bb kbb"><span>←</span><span>→</span><span>↻</span>${SHR}</div><div class="bb kbba"><span>‹</span><span>›</span><span>↻</span><span style="font-weight:800">⋮</span></div></div>
    <div class="sc br n"><div class="bt"><span class="url">heon1031.github.io</span><span class="ctop">${SHR}</span><span class="dots">⋮</span></div>${PG}<div class="bb n"><span>‹</span><span>›</span>${SHR}<span>▢</span><span>⧉</span></div><div class="bb sbb"><span>‹</span><span>›</span><span>⌂</span><span>▢</span><span>≡</span></div></div>
    <div class="lay smenu"><span class="hl"><i></i>현재 페이지 추가</span><span><i></i>북마크</span><span><i></i>방문 기록</span><span><i></i>다운로드</span><span><i></i>공유</span><span><i></i>설정</span><span><i></i>광고 차단</span><span><i></i>다크 모드</span></div>
    <div class="lay sadd"><b class="t">추가할 위치</b><b>북마크</b><b>퀵 액세스</b><b class="hl">홈 화면</b></div>
-   <div class="lay menu kmenu-a"><b>새로고침</b><b>링크 복사</b><b>공유하기</b><b class="hl">다른 브라우저로 열기</b></div>
-   <div class="lay menu kmenu kmenu-i"><b>링크 복사</b><b>공유하기</b><b class="hl">다른 브라우저로 열기</b></div>
+   <div class="lay menu kmenu kmenu-a"><b>새로고침</b><b>링크 복사</b><b>공유하기</b><b class="hl">다른 브라우저로 열기</b></div>
+   <div class="lay ksh kmenu-i"><div class="apps"><span class="sf"><i></i>Safari</span><span class="cr"><i></i>Chrome</span><span><i></i>Whale</span><span><i></i>메시지</span><span><i></i>메일</span></div><b>복사</b><b>읽기 목록에 추가</b><b>더 보기</b></div>
    <div class="lay menu cmenu"><b>새 탭</b><b>북마크</b><b>방문 기록</b><b>공유</b><b class="hl">홈 화면에 추가</b><b>설정</b></div>
    <div class="lay shs"><div class="row"><i></i><i></i><i></i><i></i><i></i></div><b>복사</b><b>읽기 목록에 추가</b><b>즐겨찾기 추가</b><b class="hl">홈 화면에 추가</b><b>페이지에서 찾기</b></div>
    <div class="lay dlg"><div><b>홈 화면에 추가</b><img src="icon-192.png?v=2" alt=""><span>대만 여행</span><div class="bs"><span style="color:#8B95A1">취소</span><span>추가</span></div></div></div>
@@ -1066,7 +1074,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
    <div class="sc home"><span><i></i>전화</span><span><i></i>카톡</span><span><i></i>카메라</span><span><i></i>사진</span><span><i></i>지도</span><span><i></i>날씨</span><span class="me"><img src="icon-192.png?v=2" alt="">대만 여행</span></div>
    <i class="tap"></i></div>
   <ol class="a2h-steps"></ol>
-  <p class="a2h-note">카톡 안에서는 추가가 안 돼요. 다른 브라우저로 연 뒤, 그 브라우저 탭을 보세요.</p>`;
+  <p class="a2h-note">카톡 안에서는 추가가 안 돼요. 꼭 다른 브라우저로 열어서 추가해 주세요.</p>`;
   const ol=w.querySelector('.a2h-steps');
   const draw=()=>{const st=A2H[w.dataset.os],cur=A2HSTEP[+w.dataset.f];ol.innerHTML=st.map((t,i)=>`<li class="${cur===i+1?'on':''}">${t}</li>`).join('')};
   
