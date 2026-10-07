@@ -432,14 +432,14 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .ovsvg .cl.seal text{fill:#7fa9cc}
 .ovm-in img{display:block;width:100%;height:100%;pointer-events:none;-webkit-user-drag:none}
 .ovsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;transform-origin:0 0}
-.ovm-in{--dw:0;--k:.8;--dz:0;--dp:0;--dq:0}
+.ovm-in{--kl:5;--ka:.06;--dw:0;--k:.8;--dz:0;--dp:0;--dq:0}
 .ovm-in.lo .ovsvg .p .l .s{opacity:0}
 .ovsvg .spot .ps{opacity:var(--dq)}.ovsvg .spot.early .ps{opacity:var(--dp)}
 .ovsvg g.wkg{stroke:none!important;opacity:var(--dz)}
 .ovsvg .wl{opacity:var(--dw)}.ovsvg .p.det .l .s{opacity:var(--dw)}
 .ovsvg.mv{will-change:transform}
 .ovsvg .wkg.d1 .wk{stroke:#3182F6}.ovsvg .wkg.d1 .ar .arc{stroke:#3182F6}.ovsvg .wkg.d2 .ar .arc{stroke:#F07C1E}.ovsvg .wkg.d3 .ar .arc{stroke:#1FA463}.ovsvg .wkg.d1 .wl{fill:#1B64DA}
-.ovsvg .wk{fill:none;stroke:#F07C1E;stroke-width:calc(7px*var(--k));stroke-dasharray:calc(4px*var(--k)) calc(12px*var(--k));stroke-linecap:round}
+.ovsvg .wk{fill:none;stroke:#F07C1E;stroke-width:calc(3px*var(--kl));stroke-dasharray:calc(.1px*var(--kl)) calc(6px*var(--kl));stroke-linecap:round}
 .ovsvg .wl{font-size:40px;font-weight:800;fill:#C25E0C;paint-order:stroke;stroke:#fff;stroke-width:10px;stroke-linejoin:round;font-family:var(--body)}
 .ovsvg .wl .s{font-size:34px;font-weight:600;fill:#6B7684}
 .ovm-go{position:relative;margin:12px 12px 0;width:calc(100% - 24px);display:flex;align-items:center;gap:6px;border:0;border-radius:12px;padding:7px 10px;background:rgba(255,255,255,.94);box-shadow:none;background:var(--tint);font:inherit;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;line-height:1.3;padding:6px 9px}
@@ -450,9 +450,9 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .ovsvg .spot circle{fill:#fff;stroke:#1FA463;stroke-width:6px}.ovsvg .spot.fix circle{fill:#1FA463}
 .ovsvg .spot text{font-size:40px;font-weight:700;fill:#333D4B;paint-order:stroke;stroke:#fff;stroke-width:9px;stroke-linejoin:round;font-family:var(--body)}
 .ovm[data-f]:not([data-f="0"]):not([data-f="3"]) .ovsvg :is(.spot,.fz){display:none}
-.ovsvg .r{fill:none;transition:stroke .2s,opacity .2s}.ovsvg .rl{fill:none;stroke:inherit;stroke-width:calc(12px*var(--k));stroke-linecap:round}
-.ovsvg .ar path{fill:none;stroke-linecap:round;stroke-linejoin:round}.ovsvg .ar .arh{display:none}.ovsvg .ar .arc{stroke:inherit;stroke-width:7}.ovsvg .r:not([data-n="1"]) .ar.s1,.ovsvg .r:not([data-n="2"]) .ar.s2,.ovsvg .r:not([data-n="3"]) .ar.s3{display:none}.ovsvg .ar .ps{transform:scale(var(--ka,1))}.ovsvg .ar.sm .ps{transform:scale(calc(var(--ka,1)*.75))}
-.ovsvg .rl.dash{stroke-dasharray:calc(22px*var(--k)) calc(18px*var(--k));stroke-width:calc(9px*var(--k))}
+.ovsvg .r{fill:none;transition:stroke .2s,opacity .2s}.ovsvg .rl{fill:none;stroke:inherit;stroke-width:calc(2.6px*var(--kl));stroke-linecap:round}
+.ovsvg .ar path{fill:none;stroke-linecap:round;stroke-linejoin:round}.ovsvg .ar .arh{display:none}.ovsvg .ar .arc{stroke:inherit;stroke-width:9.5}.ovsvg .r:not([data-n="1"]) .ar.s1,.ovsvg .r:not([data-n="2"]) .ar.s2,.ovsvg .r:not([data-n="3"]) .ar.s3{display:none}.ovsvg .ar .ps{transform:scale(var(--ka,1))}.ovsvg .ar.sm .ps{transform:scale(var(--ka,1))}
+.ovsvg .rl.dash{stroke-dasharray:calc(7px*var(--kl)) calc(5px*var(--kl))}
 .ovsvg .ps{transform:scale(var(--k))}
 .ovsvg .det{opacity:var(--dz);transition:none}
 .ovsvg .p.det{opacity:1}.ovsvg .p.det .ps{opacity:var(--dp)}
@@ -1100,7 +1100,7 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   let cq=0;const OVMAX=80,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in'),svg=w.querySelector('.ovsvg');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
   const clamp=()=>{const W=vp.clientWidth,H=vp.clientHeight;sc=Math.min(OVMAX,Math.max(1,sc));tx=Math.min(0,Math.max(W-W*sc,tx));ty=Math.min(0,Math.max(H-H*sc,ty))};
   let gest=false,csc=1,ctx=0,cty=0,wt=0;
-  const commit=()=>{const W=vp.clientWidth||1,H=vp.clientHeight||1;csc=sc;ctx=tx;cty=ty;svg.style.transform='';svg.setAttribute('viewBox',`${(-tx/(W*sc)*OVX.W).toFixed(2)} ${(-ty/(H*sc)*OVX.H).toFixed(2)} ${(OVX.W/sc).toFixed(2)} ${(OVX.H/sc).toFixed(2)}`);inn.style.setProperty('--k',(ovF(sc)/sc).toFixed(4));{const pu=W/OVX.W*sc;inn.style.setProperty('--ka',(Math.min(11,7+sc*.25)/(32*pu)).toFixed(4));svg.querySelectorAll('g.r[data-len]').forEach(g=>{const L=g.dataset.len*pu;g.dataset.n=L<150?'1':L<360?'2':'3'})}inn.style.setProperty('--dq',Math.min(1,Math.max(0,(sc-22)/6)).toFixed(3));inn.classList.toggle('lo',!solo&&sc<1.8);inn.style.setProperty('--dz',Math.min(1,Math.max(0,(sc-2.6)/1.8)).toFixed(3));inn.style.setProperty('--dp',Math.min(1,Math.max(0,(sc-6)/2)).toFixed(3));inn.style.setProperty('--dw',Math.min(1,Math.max(0,(sc-11)/3)).toFixed(3));vp.classList.toggle('zoomed',sc>1.01);if(!cq){cq=requestAnimationFrame(()=>{cq=0;ovCollide(w,inn)})}};
+  const commit=()=>{const W=vp.clientWidth||1,H=vp.clientHeight||1;csc=sc;ctx=tx;cty=ty;svg.style.transform='';svg.setAttribute('viewBox',`${(-tx/(W*sc)*OVX.W).toFixed(2)} ${(-ty/(H*sc)*OVX.H).toFixed(2)} ${(OVX.W/sc).toFixed(2)} ${(OVX.H/sc).toFixed(2)}`);inn.style.setProperty('--k',(ovF(sc)/sc).toFixed(4));{const pu=W/OVX.W*sc;inn.style.setProperty('--ka',(9/(32*pu)).toFixed(5));inn.style.setProperty('--kl',(1/pu).toFixed(5));svg.querySelectorAll('g.r[data-len]').forEach(g=>{const L=g.dataset.len*pu;g.dataset.n=L<150?'1':L<360?'2':'3'})}inn.style.setProperty('--dq',Math.min(1,Math.max(0,(sc-22)/6)).toFixed(3));inn.classList.toggle('lo',!solo&&sc<1.8);inn.style.setProperty('--dz',Math.min(1,Math.max(0,(sc-2.6)/1.8)).toFixed(3));inn.style.setProperty('--dp',Math.min(1,Math.max(0,(sc-6)/2)).toFixed(3));inn.style.setProperty('--dw',Math.min(1,Math.max(0,(sc-11)/3)).toFixed(3));vp.classList.toggle('zoomed',sc>1.01);if(!cq){cq=requestAnimationFrame(()=>{cq=0;ovCollide(w,inn)})}};
   let raf=0;const apply=()=>{clamp();if(!gest){if(raf){cancelAnimationFrame(raf);raf=0}commit();return}if(raf)return;raf=requestAnimationFrame(()=>{raf=0;const s2=sc/csc;svg.style.transform=`translate(${(tx-s2*ctx).toFixed(1)}px,${(ty-s2*cty).toFixed(1)}px) scale(${s2.toFixed(4)})`})};
   const endGest=()=>{gest=false;svg.classList.remove('mv');if(raf){cancelAnimationFrame(raf);raf=0}commit()};
   const zoomAt=(f,cx,cy)=>{const ns=Math.min(OVMAX,Math.max(1,sc*f));tx=cx-(cx-tx)*ns/sc;ty=cy-(cy-ty)*ns/sc;sc=ns;apply()};
