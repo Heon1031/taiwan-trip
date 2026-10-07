@@ -426,13 +426,22 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .ovm-in{position:absolute;inset:0;transform-origin:0 0}
 .ovm-in img{display:block;width:100%;height:100%;pointer-events:none;-webkit-user-drag:none}
 .ovsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.ovm-in{--k:1;--dz:0;--dp:0}
+.ovm-in{--k:.72;--dz:0;--dp:0;--dq:0}
+.ovm-in.lo .ovsvg .p .l .s{opacity:0}
+.ovsvg .spot .ps{opacity:var(--dq)}
+.ovsvg .xm .l{opacity:calc(1 - var(--dq))}
+.ovsvg .spot circle{fill:#fff;stroke:#1FA463;stroke-width:6px}
+.ovsvg .spot text{font-size:30px;font-weight:700;fill:#333D4B;paint-order:stroke;stroke:#fff;stroke-width:9px;stroke-linejoin:round;font-family:var(--body)}
+.ovm[data-f]:not([data-f="0"]):not([data-f="3"]) .ovsvg .spot{display:none}
 .ovsvg .r{fill:none;stroke-width:calc(12px*var(--k));stroke-linecap:round;transition:stroke .2s,opacity .2s}
 .ovsvg .r.dash{stroke-dasharray:calc(22px*var(--k)) calc(18px*var(--k));stroke-width:calc(9px*var(--k))}
 .ovsvg .ps{transform:scale(var(--k))}
 .ovsvg .det{opacity:var(--dz);transition:none}
 .ovsvg .p.det{opacity:1}.ovsvg .p.det .ps{opacity:var(--dp)}
-.ovsvg .mrt{fill:none;stroke-width:calc(16px*var(--k));stroke-linecap:round;stroke-linejoin:round;opacity:.38}
+.ovsvg .mrt{fill:none;stroke:#B4BAC2;stroke-width:calc(9px*var(--k));stroke-linecap:butt;stroke-linejoin:round}
+.ovsvg .mrt2{fill:none;stroke:#fff;stroke-width:calc(4px*var(--k));stroke-dasharray:calc(12px*var(--k)) calc(12px*var(--k));stroke-linejoin:round}
+.ovsvg .fz{fill:rgba(31,164,99,.10);stroke:#1FA463;stroke-width:calc(5px*var(--k));stroke-dasharray:calc(14px*var(--k)) calc(10px*var(--k));opacity:calc(var(--dp)*(1 - var(--dq)))}
+.ovsvg .p.det.opt circle{fill:#fff;stroke-width:9px}.ovsvg .p.det.opt.d3 circle{stroke:#1FA463}
 .ovsvg .st circle{fill:#fff;stroke:#8B95A1;stroke-width:5}
 .ovsvg .st text{opacity:var(--dp);font-size:30px;font-weight:600;fill:#8B95A1;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:9px;stroke-linejoin:round;font-family:var(--body)}
 .ovsvg .dg text{font-size:40px;font-weight:800;fill:#B9B09A;text-anchor:middle;font-family:var(--body);letter-spacing:.04em}
@@ -449,6 +458,9 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .ovsvg .hotel text.l{fill:#E5323B;font-size:44px;text-anchor:end}
 .ovm[data-f="1"] .ovsvg :is(.r,.p):not(.d1),.ovm[data-f="2"] .ovsvg :is(.r,.p):not(.d2),.ovm[data-f="3"] .ovsvg :is(.r,.p):not(.d3),.ovm[data-f="4"] .ovsvg :is(.r,.p):not(.d4){opacity:.18}
 .ovm[data-f="1"] .ovsvg .r:not(.d1),.ovm[data-f="2"] .ovsvg .r:not(.d2),.ovm[data-f="3"] .ovsvg .r:not(.d3),.ovm[data-f="4"] .ovsvg .r:not(.d4){stroke:#9AA1A9}
+.ovm.solo{margin-top:20px}
+.ovm.solo[data-f="1"] .ovsvg :is(.r,.p):not(.d1),.ovm.solo[data-f="2"] .ovsvg :is(.r,.p):not(.d2),.ovm.solo[data-f="3"] .ovsvg :is(.r,.p):not(.d3),.ovm.solo[data-f="4"] .ovsvg :is(.r,.p):not(.d4){display:none}
+.ovm.solo .ovm-hint{padding-top:12px}
 .ovm-zb{position:absolute;right:10px;bottom:10px;display:grid;gap:6px}
 .ovm-zb button{width:34px;height:34px;border-radius:12px;border:0;background:rgba(255,255,255,.92);box-shadow:0 1px 4px rgba(0,0,0,.15);font-size:22px;font-weight:700;color:var(--ink);cursor:pointer;line-height:1}
 .ovm-f{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding:12px 12px 4px}
@@ -800,15 +812,16 @@ const ovP=(lon,lat)=>[(lon-OVX.x0)*ovK*ovS,(OVX.y1-lat)*ovS];
 const OVPT={airport:[121.2325,25.0777],hotel:[121.5013,25.0333],cks:[121.5219,25.0346],t101:[121.5645,25.0335],yehliu:[121.6905,25.2063],shifen:[121.7756,25.0419],jiufen:[121.8448,25.1092],raohe:[121.5776,25.0507],wulai:[121.5506,24.8650],ximen:[121.5068,25.0438]};
 const OVC=['#3182F6','#F07C1E','#1FA463','#8A8F98'];
 const OVR=[[1,'airport','hotel',-.12,0],[1,'hotel','cks',.35,0],[1,'cks','t101',.3,0],
- [2,'hotel','yehliu',-.12,0],[2,'yehliu','shifen',-.12,0],[2,'shifen','jiufen',-.15,0],[2,'jiufen','raohe',.1,0],[2,'raohe','hotel',.3,1],
- [3,'hotel','wulai',.15,0],[3,'wulai','hotel',.15,1],[3,'hotel','ximen',.4,0],
- [4,'hotel','airport',-.12,1]];
+ [2,'hotel','yehliu',-.12,0],[2,'yehliu','shifen',-.12,0],[2,'shifen','jiufen',-.15,0],[2,'jiufen','raohe',.1,0],
+ [3,'hotel','wulai',.15,0],[3,'hotel','ximen',.4,0],
+ [4,'hotel','airport',-.12,0]];
 const OVPIN=[[1,'cks','1','중정기념당','',0,1],[1,'t101','2','타이베이 101','키키 저녁',1,0],
  [2,'yehliu','1','예류 지질공원','',1,0],[2,'shifen','2','스펀','천등',1,0],[2,'jiufen','3','지우펀','홍등 야경',1,0],[2,'raohe','4','라오허제 야시장','팀호완',1,-1],
- [3,'wulai','1','우라이','꼬마기차·폭포',1,0],[3,'ximen','2','시먼딩','우라오궈',0,-1],
- [4,'airport','✈','타오위안 공항 T1','',1,-1]];
+ [3,'wulai','1','우라이','꼬마기차·폭포',1,0],[3,'ximen','2','시먼딩','자유시간 · 우라오궈',0,-1],
+ ['4 d1','airport','✈','타오위안 공항 T1','',1,-1]];
 const OVD={x0:121.48,x1:121.60,y0:25.015,y1:25.068};
-const OVDET=[[1,[121.4999,25.0372],'용산사','',-1,0],[2,[121.5036,25.0410],'뉴뎬 우육면','',-1,0],[3,[121.5205,25.0527],'치이카와 샵','자유시간',1,0]];
+const OVDET=[[1,[121.4999,25.0372],'용산사','',-1,0],[2,[121.5036,25.0410],'뉴뎬 우육면','',-1,0],[3,[121.5205,25.0527],'치이카와 매장','자유시간 · 원하면',1,0,1]];
+const OVSPOT=[['홍러우',121.5068,25.0420,-1],['무지개 횡단보도',121.5076,25.0421,1],['완녠빌딩',121.5058,25.0441,-1],['돈키호테',121.5056,25.0430,-1],['아종면선',121.5077,25.0438,1],['망고빙수',121.5078,25.04325,1],['행복당 밀크티',121.5079,25.0452,1],['지하상가 입구',121.5097,25.0446,1],['우라오궈 (저녁)',121.5086,25.0427,1]];
 const OVDG=[['완화구',121.492,25.026],['중정구',121.516,25.026],['다안구',121.543,25.024],['신이구',121.580,25.027],['중산구',121.534,25.061],['다퉁구',121.513,25.062],['쑹산구',121.560,25.061]];
 const OVMRT=[['#0070BD',[[121.4999,25.0354],[121.5082,25.0421],[121.5172,25.0462],[121.5232,25.0448],[121.5328,25.0423],[121.5438,25.0416],[121.5513,25.0414],[121.5577,25.0413],[121.5651,25.0411],[121.5764,25.0408],[121.5824,25.0450]]],
  ['#E3002C',[[121.5172,25.0462],[121.5162,25.0414],[121.5183,25.0326],[121.5287,25.0339],[121.5353,25.0330],[121.5434,25.0330],[121.5525,25.0333],[121.5637,25.0331],[121.5706,25.0328]]],
@@ -819,31 +832,40 @@ function ovSvg(){let r='',pins='';
     r+=`<path class="r d${d}${dash?' dash':''}" d="M${x1.toFixed(0)} ${y1.toFixed(0)} Q${cx.toFixed(0)} ${cy.toFixed(0)} ${x2.toFixed(0)} ${y2.toFixed(0)}" marker-end="url(#ah${d})"/>`});
   const pinG=(cls,d,k,n,t,sub,ax,ay,rr)=>{const [x,y]=ovP(...(OVPT[k]||k));const anc=ax>0?'start':ax<0?'end':'middle';const lx=ax*(rr+18),ly=ay>0?rr+62:ay<0?(sub?-rr-66:-rr-20):14;
     return `<g class="p d${d}${cls}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><circle r="${rr}"/><text class="n" y="${rr*.4|0}">${n}</text><text class="l" x="${lx}" y="${ly}" text-anchor="${anc}">${t}${sub?`<tspan class="s" x="${lx}" dy="46">${sub}</tspan>`:''}</text></g></g>`};
-  OVPIN.forEach(([d,k,n,t,sub,ax,ay])=>{pins+=pinG('',d,k,n,t,sub,ax,ay,30)});
-  OVDET.forEach(([d,ll,t,sub,ax,ay])=>{pins+=pinG(' det',d,ll,'',t,sub,ax,ay,22)});
+  OVPIN.forEach(([d,k,n,t,sub,ax,ay])=>{pins+=pinG(k==='ximen'?' xm':'',d,k,n,t,sub,ax,ay,30)});
+  OVDET.forEach(([d,ll,t,sub,ax,ay,o])=>{pins+=pinG(' det'+(o?' opt':''),d,ll,'',t,sub,ax,ay,22)});
   const [dx0,dy0]=ovP(OVD.x0,OVD.y1),[dx1,dy1]=ovP(OVD.x1,OVD.y0);
   let det=`<image class="det" href="img/ovdetail.png" x="${dx0.toFixed(1)}" y="${dy0.toFixed(1)}" width="${(dx1-dx0).toFixed(1)}" height="${(dy1-dy0).toFixed(1)}" preserveAspectRatio="none"/><g class="det">`;
   OVDG.forEach(([t,lo,la])=>{const [x,y]=ovP(lo,la);det+=`<g class="dg" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><text y="14">${t}</text></g></g>`});
-  OVMRT.forEach(([c,pts])=>{det+=`<polyline class="mrt" stroke="${c}" points="${pts.map(q=>ovP(...q).map(v=>v.toFixed(1)).join(',')).join(' ')}"/>`});
+  OVMRT.forEach(([c,pts])=>{const pp=pts.map(q=>ovP(...q).map(v=>v.toFixed(1)).join(',')).join(' ');det+=`<polyline class="mrt" points="${pp}"/><polyline class="mrt2" points="${pp}"/>`});
   OVST.forEach(([t,lo,la])=>{const [x,y]=ovP(lo,la);det+=`<g class="st" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><circle r="11"/>${t?`<text y="46">${t}</text>`:''}</g></g>`});
-  det+='</g>';
+  {const [fx,fy]=ovP(121.5070,25.0432);det+=`<circle class="fz" cx="${fx.toFixed(1)}" cy="${fy.toFixed(1)}" r="9"/>`}
+  let spots='<g class="det">';OVSPOT.forEach(([t,lo,la,ax])=>{const [x,y]=ovP(lo,la);spots+=`<g class="spot" transform="translate(${x.toFixed(2)} ${y.toFixed(2)})"><g class="ps"><circle r="12"/><text x="${ax*24}" y="10" text-anchor="${ax>0?'start':'end'}">${t}</text></g></g>`});
+  spots+='</g>';det+='</g>';
   const [hx,hy]=ovP(...OVPT.hotel);
   const defs=OVC.map((c,i)=>`<marker id="ah${i+1}" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${c}" class="ahp"/></marker>`).join('');
-  return `<svg class="ovsvg" viewBox="0 0 ${OVX.W} ${OVX.H}" aria-hidden="true"><defs>${defs}</defs>${det}${r}${pins}<g class="hotel" transform="translate(${hx.toFixed(1)} ${hy.toFixed(1)})"><g class="ps"><rect x="-30" y="-30" width="60" height="60" rx="12"/><text y="14">H</text><text class="l" x="-46" y="14" text-anchor="end">숙소</text></g></g></svg>`}
-function buildOvMap(){const w=el('div','ovm');w.dataset.f='0';
-  w.innerHTML=`<div class="ovm-vp"><div class="ovm-in"><img src="img/ovbase.jpg" alt="4일 동안의 전체 동선 지도" draggable="false">${ovSvg()}</div>
+  return `<svg class="ovsvg" viewBox="0 0 ${OVX.W} ${OVX.H}" aria-hidden="true"><defs>${defs}</defs>${det}${r}${pins}${spots}<g class="hotel" transform="translate(${hx.toFixed(1)} ${hy.toFixed(1)})"><g class="ps"><rect x="-30" y="-30" width="60" height="60" rx="12"/><text y="14">H</text><text class="l" x="-46" y="14" text-anchor="end">숙소</text></g></g></svg>`}
+function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.dataset.f=solo||'0';
+  w.innerHTML=`<div class="ovm-vp"><div class="ovm-in${solo?'':' lo'}"><img src="img/ovbase.jpg" alt="4일 동안의 전체 동선 지도" draggable="false">${ovSvg()}</div>
    <div class="ovm-zb"><button type="button" data-z="1" aria-label="확대">+</button><button type="button" data-z="-1" aria-label="축소">−</button></div></div>
-   <div class="ovm-f">${['전체','1일차','2일차','3일차','4일차'].map((t,i)=>`<button type="button" data-f="${i}" class="${i?'':'on'}" style="--c:${i?OVC[i-1]:'var(--ink)'}">${t}</button>`).join('')}</div>
-   <p class="ovm-hint">두 손가락으로 벌리면 확대돼요 · 날짜를 누르면 그날 길만 보여요</p>`;
+   ${solo?'':`<div class="ovm-f">${['전체','1일차','2일차','3일차','4일차'].map((t,i)=>`<button type="button" data-f="${i}" class="${i?'':'on'}" style="--c:${i?OVC[i-1]:'var(--ink)'}">${t}</button>`).join('')}</div>`}
+   <p class="ovm-hint">${solo?(cap?cap+' ':'')+'두 손가락으로 벌리면 확대돼요':'두 손가락으로 벌리면 확대돼요 · 날짜를 누르면 그날 길만 보여요'}<br>회색 철길 선은 지하철 · 빈 동그라미는 원하면 가는 곳</p>`;
   w.querySelectorAll('.ovm-f button').forEach(b=>b.addEventListener('click',()=>{w.dataset.f=b.dataset.f;w.querySelectorAll('.ovm-f button').forEach(x=>x.classList.toggle('on',x===b))}));
   /* pinch / drag zoom */
-  const OVMAX=14,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
+  const OVMAX=50,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
   const clamp=()=>{const W=vp.clientWidth,H=vp.clientHeight;sc=Math.min(OVMAX,Math.max(1,sc));tx=Math.min(0,Math.max(W-W*sc,tx));ty=Math.min(0,Math.max(H-H*sc,ty))};
-  const apply=()=>{clamp();inn.style.transform=`translate(${tx}px,${ty}px) scale(${sc})`;inn.style.setProperty('--k',Math.pow(sc,-.85).toFixed(4));inn.style.setProperty('--dz',Math.min(1,Math.max(0,(sc-2.6)/1.8)).toFixed(3));inn.style.setProperty('--dp',Math.min(1,Math.max(0,(sc-5)/2)).toFixed(3));inn.classList.toggle('dp',sc>5.2);vp.style.touchAction=sc>1.01?'none':'pan-y';vp.classList.toggle('zoomed',sc>1.01)};
+  const apply=()=>{clamp();inn.style.transform=`translate(${tx}px,${ty}px) scale(${sc})`;inn.style.setProperty('--k',(Math.min(Math.pow(sc,-.85),1.486/sc)*Math.min(1,.72+.28*(sc-1))).toFixed(4));inn.style.setProperty('--dq',Math.min(1,Math.max(0,(sc-16)/6)).toFixed(3));inn.classList.toggle('lo',!solo&&sc<1.8);inn.style.setProperty('--dz',Math.min(1,Math.max(0,(sc-2.6)/1.8)).toFixed(3));inn.style.setProperty('--dp',Math.min(1,Math.max(0,(sc-5)/2)).toFixed(3));inn.classList.toggle('dp',sc>5.2);vp.style.touchAction=sc>1.01?'none':'pan-y';vp.classList.toggle('zoomed',sc>1.01)};
   const zoomAt=(f,cx,cy)=>{const ns=Math.min(OVMAX,Math.max(1,sc*f));tx=cx-(cx-tx)*ns/sc;ty=cy-(cy-ty)*ns/sc;sc=ns;apply()};
+  const home={s:1,cx:.5,cy:.5};
+  if(solo){const d=+solo,ps=[];OVR.forEach(r=>{if(r[0]===d){ps.push(ovP(...OVPT[r[1]]),ovP(...OVPT[r[2]]))}});OVPIN.forEach(r=>{if((' '+r[0]+' ').includes(' '+d+' ')||String(r[0]).includes('d'+d))ps.push(ovP(...OVPT[r[1]]))});OVDET.forEach(r=>{if(r[0]===d)ps.push(ovP(...r[1]))});
+    const xs=ps.map(q=>q[0]),ys=ps.map(q=>q[1]);const bx0=Math.min(...xs)-90,bx1=Math.max(...xs)+330,by0=Math.min(...ys)-110,by1=Math.max(...ys)+130;
+    home.s=Math.max(1,Math.min(OVMAX,OVX.W/(bx1-bx0),OVX.H/(by1-by0)));home.cx=(bx0+bx1)/2/OVX.W;home.cy=(by0+by1)/2/OVX.H}
+  let touched=false;const goHome=()=>{const W=vp.clientWidth,H=vp.clientHeight;if(!W)return;sc=home.s;tx=W/2-home.cx*W*sc;ty=H/2-home.cy*H*sc;apply()};
+  if(solo&&'ResizeObserver' in window){new ResizeObserver(()=>{if(!touched)goHome()}).observe(vp)}
+  vp.addEventListener('pointerdown',()=>{touched=true},true);
   const rel=e=>{const r=vp.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top]};
   vp.addEventListener('pointerdown',e=>{if(e.target.closest('.ovm-zb'))return;pts.set(e.pointerId,rel(e));try{vp.setPointerCapture(e.pointerId)}catch(_){}
-    if(pts.size===2){const [a,b]=[...pts.values()];pin={d:Math.hypot(a[0]-b[0],a[1]-b[1]),s:sc}}else{last=rel(e);const now=Date.now();if(now-lastTap<300){const [x,y]=rel(e);sc>1.01?(sc=1,tx=0,ty=0,apply()):zoomAt(3,x,y);lastTap=0}else lastTap=now}});
+    if(pts.size===2){const [a,b]=[...pts.values()];pin={d:Math.hypot(a[0]-b[0],a[1]-b[1]),s:sc}}else{last=rel(e);const now=Date.now();if(now-lastTap<300){const [x,y]=rel(e);sc>home.s*1.05?goHome():zoomAt(3,x,y);lastTap=0}else lastTap=now}});
   vp.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,rel(e));
     if(pts.size===2&&pin){const [a,b]=[...pts.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);const cx=(a[0]+b[0])/2,cy=(a[1]+b[1])/2;zoomAt((pin.s*d/pin.d)/sc,cx,cy);e.preventDefault()}
     else if(pts.size===1&&sc>1.01&&last){const p=rel(e);tx+=p[0]-last[0];ty+=p[1]-last[1];last=p;apply();e.preventDefault()}});
@@ -874,7 +896,8 @@ function homePanel(){const p=el('section','panel');
   return p}
 
 function dayPanel(d){const p=el('section','panel');
-  p.innerHTML=`<span class="kicker">${d.date}${TRIP[DAYS.indexOf(d)]&&DAYS.indexOf(d)===todayIdx?' <span class="todaypill">오늘</span>':''}</span><h2>${d.title}</h2><p class="lead">${d.lead}</p><figure class="map" data-map="${d.map}" data-title="${d.tab} 동선 지도"><img src="${d.map}" alt="${d.tab} 동선 지도"><figcaption>${d.cap} · 지도를 누르면 크게 보여요</figcaption></figure>${d.gmap?`<div class="walks"><div class="walks-h">경로 보기</div><a href="${d.gmap}" target="_blank" rel="noopener"><span class="car">차량</span>${d.id==='day4'?'공항 가는 길':'하루 경로'}<em>구글 지도</em><i>›</i></a>${(d.walks||[]).map(w=>`<button type="button" class="wbtn" data-place="${w[2]}"><span>도보</span>${esc(w[0])}<em>그림 지도</em><i>›</i></button>`).join('')}<p class="walks-note">도보는 그림 지도가 먼저, 구글 지도는 그 아래에 있어요.</p></div>`:''}<h3 class="h3" data-zh="行程">일정</h3>`;
+  p.innerHTML=`<span class="kicker">${d.date}${TRIP[DAYS.indexOf(d)]&&DAYS.indexOf(d)===todayIdx?' <span class="todaypill">오늘</span>':''}</span><h2>${d.title}</h2><p class="lead">${d.lead}</p><div class="ovslot"></div>${d.gmap?`<div class="walks"><div class="walks-h">경로 보기</div><a href="${d.gmap}" target="_blank" rel="noopener"><span class="car">차량</span>${d.id==='day4'?'공항 가는 길':'하루 경로'}<em>구글 지도</em><i>›</i></a>${(d.walks||[]).map(w=>`<button type="button" class="wbtn" data-place="${w[2]}"><span>도보</span>${esc(w[0])}<em>그림 지도</em><i>›</i></button>`).join('')}<p class="walks-note">도보는 그림 지도가 먼저, 구글 지도는 그 아래에 있어요.</p></div>`:''}<h3 class="h3" data-zh="行程">일정</h3>`;
+  {const sl=p.querySelector('.ovslot');if(sl)sl.replaceWith(buildOvMap(d.id.slice(3),d.cap))}
   const ol=el('ol','sched');
   d.sched.forEach(([t,w,s,k,b])=>{if(k==='move'){const li=el('li','move');li.innerHTML=`<time>${t}</time><i class="dot mvdot">${w.startsWith('걸어서')?'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2" fill="currentColor"/><path d="M10 21l2-6 3 3v4M8 12l2-4h4l2 4 2 1M12 8l-1 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15V8a2 2 0 0 1 2-2h10l4 4h1a1 1 0 0 1 1 1v4h-2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 15h2m4 0h6" stroke="currentColor" stroke-width="1.8"/><circle cx="7" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="16" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>'}</i><div class="mv"><span>${esc(w)}</span>${s?`<em>${esc(s)}</em>`:''}</div>`;ol.appendChild(li);return}const link=findLink(w);const rp=link&&(link.route?link:([PLACES.trolley,PLACES.wulaifall,PLACES.wulaist].includes(link)?PLACES.wulai:null));const li=el('li',(k==='meal'?'meal ':'')+(k==='opt'?'optrow ':'')+(link?'tap':''));
     li.innerHTML=`<time>${t}</time><i class="dot"></i><div class="what">${esc(w)}${k==='opt'?'<span class="opt">원하면</span>':''}${b==='ok'?'<span class="ok">예약 확정</span>':''}${s?`<small>${esc(s)}</small>`:''}${rp||(d.smap&&d.smap[t])?`<span class="chips">${rp?'<button type="button" class="chip rowroute"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2" fill="currentColor"/><path d="M10 21l2-6 3 3v4M8 12l2-4h4l2 4 2 1M12 8l-1 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>걷는 동선</button>':''}${d.smap&&d.smap[t]?`<a class="chip rowmap" href="${d.smap[t]}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></svg>지도</a>`:''}</span>`:''}${link?'<span class="more">자세히 보기 ›</span>':''}</div>`;
