@@ -664,32 +664,51 @@ html.big .bottombar .in{zoom:1.06}
 .a2h-ph .home span.me{transform:scale(0);transition:transform .4s cubic-bezier(.3,1.6,.5,1) .35s}
 .a2h-ph .tap{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:rgba(240,68,82,.35);border:2px solid #F04452;animation:a2htap 1.2s ease-out infinite;transition:left .3s,top .3s,opacity .2s;pointer-events:none;z-index:5}
 @keyframes a2htap{0%{transform:scale(.6);opacity:1}70%{transform:scale(1.25);opacity:.9}100%{transform:scale(1.4);opacity:0}}
-/* frame visibility: a */
+/* frame visibility */
+.a2h-ph .ctop{display:none;color:#191F28}.a2h-ph .ctop .shr{width:14px;height:14px}
+.a2h-ph .sbb{color:#191F28}
+.a2h-ph .smenu{left:0;right:0;bottom:0;height:190px;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -4px 16px rgba(0,0,0,.15);padding:14px 8px;transform:translateY(100%);display:grid;grid-template-columns:repeat(4,1fr);gap:10px 4px;align-content:start}
+.a2h-ph .smenu span{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:7.5px;text-align:center;border-radius:8px;padding:3px 0}
+.a2h-ph .smenu span i{width:24px;height:24px;border-radius:7px;background:#E5E8EB}
+.a2h-ph .smenu span.hl{background:#E8F3FF;color:#1B64DA;font-weight:800}
+.a2h-ph .smenu span.hl i{background:#3182F6}
+.a2h-ph .sadd{left:0;right:0;bottom:0;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 -4px 16px rgba(0,0,0,.15);padding:12px 6px 16px;transform:translateY(100%)}
+.a2h-ph .sadd b{display:block;font-weight:500;padding:8px 10px;font-size:9.5px}.a2h-ph .sadd b.t{font-weight:800;color:#8B95A1;font-size:8.5px;padding-bottom:4px}
+.a2h-ph .sadd b.hl{background:#E8F3FF;color:#1B64DA;font-weight:800}
 .a2h[data-f="1"] .kt,.a2h[data-f="2"] .kbr,.a2h[data-f="3"] .kbr,.a2h[data-f="4"] .br.n,.a2h[data-f="5"] .br.n,.a2h[data-f="6"] .br.n,.a2h[data-f="7"] .home{opacity:1}
-.a2h[data-f="3"] .kmenu-a,.a2h[data-os="a"][data-f="5"] .cmenu{opacity:1;transform:none}
-.a2h[data-os="a"][data-f="6"] .cmenu{opacity:1;transform:none}
+.a2h:is([data-os="a"],[data-os="s"])[data-f="3"] .kmenu-a,.a2h:is([data-os="i"],[data-os="ic"])[data-f="3"] .kmenu-i{opacity:1;transform:none}
+.a2h[data-os="a"]:is([data-f="5"],[data-f="6"]) .cmenu{opacity:1;transform:none}
 .a2h[data-os="a"][data-f="6"] .dlg{opacity:1}
-.a2h[data-os="i"][data-f="3"] .kmenu-i{opacity:1;transform:none}
-.a2h[data-os="i"][data-f="5"] .shs{opacity:1;transform:none}
-.a2h[data-os="i"][data-f="6"] .iadd{opacity:1}
-.a2h[data-os="i"][data-f="6"] .br.n{opacity:0}
-.a2h[data-os="i"][data-f="6"] .iadd{z-index:3}
+.a2h[data-os="s"][data-f="5"] .smenu,.a2h[data-os="s"][data-f="6"] .sadd{opacity:1;transform:none}
+.a2h:is([data-os="i"],[data-os="ic"])[data-f="5"] .shs{opacity:1;transform:none}
+.a2h:is([data-os="i"],[data-os="ic"])[data-f="6"] .iadd{opacity:1;z-index:3}
 .a2h[data-f="7"] .home span.me{transform:none}
 .a2h[data-f="7"] .tap{opacity:0}
-.a2h[data-os="a"] .shs,.a2h[data-os="a"] .iadd,.a2h[data-os="a"] .kmenu-i,.a2h[data-os="a"] .bb.n,.a2h[data-os="a"] .kbb,.a2h[data-os="i"] .cmenu,.a2h[data-os="i"] .dlg,.a2h[data-os="i"] .kmenu-a,.a2h[data-os="i"] .br.n .dots,.a2h[data-os="i"] .kbt .dots{display:none}
+.a2h:is([data-os="a"],[data-os="s"]) :is(.shs,.iadd,.kmenu-i,.kbb,.bb.n){display:none}
+.a2h:is([data-os="i"],[data-os="ic"]) :is(.cmenu,.dlg,.kmenu-a,.br.n .dots,.kbt .dots,.smenu,.sadd,.sbb){display:none}
+.a2h[data-os="a"] :is(.smenu,.sadd,.sbb){display:none}
+.a2h[data-os="s"] :is(.cmenu,.dlg,.br.n .dots){display:none}
 .a2h[data-os="i"] .br.n .bt{justify-content:center}
+.a2h[data-os="ic"] .bb.n{display:none}
+.a2h[data-os="ic"] .ctop{display:block}
 /* tap positions */
 .a2h[data-f="1"] .tap{left:105px;top:115px}
-.a2h[data-os="a"][data-f="2"] .tap{left:174px;top:24px}
-.a2h[data-os="a"][data-f="3"] .tap{left:125px;top:132px}
+.a2h:is([data-os="a"],[data-os="s"])[data-f="2"] .tap{left:174px;top:24px}
+.a2h:is([data-os="a"],[data-os="s"])[data-f="3"] .tap{left:125px;top:132px}
 .a2h[data-os="a"][data-f="4"] .tap{left:174px;top:24px}
 .a2h[data-os="a"][data-f="5"] .tap{left:120px;top:160px}
 .a2h[data-os="a"][data-f="6"] .tap{left:152px;top:211px}
-.a2h[data-os="i"][data-f="2"] .tap{left:166px;top:313px}
-.a2h[data-os="i"][data-f="3"] .tap{left:120px;top:278px}
+.a2h[data-os="s"][data-f="4"] .tap{left:162px;top:313px}
+.a2h[data-os="s"][data-f="5"] .tap{left:31px;top:178px}
+.a2h[data-os="s"][data-f="6"] .tap{left:60px;top:308px}
+.a2h:is([data-os="i"],[data-os="ic"])[data-f="2"] .tap{left:166px;top:313px}
+.a2h:is([data-os="i"],[data-os="ic"])[data-f="3"] .tap{left:120px;top:278px}
 .a2h[data-os="i"][data-f="4"] .tap{left:95px;top:313px}
-.a2h[data-os="i"][data-f="5"] .tap{left:90px;top:289px}
-.a2h[data-os="i"][data-f="6"] .tap{left:166px;top:26px}
+.a2h[data-os="ic"][data-f="4"] .tap{left:174px;top:24px}
+.a2h:is([data-os="i"],[data-os="ic"])[data-f="5"] .tap{left:90px;top:289px}
+.a2h:is([data-os="i"],[data-os="ic"])[data-f="6"] .tap{left:166px;top:26px}
+.a2h-tabs{grid-template-columns:1fr 1fr!important}
+.a2h-tabs button{font-size:13px!important}
 .a2h-steps{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:6px;counter-reset:s}
 .a2h-steps li{counter-increment:s;display:flex;gap:10px;align-items:center;padding:9px 12px;border-radius:12px;background:var(--tint);color:var(--sub);font-size:15px;transition:background .25s,color .25s}
 .a2h-steps li::before{content:counter(s);flex:none;width:22px;height:22px;border-radius:50%;background:#fff;color:var(--muted);font-size:12px;font-weight:800;display:grid;place-items:center}
@@ -1019,17 +1038,20 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   w.querySelectorAll('.ovm-zb button').forEach(b=>b.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;if(+b.dataset.z>0)zoomAt(2,W/2,H/2);else zoomAt(1/2,W/2,H/2)}));
   return w}
 
-const A2H={a:['카카오톡에서 받은 링크를 눌러요','오른쪽 위 점 세 개(⋮) → ‘다른 브라우저로 열기’','크롬에서 다시 ⋮ → ‘홈 화면에 추가’','‘추가’를 누르면 바탕화면에 아이콘이 생겨요'],
+const A2H={s:['카카오톡에서 받은 링크를 눌러요','오른쪽 위 점 세 개(⋮) → ‘다른 브라우저로 열기’','삼성 인터넷 오른쪽 아래 ≡ → ‘현재 페이지 추가’','‘홈 화면’ → ‘추가’를 누르면 바탕화면에 아이콘이 생겨요'],
+ ic:['카카오톡에서 받은 링크를 눌러요','오른쪽 아래 점 세 개(⋯) → ‘다른 브라우저로 열기’','크롬 주소창 오른쪽 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’를 누르면 바탕화면에 아이콘이 생겨요'],a:['카카오톡에서 받은 링크를 눌러요','오른쪽 위 점 세 개(⋮) → ‘다른 브라우저로 열기’','크롬에서 다시 ⋮ → ‘홈 화면에 추가’','‘추가’를 누르면 바탕화면에 아이콘이 생겨요'],
  i:['카카오톡에서 받은 링크를 눌러요','오른쪽 아래 점 세 개(⋯) → ‘다른 브라우저로 열기’','사파리 아래 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’를 누르면 바탕화면에 아이콘이 생겨요']};
 const A2HSTEP=[0,1,2,2,3,3,4,4];
-function a2hBox(){const os=/iPhone|iPad|iPod/.test(navigator.userAgent)?'i':'a';const w=el('div','a2h');w.dataset.os=os;w.dataset.f='1';
+function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/CriOS/.test(ua)?'ic':'i'):(/SamsungBrowser/.test(ua)?'s':'a');const w=el('div','a2h');w.dataset.os=os;w.dataset.f='1';
   const SHR='<svg class="shr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5v10h14V11h-1"/></svg>';
   const PG='<div class="pg"><div class="hero"></div><i></i><i></i><i></i></div>';
-  w.innerHTML=`<div class="a2h-tabs"><button type="button" data-os="a">갤럭시</button><button type="button" data-os="i">아이폰</button></div>
+  w.innerHTML=`<div class="a2h-tabs"><button type="button" data-os="a">갤럭시 크롬</button><button type="button" data-os="s">갤럭시 삼성인터넷</button><button type="button" data-os="i">아이폰 사파리</button><button type="button" data-os="ic">아이폰 크롬</button></div>
   <div class="a2h-ph" aria-hidden="true">
    <div class="sc kt"><div class="hd">‹ 우리 가족 (6)</div><div class="msg"><span class="av"></span><div><div class="nm">헌주</div><div class="bub">대만 여행 안내서예요!</div><div class="lk"><i></i><b>여섯 식구 첫 여행</b><span>heon1031.github.io</span></div></div></div><div class="me">고마워!</div></div>
    <div class="sc br kbr"><div class="bt kbt"><span class="x">✕</span><span class="url">여섯 식구 첫 여행</span><span class="dots">⋮</span></div>${PG}<div class="bb kbb"><span>‹</span><span>›</span><span>↻</span><span>⋯</span></div></div>
-   <div class="sc br n"><div class="bt"><span class="url">heon1031.github.io</span><span class="dots">⋮</span></div>${PG}<div class="bb n"><span>‹</span><span>›</span>${SHR}<span>▢</span><span>⧉</span></div></div>
+   <div class="sc br n"><div class="bt"><span class="url">heon1031.github.io</span><span class="ctop">${SHR}</span><span class="dots">⋮</span></div>${PG}<div class="bb n"><span>‹</span><span>›</span>${SHR}<span>▢</span><span>⧉</span></div><div class="bb sbb"><span>‹</span><span>›</span><span>⌂</span><span>▢</span><span>≡</span></div></div>
+   <div class="lay smenu"><span class="hl"><i></i>현재 페이지 추가</span><span><i></i>북마크</span><span><i></i>방문 기록</span><span><i></i>다운로드</span><span><i></i>공유</span><span><i></i>설정</span><span><i></i>광고 차단</span><span><i></i>다크 모드</span></div>
+   <div class="lay sadd"><b class="t">추가할 위치</b><b>북마크</b><b>퀵 액세스</b><b class="hl">홈 화면</b></div>
    <div class="lay menu kmenu-a"><b>새로고침</b><b>링크 복사</b><b>공유하기</b><b class="hl">다른 브라우저로 열기</b></div>
    <div class="lay menu kmenu kmenu-i"><b>링크 복사</b><b>공유하기</b><b class="hl">다른 브라우저로 열기</b></div>
    <div class="lay menu cmenu"><b>새 탭</b><b>북마크</b><b>방문 기록</b><b>공유</b><b class="hl">홈 화면에 추가</b><b>설정</b></div>
@@ -1039,7 +1061,7 @@ function a2hBox(){const os=/iPhone|iPad|iPod/.test(navigator.userAgent)?'i':'a';
    <div class="sc home"><span><i></i>전화</span><span><i></i>카톡</span><span><i></i>카메라</span><span><i></i>사진</span><span><i></i>지도</span><span><i></i>날씨</span><span class="me"><img src="icon-192.png" alt="">대만 여행</span></div>
    <i class="tap"></i></div>
   <ol class="a2h-steps"></ol>
-  <p class="a2h-note">카카오톡 안에서 바로 열면 홈 화면 추가가 안 돼요. 꼭 다른 브라우저(갤럭시는 크롬, 아이폰은 사파리)로 연 다음 추가해 주세요. 바탕화면 아이콘으로 열면 앱처럼 화면이 넓고, 인터넷이 약한 곳에서도 열려요.</p>`;
+  <p class="a2h-note">어떤 브라우저인지 모르면: 카톡에서 ‘다른 브라우저로 열기’를 눌렀을 때 열리는 앱이 그 휴대폰의 기본 브라우저예요. 그 이름의 탭을 보면 돼요. 카카오톡 안에서 바로 열면 홈 화면 추가가 안 돼요. 바탕화면 아이콘으로 열면 앱처럼 화면이 넓고, 인터넷이 약한 곳에서도 열려요.</p>`;
   const ol=w.querySelector('.a2h-steps');
   const draw=()=>{const st=A2H[w.dataset.os],cur=A2HSTEP[+w.dataset.f];ol.innerHTML=st.map((t,i)=>`<li class="${cur===i+1?'on':''}">${t}</li>`).join('')};
   w.querySelectorAll('.a2h-tabs button').forEach(b=>b.addEventListener('click',()=>{w.dataset.os=b.dataset.os;w.dataset.f='1';draw()}));
