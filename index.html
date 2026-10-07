@@ -432,10 +432,12 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .ovsvg .cl.seal text{fill:#7fa9cc}
 .ovm-in img{display:block;width:100%;height:100%;pointer-events:none;-webkit-user-drag:none}
 .ovsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;transform-origin:0 0}
-.ovm-in{--k:.8;--dz:0;--dp:0;--dq:0}
+.ovm-in{--dw:0;--k:.8;--dz:0;--dp:0;--dq:0}
 .ovm-in.lo .ovsvg .p .l .s{opacity:0}
 .ovsvg .spot .ps{opacity:var(--dq)}.ovsvg .spot.early .ps{opacity:var(--dp)}
 .ovsvg g.wkg{stroke:none!important;opacity:var(--dz)}
+.ovsvg .wl{opacity:var(--dw)}.ovsvg .p.det .l .s{opacity:var(--dw)}
+.ovsvg.mv{will-change:transform}
 .ovsvg .wkg.d1 .wk{stroke:#3182F6}.ovsvg .wkg.d1 .wl{fill:#1B64DA}
 .ovsvg .wk{fill:none;stroke:#F07C1E;stroke-width:calc(7px*var(--k));stroke-dasharray:calc(4px*var(--k)) calc(12px*var(--k));stroke-linecap:round}
 .ovsvg .wl{font-size:40px;font-weight:800;fill:#C25E0C;paint-order:stroke;stroke:#fff;stroke-width:10px;stroke-linejoin:round;font-family:var(--body)}
@@ -826,10 +828,10 @@ function themePanel(k){const [zh,t,html]=THEMES[k];const p=el('section','panel')
 const OVX={x0:121.18,x1:121.95,y1:25.26,W:2000,H:1262};
 const ovK=Math.cos(25.05*Math.PI/180),ovS=OVX.W/((OVX.x1-OVX.x0)*ovK);
 const ovP=(lon,lat)=>[(lon-OVX.x0)*ovK*ovS,(OVX.y1-lat)*ovS];
-const OVPT={airport:[121.2325,25.0777],hotel:[121.5013,25.0333],cks:[121.5219,25.0346],t101:[121.5645,25.0335],yehliu:[121.6905,25.2063],shifen:[121.7756,25.0419],jiufen:[121.8448,25.1092],raohe:[121.5776,25.0507],wulai:[121.5506,24.8650],ximen:[121.5068,25.0438],wulao:[121.5086,25.0428]};
+const OVPT={airport:[121.2325,25.0777],hotel:[121.5013,25.0333],cks:[121.5219,25.0346],t101:[121.5645,25.0335],yehliu:[121.6905,25.2063],shifen:[121.7756,25.0419],jiufen:[121.8448,25.1092],raohe:[121.5776,25.0507],wulai:[121.5506,24.8650],ximen:[121.5068,25.0438],wulao:[121.5086,25.0428],beef:[121.5036,25.0410]};
 const OVC=['#3182F6','#F07C1E','#1FA463','#8A8F98'];
 const OVR=[[1,'airport','hotel',-.12,0],[1,'hotel','cks',.35,0],[1,'cks','t101',.3,0],[1,'t101','hotel',.3,1],
- [2,'hotel','yehliu',-.12,0],[2,'yehliu','shifen',-.12,0],[2,'shifen','jiufen',-.15,0],[2,'jiufen','raohe',.1,0],[2,'raohe','hotel',.3,1],
+ [2,'beef','yehliu',-.12,0],[2,'yehliu','shifen',-.12,0],[2,'shifen','jiufen',-.15,0],[2,'jiufen','raohe',.1,0],[2,'raohe','hotel',.3,1],
  [3,'hotel','wulai',.15,0],[3,'wulai','hotel',.15,1],[3,'hotel','ximen',.4,0],[3,'ximen','wulao',.35,0],[3,'wulao','hotel',-.25,1],
  [4,'hotel','airport',-.12,0]];
 const OVPIN=[[1,'cks','3','중정기념당','',0,1],[1,'t101','4','타이베이 101','키키 저녁',1,0],
@@ -884,7 +886,7 @@ function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>
   if(vr('--dp')>.3)circ('.ovsvg .p.det circle');
   
   const dq=vr('--dq');
-  const groups=[['.ovsvg .hotel .l',1],['.ovsvg .p:not(.det):not(.xm) .l',1],['.ovsvg .xm .l',1],['.ovsvg .p.det .l',vr('--dp')],['.ovsvg .wl',vr('--dz')],['.ovsvg .spot.early text',vr('--dp')],['.ovsvg .spot:not(.early) text',dq],['.ovsvg .st text',vr('--dp')],['.ovsvg .dg text',vr('--dz')],['.ovsvg .cl text',1]];
+  const groups=[['.ovsvg .hotel .l',1],['.ovsvg .p:not(.det):not(.xm) .l',1],['.ovsvg .xm .l',1],['.ovsvg .p.det .l',vr('--dp')],['.ovsvg .wl',vr('--dw')],['.ovsvg .spot.early text',vr('--dp')],['.ovsvg .spot:not(.early) text',dq],['.ovsvg .st text',vr('--dp')],['.ovsvg .dg text',vr('--dz')],['.ovsvg .cl text',1]];
   const act=e=>{if(f==='0'||!f)return true;const g=e.closest('.p,.r,.spot');return !g||g.classList.contains('d'+f)||g.classList.contains('spot')};
   const order=[];groups.forEach(([sel,v])=>{if(v<.3)return;inn.querySelectorAll(sel).forEach(e=>order.push(e))});
   order.sort((a,b)=>act(b)-act(a));
@@ -901,9 +903,9 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   let cq=0;const OVMAX=80,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in'),svg=w.querySelector('.ovsvg');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
   const clamp=()=>{const W=vp.clientWidth,H=vp.clientHeight;sc=Math.min(OVMAX,Math.max(1,sc));tx=Math.min(0,Math.max(W-W*sc,tx));ty=Math.min(0,Math.max(H-H*sc,ty))};
   let gest=false,csc=1,ctx=0,cty=0,wt=0;
-  const commit=()=>{const W=vp.clientWidth||1,H=vp.clientHeight||1;csc=sc;ctx=tx;cty=ty;svg.style.transform='';svg.setAttribute('viewBox',`${(-tx/(W*sc)*OVX.W).toFixed(2)} ${(-ty/(H*sc)*OVX.H).toFixed(2)} ${(OVX.W/sc).toFixed(2)} ${(OVX.H/sc).toFixed(2)}`);inn.style.setProperty('--k',(ovF(sc)/sc).toFixed(4));inn.style.setProperty('--dq',Math.min(1,Math.max(0,(sc-22)/6)).toFixed(3));inn.classList.toggle('lo',!solo&&sc<1.8);inn.style.setProperty('--dz',Math.min(1,Math.max(0,(sc-2.6)/1.8)).toFixed(3));inn.style.setProperty('--dp',Math.min(1,Math.max(0,(sc-6)/2)).toFixed(3));vp.classList.toggle('zoomed',sc>1.01);if(!cq){cq=requestAnimationFrame(()=>{cq=0;ovCollide(w,inn)})}};
+  const commit=()=>{const W=vp.clientWidth||1,H=vp.clientHeight||1;csc=sc;ctx=tx;cty=ty;svg.style.transform='';svg.setAttribute('viewBox',`${(-tx/(W*sc)*OVX.W).toFixed(2)} ${(-ty/(H*sc)*OVX.H).toFixed(2)} ${(OVX.W/sc).toFixed(2)} ${(OVX.H/sc).toFixed(2)}`);inn.style.setProperty('--k',(ovF(sc)/sc).toFixed(4));inn.style.setProperty('--dq',Math.min(1,Math.max(0,(sc-22)/6)).toFixed(3));inn.classList.toggle('lo',!solo&&sc<1.8);inn.style.setProperty('--dz',Math.min(1,Math.max(0,(sc-2.6)/1.8)).toFixed(3));inn.style.setProperty('--dp',Math.min(1,Math.max(0,(sc-6)/2)).toFixed(3));inn.style.setProperty('--dw',Math.min(1,Math.max(0,(sc-11)/3)).toFixed(3));vp.classList.toggle('zoomed',sc>1.01);if(!cq){cq=requestAnimationFrame(()=>{cq=0;ovCollide(w,inn)})}};
   let raf=0;const apply=()=>{clamp();if(!gest){if(raf){cancelAnimationFrame(raf);raf=0}commit();return}if(raf)return;raf=requestAnimationFrame(()=>{raf=0;const s2=sc/csc;svg.style.transform=`translate(${(tx-s2*ctx).toFixed(1)}px,${(ty-s2*cty).toFixed(1)}px) scale(${s2.toFixed(4)})`})};
-  const endGest=()=>{gest=false;if(raf){cancelAnimationFrame(raf);raf=0}commit()};
+  const endGest=()=>{gest=false;svg.classList.remove('mv');if(raf){cancelAnimationFrame(raf);raf=0}commit()};
   const zoomAt=(f,cx,cy)=>{const ns=Math.min(OVMAX,Math.max(1,sc*f));tx=cx-(cx-tx)*ns/sc;ty=cy-(cy-ty)*ns/sc;sc=ns;apply()};
   const home={s:1,cx:.5,cy:.5};
   if(solo){const d=+solo,ps=[];OVR.forEach(r=>{if(r[0]===d){ps.push(ovP(...OVPT[r[1]]),ovP(...OVPT[r[2]]))}});OVPIN.forEach(r=>{if((' '+r[0]+' ').includes(' '+d+' ')||String(r[0]).includes('d'+d))ps.push(ovP(...OVPT[r[1]]))});OVDET.forEach(r=>{if(r[0]===d)ps.push(ovP(...r[1]))});
@@ -914,7 +916,7 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   vp.addEventListener('pointerdown',()=>{touched=true},true);
   const rel=e=>{const r=vp.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top]};
   {const go=w.querySelector('.ovm-go');if(go)go.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;const g=OVGO[solo];const [px,py]=ovP(g[2],g[3]);const cx=px/OVX.W*W,cy=py/OVX.H*H;sc=g[4];tx=W/2-cx*sc;ty=H/2-cy*sc;touched=true;apply()})}
-  vp.addEventListener('pointerdown',e=>{if(e.target.closest('.ovm-zb,.ovm-go'))return;pts.set(e.pointerId,rel(e));gest=true;try{vp.setPointerCapture(e.pointerId)}catch(_){}
+  vp.addEventListener('pointerdown',e=>{if(e.target.closest('.ovm-zb,.ovm-go'))return;pts.set(e.pointerId,rel(e));gest=true;svg.classList.add('mv');try{vp.setPointerCapture(e.pointerId)}catch(_){}
     if(pts.size===2){const [a,b]=[...pts.values()];pin={d:Math.hypot(a[0]-b[0],a[1]-b[1]),s:sc}}else{last=rel(e);const now=Date.now();if(now-lastTap<300){const [x,y]=rel(e);sc>home.s*1.05?goHome():zoomAt(3,x,y);lastTap=0}else lastTap=now}});
   vp.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,rel(e));
     if(pts.size===2&&pin){const [a,b]=[...pts.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);const cx=(a[0]+b[0])/2,cy=(a[1]+b[1])/2;zoomAt((pin.s*d/pin.d)/sc,cx,cy);e.preventDefault()}
@@ -922,7 +924,7 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   ['gesturestart','gesturechange'].forEach(t=>vp.addEventListener(t,e=>e.preventDefault()));
   const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pin=null;if(pts.size===1)last=[...pts.values()][0];if(!pts.size){last=null;if(gest)endGest()}};
   vp.addEventListener('pointerup',up);vp.addEventListener('pointercancel',up);
-  vp.addEventListener('wheel',e=>{if(!e.ctrlKey&&sc<=1.01&&e.deltaY>0)return;e.preventDefault();gest=true;clearTimeout(wt);wt=setTimeout(endGest,180);const [x,y]=rel(e);zoomAt(e.deltaY<0?1.15:1/1.15,x,y)},{passive:false});
+  vp.addEventListener('wheel',e=>{if(!e.ctrlKey&&sc<=1.01&&e.deltaY>0)return;e.preventDefault();gest=true;svg.classList.add('mv');clearTimeout(wt);wt=setTimeout(endGest,180);const [x,y]=rel(e);zoomAt(e.deltaY<0?1.15:1/1.15,x,y)},{passive:false});
   w.querySelectorAll('.ovm-zb button').forEach(b=>b.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;if(+b.dataset.z>0)zoomAt(2,W/2,H/2);else zoomAt(1/2,W/2,H/2)}));
   return w}
 function homePanel(){const p=el('section','panel');
