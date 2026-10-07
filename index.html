@@ -435,6 +435,7 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .ovsvg .wl{font-size:40px;font-weight:800;fill:#C25E0C;paint-order:stroke;stroke:#fff;stroke-width:10px;stroke-linejoin:round;font-family:var(--body)}
 .ovsvg .wl .s{font-size:34px;font-weight:600;fill:#6B7684}
 .ovm-go{position:relative;margin:12px 12px 0;width:calc(100% - 24px);display:flex;align-items:center;gap:6px;border:0;border-radius:12px;padding:7px 10px;background:rgba(255,255,255,.94);box-shadow:none;background:var(--tint);font:inherit;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;text-align:left;line-height:1.3;padding:6px 9px}
+.ovm-lg{display:inline-flex;align-items:center;gap:6px;margin-right:14px}.ovm-lg svg{width:30px;height:10px}
 .ovm-go svg{width:16px;height:16px;flex:none;color:var(--gc)}
 .ovm-go em{font-style:normal;color:var(--muted);font-weight:600}
 .ovsvg .xm .l{opacity:calc(1 - var(--dq))}
@@ -821,9 +822,9 @@ const ovK=Math.cos(25.05*Math.PI/180),ovS=OVX.W/((OVX.x1-OVX.x0)*ovK);
 const ovP=(lon,lat)=>[(lon-OVX.x0)*ovK*ovS,(OVX.y1-lat)*ovS];
 const OVPT={airport:[121.2325,25.0777],hotel:[121.5013,25.0333],cks:[121.5219,25.0346],t101:[121.5645,25.0335],yehliu:[121.6905,25.2063],shifen:[121.7756,25.0419],jiufen:[121.8448,25.1092],raohe:[121.5776,25.0507],wulai:[121.5506,24.8650],ximen:[121.5068,25.0438]};
 const OVC=['#3182F6','#F07C1E','#1FA463','#8A8F98'];
-const OVR=[[1,'airport','hotel',-.12,0],[1,'hotel','cks',.35,0],[1,'cks','t101',.3,0],
- [2,'hotel','yehliu',-.12,0],[2,'yehliu','shifen',-.12,0],[2,'shifen','jiufen',-.15,0],[2,'jiufen','raohe',.1,0],
- [3,'hotel','wulai',.15,0],[3,'hotel','ximen',.4,0],
+const OVR=[[1,'airport','hotel',-.12,0],[1,'hotel','cks',.35,0],[1,'cks','t101',.3,0],[1,'t101','hotel',.3,1],
+ [2,'hotel','yehliu',-.12,0],[2,'yehliu','shifen',-.12,0],[2,'shifen','jiufen',-.15,0],[2,'jiufen','raohe',.1,0],[2,'raohe','hotel',.3,1],
+ [3,'hotel','wulai',.15,0],[3,'wulai','hotel',.15,1],[3,'hotel','ximen',.4,0],[3,'ximen','hotel',.4,1],
  [4,'hotel','airport',-.12,0]];
 const OVPIN=[[1,'cks','3','중정기념당','',0,1],[1,'t101','4','타이베이 101','키키 저녁',1,0],
  [2,'yehliu','2','예류 지질공원','',1,0],[2,'shifen','3','스펀','천등',1,0],[2,'jiufen','4','지우펀','홍등 야경',1,0],[2,'raohe','5','라오허제 야시장','팀호완',1,-1],
@@ -883,7 +884,7 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
    <div class="ovm-zb"><button type="button" data-z="1" aria-label="확대">+</button><button type="button" data-z="-1" aria-label="축소">−</button></div></div>
    ${OVGO[solo]?`<button type="button" class="ovm-go${OVGO[solo][5]?' top':''}" style="--gc:${OVC[solo-1]}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2" fill="currentColor"/><path d="M10 21l2-6 3 3v4M8 12l2-4h4l2 4 2 1M12 8l-1 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${OVGO[solo][0]}<br><em>${OVGO[solo][1]} ›</em></span></button>`:''}
    ${solo?'':`<div class="ovm-f">${['전체','1일차','2일차','3일차','4일차'].map((t,i)=>`<button type="button" data-f="${i}" class="${i?'':'on'}" style="--c:${i?OVC[i-1]:'var(--ink)'}">${t}</button>`).join('')}</div>`}
-   <p class="ovm-hint">${solo&&cap?cap+'<br>':''}회색 선은 지하철</p>`;
+   <p class="ovm-hint">${solo&&cap?cap+'<br>':''}<span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="1" y1="5" x2="29" y2="5" stroke="#B4BAC2" stroke-width="5"/><line x1="1" y1="5" x2="29" y2="5" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/></svg>지하철</span><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="2" y1="5" x2="28" y2="5" stroke="#6B7684" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/></svg>숙소로 돌아가는 길</span></p>`;
   w.querySelectorAll('.ovm-f button').forEach(b=>b.addEventListener('click',()=>{w.dataset.f=b.dataset.f;w.querySelectorAll('.ovm-f button').forEach(x=>x.classList.toggle('on',x===b));requestAnimationFrame(()=>ovCollide(w,w.querySelector('.ovm-in')))}));
   /* pinch / drag zoom */
   let cq=0;const OVMAX=80,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
