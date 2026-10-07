@@ -421,6 +421,35 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .sched .mv{white-space:normal;flex-wrap:wrap;row-gap:0;overflow:visible}
 .sched .mv em{overflow:visible;text-overflow:clip;white-space:nowrap}
 /* ui pass 10/7 */
+.tlstage{position:relative;line-height:0}
+.tlstage img{display:block;width:100%;height:auto}
+.tlsvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#tlTrail line{stroke-width:16;stroke-linecap:round;opacity:.85}
+#tlMark{--c:#3182F6;transition:transform .08s linear}
+#tlMark .tldot{fill:var(--c);stroke:#fff;stroke-width:9}
+#tlMark .tlpulse{fill:var(--c);opacity:.25;animation:tlpulse 1.6s ease-out infinite;transform-origin:center;transform-box:fill-box}
+#tlMark text{font-size:32px;font-weight:800;fill:#fff;font-family:var(--body)}
+@keyframes tlpulse{0%{transform:scale(.6);opacity:.45}100%{transform:scale(1.5);opacity:0}}
+.tl{margin-top:10px;background:var(--paper);border-radius:20px;padding:16px}
+.tl-info{min-height:76px}
+.tl-when{font-size:14px;color:var(--muted)}
+.tl-when b{margin-right:6px}
+.tl-when span{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink)}
+.tl-what{font-size:19px;font-weight:800;letter-spacing:-.02em;margin-top:2px;line-height:1.35}
+.tl-next{font-size:13.5px;color:var(--muted);margin-top:2px}
+.tl-bar{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;margin-top:12px}
+.tl-play{width:44px;height:44px;border-radius:50%;border:0;background:var(--jade);color:#fff;font-size:15px;cursor:pointer;display:grid;place-items:center}
+#tlRange{--p:0%;--c:#3182F6;-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--c) var(--p),var(--rule) var(--p));outline:none}
+#tlRange::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--c);box-shadow:0 2px 6px rgba(0,0,0,.2);cursor:pointer}
+#tlRange::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--c);cursor:pointer}
+.tl-days{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.tl-days button{border:0;border-radius:999px;padding:7px 13px;font:inherit;font-size:14px;font-weight:700;background:var(--tint);color:var(--ink);cursor:pointer}
+.tl-days button.on{background:var(--c);color:#fff}
+.tl-days .tl-now{background:var(--lantern);color:#fff;margin-left:auto}
+@media (prefers-reduced-motion:reduce){#tlMark .tlpulse{animation:none}}
+.sosnote{background:#FFF0F1;color:#B4232B;border-radius:16px;padding:14px 16px;margin:4px 0 12px;font-size:15.5px;line-height:1.55}
+.sosnote b{color:#E5323B}
+.sosnote small{display:block;color:#8A3A40;font-size:13px;margin-top:4px}
 .flt .pnr{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--rule);font-size:14px}
 .flt .pnr span{color:var(--muted)}
 .flt .pnr b{font-variant-numeric:tabular-nums;letter-spacing:.06em;font-size:16px;user-select:all}
@@ -552,7 +581,6 @@ html.big .bottombar .in{zoom:1.06}
   <div class="zv-bar"><button type="button" id="zvClose">‹ 닫기</button><span class="zv-hint">두 손가락으로 벌려 확대 · 두 번 톡톡</span><span class="zv-z"><button type="button" id="zvOut" aria-label="축소">−</button><button type="button" id="zvIn" aria-label="확대">+</button></span></div>
   <div class="zv-stage" id="zvStage"><img id="zvImg" alt="" draggable="false"></div>
 </div>
-<div class="siren-ov" id="sirenOv" hidden role="alertdialog" aria-label="비상 사이렌"><div class="sv-in"><div class="sv-zh">請幫幫我！</div><div class="sv-ko">도와주세요!</div><div class="sv-en">HELP!</div><button type="button" id="sirenStop">멈추기</button><small>휴대폰 소리를 최대로 올려주세요</small></div></div>
 <div class="card-ov" id="cardOv" hidden role="dialog" aria-modal="true" aria-labelledby="cardCn">
   <div class="in"><div class="ko" id="cardKo"></div><div class="cn" id="cardCn"></div><div class="ko" id="cardSub"></div><button type="button" id="cardClose">닫기</button></div>
 </div>
@@ -750,6 +778,47 @@ function hotelPanel(){const h=PLACES.hotel;const p=el('section','panel');p.inner
   p.querySelector('#hTaxi').addEventListener('click',()=>openCard(CARDS.find(c=>c.ko==='숙소로 가주세요')));return p}
 function flightPanel(){const p=el('section','panel');p.innerHTML=`<span class="kicker">필요할 때 보세요</span><h2>비행기 정보</h2><p class="lead">부산팀·서울팀 비행기는 모두 타오위안 공항 <b>제1터미널(T1)</b>이에요. 시간은 모두 그 나라 현지 시각이에요. 대만은 한국보다 1시간 늦어요.</p><h3 class="h3" data-zh="去">한국 → 대만 · 11월 7일(토)</h3>${fltList('go')}<h3 class="h3" data-zh="回">대만 → 한국 · 11월 10일(화)</h3>${fltList('back')}<div class="note">공항에는 출발 2시간 전까지 도착해요. 한국으로 가는 날은 08:20 호텔 앞에서 밴을 타요.</div>`;return p}
 function themePanel(k){const [zh,t,html]=THEMES[k];const p=el('section','panel');p.innerHTML=`<span class="kicker">필요할 때 보세요</span><h2>${t}</h2><div class="theme" style="margin-top:18px">${html}</div>`;return p}
+/* ---------- 여행 타임라인 (전체 동선 위를 시간에 따라 움직이기) ---------- */
+const TLP={airport:[121.362,25.054],hotel:[121.4995,25.0335],cks:[121.5219,25.0346],t101:[121.5645,25.0340],kiki:[121.5672,25.0353],beef:[121.5042,25.0418],yehliu:[121.6905,25.2063],shifen:[121.7756,25.0419],jiufen:[121.8448,25.1092],raohe:[121.5776,25.0507],wulai:[121.5506,24.8650],ximen:[121.5068,25.0438]};
+const TLK={tlx:function(lon,lat){const K=Math.cos(25.05*Math.PI/180),x0=121.355,y1=25.25,s=2591.111;return [1.652+(lon-x0)*K*s,(y1-lat)*s]}};
+const TLW=[[0,'09:30','22:00'],[1,'08:00','22:30'],[2,'08:00','22:00'],[3,'07:00','13:40']];
+const TLKF=[[0,'09:30','airport'],[0,'13:00','airport'],[0,'13:50','hotel'],[0,'16:15','hotel'],[0,'16:30','cks'],[0,'17:15','cks'],[0,'17:30','t101'],[0,'19:20','t101'],[0,'19:30','kiki'],[0,'21:15','kiki'],[0,'21:35','hotel'],[0,'22:00','hotel'],
+ [1,'08:00','hotel'],[1,'10:30','hotel'],[1,'10:50','beef'],[1,'12:00','beef'],[1,'13:00','yehliu'],[1,'14:00','yehliu'],[1,'15:00','shifen'],[1,'16:15','shifen'],[1,'17:15','jiufen'],[1,'19:00','jiufen'],[1,'20:00','raohe'],[1,'21:50','raohe'],[1,'22:15','hotel'],[1,'22:30','hotel'],
+ [2,'08:00','hotel'],[2,'10:00','hotel'],[2,'11:00','wulai'],[2,'14:00','wulai'],[2,'15:00','hotel'],[2,'18:45','hotel'],[2,'19:00','ximen'],[2,'21:15','ximen'],[2,'21:30','hotel'],[2,'22:00','hotel'],
+ [3,'07:00','hotel'],[3,'08:20','hotel'],[3,'09:30','airport'],[3,'13:40','airport']];
+const TLC=['#3182F6','#F07C1E','#1FA463','#8A8F98'];
+const hm=t=>{const [h,m]=t.split(':').map(Number);return h*60+m};
+const TLOFF=(()=>{let o=0;return TLW.map(([d,a,b])=>{const r=o;o+=hm(b)-hm(a);return r})})();
+const TLMAX=TLW.reduce((n,[d,a,b])=>n+hm(b)-hm(a),0);
+const tlAbs=(d,t)=>TLOFF[d]+hm(t)-hm(TLW[d][1]);
+const TLPTS=TLKF.map(([d,t,k])=>({v:tlAbs(d,t),d,xy:TLK.tlx(...TLP[k])}));
+function tlDayTime(v){let d=0;for(let i=0;i<TLW.length;i++)if(v>=TLOFF[i])d=i;const m=hm(TLW[d][1])+v-TLOFF[d];return {d,min:m,t:String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}}
+function tlPos(v){let a=TLPTS[0],b=TLPTS[TLPTS.length-1];for(let i=0;i<TLPTS.length-1;i++){if(v>=TLPTS[i].v&&v<=TLPTS[i+1].v){a=TLPTS[i];b=TLPTS[i+1];break}}const f=b.v===a.v?0:(v-a.v)/(b.v-a.v);return {x:a.xy[0]+(b.xy[0]-a.xy[0])*f,y:a.xy[1]+(b.xy[1]-a.xy[1])*f,moving:a.xy[0]!==b.xy[0]||a.xy[1]!==b.xy[1],d:a.d}}
+function tlRow(d,min){const rows=DAYS[d].sched.map(r=>({t:toMin(r[0]),r})).filter(x=>x.t!=null);let cur=null,nxt=null;rows.forEach(x=>{if(x.t<=min)cur=x;else if(!nxt)nxt=x});return {cur,nxt}}
+const WD=['토','일','월','화'];
+function buildTimeline(){const w=el('div','tl');
+  w.innerHTML=`<div class="tl-info"><div class="tl-when" id="tlWhen"></div><div class="tl-what" id="tlWhat"></div><div class="tl-next" id="tlNext"></div></div>
+  <div class="tl-bar"><button type="button" class="tl-play" id="tlPlay" aria-label="재생">${'▶'}</button><input type="range" id="tlRange" min="0" max="${TLMAX}" step="5" value="0" aria-label="여행 시간"></div>
+  <div class="tl-days">${TLW.map(([d],i)=>`<button type="button" data-d="${i}" style="--c:${TLC[i]}">${i+1}일차</button>`).join('')}${todayIdx>=0?'<button type="button" class="tl-now" data-now="1">지금</button>':''}</div>`;
+  return w}
+let tlTimer=null;
+function tlRender(v){const Q=q=>built.home.querySelector(q);const R=Q('#tlRange');if(!R)return;R.value=v;const {d,min,t}=tlDayTime(+v);const pos=tlPos(+v);
+  const m=Q('#tlMark');m.setAttribute('transform',`translate(${pos.x.toFixed(1)},${pos.y.toFixed(1)})`);m.style.setProperty('--c',TLC[d]);
+  const tr=Q('#tlTrail');let path='';let segs=[];for(let i=0;i<TLPTS.length-1;i++){const a=TLPTS[i],b=TLPTS[i+1];if(a.v>=+v)break;if(a.xy[0]===b.xy[0]&&a.xy[1]===b.xy[1])continue;const e=b.v<=+v?b.xy:[pos.x,pos.y];segs.push(`<line x1="${a.xy[0].toFixed(1)}" y1="${a.xy[1].toFixed(1)}" x2="${e[0].toFixed(1)}" y2="${e[1].toFixed(1)}" stroke="${TLC[a.d]}"/>`)}tr.innerHTML=segs.join('');
+  R.style.setProperty('--p',(100*v/TLMAX)+'%');R.style.setProperty('--c',TLC[d]);
+  const {cur,nxt}=tlRow(d,min);Q('#tlWhen').innerHTML=`<b style="color:${TLC[d]}">${d+1}일차</b> 11월 ${7+d}일(${WD[d]}) <span>${t}</span>`;
+  Q('#tlWhat').textContent=cur?(pos.moving&&cur.r[3]!=='move'?'이동 중':cur.r[1]):'비행기 타고 대만으로';
+  Q('#tlNext').textContent=nxt?`다음 ${nxt.r[0]} · ${nxt.r[1]}`:'';
+  built.home.querySelectorAll('.tl-days button[data-d]').forEach(b=>b.classList.toggle('on',+b.dataset.d===d))}
+function tlStop(){if(tlTimer){cancelAnimationFrame(tlTimer);tlTimer=null}const b=built.home.querySelector('#tlPlay');if(b){b.textContent='▶';b.setAttribute('aria-label','재생')}}
+function tlPlay(){if(tlTimer){tlStop();return}const R=built.home.querySelector('#tlRange');if(+R.value>=TLMAX)R.value=0;const b=built.home.querySelector('#tlPlay');b.textContent='❚❚';b.setAttribute('aria-label','멈춤');let last=performance.now();
+  const step=now=>{const dt=now-last;last=now;let v=+R.value+dt*0.25;if(v>=TLMAX){v=TLMAX;tlRender(v);tlStop();return}tlRender(v);tlTimer=requestAnimationFrame(step)};tlTimer=requestAnimationFrame(step)}
+function tlNowValue(){if(todayIdx<0)return 0;const n=tpeNow();const w=TLW[todayIdx];const m=Math.min(Math.max(n.min,hm(w[1])),hm(w[2]));return TLOFF[todayIdx]+m-hm(w[1])}
+function tlInit(root){const R=root.querySelector('#tlRange');if(!R)return;
+  R.addEventListener('input',()=>{tlStop();tlRender(+R.value)});
+  root.querySelector('#tlPlay').addEventListener('click',tlPlay);
+  root.querySelectorAll('.tl-days button').forEach(b=>b.addEventListener('click',()=>{tlStop();tlRender(b.dataset.now?tlNowValue():TLOFF[+b.dataset.d])}));
+  tlRender(tlNowValue())}
 function homePanel(){const p=el('section','panel');
   p.innerHTML=`<div class="hello"><h1>여섯 식구 첫 여행</h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
@@ -760,12 +829,13 @@ function homePanel(){const p=el('section','panel');
     b.addEventListener('click',()=>show(DAYS[i].id));g.appendChild(b)});
   p.appendChild(g);
   p.appendChild((e=>{e.dataset.zh='路線';return e})(el('div','ask','전체 동선')));
-  p.appendChild(el('figure','map','<img src="img/overview.jpg" alt="4일 동안의 전체 동선 지도" loading="lazy"><figcaption>파랑 1일차 · 주황 2일차 · 초록 3일차 · 회색 4일차 · 누르면 크게 보여요</figcaption>'));
+  p.appendChild(el('figure','map tlmap','<div class="tlstage"><img src="img/overview.jpg" alt="4일 동안의 전체 동선 지도" loading="lazy"><svg class="tlsvg" viewBox="0 0 1400 1166" aria-hidden="true"><g id="tlTrail"></g><g id="tlMark"><circle r="70" class="tlpulse"/><circle r="44" class="tldot"/><text y="12" text-anchor="middle">우리</text></g></svg></div><figcaption>파랑 1일차 · 주황 2일차 · 초록 3일차 · 회색 4일차 · 누르면 크게 보여요</figcaption>'));
+  p.appendChild(buildTimeline());
   p.appendChild((e=>{e.dataset.zh='便覽';return e})(el('div','ask','필요할 때 보세요')));
   const h=el('div','daybtns');
   const PLANE='<span class="thumb bub"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M42 21.5c0-1.7-1.4-3-3-3H29.6L19.8 5.4A2 2 0 0 0 18.3 4.7H15l5 13.8h-8.3L8.2 13.9H5l2.5 9.6L5 33.1h3.2l3.5-4.6H20L15 42.3h3.3a2 2 0 0 0 1.5-.7l9.8-13.1H39c1.6 0 3-1.3 3-3z" fill="currentColor"/></svg></span>';
   const BUB='<span class="thumb bub"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 9h28a5 5 0 0 1 5 5v15a5 5 0 0 1-5 5H22l-8 7v-7h-4a5 5 0 0 1-5-5V14a5 5 0 0 1 5-5z" fill="currentColor"/><rect x="22.2" y="14" width="3.6" height="10" rx="1.8" fill="#fff"/><circle cx="24" cy="28.6" r="2.1" fill="#fff"/></svg></span>';
-  [['hotel','img/hotel.jpg','숙소 정보','택시 카드 · 주소, 전화, 체크인'],['cards','img/raohe.jpg','중국어 카드','말이 안 통할 때 보여주는 카드'],['info',null,'알아둘 것 · 긴급 연락처','날씨 · 돈 · 비상 사이렌 · 긴급 전화'],['flight','img/flight.jpg','비행기 정보','편명 · 시간 · 예약번호'],['eat','img/f_beef.jpg','이번 여행에서 맛보는 대만','우육면, 딤섬, 훠궈, 야시장 간식'],['see','img/longshan.jpg','이번 여행에서 보는 타이베이','옛 도심부터 바다와 산까지'],['taiwan','img/cks.jpg','대만은 어떤 나라','나라 이름, 말과 글, 역사']].forEach(([id,im,t,sub])=>{const b=el('button','daybtn hrow');b.type='button';b.innerHTML=`${im==='PLANE'?PLANE:im?`<span class="thumb"><img src="${im}" alt="" loading="lazy"></span>`:BUB}<span class="txt">${t}<small>${sub}</small></span><span class="arrow">›</span>`;b.addEventListener('click',()=>show(id));h.appendChild(b)});
+  [['hotel','img/hotel.jpg','숙소 정보','택시 카드 · 주소, 전화, 체크인'],['cards','img/raohe.jpg','중국어 카드','말이 안 통할 때 보여주는 카드'],['info',null,'알아둘 것 · 긴급 연락처','날씨 · 돈 · 긴급 전화'],['flight','img/flight.jpg','비행기 정보','편명 · 시간 · 예약번호'],['eat','img/f_beef.jpg','이번 여행에서 맛보는 대만','우육면, 딤섬, 훠궈, 야시장 간식'],['see','img/longshan.jpg','이번 여행에서 보는 타이베이','옛 도심부터 바다와 산까지'],['taiwan','img/cks.jpg','대만은 어떤 나라','나라 이름, 말과 글, 역사']].forEach(([id,im,t,sub])=>{const b=el('button','daybtn hrow');b.type='button';b.innerHTML=`${im==='PLANE'?PLANE:im?`<span class="thumb"><img src="${im}" alt="" loading="lazy"></span>`:BUB}<span class="txt">${t}<small>${sub}</small></span><span class="arrow">›</span>`;b.addEventListener('click',()=>show(id));h.appendChild(b)});
   p.appendChild(h);
   p.appendChild(el('div','howto','날짜를 누르면 그날 일정이, 일정을 누르면 자세한 설명이 나와요.'));
   return p}
@@ -795,13 +865,13 @@ function infoPanel(){const p=el('section','panel');
   <div class="tip"><h3>시간과 전기</h3><ul><li>한국보다 1시간 늦어요. 휴대폰 시계는 저절로 바뀌어요.</li><li>콘센트 모양이 달라요(11자). 충전할 땐 어댑터를 끼워요.</li></ul></div>
   <div class="tip"><h3>다닐 때</h3><ul><li>오토바이가 정말 많아요. 길을 건널 땐 신호를 꼭 지켜요.</li><li>가족과 떨어지면 그 자리에서 기다리며 전화하세요.</li></ul></div>
   <h3 class="h3 emh" data-zh="緊急">긴급 연락처</h3>
-  <button type="button" class="sirenbtn" id="sirenBtn"><span class="si"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7v6h14v-6a7 7 0 0 0-7-7z" fill="currentColor"/><rect x="3" y="17" width="18" height="3" rx="1.5" fill="currentColor"/><path d="M12 1v1M3.5 4.5l.8.8M20.5 4.5l-.8.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span><b>비상 사이렌 울리기</b><small>큰 소리와 빨간 화면으로 주변에 도움을 청해요</small></span></button>`;
+  <div class="sosnote"><b>진짜 위급할 땐</b> 휴대폰 측면 버튼을 5번 빠르게 누르세요 (긴급 SOS). 출발 전에 설정에서 켜두세요.<small>갤럭시: 설정 › 안전 및 긴급 › 긴급 SOS · 아이폰: 설정 › 긴급 구조 요청</small></div>`;
   const cc=el('div','ctcard');p.appendChild(cc);
   [['대만 경찰','사고 · 도난 · 길을 잃었을 때','110','110'],['구급차 · 소방','아프거나 다쳤을 때 · 무료','119','119'],['외교부 영사콜센터','24시간 한국어 · 여권 분실, 사건사고 시 대만 대표부로 연결','+82-2-3210-0404','+82232100404']].forEach(([w,s,n,c])=>{
     const r=el('div','ct');r.innerHTML=`<div class="who">${w}<small>${s}</small><span class="num">${n}</span></div><div class="acts"><a class="call" href="tel:${c.startsWith('+')||c.length<5?c:'+'+c}">전화</a></div>`;const b=el('button',null,'복사');b.type='button';
     b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c);b.textContent='복사됨'}catch(e){const s=r.querySelector('.num');const rg=document.createRange();rg.selectNodeContents(s);const sl=getSelection();sl.removeAllRanges();sl.addRange(rg);b.textContent='길게 눌러 복사'}setTimeout(()=>b.textContent='복사',2000)});
     r.querySelector('.acts').appendChild(b);cc.appendChild(r)});
-  p.appendChild(el('div','note','가족 전화는 카톡 가족방에서 바로 걸어요. 말이 안 통하면 중국어 카드의 \'도와주세요\'를 보여줘요.'));p.querySelector('#sirenBtn').addEventListener('click',startSiren);return p}
+  p.appendChild(el('div','note','가족 전화는 카톡 가족방에서 바로 걸어요. 말이 안 통하면 중국어 카드의 \'도와주세요\'를 보여줘요.'));return p}
 
 const built={home:homePanel(),hotel:hotelPanel(),flight:flightPanel(),cards:cardsPanel(),info:infoPanel(),taiwan:themePanel('taiwan'),see:themePanel('see'),eat:themePanel('eat')};DAYS.forEach(d=>built[d.id]=dayPanel(d));
 const ORDER=['home','day1','day2','day3','day4'];
@@ -831,17 +901,8 @@ function fsBtn(){const b=el('button','fsbtn','<b>가</b><em>글씨 크게</em>')
 $('#topbar').appendChild(fsBtn());built.home.querySelector('.hello').appendChild(fsBtn());
 try{setBig(localStorage.getItem(FS_KEY)==='1')}catch(e){setBig(false)}
 if('serviceWorker' in navigator&&/github\.io$/.test(location.hostname)){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
-let sirenAudio=null,sirenUrl=null;
-function sirenWav(){const sr=22050,dur=2,n=sr*dur,buf=new ArrayBuffer(44+n*2),v=new DataView(buf);const w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
-  w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);
-  let ph=0;for(let i=0;i<n;i++){const t=i/sr;const f=t<1?700+800*t:1500-800*(t-1);ph+=2*Math.PI*f/sr;const x=Math.sin(ph)>0?0.9:-0.9;const y=0.6*x+0.4*Math.sin(ph*2);v.setInt16(44+i*2,Math.max(-1,Math.min(1,y))*32000,true)}
-  return URL.createObjectURL(new Blob([buf],{type:'audio/wav'}))}
-function startSiren(){try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
-  if(!sirenUrl)sirenUrl=sirenWav();if(!sirenAudio){sirenAudio=new Audio(sirenUrl);sirenAudio.loop=true}sirenAudio.volume=1;sirenAudio.currentTime=0;const pr=sirenAudio.play();if(pr&&pr.catch)pr.catch(()=>{});
-  $('#sirenOv').hidden=false;try{navigator.vibrate&&navigator.vibrate([400,200,400,200,400])}catch(e){}
-  openLayer(()=>{$('#sirenOv').hidden=true;if(sirenAudio){sirenAudio.pause()}});$('#sirenStop').focus()}
-$('#sirenStop').addEventListener('click',()=>closeTop());
 let cur=null;
+tlInit(built.home);
 function show(id,fromPop){if(!built[id])id='home';
   panels.replaceChildren(built[id]);
   const home=id==='home';topbar.hidden=home;bottombar.hidden=home;document.querySelector('.wrap').classList.toggle('has-bottom',!home);
