@@ -189,8 +189,9 @@ button{font:inherit;color:inherit}
 .ct button{font-size:14px;padding:6px 14px;border-radius:999px;border:1px solid var(--rule);background:var(--paper);cursor:pointer}
 
 /* popups */
-.pop{position:fixed;inset:0;z-index:20;background:rgba(20,26,24,.45);display:grid;align-items:end;justify-items:center}
-.sheet{background:var(--paper);width:100%;max-width:640px;max-height:92vh;overflow-y:auto;border-radius:18px 18px 0 0;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+html.lock,html.lock body{overflow:hidden;overscroll-behavior:none}
+.pop{position:fixed;inset:0;z-index:20;overscroll-behavior:contain;background:rgba(20,26,24,.45);display:grid;align-items:end;justify-items:center}
+.sheet{background:var(--paper);width:100%;max-width:640px;max-height:92vh;max-height:92dvh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;border-radius:18px 18px 0 0;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
 .sheet img{width:100%;max-height:52vh;object-fit:cover}
 .sheet .in{padding:18px 20px 4px;display:grid;gap:8px}
 .sheet .lbl{font-size:14px;font-weight:700;color:var(--lantern)}
@@ -346,6 +347,7 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .bottombar button.primary{background:var(--jade);color:#fff}
 .bottombar button.primary:hover{background:var(--jade-deep)}
 .sheet{border-radius:24px 24px 0 0}
+@media (min-width:700px){.sheet{border-radius:24px}}
 .sheet h3{font-family:var(--body);font-weight:800;font-size:23px;letter-spacing:-.03em}
 .sheet .lbl{color:var(--jade);font-weight:600}
 .sheet .spice{color:var(--lantern);background:var(--lantern-wash)}
@@ -708,7 +710,7 @@ function openSheet(d,o){const wasOpen=!pop.hidden;const R=!!(o&&o.route);const R
   sheet.innerHTML=`<div class="xbar"><button type="button" class="xclose" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>닫기</button></div>${o&&o.back?`<button type="button" class="backsub">‹ ${esc(o.back.title)}</button>`:''}${d.img&&!R?`<img${d.fit?' class="fit"':''} src="${d.img}" alt="${esc(d.title)}">`:''}<div class="in"><span class="lbl">${esc(d.lbl)}</span><h3 id="popTitle">${esc(d.title)}</h3>${d.zh?`<span class="zhn">${esc(d.zh)}</span>`:''}${R?RT+'<h4 class="about">장소 이야기</h4>':''}${d.route&&!R?'<button class="jumpr" type="button">걷는 동선 · 현장 지도 보기 ↓</button>':''}${d.spice?`<p class="spice">${esc(d.spice)}</p>`:''}${d.key?`<p class="key">${esc(d.key)}</p>`:''}${d.text.map(t=>`<p>${esc(t)}</p>`).join('')}${d.subs?`<div class="tiles subs">${d.subs.map(k=>{const x=PLACES[k]||FOODS[k];return `<button type="button" class="tile" data-sub="${k}"><div class="ph"><img src="${x.img}" alt="${esc(x.title)}" loading="lazy"></div><span class="lbl">${esc(x.near||'')}</span><span class="ttl">${esc(x.title)}</span><span class="more">${esc(x.key)}</span>${x.warn?`<span class="warn">${esc(x.warn)}</span>`:''}</button>`}).join('')}</div>`:''}${d.opts?`<div class="opts">${d.opts.map(o=>`<div class="optc"><img src="${o[0]}" alt="${esc(o[1])}" loading="lazy"><div class="optb"><b>${esc(o[1])}</b><span class="optz">${esc(o[2])}</span><p>${esc(o[3])}</p><small>${esc(o[4])}</small><a href="${o[5]}" target="_blank" rel="noopener">지도 보기 ›</a></div></div>`).join('')}</div>`:''}${d.tips&&d.tips.length?`<ul>${d.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>`:''}${d.shop?`<div class="shop"><b>${esc(d.shop.name)}</b><span>${esc(d.shop.addr)}</span><span>${esc(d.shop.hours)}</span><a href="${d.shop.map}" target="_blank" rel="noopener">구글 지도에서 보기 ›</a></div>`:''}${d.gm?`<div class="walks in-sheet maps"><div class="walks-h">구글 지도에서 보기</div><a href="${d.gm}" target="_blank" rel="noopener"><span>장소</span>${esc(d.mapName||d.title)}<i>›</i></a>${(d.spots||[]).map(x=>`<a href="${x[3]}" target="_blank" rel="noopener"><span>${esc(x[0])}</span><b>${esc(x[1])}<small>${esc(x[2])}</small></b><i>›</i></a>`).join('')}</div>`:''}${R?'':RT}${d.note?`<p class="note2">${esc(d.note)}</p>`:''}${d.ref?'<span class="credit">참고 사진 (같은 종류 음식의 예시)</span>':''}</div><button type="button" class="close">닫기</button>`;
   sheet.querySelector('.close').addEventListener('click',closeTop);sheet.querySelector('.xclose').addEventListener('click',closeTop);const jr=sheet.querySelector('.jumpr');if(jr)jr.addEventListener('click',()=>sheet.querySelector('.route').scrollIntoView({behavior:'smooth',block:'start'}));sheet.querySelectorAll('[data-sub]').forEach(b=>b.addEventListener('click',()=>openSheet(PLACES[b.dataset.sub]||FOODS[b.dataset.sub],{back:d})));const bk=sheet.querySelector('.backsub');if(bk)bk.addEventListener('click',()=>openSheet(o.back));
   pop.hidden=false;sheet.scrollTop=0;sheet.querySelector('.close').focus({preventScroll:true});
-  if(!wasOpen)openLayer(()=>{pop.hidden=true;lastFocus&&lastFocus.focus()})}
+  if(!wasOpen){document.documentElement.classList.add('lock');openLayer(()=>{pop.hidden=true;document.documentElement.classList.remove('lock');lastFocus&&lastFocus.focus({preventScroll:true})})}}
 const closeSheet=closeTop;
 pop.addEventListener('click',e=>{if(e.target===pop){closeTop();return}const a=e.target.closest('a.rlink');if(a){e.preventDefault();const im=a.querySelector('img');openViewer(a.getAttribute('href'),im?im.alt:'')}});
 const cov=$('#cardOv');
