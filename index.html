@@ -707,17 +707,17 @@ html.big .bottombar .in{zoom:1.06}
 .a2h:is([data-os="a"],[data-os="s"])[data-f="2"] .tap{left:166px;top:312px}
 .a2h:is([data-os="a"],[data-os="s"])[data-f="3"] .tap{left:120px;top:283px}
 .a2h[data-os="a"][data-f="4"] .tap{left:174px;top:24px}
-.a2h[data-os="a"][data-f="5"] .tap{left:120px;top:160px}
-.a2h[data-os="a"][data-f="6"] .tap{left:152px;top:211px}
+.a2h[data-os="a"][data-f="5"] .tap{left:120px;top:184px}
+.a2h[data-os="a"][data-f="6"] .tap{left:151px;top:205px}
 .a2h[data-os="s"][data-f="4"] .tap{left:162px;top:313px}
 .a2h[data-os="s"][data-f="5"] .tap{left:31px;top:178px}
 .a2h[data-os="s"][data-f="6"] .tap{left:60px;top:308px}
 .a2h:is([data-os="i"],[data-os="ic"])[data-f="2"] .tap{left:168px;top:312px}
 .a2h[data-os="i"][data-f="3"] .tap{left:28px;top:200px}.a2h[data-os="ic"][data-f="3"] .tap{left:66px;top:200px}
-.a2h[data-os="i"][data-f="4"] .tap{left:95px;top:313px}
+.a2h[data-os="i"][data-f="4"] .tap{left:168px;top:315px}
 .a2h[data-os="ic"][data-f="4"] .tap{left:174px;top:24px}
-.a2h:is([data-os="i"],[data-os="ic"])[data-f="5"] .tap{left:90px;top:289px}
-.a2h:is([data-os="i"],[data-os="ic"])[data-f="6"] .tap{left:166px;top:26px}
+.a2h:is([data-os="i"],[data-os="ic"])[data-f="5"] .tap{left:80px;top:307px}
+.a2h:is([data-os="i"],[data-os="ic"])[data-f="6"] .tap{left:166px;top:31px}
 .a2h-tabs{grid-template-columns:1fr 1fr!important}
 .a2h-tabs button{font-size:13px!important}
 .a2h-steps{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:6px;counter-reset:s}
@@ -726,6 +726,67 @@ html.big .bottombar .in{zoom:1.06}
 .a2h-steps li.on{background:var(--wash);color:var(--ink);font-weight:700}
 .a2h-steps li.on::before{background:var(--jade);color:#fff}
 .a2h-note{margin:14px 0 0;font-size:14px;color:var(--sub);line-height:1.6}
+
+/* per-browser pages */
+.a2h-ph .b-a,.a2h-ph .b-s,.a2h-ph .b-i,.a2h-ph .b-ic{display:none}
+.a2h[data-os="a"] .b-a,.a2h[data-os="s"] .b-s,.a2h[data-os="i"] .b-i,.a2h[data-os="ic"] .b-ic{display:block}
+.a2h-ph .b-a,.a2h-ph .b-ic{background:#fff}.a2h-ph .b-s{background:#F7F7FA}.a2h-ph .b-i{background:#fff}
+.a2h-ph :is(.b-a,.b-i,.b-ic) .pg i{background:#F2F4F6}
+.a2h-ph .b-a .pg,.a2h-ph .b-ic .pg{top:46px}.a2h-ph .b-s .pg{top:46px}.a2h-ph .b-i .pg{top:24px}
+.a2h-ph .cbar{position:absolute;left:0;right:0;top:0;height:42px;padding:16px 8px 0;display:flex;align-items:center;gap:6px;background:#fff;color:#3C4043}
+.a2h-ph .omni{flex:1;display:flex;align-items:center;gap:4px;height:22px;border-radius:11px;background:#F1F3F4;padding:0 8px;font-size:8.5px;color:#3C4043;white-space:nowrap;overflow:hidden}
+.a2h-ph .omni em{font-style:normal;font-size:8px;color:#5F6368}
+.a2h-ph .b-ic .omni .sh{margin-left:auto;display:flex}.a2h-ph .b-ic .omni .shr{width:12px;height:12px}
+.a2h-ph .ic{font-size:12px;width:14px;text-align:center}
+.a2h-ph .tabn{width:13px;height:13px;border:1.6px solid currentColor;border-radius:3px;font-size:7px;font-weight:800;display:grid;place-items:center;line-height:1}
+.a2h-ph .mo{font-size:14px;font-weight:800;width:10px;text-align:center}
+.a2h-ph .ctb{position:absolute;left:0;right:0;bottom:0;height:40px;background:#fff;border-top:1px solid #E8EAED;display:flex;justify-content:space-around;align-items:center;padding-bottom:8px;font-size:13px;color:#3C4043}
+.a2h-ph .sbar{position:absolute;left:0;right:0;top:0;height:42px;padding:16px 8px 0;display:flex;align-items:center;gap:6px;background:#fff;color:#5B5BD6}
+.a2h-ph .b-s .omni{background:#EEEEF3;border-radius:8px;color:#222}
+.a2h-ph .stb{position:absolute;left:0;right:0;bottom:0;height:40px;background:#fff;display:flex;justify-content:space-around;align-items:center;padding-bottom:8px;font-size:12px;color:#333;box-shadow:0 -1px 0 #E3E3EA}
+.a2h-ph .stb .hm{font-size:14px;font-weight:700}
+.a2h-ph .ibar{position:absolute;left:8px;right:8px;bottom:10px;height:30px;display:flex;align-items:center;gap:6px}
+.a2h-ph .ibar .rb,.a2h-ph .iadd .rb{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,.18);display:grid;place-items:center;font-size:13px;font-weight:700;flex:none}
+.a2h-ph .ibar .pill{flex:1;height:30px;border-radius:15px;background:rgba(255,255,255,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 2px 10px rgba(0,0,0,.18);display:grid;place-items:center;font-size:8.5px;font-weight:600}
+.a2h-ph .bn{position:absolute;left:50%;top:150px;transform:translateX(-50%);display:flex;align-items:center;gap:6px;background:rgba(25,31,40,.86);color:#fff;font-size:10px;font-weight:800;padding:6px 11px 6px 7px;border-radius:20px;white-space:nowrap;opacity:0;transition:opacity .3s}
+.a2h[data-f="4"] .bn{opacity:1}
+.a2h-ph .lg{width:18px;height:18px;border-radius:50%;display:block}
+.a2h-ph .lg-c{background:radial-gradient(circle,#4285F4 0 32%,#fff 33% 42%,transparent 43%),conic-gradient(from -30deg,#EA4335 0 120deg,#FBBC05 0 240deg,#34A853 0)}
+.a2h-ph .lg-s{background:radial-gradient(circle at 40% 40%,#fff 0 22%,transparent 23%),linear-gradient(135deg,#8E7BFF,#4B2FD6)}
+.a2h-ph .lg-i{background:conic-gradient(from 45deg,#fff 0 10deg,transparent 10deg 180deg,#F04452 180deg 190deg,transparent 190deg),linear-gradient(#5AC8FA,#1E6FE8)}
+/* chrome menu + dialog */
+.a2h-ph .cmenu{top:14px;right:4px;width:118px;border-radius:12px;padding:0 0 4px}
+.a2h-ph .cmenu .ir{display:flex;justify-content:space-around;padding:7px 4px;border-bottom:1px solid #EEE;font-size:10px;color:#5F6368}
+.a2h-ph .cmenu b{padding:5px 12px;font-size:9px}
+.a2h-ph .cmenu b.hl{background:#E8F0FE;color:#1967D2}
+.a2h-ph .dlg>div{width:160px;border-radius:20px;text-align:left;padding:14px 14px 10px;background:#F8FAFD}
+.a2h-ph .dlg .tt{font-size:11px;font-weight:600;display:block}
+.a2h-ph .dlg .rw{display:flex;align-items:center;gap:8px;margin-top:10px}
+.a2h-ph .dlg .rw img{width:28px;height:28px;margin:0;border-radius:50%}
+.a2h-ph .dlg .in{flex:1;border-bottom:1.5px solid #1A73E8;padding:3px 0;font-size:9.5px}
+.a2h-ph .dlg .bs{color:#1A73E8;margin-top:12px;gap:14px}
+/* samsung */
+.a2h-ph .smenu{border-radius:22px 22px 0 0;bottom:40px;height:160px}
+.a2h-ph .smenu span.hl{background:#EEEBFF;color:#4B2FD6}.a2h-ph .smenu span.hl i{background:#5B5BD6}
+.a2h-ph .sadd{border-radius:22px 22px 0 0}.a2h-ph .sadd b.hl{background:#EEEBFF;color:#4B2FD6}
+/* ios share sheet */
+.a2h-ph .shs{height:236px;background:#F2F2F7;border-radius:22px 22px 0 0;padding:10px 8px}
+.a2h-ph .shs .hd{display:flex;align-items:center;gap:7px;padding:0 4px 8px}
+.a2h-ph .shs .hd img{width:26px;height:26px;border-radius:7px}
+.a2h-ph .shs .hd b{display:block;padding:0;font-size:9px;font-weight:700}.a2h-ph .shs .hd span{font-size:7.5px;color:#8B95A1}
+.a2h-ph .shs .hd em{margin-left:auto;font-style:normal;width:18px;height:18px;border-radius:50%;background:#E3E3E8;display:grid;place-items:center;font-size:8px;color:#666}
+.a2h-ph .shs .row{justify-content:space-around;padding:2px 0 8px}
+.a2h-ph .shs .row span{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:7px}
+.a2h-ph .shs .row i{width:30px;height:30px;border-radius:50%;background:#DADAE0}
+.a2h-ph .shs .grp{background:#fff;border-radius:12px;overflow:hidden}
+.a2h-ph .shs .grp b{padding:6px 10px;font-size:9px;border-bottom:1px solid #EFEFF4;display:flex;justify-content:space-between}
+.a2h-ph .shs .grp b em{font-style:normal}
+.a2h-ph .iadd{background:#F2F2F7}
+.a2h-ph .iadd .nav{align-items:center;padding-top:4px}
+.a2h-ph .iadd .rb.ok{background:#0A84FF;color:#fff}
+.a2h-ph .iadd .tg{justify-content:space-between;font-size:9px;margin-top:8px}
+.a2h-ph .iadd .tg i{width:26px;height:15px;border-radius:8px;background:#34C759;position:relative}
+.a2h-ph .iadd .tg i::after{content:'';position:absolute;right:2px;top:2px;width:11px;height:11px;border-radius:50%;background:#fff}
 .sched .pay{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;font-size:12px;font-weight:700;background:#E8F3FF;color:#1B64DA;vertical-align:2px}.sched .pay.cash{background:#FFF4E5;color:#C25E0C}
 .ovm-approx{font-size:12px;color:var(--muted)}
 </style>
@@ -1051,9 +1112,9 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   return w}
 
 const A2H={a:['카톡에서 링크 누르기','오른쪽 아래 ⋮ → ‘다른 브라우저로 열기’','크롬 ⋮ → ‘홈 화면에 추가’','‘추가’ → 바탕화면에 아이콘 완성'],
- s:['카톡에서 링크 누르기','오른쪽 아래 ⋮ → ‘다른 브라우저로 열기’','오른쪽 아래 ≡ → ‘현재 페이지 추가’','‘홈 화면’ → ‘추가’ → 아이콘 완성'],
- i:['카톡에서 링크 누르기','오른쪽 아래 공유 버튼 → Safari 선택','사파리 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’ → 아이콘 완성'],
- ic:['카톡에서 링크 누르기','오른쪽 아래 공유 버튼 → Chrome 선택','크롬 주소창 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ‘추가’ → 아이콘 완성']};
+ s:['카톡에서 링크 누르기','오른쪽 아래 ⋮ → ‘다른 브라우저로 열기’','삼성인터넷 아래 ≡ → ‘현재 페이지 추가’','‘홈 화면’ → ‘추가’ → 아이콘 완성'],
+ i:['카톡에서 링크 누르기','오른쪽 아래 공유 버튼 → Safari 선택','사파리 아래 ⋯ → 공유 → ‘홈 화면에 추가’','오른쪽 위 ✓ → 아이콘 완성'],
+ ic:['카톡에서 링크 누르기','오른쪽 아래 공유 버튼 → Chrome 선택','크롬 주소창 공유 버튼 → ‘홈 화면에 추가’','오른쪽 위 ✓ → 아이콘 완성']};
 const A2HSTEP=[0,1,2,2,3,3,4,4];
 function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/CriOS/.test(ua)?'ic':'i'):(/SamsungBrowser/.test(ua)?'s':'a');const w=el('div','a2h');w.dataset.os=os;w.dataset.f='1';
   const SHR='<svg class="shr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M6 11H5v10h14V11h-1"/></svg>';
@@ -1062,15 +1123,18 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   <div class="a2h-ph" aria-hidden="true">
    <div class="sc kt"><div class="hd">‹ 우리 가족 (6)</div><div class="msg"><span class="av"></span><div><div class="nm">헌주</div><div class="bub">대만 여행 안내서예요!</div><div class="lk"><i></i><b>여섯 식구 첫 여행</b><span>heon1031.github.io</span></div></div></div><div class="me">고마워!</div></div>
    <div class="sc br kbr"><div class="bt kbt"><span class="x">✕</span><span class="url">여섯 식구 첫 여행</span></div><div class="bt kbti"><span class="kb">‹</span><span class="url">heon1031.github..</span><span class="ky"></span><span class="kb">˅</span></div>${PG}<div class="bb kbb"><span>←</span><span>→</span><span>↻</span>${SHR}</div><div class="bb kbba"><span>‹</span><span>›</span><span>↻</span><span style="font-weight:800">⋮</span></div></div>
-   <div class="sc br n"><div class="bt"><span class="url">heon1031.github.io</span><span class="ctop">${SHR}</span><span class="dots">⋮</span></div>${PG}<div class="bb n"><span>‹</span><span>›</span>${SHR}<span>▢</span><span>⧉</span></div><div class="bb sbb"><span>‹</span><span>›</span><span>⌂</span><span>▢</span><span>≡</span></div></div>
-   <div class="lay smenu"><span class="hl"><i></i>현재 페이지 추가</span><span><i></i>북마크</span><span><i></i>방문 기록</span><span><i></i>다운로드</span><span><i></i>공유</span><span><i></i>설정</span><span><i></i>광고 차단</span><span><i></i>다크 모드</span></div>
+   <div class="sc br n b-a"><div class="cbar"><span class="ic">⌂</span><span class="omni"><em>⊜</em>heon1031.github.io</span><span class="tabn">1</span><span class="mo">⋮</span></div>${PG}<div class="bn"><i class="lg lg-c"></i>Chrome</div></div>
+   <div class="sc br n b-s"><div class="sbar"><span class="omni"><em>🔒</em>heon1031.github.io</span><span class="ic">↻</span></div>${PG}<div class="stb"><span>‹</span><span>›</span><span>⌂</span><span>☆</span><span class="tabn">1</span><span class="hm">≡</span></div><div class="bn"><i class="lg lg-s"></i>삼성 인터넷</div></div>
+   <div class="sc br n b-i">${PG}<div class="ibar"><span class="rb">‹</span><span class="pill">heon1031.github.io</span><span class="rb">⋯</span></div><div class="bn"><i class="lg lg-i"></i>Safari</div></div>
+   <div class="sc br n b-ic"><div class="cbar"><span class="omni"><em>⊜</em>heon1031.github.io<span class="sh">${SHR}</span></span></div>${PG}<div class="ctb"><span>‹</span><span>›</span><span>＋</span><span class="tabn">1</span><span>⋯</span></div><div class="bn"><i class="lg lg-c"></i>Chrome</div></div>
+   <div class="lay smenu"><span class="hl"><i></i>현재 페이지<br>추가</span><span><i></i>북마크</span><span><i></i>방문 기록</span><span><i></i>다운로드</span><span><i></i>공유</span><span><i></i>설정</span><span><i></i>광고 차단</span><span><i></i>다크 모드</span></div>
    <div class="lay sadd"><b class="t">추가할 위치</b><b>북마크</b><b>퀵 액세스</b><b class="hl">홈 화면</b></div>
    <div class="lay menu kmenu kmenu-a"><b>새로고침</b><b>링크 복사</b><b>공유하기</b><b class="hl">다른 브라우저로 열기</b></div>
    <div class="lay ksh kmenu-i"><div class="apps"><span class="sf"><i></i>Safari</span><span class="cr"><i></i>Chrome</span><span><i></i>Whale</span><span><i></i>메시지</span><span><i></i>메일</span></div><b>복사</b><b>읽기 목록에 추가</b><b>더 보기</b></div>
-   <div class="lay menu cmenu"><b>새 탭</b><b>북마크</b><b>방문 기록</b><b>공유</b><b class="hl">홈 화면에 추가</b><b>설정</b></div>
-   <div class="lay shs"><div class="row"><i></i><i></i><i></i><i></i><i></i></div><b>복사</b><b>읽기 목록에 추가</b><b>즐겨찾기 추가</b><b class="hl">홈 화면에 추가</b><b>페이지에서 찾기</b></div>
-   <div class="lay dlg"><div><b>홈 화면에 추가</b><img src="icon-192.png?v=2" alt=""><span>대만 여행</span><div class="bs"><span style="color:#8B95A1">취소</span><span>추가</span></div></div></div>
-   <div class="lay iadd" style="inset:0"><div class="nav"><span>취소</span><b>홈 화면에 추가</b><span>추가</span></div><div class="card"><img src="icon-192.png?v=2" alt=""><div><b>대만 여행</b><br><span style="color:#8B95A1">heon1031.github.io</span></div></div></div>
+   <div class="lay menu cmenu"><div class="ir"><span>→</span><span>☆</span><span>⤓</span><span>ⓘ</span><span>↻</span></div><b>새 탭</b><b>새 시크릿 탭</b><b>방문 기록</b><b>다운로드</b><b>북마크</b><b class="hl">홈 화면에 추가</b><b>설정</b></div>
+   <div class="lay shs"><div class="hd"><img src="icon-192.png?v=2" alt=""><div><b>여섯 식구 첫 여행</b><span>heon1031.github.io</span></div><em>✕</em></div><div class="row"><span><i></i>AirDrop</span><span><i></i>메시지</span><span><i></i>메일</span><span><i></i>메모</span></div><div class="grp"><b>복사</b><b>읽기 목록에 추가</b><b>북마크 추가</b><b class="hl">홈 화면에 추가 <em>⊞</em></b></div></div>
+   <div class="lay dlg"><div><b class="tt">홈 화면에 추가</b><div class="rw"><img src="icon-192.png?v=2" alt=""><span class="in">대만 여행</span></div><div class="bs"><span>취소</span><span>추가</span></div></div></div>
+   <div class="lay iadd" style="inset:0"><div class="nav"><span class="rb">✕</span><b>홈 화면에 추가</b><span class="rb ok">✓</span></div><div class="card"><img src="icon-192.png?v=2" alt=""><div><b>대만 여행</b><br><span style="color:#8B95A1">heon1031.github.io</span></div></div><div class="card tg"><span>웹 앱으로 열기</span><i></i></div></div>
    <div class="sc home"><span><i></i>전화</span><span><i></i>카톡</span><span><i></i>카메라</span><span><i></i>사진</span><span><i></i>지도</span><span><i></i>날씨</span><span class="me"><img src="icon-192.png?v=2" alt="">대만 여행</span></div>
    <i class="tap"></i></div>
   <ol class="a2h-steps"></ol>
@@ -1101,7 +1165,6 @@ function homePanel(){const p=el('section','panel');
   const BUB='<span class="thumb bub zhc"><span class="zc zc2"><b>110·119</b><i>알아둘 것</i></span></span>';
   [['비행기 · 숙소'],['flight','img/flight.jpg','비행기 정보','편명 · 시간 · 예약번호'],['hotel','img/hotel.jpg','숙소 정보','택시 카드 · 주소, 전화, 체크인'],['카드'],['cards','ZHC','중국어 카드','말이 안 통할 때 보여주는 카드'],['info',null,'알아둘 것 · 긴급 연락처','날씨 · 돈 · 긴급 전화'],['여행지 이야기'],['eat','img/f_beef.jpg','이번 여행에서 맛보는 대만','우육면, 딤섬, 훠궈, 야시장 간식'],['see','img/longshan.jpg','이번 여행에서 보는 타이베이','옛 도심부터 바다와 산까지'],['taiwan','img/cks.jpg','대만은 어떤 나라','나라 이름, 말과 글, 역사']].forEach(([id,im,t,sub])=>{if(im===undefined){h.appendChild(el('div','hgrp',esc(id)));return}const b=el('button','daybtn hrow');b.type='button';b.innerHTML=`${im==='PLANE'?PLANE:im==='ZHC'?ZHC:im?`<span class="thumb"><img src="${im}" alt="" loading="lazy"></span>`:BUB}<span class="txt">${t}<small>${sub}</small></span><span class="arrow">›</span>`;b.addEventListener('click',()=>show(id));h.appendChild(b)});
   p.appendChild(h);
-  p.appendChild(el('div','howto','날짜를 누르면 그날 일정이, 일정을 누르면 자세한 설명이 나와요.'));
   {const b=el('button','a2hlink','휴대폰 바탕화면에 앱으로 추가하는 방법');b.type='button';b.addEventListener('click',openA2H);p.appendChild(b)}
   return p}
 
