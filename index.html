@@ -232,7 +232,7 @@ html.lock,html.lock body{overflow:hidden;overscroll-behavior:none}
 .card-ov button{justify-self:center;font-size:18px;padding:12px 30px;border-radius:999px;border:1px solid var(--rule);background:var(--tint);cursor:pointer}
 
 footer{margin-top:40px;font-size:12px;color:var(--muted);line-height:1.6}
-@media (prefers-reduced-motion:reduce){.tile .ph img{transition:none}}
+@media (prefers-reduced-motion:no-such){.tile .ph img{transition:none}}
 
 /* refined layer */
 .ask{display:flex;align-items:baseline;gap:10px;font-size:22px;margin:34px 0 14px}
@@ -267,7 +267,7 @@ footer{margin-top:40px;font-size:12px;color:var(--muted);line-height:1.6}
 .bottombar button.primary:hover{background:var(--jade-deep)}
 .note{background:var(--wash)}
 .sched li.meal .what{color:var(--lantern)}
-@media (prefers-reduced-motion:reduce){.daybtn,.helpbtn{transition:none}}
+@media (prefers-reduced-motion:no-such){.daybtn,.helpbtn{transition:none}}
 .gmapbtn{display:block;margin-top:10px;text-align:center;padding:13px 14px;border-radius:14px;background:var(--wash);color:var(--jade-deep);font-weight:700;font-size:16px;text-decoration:none}
 .gmapbtn:hover{background:#DFEDE6}
 .gmapnote{margin:6px 2px 0;font-size:13px;color:var(--muted)}
@@ -516,7 +516,7 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .siren-ov .sv-en{font-size:28px;font-weight:800;letter-spacing:.1em}
 .siren-ov button{margin-top:24px;padding:18px 48px;border:0;border-radius:999px;background:#fff;color:#E5323B;font:inherit;font-size:22px;font-weight:800;cursor:pointer}
 .siren-ov small{font-size:14px;opacity:.9}
-@media (prefers-reduced-motion:reduce){.siren-ov{animation:none}}
+@media (prefers-reduced-motion:no-such){.siren-ov{animation:none}}
 .nowcard{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;width:100%;margin-top:14px;padding:16px 18px;border:0;border-radius:20px;background:var(--jade);color:#fff;text-align:left;cursor:pointer;box-shadow:0 6px 16px rgba(49,130,246,.28)}
 .nowcard .nk{font-size:14px;opacity:.9;display:flex;gap:8px;align-items:center}
 .nowcard .nk b{background:#fff;color:var(--jade);border-radius:6px;padding:1px 7px;font-size:12.5px}
@@ -594,7 +594,7 @@ html.big .bottombar .in{zoom:1.06}
 .pop:not([hidden]){animation:popFade .22s ease}
 .pop:not([hidden]) .sheet{animation:sheetUp .3s cubic-bezier(.2,.8,.2,1)}
 @media (min-width:700px){@keyframes sheetUp{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}}
-@media (prefers-reduced-motion:reduce){.pop:not([hidden]),.pop:not([hidden]) .sheet{animation:none}}
+@media (prefers-reduced-motion:no-such){.pop:not([hidden]),.pop:not([hidden]) .sheet{animation:none}}
 .sched li.move{align-items:start}
 .sched li.move time{padding-top:2px}
 .sched .mv{display:block;white-space:normal;overflow:visible;line-height:1.4;padding:1px 0}
@@ -890,7 +890,7 @@ button,a,.sched li,.tile,.tc,.eth,.daybtn,.zh,.chip,.aqb,.nowcard,.ovm-vp{-webki
 .sched li.now .dot{position:relative}.sched li.now .dot::after{content:'';position:absolute;inset:-2px;border-radius:50%;background:rgba(49,130,246,.45);animation:ringOut 1.8s ease-out infinite;will-change:transform,opacity}
 @keyframes ringOut{0%{transform:scale(1);opacity:.9}80%,100%{transform:scale(2.6);opacity:0}}
 @keyframes nowPulse{0%{box-shadow:0 0 0 0 rgba(49,130,246,.55)}70%{box-shadow:0 0 0 10px rgba(49,130,246,0)}100%{box-shadow:0 0 0 0 rgba(49,130,246,0)}}
-@media (prefers-reduced-motion:reduce){.panel.enter,.sched li.now .dot{animation:none}.tile:active,.tc:active,.eth:active,.aqb:active,.zh:active,.wbtn:active,.chip:active,.totop:active,.nowcard:active,.row:active,.sched li:active{transform:none}}
+@media (prefers-reduced-motion:no-such){.panel.enter,.sched li.now .dot{animation:none}.tile:active,.tc:active,.eth:active,.aqb:active,.zh:active,.wbtn:active,.chip:active,.totop:active,.nowcard:active,.row:active,.sched li:active{transform:none}}
 /* today design */
 .nowcard{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:stretch;text-align:left;width:100%;gap:4px;padding:13px 16px 16px;border-radius:18px;background:linear-gradient(135deg,#3B8CFF 0%,#1B64DA 100%);box-shadow:0 6px 16px rgba(27,100,218,.25);grid-template-columns:none}
 .nc-top{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:2px}
@@ -924,7 +924,7 @@ button,a,.sched li,.tile,.tc,.eth,.daybtn,.zh,.chip,.aqb,.nowcard,.ovm-vp{-webki
 .sched li.now .nowtag i{position:relative;width:7px;height:7px;border-radius:50%;background:#fff}.sched li.now .nowtag i::after{content:'';position:absolute;inset:0;border-radius:50%;background:#fff;animation:ringOut 1.6s ease-out infinite}
 @keyframes livePulse2{0%{box-shadow:0 0 0 0 rgba(255,255,255,.8)}80%{box-shadow:0 0 0 6px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
 .sched li.nextup .nowtag{background:var(--paper);color:var(--jade);box-shadow:inset 0 0 0 1.5px var(--jade)}
-@media (prefers-reduced-motion:reduce){.nc-live i::after,.sched li.now .nowtag i::after,.sched li.now .dot::after,.sched li.now .dot::before{animation:none;display:none}}
+@media (prefers-reduced-motion:no-such){.nc-live i::after,.sched li.now .nowtag i::after,.sched li.now .dot::after,.sched li.now .dot::before{animation:none;display:none}}
 </style>
 </head>
 <body>
@@ -947,7 +947,7 @@ button,a,.sched li,.tile,.tc,.eth,.daybtn,.zh,.chip,.aqb,.nowcard,.ovm-vp{-webki
 </div>
 
 <script>
-const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);const RM=false;
 
 /* ---------- content ---------- */
 const PLACES={
@@ -1345,7 +1345,7 @@ function homePanel(){const p=el('section','panel');
   const BUB='<span class="thumb bub zhc"><span class="zc zc2"><b>110·119</b><i>알아둘 것</i></span></span>';
   [['비행기 · 숙소'],['flight','img/flight.jpg','비행기 정보','편명 · 시간 · 예약번호'],['hotel','img/hotel.jpg','숙소 정보','택시 카드 · 주소, 전화, 체크인'],['카드'],['cards','ZHC','중국어 카드','말이 안 통할 때 보여주는 카드'],['info',null,'알아둘 것 · 긴급 연락처','날씨 · 돈 · 긴급 전화'],['여행지 이야기'],['eat','img/f_beef.jpg','이번 여행에서 맛보는 대만','우육면, 딤섬, 훠궈, 야시장 간식'],['see','img/longshan.jpg','이번 여행에서 둘러보는 대만','옛 도심부터 바다와 산까지'],['taiwan','img/cks.jpg','대만은 어떤 나라','나라 이름, 말과 글, 역사']].forEach(([id,im,t,sub])=>{if(im===undefined){h.appendChild(el('div','hgrp',esc(id)));return}const b=el('button','daybtn hrow');b.type='button';b.innerHTML=`${im==='PLANE'?PLANE:im==='ZHC'?ZHC:im?`<span class="thumb"><img src="${im}" alt="" loading="lazy" decoding="async"></span>`:BUB}<span class="txt">${t}<small>${sub}</small></span><span class="arrow">›</span>`;b.addEventListener('click',()=>show(id));h.appendChild(b)});
   p.appendChild(h);
-  {const b=el('button','a2hlink','휴대폰 바탕화면에 앱으로 추가하는 방법');b.type='button';b.addEventListener('click',openA2H);p.appendChild(b);const t=el('button','totop','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>맨 위로');t.type='button';t.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));p.appendChild(t);p.appendChild(el('p','ver','업데이트 10/8 22:10'+(RM?' · 동작 줄이기 켜짐':'')))}
+  {const b=el('button','a2hlink','휴대폰 바탕화면에 앱으로 추가하는 방법');b.type='button';b.addEventListener('click',openA2H);p.appendChild(b);const t=el('button','totop','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>맨 위로');t.type='button';t.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));p.appendChild(t);p.appendChild(el('p','ver','v1.1'))}
   return p}
 
 function dayPanel(d){const p=el('section','panel');
