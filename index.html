@@ -957,7 +957,7 @@ html,button,a,[role=button],.bottombar{touch-action:manipulation}
 .ovsvg .sub .ps{opacity:var(--dp)}
 .ovsvg .sub circle{fill:#fff;stroke-width:6px;stroke:#6B7684}
 .ovsvg .sub.d2 circle{stroke:#F07C1E}.ovsvg .sub.d3 circle{stroke:#1FA463}
-.ovsvg .sub.opt circle{stroke:#B0B8C1;stroke-dasharray:4 3}.ovsvg .sub.opt text{fill:#8B95A1;font-weight:600}
+
 .ovsvg .sub text{font-size:34px;font-weight:600;fill:#4E5968;paint-order:stroke;stroke:#fff;stroke-width:9px;stroke-linejoin:round;font-family:var(--body)}
 .ovm[data-f="0"] .ovsvg .sub{display:none}
 
@@ -976,6 +976,16 @@ html,button,a,[role=button],.bottombar{touch-action:manipulation}
 .ovm-tip{color:var(--sub);font-weight:600}
 .ovsvg .p:not(.hid):not(.det) .ps circle,.ovsvg .p:not(.hid):not(.det) .ps .n,.ovsvg .hotel .ps rect,.ovsvg .hotel .ps path{pointer-events:auto;cursor:pointer}
 .ovm-in.dpv .ovsvg .p.det:not(.hid) .ps circle,.ovm-in.dpv .ovsvg .p.det:not(.hid) .ps .n{pointer-events:auto;cursor:pointer}
+
+.ovsvg .plist{font-size:30px;font-weight:600;fill:#6B7684;paint-order:stroke;stroke:#fff;stroke-width:8px;stroke-linejoin:round;font-family:var(--body);opacity:var(--dp)}
+.ovm[data-f="0"] .ovsvg .plist{display:none}
+.ovsvg .sub.opt circle{fill:#E3F5EA;stroke:#8FD3A8;stroke-width:4px;stroke-dasharray:none}
+.ovsvg .sub.opt text{font-size:30px;fill:#6B7684;font-weight:600}
+
+.ovsvg .pk .ps rect{fill:#8A8F98;stroke-width:7px;stroke:#fff}
+.ovsvg .pk.d1 .ps rect{fill:#3182F6}.ovsvg .pk.d2 .ps rect{fill:#F07C1E}.ovsvg .pk.d3 .ps rect{fill:#1FA463}
+.ovsvg .pk text{font-size:34px;font-weight:800;text-anchor:middle;font-family:var(--body);fill:#fff}
+.ovsvg .pk .ps rect,.ovsvg .pk .ps text{pointer-events:auto;cursor:pointer}
 </style>
 </head>
 <body>
@@ -1073,9 +1083,9 @@ const FOODS={
  court:{shop:{name:'T1 B1 美食街 (공항 지하 푸드코트)',addr:'타오위안 공항 제1터미널 지하 1층',hours:'체크인하고 10:00쯤 · 현금·카드 가능',map:'https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E5%9C%92%E6%A9%9F%E5%A0%B4%20%E7%AC%AC%E4%B8%80%E8%88%AA%E5%BB%88%20%E7%BE%8E%E9%A3%9F%E8%A1%97'},img:'img/f_court.jpg',zhTile:'美食街',lbl:'4일차 아점 · 공항',title:'공항 푸드코트',zh:'美食街',spice:'맵기: 메뉴마다 달라요',key:'마지막 한 끼는 각자 먹고 싶은 대만 음식으로',
   text:['1터미널 지하 1층 푸드코트엔 라멘·한식·치킨·카페 등이 모여 있어요. 6명이 한자리에 앉아 각자 고른 메뉴로 아점을 먹어요.','대만식 밥(Hómee Rice)은 출국 심사를 지난 뒤 B4 게이트 근처에 있어요. 6명이 같이는 못 가요.','이번 여행에서 맛있었던 음식을 한 번 더 골라도 좋아요.'],
   tips:['부산팀은 10:50까지 먹고 출국 수속해요']},
- beef:{shop:{name:'牛店精燉牛肉麵 (뉴뎬)',addr:'台北市萬華區昆明街91號 (숙소에서 걸어서 20분 · 택시 5분)',hours:'11:30~14:30 · 월 휴무 · 번호표 받고 밖에서 대기 · 현금만',map:'https://www.google.com/maps/search/?api=1&query=%E7%89%9B%E5%BA%97%E7%B2%BE%E7%87%89%E7%89%9B%E8%82%89%E9%BA%B5%20%E5%8F%B0%E5%8C%97%E5%B8%82%E8%90%AC%E8%8F%AF%E5%8D%80%E6%98%86%E6%98%8E%E8%A1%9791%E8%99%9F'},img:'img/f_beef.jpg',ref:true,lbl:'2일차 점심 · 뉴뎬',title:'우육면',zh:'牛肉麵',spice:'맵기: 맑은 국물(清燉)은 맵지 않음 · 간장 국물(紅燒)은 살짝 매콤',key:'미쉐린 빕구르망에 선정된 적 있는 우육면집',
+ beef:{shop:{name:'牛店精燉牛肉麵 (뉴뎬)',addr:'台北市萬華區昆明街91號 (숙소에서 걸어서 20분 · 택시 5분)',hours:'11:00 오픈 (구글 지도 기준) · 월 휴무 · 번호표 받고 밖에서 대기 · 현금만',map:'https://www.google.com/maps/search/?api=1&query=%E7%89%9B%E5%BA%97%E7%B2%BE%E7%87%89%E7%89%9B%E8%82%89%E9%BA%B5%20%E5%8F%B0%E5%8C%97%E5%B8%82%E8%90%AC%E8%8F%AF%E5%8D%80%E6%98%86%E6%98%8E%E8%A1%9791%E8%99%9F'},img:'img/f_beef.jpg',ref:true,lbl:'2일차 점심 · 뉴뎬',title:'우육면',zh:'牛肉麵',spice:'맵기: 맑은 국물(清燉)은 맵지 않음 · 간장 국물(紅燒)은 살짝 매콤',key:'미쉐린 빕구르망에 선정된 적 있는 우육면집',
   text:['우육면은 1949년 이후 대륙에서 건너온 사람들이 고향의 소고기 국수를 대만식으로 끓이면서 퍼졌어요. 지금은 해마다 우육면 대회가 열릴 만큼 대만을 대표하는 국수예요.','큼직한 소고기를 오래 고아 낸 국물에 국수를 말아요. 우리 갈비탕에 국수를 넣은 맛을 떠올리면 비슷해요. 맑은 국물(清燉)과 간장 국물(紅燒) 두 가지가 있어요.'],
-  tips:['맑은 국물은 清燉 (칭뚠)','예약은 안 받아요 · 11:15쯤 도착해 줄 서고 11:30 문 열면 들어가요','다 먹고 식당 앞에서 12:20에 밴을 타요']},
+  tips:['맑은 국물은 清燉 (칭뚠)','예약은 안 받아요 · 10:50쯤 도착해 번호표를 받고 기다려요','다 먹고 식당 앞에서 12:00에 밴을 타요']},
 
  gopchang:{near:'시먼딩 간식',shop:{name:'阿宗麵線 西門店',addr:'台北市萬華區峨眉街8-1號',hours:'낮~22:30쯤 · 小 NT$65 · 서서 먹음',map:'https://www.google.com/maps/search/?api=1&query=%E9%98%BF%E5%AE%97%E9%BA%B5%E7%B7%9A%20%E8%A5%BF%E9%96%80%E5%BA%97%20%E5%8F%B0%E5%8C%97%E5%B8%82%E8%90%AC%E8%8F%AF%E5%8D%80%E5%B3%A8%E7%9C%89%E8%A1%978-1%E8%99%9F'},img:'img/f_gopchang.jpg',lbl:'3일차 간식 · 시먼딩',title:'아종면선 (곱창국수)',zh:'阿宗麵線',spice:'맵기: 맵지 않음 (매운 소스는 원하면 따로 넣어요)',key:'1975년부터 시먼딩 명물',
   text:['가는 국수를 가다랑어 국물에 걸쭉하게 끓이고 곱창을 올려요. 의자 없이 서서 먹는 집이에요.','양이 작은 컵 국수라 간식으로 딱 좋아요. 곱창 냄새는 호불호가 있어요.'],
@@ -1086,7 +1096,7 @@ const FOODS={
  wing:{shop:{name:'十分溜哥燒烤雞翅包飯 (리우거)',addr:'新北市平溪區十分街52號 (스펀 옛거리)',hours:'매일 10:00~18:00 · 1개 NT$75',map:'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E6%BA%9C%E5%93%A5%E7%87%92%E7%83%A4%E9%9B%9E%E7%BF%85%E5%8C%85%E9%A3%AF%20%E6%96%B0%E5%8C%97%E5%B8%82%E5%B9%B3%E6%BA%AA%E5%8D%80%E5%8D%81%E5%88%86%E8%A1%9752%E8%99%9F'},img:'img/f_wing.jpg',zhTile:'雞翅包飯',lbl:'2일차 간식 · 스펀 옛거리',title:'닭날개 볶음밥',zh:'雞翅包飯',spice:'맵기: 맵지 않음 (기본맛 原味으로)',key:'뼈를 발라낸 닭날개 속에 볶음밥을 채워 구운 간식',
   text:['닭날개 뼈를 빼내고 그 안에 볶음밥을 꽉 채워 숯불에 구워요. 한 손에 들고 걸으며 먹기 좋아 스펀 옛거리의 대표 간식이 됐어요.','겉은 달짝지근한 양념으로 윤기 나게 굽고 속은 고소한 볶음밥이라 우리 닭꼬치와 주먹밥을 합친 맛이에요.'],
   tips:['양념은 기본맛(原味)으로 주문해요','하나를 둘이 나눠 먹어도 충분해요']},
- kiki:{shop:{name:'KiKi餐廳 ATT 4 FUN 信義店',addr:'台北市信義區松壽路12號 6樓',hours:'토 저녁 17:15~21:30쯤 (출처마다 달라 예약 메일 기준) · 현금·카드 가능',map:'https://www.google.com/maps/search/?api=1&query=KiKi%E9%A4%90%E5%BB%B3%20ATT%204%20FUN%20%E4%BF%A1%E7%BE%A9%E5%BA%97%20%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80%E6%9D%BE%E5%A3%BD%E8%B7%AF12%E8%99%9F%206%E6%A8%93'},img:'img/f_kiki.jpg',zhTile:'老皮嫩肉',lbl:'1일차 저녁 · 키키 레스토랑',title:'계란두부 튀김',key:'타이베이 사람들이 즐겨 찾는 쓰촨식 가정 요리',zh:'KiKi 餐廳',spice:'맵기: 매운 요리가 많음 · 안 매운 메뉴도 있음',
+ kiki:{shop:{name:'KiKi餐廳 ATT 4 FUN 信義店',addr:'台北市信義區松壽路12號 6樓',hours:'11:00~14:00 · 17:15~21:00 (구글 지도 기준) · 현금·카드 가능',map:'https://www.google.com/maps/search/?api=1&query=KiKi%E9%A4%90%E5%BB%B3%20ATT%204%20FUN%20%E4%BF%A1%E7%BE%A9%E5%BA%97%20%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80%E6%9D%BE%E5%A3%BD%E8%B7%AF12%E8%99%9F%206%E6%A8%93'},img:'img/f_kiki.jpg',zhTile:'老皮嫩肉',lbl:'1일차 저녁 · 키키 레스토랑',title:'계란두부 튀김',key:'타이베이 사람들이 즐겨 찾는 쓰촨식 가정 요리',zh:'KiKi 餐廳',spice:'맵기: 매운 요리가 많음 · 안 매운 메뉴도 있음',
   text:['대만에서 유명한 사천식 가정 요리 식당이에요.','대표 메뉴는 겉은 바삭하고 속은 푸딩처럼 부드러운 계란두부 튀김이에요. 매운 요리가 많아서, 안 매운 요리 위주로 주문해요.'],
   tips:['19:30 예약 · 10분 넘게 늦으면 자리가 취소돼요','혜영이가 여기서 합류해요','외부 술은 가져갈 수 없어요']},
  peanut:{shop:{name:'阿珠雪在燒',addr:'新北市瑞芳區基山街20號 (九份老街)',hours:'12:00~18:00쯤 · 1개 NT$50 · 현금만',map:'https://www.google.com/maps/search/?api=1&query=%E9%98%BF%E7%8F%A0%E9%9B%AA%E5%9C%A8%E7%87%92%20%E6%96%B0%E5%8C%97%E5%B8%82%E7%91%9E%E8%8A%B3%E5%8D%80%E5%9F%BA%E5%B1%B1%E8%A1%9720%E8%99%9F%20%28%E4%B9%9D%E4%BB%BD%E8%80%81%E8%A1%97%29'},img:'img/f_peanut.jpg',lbl:'2일차 간식 · 지우펀',title:'땅콩 아이스크림롤',key:'땅콩엿과 아이스크림을 전병에 돌돌 만 지우펀 명물',zh:'阿珠雪在燒',spice:'맵기: 맵지 않음',
@@ -1098,10 +1108,10 @@ const FOODS={
  sausage:{shop:{name:'黑豬肉香腸 (흑돼지 소시지 노점)',addr:'十分老街 철길 옆 (천등 가게들 사이)',hours:'낮~해 질 녘 · 1개 NT$40~50쯤 (약 2천 원)',map:'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%20%E9%BB%91%E8%B1%AC%E8%82%89%E9%A6%99%E8%85%B8'},img:'img/f_sausage.jpg',lbl:'2일차 간식 · 스펀 옛거리',title:'흑돼지 소시지',zh:'黑豬肉香腸',spice:'맵기: 맵지 않음 (생마늘은 원하면)',key:'천등 날리고 철길 옆에서 바로 먹는 숯불 소시지',
   text:['대만 소시지는 흑돼지 고기에 설탕과 고량주를 넣어 만들어서 살짝 달큰해요. 숯불에 구워 겉이 반질반질하고 속은 촉촉해요.','한국 순대처럼 시장마다 하나씩 있는 국민 간식이에요. 현지에서는 생마늘 한 쪽을 같이 씹어 먹어요.'],
   tips:['가게 이름 없는 노점이라 "黑豬肉香腸" 간판을 찾으면 돼요','6명이 2~3개 사서 잘라 나눠 먹기 · 리우거 닭날개도 먹어야 하니까요']},
- pepper:{shop:{name:'福州世祖胡椒餅 (푸저우 스쭈 후추빵)',addr:'台北市松山區饒河街 야시장 입구 (츠유궁 앞)',hours:'16:00~자정쯤 · 1개 NT$60 (약 2,500원) · 현금만',map:'https://www.google.com/maps/search/?api=1&query=%E7%A6%8F%E5%B7%9E%E4%B8%96%E7%A5%96%E8%83%A1%E6%A4%92%E9%A4%85%20%E9%A5%92%E6%B2%B3%E8%A1%97224%E8%99%9F'},img:'img/f_pepper.jpg',lbl:'2일차 야시장 · 입구',title:'후추빵',zh:'胡椒餅',spice:'맵기: 고추 매운맛 없음 · 후추 향이 살짝 톡 쏴요',key:'항아리 화덕 벽에 붙여 굽는 야시장 1등 간식',
+ pepper:{shop:{name:'福州世祖胡椒餅 (푸저우 스쭈 후추빵)',addr:'台北市松山區饒河街 야시장 입구 (츠유궁 앞)',hours:'15:30~23:30 · 1개 NT$60 (약 2,500원) · 현금만',map:'https://www.google.com/maps/search/?api=1&query=%E7%A6%8F%E5%B7%9E%E4%B8%96%E7%A5%96%E8%83%A1%E6%A4%92%E9%A4%85%20%E9%A5%92%E6%B2%B3%E8%A1%97224%E8%99%9F'},img:'img/f_pepper.jpg',lbl:'2일차 야시장 · 입구',title:'후추빵',zh:'胡椒餅',spice:'맵기: 고추 매운맛 없음 · 후추 향이 살짝 톡 쏴요',key:'항아리 화덕 벽에 붙여 굽는 야시장 1등 간식',
   text:['밀가루 반죽에 후추로 양념한 돼지고기와 파를 듬뿍 넣고, 깨를 뿌려 항아리 모양 화덕 안쪽 벽에 붙여 구워요. 인도 난을 굽는 탄두르 화덕과 같은 방식이에요.','중국 푸저우에서 건너온 음식이라 이름에 푸저우(福州)가 붙어요. 겉은 바삭하고 속은 고기 육즙이 가득해서, 한국 고기만두를 화덕에 구운 맛에 가까워요.'],
   tips:['야시장 들어가자마자 왼쪽 입구에 있어요 · 줄이 길어도 금방 줄어요','갓 나온 건 속 육즙이 아주 뜨거워요 · 살짝 베어 김을 빼고 먹기','6명이면 2~3개 사서 나눠 먹기 · 뒤에 갈비탕과 과일이 있어요']},
- ribs:{shop:{name:'陳董藥燉排骨 (천둥 약재갈비탕)',addr:'台北市松山區饒河街160號 (야시장 중간쯤)',hours:'16:00~자정쯤 · 한 그릇 NT$90~100쯤 (약 4천 원) · 현금만',map:'https://www.google.com/maps/search/?api=1&query=%E9%99%B3%E8%91%A3%E8%97%A5%E7%87%89%E6%8E%92%E9%AA%A8%20%E9%A5%92%E6%B2%B3'},img:'img/f_ribs.jpg',lbl:'2일차 야시장 · 중간',title:'약재갈비탕',zh:'藥燉排骨',spice:'맵기: 맵지 않음',key:'한약재로 푹 고아 낸 따뜻한 돼지갈비 국물',
+ ribs:{shop:{name:'陳董藥燉排骨 (천둥 약재갈비탕)',addr:'台北市松山區饒河街160號 (야시장 중간쯤)',hours:'13:00~22:30 · 한 그릇 NT$90~100쯤 (약 4천 원) · 현금만',map:'https://www.google.com/maps/search/?api=1&query=%E9%99%B3%E8%91%A3%E8%97%A5%E7%87%89%E6%8E%92%E9%AA%A8%20%E9%A5%92%E6%B2%B3'},img:'img/f_ribs.jpg',lbl:'2일차 야시장 · 중간',title:'약재갈비탕',zh:'藥燉排骨',spice:'맵기: 맵지 않음',key:'한약재로 푹 고아 낸 따뜻한 돼지갈비 국물',
   text:['당귀·천궁 같은 한약재를 넣고 돼지갈비를 오래 끓인 국물이에요. 한국 갈비탕에 쌍화탕 향을 살짝 더한 맛이라 부모님 입맛에도 잘 맞아요.','대만에서는 날이 쌀쌀해지는 가을·겨울에 몸을 데우는 보양 음식으로 먹어요. 갈비는 오래 끓여서 뼈에서 쉽게 떨어져요.'],
   tips:['서서 먹거나 가게 안 좁은 자리에서 먹어요','한 그릇을 2~3명이 나눠 국물 맛만 봐도 충분해요']},
  fruit:{shop:{name:'야시장 과일 가게 (여러 곳)',addr:'라오허제 야시장 안 · 출구 쪽',hours:'컷과일 한 팩 NT$100~150쯤 (약 4~6천 원)',map:'https://www.google.com/maps/search/?api=1&query=%E9%A5%92%E6%B2%B3%E8%A1%97%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82'},img:'img/f_fruit.jpg',fit:true,lbl:'2일차 야시장 · 마무리',title:'11월 제철 컷과일',zh:'切盤水果',spice:'맵기: 맵지 않음',key:'먹기 좋게 잘라 팩에 담아 파는 대만 과일',
@@ -1125,7 +1135,7 @@ const DAYS=[
   sched:[['08:35','김해공항 출발','한국 시간 09:35 · 제주항공 7C6151 · 서울팀은 인천에서 진에어 LJ0171'],['11:15','타오위안 공항 1터미널 도착','서울팀은 11:30 도착 · 공항에서 만나요'],['13:00','밴으로 숙소까지','40~50분','move'],['13:50','호텔 로비에 캐리어 맡기기','체크인은 15:00부터 · 점심·용산사 다녀와서'],['13:52','걸어서 식당까지','8분','move'],['14:00','점심 · 샤오왕주과','루러우판과 맑은 고깃국','meal'],['14:45','걸어서 용산사로','3분','move'],['14:50','용산사 구경','15~20분'],['15:10','걸어서 숙소로','5분','move'],['15:15','체크인하고 쉬기','맡긴 캐리어 찾아 방으로'],['16:15','택시로 중정기념당','10분 · 약 6천 원','move'],['16:30','중정기념당','17:00 정각 본당 밖 계단 앞 의장대 시범 (비 오면 없음)'],['17:15','101까지','지하철 10분 또는 택시 약 1만 원','move'],['17:30','101 전망대 야경',''],['19:20','걸어서 키키까지','3분','move'],['19:30','저녁 · 키키 레스토랑','혜영이도 여기서 만나요 · 늦으면 자리가 취소돼요','meal'],['21:15','택시로 숙소까지','20분 · 약 1.3만 원','move']],
   places:['longshan','cks','t101'],foods:['lurou','kiki']},
  {id:'day2',gw:[["숙소 → 우육면집 (20분)", "台北凱達大飯店 艋舺大道167號", "牛店精燉牛肉麵 昆明街91號"], ["팀호완 → 야시장 (5분)", "添好運 松山車站店", "饒河街觀光夜市"]],smap:{'06:30': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97', '10:50': 'https://www.google.com/maps/search/?api=1&query=%E7%89%9B%E5%BA%97%E7%B2%BE%E7%87%89%E7%89%9B%E8%82%89%E9%BA%B5%20%E6%98%86%E6%98%8E%E8%A1%9791%E8%99%9F', '13:00': 'https://www.google.com/maps/search/?api=1&query=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92', '15:00': 'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97', '17:15': 'https://www.google.com/maps/search/?api=1&query=%E4%B9%9D%E4%BB%BD%E8%80%81%E8%A1%97', '20:00': 'https://www.google.com/maps/search/?api=1&query=%E6%B7%BB%E5%A5%BD%E9%81%8B%20%E6%9D%BE%E5%B1%B1%E8%BB%8A%E7%AB%99%E5%BA%97', '20:50': 'https://www.google.com/maps/search/?api=1&query=%E9%A5%92%E6%B2%B3%E8%A1%97%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82'},walks:[['예류 지질공원','https://www.google.com/maps/dir/?api=1&origin=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%20%E9%81%8A%E5%AE%A2%E4%B8%AD%E5%BF%83&destination=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%20%E9%81%8A%E5%AE%A2%E4%B8%AD%E5%BF%83&travelmode=walking&waypoints=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%20%E8%95%88%E7%8B%80%E5%B2%A9%7C%E9%87%8E%E6%9F%B3%20%E5%A5%B3%E7%8E%8B%E9%A0%AD%7C%E9%87%8E%E6%9F%B3%20%E4%BB%99%E5%A5%B3%E9%9E%8B','yehliu'],['스펀 옛거리','https://www.google.com/maps/dir/?api=1&origin=%E5%8D%81%E5%88%86%E8%BB%8A%E7%AB%99&destination=%E5%8D%81%E5%88%86%E6%BA%9C%E5%93%A5%E7%87%92%E7%83%A4%E9%9B%9E%E7%BF%85%E5%8C%85%E9%A3%AF%20%E6%96%B0%E5%8C%97%E5%B8%82%E5%B9%B3%E6%BA%AA%E5%8D%80%E5%8D%81%E5%88%86%E8%A1%9752%E8%99%9F&travelmode=walking&waypoints=%E5%90%89%E7%A5%A5%E5%A4%A9%E7%87%88%20%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%7C%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%20%E9%BB%91%E8%B1%AC%E8%82%89%E9%A6%99%E8%85%B8','shifen'], ['지우펀 마을','https://www.google.com/maps/dir/?api=1&origin=7-ELEVEN%20%E4%B9%9D%E4%BB%BD%E9%96%80%E5%B8%82&destination=%E6%98%87%E5%B9%B3%E6%88%B2%E9%99%A2%20%E6%96%B0%E5%8C%97%E5%B8%82%E7%91%9E%E8%8A%B3%E5%8D%80&travelmode=walking&waypoints=%E9%98%BF%E7%8F%A0%E9%9B%AA%E5%9C%A8%E7%87%92%20%E4%B9%9D%E4%BB%BD%7C%E9%98%BF%E5%A6%B9%E8%8C%B6%E6%A8%93%20%E4%B9%9D%E4%BB%BD','jiufen']],gmap:'https://www.google.com/maps/dir/?api=1&origin=%E7%89%9B%E5%BA%97%E7%B2%BE%E7%87%89%E7%89%9B%E8%82%89%E9%BA%B5%20%E6%98%86%E6%98%8E%E8%A1%9791%E8%99%9F&destination=%E9%A5%92%E6%B2%B3%E8%A1%97%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82&travelmode=driving&waypoints=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%7C%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%7C%E4%B9%9D%E4%BB%BD%E8%80%81%E8%A1%97',tab:'2일차',date:'11월 8일 일요일',zhd:'十一月八日 星期日',title:'바다가 빚고, 탄광이 키운 북쪽 해안',lead:'수천 년 파도가 깎아 낸 예류의 버섯 바위에서 시작해, 석탄을 나르던 철길 위로 소원 천등을 띄우는 스펀을 지나, 금광 붐이 남긴 산비탈 마을 지우펀의 홍등 야경을 보고, 라오허제 야시장에서 하루를 마무리해요.',map:'img/day2.jpg',cap:'바닷가에서 산골까지, 북쪽 해안을 한 바퀴 돌아요.',
-  sched:[['06:30','호텔 조식','06:30 오픈 · 5층 뷔페','meal'],['10:50','우육면집까지','걸어서 20분 또는 택시 5분 약 4천 원','move'],['11:15','점심 · 뉴뎬 우육면','11:30 오픈 · 먼저 줄 서서 번호표 받기','meal'],['12:20','밴 타고 예류로','약 1시간 · 밴투어 8시간 코스','move'],['13:00','예류 지질공원','여왕머리 바위 · 바닷바람이 세요 · 약 1시간'],['14:00','밴으로 스펀까지','약 1시간','move'],['15:00','스펀 · 천등 날리기','닭날개 볶음밥 · 흑돼지 소시지 · 징안 출렁다리'],['16:15','밴으로 지우펀까지','약 1시간','move'],['17:15','지우펀','땅콩아이스크림 · 아메이 찻집 홍등 계단 야경'],['19:00','밴으로 송산역까지','약 1시간','move'],['20:00','저녁 · 팀호완','차슈번과 딤섬','meal'],['20:50','라오허제 야시장','후추빵 · 약재갈비탕 · 컷과일'],['21:50','택시로 숙소까지','25분 · 약 2.1만 원','move']],
+  sched:[['06:30','호텔 조식','06:30 오픈 · 5층 뷔페','meal'],['10:30','우육면집까지','걸어서 20분 또는 택시 5분 약 4천 원','move'],['10:50','점심 · 뉴뎬 우육면','11:00 오픈 · 번호표 받고 기다리기','meal'],['12:00','밴 타고 예류로','약 1시간 · 밴투어 8시간 코스','move'],['13:00','예류 지질공원','여왕머리 바위 · 바닷바람이 세요 · 약 1시간'],['14:00','밴으로 스펀까지','약 1시간','move'],['15:00','스펀 · 천등 날리기','닭날개 볶음밥 · 흑돼지 소시지 · 징안 출렁다리'],['16:15','밴으로 지우펀까지','약 1시간','move'],['17:15','지우펀','땅콩아이스크림 · 아메이 찻집 홍등 계단 야경'],['19:00','밴으로 송산역까지','약 1시간','move'],['20:00','저녁 · 팀호완','차슈번과 딤섬','meal'],['20:50','라오허제 야시장','후추빵 · 약재갈비탕 · 컷과일'],['21:50','택시로 숙소까지','25분 · 약 2.1만 원','move']],
   note:'방문 순서는 그날 날씨와 길 사정에 따라 기사님이 조금 바꿀 수 있어요.',
   places:['yehliu','shifen','jiufen','raohe'],foods:['beef','wing','sausage','peanut','charsiu','pepper','ribs','fruit']},
  {id:'day3',gw:[["우라오궈 → 망고빙수 (3분)", "無老鍋 西門町店", "幸春三兄妹雪花冰 西門總店"]],smap:{'06:30': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97', '11:00': 'https://www.google.com/maps/search/?api=1&query=%E7%83%8F%E4%BE%86%E5%8F%B0%E8%BB%8A%20%E7%83%8F%E4%BE%86%E7%AB%99', '12:00': 'https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E5%9C%B0%E7%BE%8E%E9%A3%9F%E5%B1%8B%20%E7%83%8F%E4%BE%86%E8%A1%9720%E8%99%9F', '13:00': 'https://www.google.com/maps/search/?api=1&query=%E7%83%8F%E4%BE%86%E8%80%81%E8%A1%97', '15:00': 'https://www.google.com/maps/search/?api=1&query=%E8%A5%BF%E9%96%80%E7%94%BA', '19:00': 'https://www.google.com/maps/search/?api=1&query=%E7%84%A1%E8%80%81%E9%8D%8B%20%E8%A5%BF%E9%96%80%E7%94%BA%E5%BA%97', '20:30': 'https://www.google.com/maps/search/?api=1&query=%E4%B8%89%E5%85%84%E5%A6%B9%E9%9B%AA%E8%8A%B1%E5%86%B0%20%E8%A5%BF%E9%96%80%E7%B8%BD%E5%BA%97'},walks:[['우라이 마을','https://www.google.com/maps/dir/?api=1&origin=%E7%83%8F%E4%BE%86%E8%80%81%E8%A1%97&destination=%E7%83%8F%E4%BE%86%E7%80%91%E5%B8%83&travelmode=walking&waypoints=%E7%83%8F%E4%BE%86%E5%8F%B0%E8%BB%8A%20%E7%83%8F%E4%BE%86%E7%AB%99','wulai']],gmap:'https://www.google.com/maps/dir/?api=1&origin=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97%20%E8%89%8B%E8%88%BA%E5%A4%A7%E9%81%93167%E8%99%9F&destination=%E7%84%A1%E8%80%81%E9%8D%8B%20%E8%A5%BF%E9%96%80%E7%94%BA%E5%BA%97&travelmode=driving&waypoints=%E7%83%8F%E4%BE%86%E5%8F%B0%E8%BB%8A%20%E7%83%8F%E4%BE%86%E7%AB%99%7C%E5%B1%B1%E5%9C%B0%E7%BE%8E%E9%A3%9F%E5%B1%8B%20%E7%83%8F%E4%BE%86%7C%E8%A5%BF%E9%96%80%E7%94%BA',tab:'3일차',date:'11월 9일 월요일',zhd:'十一月九日 星期一',title:'타이야족의 온천 마을, 그리고 대만의 명동',lead:'원주민 말로 \'김이 나는 뜨거운 물\'이라는 우라이에서 꼬마기차를 타고 폭포를 만나요. 오후엔 숙소에서 쉬고, 저녁엔 타이베이 젊음의 거리 시먼딩에서 가족 만찬을 즐겨요.',map:'img/day3.jpg',cap:'오후엔 숙소 근처 시먼딩만 다녀요. 지하철 한 정거장이에요.',
@@ -1233,14 +1243,14 @@ const OVR=[[1,'airport','hotel',-.12,0,'밴 40~50분'],[1,'hotel','cks',.35,0,'�
  [4,'hotel','airport',-.12,0,'밴 45~60분']];
 const OVPIN=[[1,'cks','3','중정기념당','',0,1],[1,'t101','4','타이베이 101','키키 저녁',1,0],
  [2,'yehliu','2','예류 지질공원','',1,0],[2,'shifen','3','스펀','천등',1,0],[2,'jiufen','4','지우펀','홍등 야경',1,0],[2,'raohe','5','라오허제 야시장','팀호완',1,-1],
- [3,'wulai','1','우라이','꼬마기차·폭포',1,0],[3,'ximen','2','시먼딩','자유시간',1,-1],[3,'wulao','3','우라오궈','저녁',1,0],
+ [3,'wulai','1','우라이','꼬마기차·폭포',1,0],[3,'ximen','2','시먼딩','자유시간',-1,0],[3,'wulao','3','우라오궈','저녁',1,0],
  ['4 d1','airport','✈','타오위안 공항 T1','',1,-1]];
 const OVD={x0:121.48,x1:121.60,y0:25.015,y1:25.068};
 const OVDET=[[1,[121.5003,25.0363],'샤오왕주과 (점심)','숙소에서 걸어서 8분',1,0,0,'1'],[1,[121.4992,25.0380],'용산사','식당에서 걸어서 3분',-1,0,0,'2'],[2,[121.5036,25.0410],'뉴뎬 우육면 (점심)','숙소에서 걸어서 20분',-1,0,0,'1']];
 
 const OVWALK=[[2,[121.5013,25.0333],[121.5036,25.0410],'걸어서 20분','택시 5분 · 약 1.4km',1],
  [1,[121.5013,25.0333],[121.5003,25.0363],'','',1,-.25],[1,[121.5003,25.0363],[121.4992,25.0380],'','',1,0],[1,[121.4992,25.0380],[121.5013,25.0333],'숙소까지 5분','',-1,.45]];
-const OVSUB=[[2,121.6948,25.2089,'여왕머리 바위',1],[2,121.7771,25.0411,'닭날개 볶음밥',1],[2,121.7742,25.0398,'징안 출렁다리',-1],[2,121.8452,25.1097,'땅콩아이스크림',-1],[2,121.8441,25.1081,'아메이차루',-1],[3,121.5490,24.8620,'꼬마기차 타는 곳',1],[3,121.5476,24.8487,'우라이 폭포',1],[3,121.5497,24.8647,'산지메이스우 (점심)',-1],[3,121.5205,25.0527,'치이카와 매장',1,1],[3,121.5078,25.04325,'망고빙수',1,1]];
+const OVSUB=[[2,121.6931,25.2088,'여왕머리 바위',1],[2,121.7771,25.0411,'닭날개 볶음밥',1],[2,121.7742,25.0398,'징안 출렁다리',-1],[2,121.8452,25.1097,'땅콩아이스크림',-1],[2,121.8441,25.1081,'아메이차루',-1],[3,121.5490,24.8620,'꼬마기차 타는 곳',1],[3,121.5476,24.8487,'우라이 폭포',1],[3,121.5497,24.8647,'산지메이스우 (점심)',-1],[3,121.5068,25.0420,'홍러우',-1,1],[3,121.5076,25.0421,'무지개 횡단보도',1,1],[3,121.5058,25.0441,'완녠빌딩',-1,1],[3,121.5056,25.0430,'돈키호테',-1,1],[3,121.5077,25.0438,'아종면선',1,1],[3,121.5078,25.04325,'망고빙수',1,1],[3,121.5079,25.0452,'행복당 밀크티',1,1],[3,121.5097,25.0446,'지하상가 입구',1,1],[3,121.5205,25.0527,'치이카와 매장',1,1]];
 const OVDG=[['완화구',121.492,25.026],['중정구',121.516,25.026],['다안구',121.543,25.024],['신이구',121.580,25.027],['중산구',121.534,25.061],['다퉁구',121.513,25.062],['쑹산구',121.560,25.061]];
 const OVMRT=[['#0070BD',[[121.4999,25.0354],[121.5082,25.0421],[121.5172,25.0462],[121.5232,25.0448],[121.5328,25.0423],[121.5438,25.0416],[121.5513,25.0414],[121.5577,25.0413],[121.5651,25.0411],[121.5764,25.0408],[121.5824,25.0450]]],
  ['#E3002C',[[121.5172,25.0462],[121.5162,25.0414],[121.5183,25.0326],[121.5287,25.0339],[121.5353,25.0330],[121.5434,25.0330],[121.5525,25.0333],[121.5637,25.0331],[121.5706,25.0328]]],
@@ -1255,7 +1265,7 @@ function ovSvg(){let r='',pins='',mls='';
     if(ml){const qx=(x1+2*cx+x2)/4,qy=(y1+2*cy+y2)/4;let nx=-dy/len,ny=dx/len;if(rad<0){nx=-nx;ny=-ny}mls+=`<g class="r d${d} mdg" data-i="${oi}" transform="translate(${qx.toFixed(1)} ${qy.toFixed(1)})"><g class="ps"><text class="ml" x="${(nx*40).toFixed(0)}" y="${(ny*40+(ny<0?-14:12)).toFixed(0)}" text-anchor="${Math.abs(nx)<.4?'middle':nx>0?'start':'end'}">${ml.split('|')[0]}${ml.includes('|')?`<tspan class="s" x="${(nx*40).toFixed(0)}" dy="34">${ml.split('|')[1]}</tspan>`:''}</text></g></g>`}
     r+=`<g class="r d${d}" data-i="${oi}" data-len="${len.toFixed(0)}" data-n="1"><path class="rl${dash?' dash':''}" d="M${x1.toFixed(2)} ${y1.toFixed(2)} Q${cx.toFixed(2)} ${cy.toFixed(2)} ${x2.toFixed(2)} ${y2.toFixed(2)}"/>${ovChev(x1,y1,cx,cy,x2,y2,[.5],0,'s1')}${ovChev(x1,y1,cx,cy,x2,y2,[.3,.7],0,'s2')}${ovChev(x1,y1,cx,cy,x2,y2,[.14,.5,.86],0,'s3')}</g>`});
   const pinG=(cls,d,k,n,t,sub,ax,ay,rr)=>{const [x,y]=ovP(...(OVPT[k]||k));const anc=ax>0?'start':ax<0?'end':'middle';const lx=ax*(rr+18),ly=ay>0?rr+62:ay<0?(sub?-rr-66:-rr-20):14;
-    return `<g class="p d${d}${cls}${ay<0&&sub?' up':''}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><circle r="${rr}"/><text class="n" y="1" dominant-baseline="central">${n}</text><text class="l" x="${lx}" y="${ly}" text-anchor="${anc}">${t}${sub?`<tspan class="s" x="${lx}" dy="46">${sub}</tspan>`:''}</text></g></g>`};
+    return `<g class="p d${d}${cls}${ay<0&&sub?' up':''}"${typeof k==='string'?` data-k="${k}"`:''} transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><circle r="${rr}"/><text class="n" y="1" dominant-baseline="central">${n}</text><text class="l" x="${lx}" y="${ly}" text-anchor="${anc}">${t}${sub?`<tspan class="s" x="${lx}" dy="46">${sub}</tspan>`:''}</text>${cls.includes('det')?'':`<text class="plist" x="${lx}" y="${ay<0?rr+44:ly+(sub?86:44)}" text-anchor="${anc}"></text>`}</g></g>`};
   OVPIN.forEach(([d,k,n,t,sub,ax,ay])=>{let g=pinG(k==='ximen'?' xm':k==='airport'?' apt':'',d,k,n,t,sub,ax,ay,k==='airport'?34:30);
     if(k==='airport')g=g.replace(/<circle r="34"\/><text class="n"[^>]*>[^<]*<\/text>/,'<rect x="-34" y="-34" width="68" height="68" rx="16"/><path class="pl" transform="rotate(45) translate(-24 -24) scale(2)" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>');
     pins+=g});
@@ -1268,7 +1278,7 @@ function ovSvg(){let r='',pins='',mls='';
   OVMRT.forEach(([c,pts])=>{const pp=pts.map(q=>ovP(...q).map(v=>v.toFixed(1)).join(',')).join(' ');det+=`<polyline class="mrt" points="${pp}"/><polyline class="mrt2" points="${pp}"/>`});
   OVST.forEach(([t,lo,la])=>{const [x,y]=ovP(lo,la);det+=`<g class="st" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><circle r="11"/>${t?`<text y="46">${t}</text>`:''}</g></g>`});
   {/* 시먼딩 보행자 거리 대략 모양 */const pz=[[121.5044,25.0466],[121.5093,25.0463],[121.5099,25.0421],[121.5051,25.0413]].map(q=>ovP(...q).map(v=>v.toFixed(1)).join(' '));det+=`<polygon class="fz" points="${pz.join(' ')}"/>`}
-  let spots='<g class="det">',walks='<g class="det">';OVSUB.forEach(([d,lo,la,t,ax,op])=>{const [x,y]=ovP(lo,la);spots+=`<g class="r d${d} sub${op?' opt':''}" transform="translate(${x.toFixed(2)} ${y.toFixed(2)})"><g class="ps"><circle r="11"/><text x="${ax*24}" y="11" text-anchor="${ax>0?'start':'end'}">${t}</text></g></g>`});
+  let spots='<g class="det">',walks='<g class="det">';OVSUB.forEach(([d,lo,la,t,ax,op])=>{const [x,y]=ovP(lo,la);let par='',bd=1e9;OVPIN.forEach(q=>{if(String(q[0]).split(' ')[0]!==String(d)||q[1]==='airport')return;const [a,b]=ovP(...OVPT[q[1]]);const dd=Math.hypot(a-x,b-y);if(dd<bd){bd=dd;par=q[1]}});spots+=`<g class="r d${d} sub${op?' opt':''}" data-par="${par}" transform="translate(${x.toFixed(2)} ${y.toFixed(2)})"><g class="ps"><circle r="${op?8:11}"/><text x="${ax*(op?20:24)}" y="11" text-anchor="${ax>0?'start':'end'}">${t}</text></g></g>`});
   
   OVWALK.forEach(([d,a,b,t1,t2,ax,rad])=>{const [x1,y1]=ovP(...a),[x2,y2]=ovP(...b);rad=rad||0;const qx=(x1+x2)/2-rad*(y2-y1),qy=(y1+y2)/2+rad*(x2-x1);const mx=(x1+x2)/4+qx/2,my=(y1+y2)/4+qy/2;
     const t=.58,L=(p,q)=>p+(q-p)*t,ax1=L(x1,qx),ay1=L(y1,qy),bx1=L(qx,x2),by1=L(qy,y2),sx=L(ax1,bx1),sy=L(ay1,by1),F=v=>v.toFixed(2);
@@ -1280,31 +1290,46 @@ function ovSvg(){let r='',pins='',mls='';
   return `<svg class="ovsvg" viewBox="0 0 ${OVX.W} ${OVX.H}" preserveAspectRatio="none" role="img" aria-label="여행 동선 지도"><defs>${defs}</defs>${det}${r}${walks}${mls}${pins}${spots}<g class="hotel" transform="translate(${hx.toFixed(1)} ${hy.toFixed(1)})"><g class="ps"><rect x="-30" y="-30" width="60" height="60" rx="12"/><path class="hs" transform="translate(-27 -27) scale(3)" d="M3 8.2 9 3.3l6 4.9V15a.8.8 0 0 1-.8.8H11v-4.2H7v4.2H3.8A.8.8 0 0 1 3 15Z"/><text class="l" x="-46" y="14" text-anchor="end">숙소</text></g></g></svg>`}
 const ovF=sc=>Math.min(1.5,.8+.05*(sc-1));
 function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>parseFloat(inn.style.getPropertyValue(n)||'0');
+  /* 숨길 것을 먼저 다 계산하고 마지막에 한 번에 반영 → 깜빡임 없이 바뀐 것만 서서히 */
+  const H=new Set();const isH=e=>{for(let x=e;x&&x!==inn;x=x.parentNode)if(H.has(x))return true;return false};
   const own=e=>e.closest('g.p,g.hotel,g.st,g.dg,g.wkg,g.mdg,g.sub,g.cl')||e;
   const over=(r,o)=>placed.some(q=>q.o!==o&&r.left<q.r.right+pad&&r.right>q.r.left-pad&&r.top<q.r.bottom+pad&&r.bottom>q.r.top-pad);
   const vis=e=>{const r=e.getBoundingClientRect();return r.width>0?r:null};
-  inn.querySelectorAll('.ovsvg .hid').forEach(e=>e.classList.remove('hid'));inn.querySelectorAll('.ovsvg .flp').forEach(e=>{e.setAttribute('x',e.dataset.ox);e.setAttribute('text-anchor',e.dataset.oa);e.querySelectorAll('tspan').forEach(t=>t.setAttribute('x',e.dataset.ox));e.classList.remove('flp')});
-  const obs=e=>{const r=vis(e);if(r)placed.push({r,o:own(e)})};
-  inn.querySelectorAll('.ovsvg .hotel rect').forEach(obs);
-  {const act0=g=>(f==='0'||!f||g.classList.contains('d'+f))?1:0;const ps=[...inn.querySelectorAll('.ovsvg .p:not(.det)')].sort((a,b)=>act0(b)-act0(a));
-   const solo1=f&&f!=='0';ps.forEach(g=>{const c=g.querySelector('circle');const r=c&&vis(c);if(!r)return;const R={left:r.left-2,right:r.right+2,top:r.top-2,bottom:r.bottom+2};if(over(R,g))g.classList.add('hid');else placed.push({r,o:g})})}
-  if(vr('--dp')>.3)inn.querySelectorAll('.ovsvg .p.det circle').forEach(c=>{const r=vis(c);if(r)placed.push({r,o:c.closest('g.p')})});
-  /* 들르는 곳 동그라미가 번호 핀·식당 핀과 겹치면 더 확대할 때까지 숨김 */
-  if(vr('--dp')>.3)inn.querySelectorAll('.ovsvg .sub circle').forEach(c=>{const g=c.closest('g.sub');const r=vis(c);if(!r)return;const R={left:r.left-3,right:r.right+3,top:r.top-3,bottom:r.bottom+3};if(over(R,g))g.classList.add('hid');else placed.push({r,o:g})});
-  
-  const groups=[['.ovsvg .hotel .l',1],['.ovsvg .p:not(.det):not(.xm) .l',1],['.ovsvg .xm .l',1],['.ovsvg .ml',1],['.ovsvg .sub text',vr('--dp')],['.ovsvg .p.det .l',vr('--dp')],['.ovsvg .wl',vr('--dw')],['.ovsvg .st text',vr('--dp')],['.ovsvg .dg text',vr('--dz')],['.ovsvg .cl text',1]];
-  const act=e=>{if(f==='0'||!f)return true;const g=e.closest('.p,.r,.spot');return !g||g.classList.contains('d'+f)||g.classList.contains('spot')};
-  const order=[];groups.forEach(([sel,v])=>{if(v<.3)return;inn.querySelectorAll(sel).forEach(e=>order.push(e))});
-  order.sort((a,b)=>act(b)-act(a));
-  const flip=e=>{/* 겹치면 글자를 반대편으로 옮겨 봄 */if(!e.dataset.ox){e.dataset.ox=e.getAttribute('x')||'0';e.dataset.oa=e.getAttribute('text-anchor')||'middle'}const ox=e.dataset.ox,oa=e.dataset.oa;if(oa==='middle'||ox==='0')return false;
-    const nx=String(-parseFloat(ox)),na=oa==='start'?'end':'start';e.setAttribute('x',nx);e.setAttribute('text-anchor',na);e.querySelectorAll('tspan').forEach(t=>t.setAttribute('x',nx));e.classList.add('flp');return true};
-  const unflip=e=>{if(!e.classList.contains('flp'))return;e.setAttribute('x',e.dataset.ox);e.setAttribute('text-anchor',e.dataset.oa);e.querySelectorAll('tspan').forEach(t=>t.setAttribute('x',e.dataset.ox));e.classList.remove('flp')};
-  order.forEach(e=>{
-    if(e.closest('.hid'))return;unflip(e);let r=vis(e);if(!r)return;const o=own(e);if(!over(r,o)){placed.push({r,o});return}
-    if(e.matches('.sub text,.p.det .l,.wl,.p:not(.det) .l')&&flip(e)){r=vis(e);if(r&&!over(r,o)){placed.push({r,o});return}unflip(e)}
-    e.classList.add('hid')});
-  const ars=[...inn.querySelectorAll('.ovsvg .ar')].sort((a,b)=>act(b)-act(a));
-  ars.forEach(a=>{if(a.closest('.hid'))return;const c=a.querySelector('.arc');const r=c&&vis(c);if(!r)return;if(over(r,a))a.classList.add('hid');else placed.push({r,o:a})})}
+  const setX=(e,x,a)=>{e.setAttribute('x',x);e.setAttribute('text-anchor',a);e.querySelectorAll('tspan').forEach(t=>t.setAttribute('x',x))};
+  inn.querySelectorAll('.ovsvg .flp').forEach(e=>{setX(e,e.dataset.ox,e.dataset.oa);e.classList.remove('flp')});
+  const flip=e=>{if(!e.dataset.ox){e.dataset.ox=e.getAttribute('x')||'0';e.dataset.oa=e.getAttribute('text-anchor')||'middle'}const ox=e.dataset.ox,oa=e.dataset.oa;if(oa==='middle'||ox==='0')return false;setX(e,String(-parseFloat(ox)),oa==='start'?'end':'start');e.classList.add('flp');return true};
+  const unflip=e=>{if(e.classList.contains('flp')){setX(e,e.dataset.ox,e.dataset.oa);e.classList.remove('flp')}};
+  const act=e=>{if(f==='0'||!f)return true;const g=e.closest('.p,.r');return !g||g.classList.contains('d'+f)};
+  const place=(e,canFlip)=>{if(isH(e))return;let r=vis(e);if(!r)return;const o=own(e);if(!over(r,o)){placed.push({r,o});return}
+    if(canFlip&&flip(e)){r=vis(e);if(r&&!over(r,o)){placed.push({r,o});return}unflip(e)}H.add(e)};
+  const all=(sel,v)=>v<.3?[]:[...inn.querySelectorAll(sel)].sort((a,b)=>act(b)-act(a));
+  inn.querySelectorAll('.ovsvg .hotel rect').forEach(e=>{const r=vis(e);if(r)placed.push({r,o:own(e)})});
+  all('.ovsvg .p:not(.det)',1).forEach(g=>{const c=g.querySelector('circle,rect');const r=c&&vis(c);if(!r)return;const R={left:r.left-2,right:r.right+2,top:r.top-2,bottom:r.bottom+2};if(over(R,g))H.add(g);else placed.push({r,o:g})});
+  /* 그날 번호가 숙소·다른 번호에 가려지면 '2·3' 묶음 표시 → 누르면 그쪽으로 확대 */
+  {const svg=inn.querySelector('.ovsvg');let L=svg.querySelector('g.pkl');if(!L){L=document.createElementNS('http://www.w3.org/2000/svg','g');L.setAttribute('class','pkl');svg.appendChild(L)}L.textContent='';
+   if(f&&f!=='0'){const hid=[...H].filter(g=>g.matches&&g.matches('.p:not(.det).d'+f)&&!g.classList.contains('apt'));const cl=[];
+    hid.forEach(g=>{const r=vis(g.querySelector('circle'));if(!r)return;const cx=(r.left+r.right)/2,cy=(r.top+r.bottom)/2;const m=/translate\(([-\d.]+) ([-\d.]+)\)/.exec(g.getAttribute('transform'));let k=cl.find(q=>Math.hypot(q.cx-cx,q.cy-cy)<60);if(!k){k={cx,cy,gs:[]};cl.push(k)}k.gs.push({g,x:+m[1],y:+m[2]})});
+    cl.forEach(k=>{const ns=k.gs.map(o=>(o.g.querySelector('.n')||{}).textContent).sort().join('·');const x=k.gs.reduce((a,o)=>a+o.x,0)/k.gs.length,y=k.gs.reduce((a,o)=>a+o.y,0)/k.gs.length;const wd=44+ns.length*19;
+     const b=document.createElementNS('http://www.w3.org/2000/svg','g');b.setAttribute('class','pk d'+f);b.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');b.dataset.pts=k.gs.map(o=>o.x.toFixed(1)+','+o.y.toFixed(1)).join(';');
+     b.innerHTML='<g class="ps"><rect x="'+(-wd/2)+'" y="-110" width="'+wd+'" height="58" rx="29"/><text y="-80" dominant-baseline="central">'+ns+'</text></g>';L.appendChild(b);const rr=vis(b.querySelector('rect'));if(rr)placed.push({r:rr,o:b})})}}
+  const dp=vr('--dp');
+  if(dp>.3)inn.querySelectorAll('.ovsvg .p.det circle').forEach(c=>{const r=vis(c);if(r)placed.push({r,o:c.closest('g.p')})});
+  all('.ovsvg .hotel .l',1).forEach(e=>place(e,false));
+  all('.ovsvg .p:not(.det) .l',1).forEach(e=>place(e,true));
+  /* 들르는 곳: 부모 번호 핀과 너무 가깝거나 자리가 없으면 점 대신 번호 옆 목록으로 */
+  const lists=new Map();
+  if(dp>.3)all('.ovsvg g.sub',1).forEach(g=>{const c=g.querySelector('circle'),t=g.querySelector('text');const rc=vis(c);if(!rc)return;
+    const par=g.dataset.par&&inn.querySelector('.ovsvg g.p[data-k="'+g.dataset.par+'"]');const pc=par&&!isH(par)&&vis(par.querySelector('circle'));
+    const toList=()=>{H.add(g);if(pc&&!g.classList.contains('opt')){if(!lists.has(par))lists.set(par,[]);lists.get(par).push(t.textContent)}};
+    if(pc&&Math.hypot((rc.left+rc.right)/2-(pc.left+pc.right)/2,(rc.top+rc.bottom)/2-(pc.top+pc.bottom)/2)<30)return toList();
+    const R={left:rc.left-3,right:rc.right+3,top:rc.top-3,bottom:rc.bottom+3};if(over(R,g))return toList();
+    unflip(t);let rt=vis(t);if(rt&&over(rt,g)){if(flip(t)){rt=vis(t);if(rt&&over(rt,g)){unflip(t);rt=null}}else rt=null}
+    if(!rt)return toList();placed.push({r:rc,o:g},{r:rt,o:g})});
+  inn.querySelectorAll('.ovsvg g.p .plist').forEach(t=>{const L=lists.get(t.closest('g.p'))||[];const s=L.length>3?L.slice(0,2).join(' · ')+' 외 '+(L.length-2)+'곳':L.join(' · ');if(t.textContent!==s)t.textContent=s});
+  all('.ovsvg .p .plist',dp).forEach(e=>place(e,false));
+  [['.ovsvg .ml',1],['.ovsvg .p.det .l',dp],['.ovsvg .wl',vr('--dw')],['.ovsvg .st text',dp],['.ovsvg .dg text',vr('--dz')],['.ovsvg .cl text',1]].forEach(([sel,v])=>all(sel,v).forEach(e=>place(e,/det|wl/.test(sel))));
+  all('.ovsvg .ar',1).forEach(a=>{if(isH(a))return;const c=a.querySelector('.arc');const r=c&&vis(c);if(!r)return;if(over(r,a))H.add(a);else placed.push({r,o:a})});
+  inn.querySelectorAll('.ovsvg .hid').forEach(e=>{if(!H.has(e))e.classList.remove('hid')});H.forEach(e=>{if(!e.classList.contains('hid'))e.classList.add('hid')})}
 const OVJ=[];let ovRaf=0;function ovTick(now){for(let i=OVJ.length-1;i>=0;i--){const j=OVJ[i];if(now<j.t0){continue}const k=Math.min(1,(now-j.t0)/j.du),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;try{j.f(e);if(k>=1){j.end&&j.end();OVJ.splice(i,1)}}catch(_){OVJ.splice(i,1)}}ovRaf=OVJ.length?requestAnimationFrame(ovTick):0}
 let OVW=null;function ovJob(t0,du,f,end){f(0);OVJ.push({t0,du,f,end,w:OVW});if(!ovRaf)ovRaf=requestAnimationFrame(ovTick)}
 function ovStop(w){for(let i=OVJ.length-1;i>=0;i--){const j=OVJ[i];if(j.w===w){j.f(1);j.end&&j.end();OVJ.splice(i,1)}}}
@@ -1324,7 +1349,7 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
    <button type="button" class="ovm-h" aria-label="숙소로 가기"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 8.2 9 3.3l6 4.9V15a.8.8 0 0 1-.8.8H11v-4.2H7v4.2H3.8A.8.8 0 0 1 3 15Z" fill="currentColor"/></svg></button><div class="ovm-zb"><button type="button" data-z="1" aria-label="확대"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3.5v11M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" data-z="-1" aria-label="축소"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" class="zfit" data-z="0" aria-label="전체 보기"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 7V4a1 1 0 0 1 1-1h3M11 3h3a1 1 0 0 1 1 1v3M15 11v3a1 1 0 0 1-1 1h-3M7 15H4a1 1 0 0 1-1-1v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div></div>
    
    ${solo?'':`<div class="ovm-f">${['대표 동선','1일차','2일차','3일차','4일차'].map((t,i)=>`<button type="button" data-f="${i}" class="${i?'':'on'}" style="--c:${i?OVC[i-1]:'var(--ink)'}">${t}</button>`).join('')}</div>`}
-   <p class="ovm-hint"><span class="ovm-tip">번호나 숙소를 누르면 그곳을 확대해요</span><br><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="1" y1="5" x2="29" y2="5" stroke="#B4BAC2" stroke-width="5"/><line x1="1" y1="5" x2="29" y2="5" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/></svg>지하철</span><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="2" y1="5" x2="28" y2="5" stroke="#6B7684" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/></svg>숙소로 돌아가는 길</span><br><span class="ovm-approx">지도의 위치와 경로는 대략이에요</span></p>`;
+   <p class="ovm-hint"><span class="ovm-tip">번호를 누르면 그곳을 확대해요 · 한 번 더 누르면 처음으로</span><br><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="1" y1="5" x2="29" y2="5" stroke="#B4BAC2" stroke-width="5"/><line x1="1" y1="5" x2="29" y2="5" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/></svg>지하철</span><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="2" y1="5" x2="28" y2="5" stroke="#6B7684" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/></svg>숙소로 돌아가는 길</span><br><span class="ovm-approx">지도의 위치와 경로는 대략이에요</span></p>`;
   w.querySelectorAll('.ovm-f button').forEach(b=>b.addEventListener('click',()=>{if(w.dataset.f===b.dataset.f){const fb=w.querySelector('.ovm-zb button[data-z="0"]');if(fb)fb.click();return}w.dataset.f=b.dataset.f;if(w._fly)w._fly(+b.dataset.f);ovDraw(w,b.dataset.f);w.querySelectorAll('.ovm-f button').forEach(x=>x.classList.toggle('on',x===b));requestAnimationFrame(()=>ovCollide(w,w.querySelector('.ovm-in')))}));
   /* pinch / drag zoom */
   let tapPin=null,tapAt=null,tapped=null;let cq=0;const RG=[...w.querySelectorAll('.ovsvg g.r[data-len]')];const OVMAX=80,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in'),svg=w.querySelector('.ovsvg');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
@@ -1349,18 +1374,18 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   if('ResizeObserver' in window){new ResizeObserver(()=>{if(!vp.clientWidth)return;if(!touched){solo?goHome():(sc=1,tx=0,ty=0,apply())}else apply()}).observe(vp)}
   vp.addEventListener('pointerdown',()=>{touched=true;moved=true},true);
   const rel=e=>{const r=vp.getBoundingClientRect();const z=(r.width/(vp.clientWidth||r.width))||1;return [(e.clientX-r.left)/z,(e.clientY-r.top)/z]};
-  vp.addEventListener('pointerdown',e=>{if(e.target.closest('.ovm-zb,.ovm-h'))return;cancelAnimationFrame(tw);tapPin=e.target.closest('g.p:not(.hid),g.hotel');tapAt=rel(e);pts.set(e.pointerId,rel(e));gest=true;inn.classList.add('mv');try{vp.setPointerCapture(e.pointerId)}catch(_){}
+  vp.addEventListener('pointerdown',e=>{if(e.target.closest('.ovm-zb,.ovm-h'))return;cancelAnimationFrame(tw);tapPin=e.target.closest('g.p:not(.hid),g.hotel,g.pk');tapAt=rel(e);pts.set(e.pointerId,rel(e));gest=true;inn.classList.add('mv');try{vp.setPointerCapture(e.pointerId)}catch(_){}
     if(pts.size===2){const [a,b]=[...pts.values()];pin={d:Math.max(8,Math.hypot(a[0]-b[0],a[1]-b[1])),s:sc,mx:(a[0]+b[0])/2,my:(a[1]+b[1])/2}}else{last=rel(e)}});
   vp.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,rel(e));
     if(pts.size===2&&pin){const [a,b]=[...pts.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);const cx=(a[0]+b[0])/2,cy=(a[1]+b[1])/2;tx+=cx-pin.mx;ty+=cy-pin.my;pin.mx=cx;pin.my=cy;zoomAt((pin.s*d/pin.d)/sc,cx,cy);e.preventDefault()}
     else if(pts.size===1&&last){const p=rel(e);tx+=p[0]-last[0];ty+=p[1]-last[1];tapped=null;apply();last=p;e.preventDefault()}});
   ['gesturestart','gesturechange'].forEach(t=>vp.addEventListener(t,e=>e.preventDefault()));
-  const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pin=null;if(pts.size===1)last=[...pts.values()][0];if(!pts.size){last=null;if(gest)endGest();if(tapPin&&tapAt&&e.type==='pointerup'){const q=rel(e);if(Math.hypot(q[0]-tapAt[0],q[1]-tapAt[1])<8){const g=tapPin;if(g===tapped){tapped=null;const fb=w.querySelector('.ovm-zb button[data-z="0"]');if(fb)fb.click();tapPin=null;tapAt=null;return}tapped=g;const m=/translate\(([-\d.]+) ([-\d.]+)\)/.exec(g.getAttribute('transform')||'');if(m){const W=vp.clientWidth,H=vp.clientHeight;const t=zoomAround(+m[1],+m[2],g);flyTo(t.s,W/2-t.cx/OVX.W*W*t.s,H/2-t.cy/OVX.H*H*t.s)}}}tapPin=null;tapAt=null}};
+  const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pin=null;if(pts.size===1)last=[...pts.values()][0];if(!pts.size){last=null;if(gest)endGest();if(tapPin&&tapAt&&e.type==='pointerup'){const q=rel(e);if(Math.hypot(q[0]-tapAt[0],q[1]-tapAt[1])<8){const g=tapPin;if(g.classList.contains('pk')){const P=g.dataset.pts.split(';').map(q=>q.split(',').map(Number));const W=vp.clientWidth,H=vp.clientHeight;const t=zoomAround(P[0][0],P[0][1],g,P);tapped=null;flyTo(t.s,W/2-t.cx/OVX.W*W*t.s,H/2-t.cy/OVX.H*H*t.s);tapPin=null;tapAt=null;return}if(g===tapped){tapped=null;const fb=w.querySelector('.ovm-zb button[data-z="0"]');if(fb)fb.click();tapPin=null;tapAt=null;return}tapped=g;const m=/translate\(([-\d.]+) ([-\d.]+)\)/.exec(g.getAttribute('transform')||'');if(m){const W=vp.clientWidth,H=vp.clientHeight;const t=zoomAround(+m[1],+m[2],g);flyTo(t.s,W/2-t.cx/OVX.W*W*t.s,H/2-t.cy/OVX.H*H*t.s)}}}tapPin=null;tapAt=null}};
   vp.addEventListener('pointerup',up);vp.addEventListener('pointercancel',up);
   vp.addEventListener('wheel',e=>{moved=true;if(!e.ctrlKey&&sc<=1.01&&e.deltaY>0)return;e.preventDefault();gest=true;inn.classList.add('mv');clearTimeout(wt);wt=setTimeout(endGest,180);const [x,y]=rel(e);zoomAt(e.deltaY<0?1.15:1/1.15,x,y)},{passive:false});
   w.querySelectorAll('.ovm-zb button').forEach(b=>b.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;if(b.dataset.z==='0'){delete views[curF];moved=false;const t=(!solo&&curF)?dayFit(curF):home;flyTo(t.s,W/2-t.cx*W*t.s,H/2-t.cy*H*t.s);return}if(+b.dataset.z>0)zoomAt(2,W/2,H/2);else zoomAt(1/2,W/2,H/2)}));
   let tw=0;const flyTo=(s1,x1,y1)=>{touched=true;const W=vp.clientWidth,H=vp.clientHeight;{const cs=Math.min(OVMAX,Math.max(1,s1));w._tvb={x:-x1/(W*cs)*OVX.W,y:-y1/(H*cs)*OVX.H,width:OVX.W/cs,height:OVX.H/cs}}
-    const s0=sc,x0=tx,y0=ty;cancelAnimationFrame(tw);const big=true;const T=performance.now(),D=(s1/s0>2.5||s0/s1>2.5)?750:650;inn.classList.add('fly');
+    const s0=sc,x0=tx,y0=ty;cancelAnimationFrame(tw);{/* 도착 화면 기준으로 글자 정리를 먼저 해두고 날아감 */const cs=Math.min(OVMAX,Math.max(1,s1));sc=cs;tx=x1;ty=y1;clamp();noCol=true;commit();noCol=false;if(cq){cancelAnimationFrame(cq);cq=0}ovCollide(w,inn);sc=s0;tx=x0;ty=y0;noCol=true;commit();noCol=false}const big=true;const T=performance.now(),D=(s1/s0>2.5||s0/s1>2.5)?750:650;inn.classList.add('fly');
     const step=now=>{const k=Math.min(1,(now-T)/D),e=1-Math.pow(1-k,3);const ls=Math.exp(Math.log(s0)+(Math.log(s1)-Math.log(s0))*e);
       const f=(ls-s0)/(s1-s0||1);sc=ls;tx=x0+(x1-x0)*(s1===s0?e:f);ty=y0+(y1-y0)*(s1===s0?e:f);clamp();if(big){if(k<1){noCol=true;commit();noCol=false}else{gest=false;w._tvb=null;inn.classList.remove('fly');commit()}}
       if(k<1)tw=requestAnimationFrame(step)};tw=requestAnimationFrame(step)};
@@ -1369,10 +1394,13 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   const views={};let curF=+(solo||0),moved=false;
   w._fly=f=>{const W=vp.clientWidth,H=vp.clientHeight;if(!W)return;if(moved)views[curF]={s:sc,x:tx/W,y:ty/H};moved=false;curF=f;const v=views[f];if(v){flyTo(v.s,v.x*W,v.y*H);return}const t=f?dayFit(f):{s:1,cx:.5,cy:.5,ux:.5};flyTo(t.s,W/2-t.cx*W*t.s,H/2-t.cy*H*t.s)};
   /* 핀 주변(같은 날 들르는 곳·식당)이 다 보이게 확대 정도를 정함 */
-  const zoomAround=(px,py,g)=>{const dm=(g.className.baseVal.match(/\bd(\d)\b/)||[])[1];const pts=[[px,py]];const near=(x,y)=>Math.hypot(x-px,y-py)<60;
-    if(dm){OVSUB.forEach(([d,lo,la])=>{if(String(d)===dm){const q=ovP(lo,la);if(near(...q))pts.push(q)}});OVDET.forEach(([d,ll])=>{if(String(d)===dm){const q=ovP(...ll);if(near(...q))pts.push(q)}})}
-    const xs=pts.map(q=>q[0]),ys=pts.map(q=>q[1]);const x0=Math.min(...xs)-10,x1=Math.max(...xs)+10,y0=Math.min(...ys)-8,y1=Math.max(...ys)+8;
-    let s1=Math.min(OVX.W*.5/Math.max(1,x1-x0),OVX.H*.5/Math.max(1,y1-y0));s1=Math.max(solo?14:12,Math.min(30,s1));if(g.classList.contains('hotel'))s1=Math.max(10,Math.min(s1,12));
+  const zoomAround=(px,py,g,extra)=>{const dm=(g.className.baseVal.match(/\bd(\d)\b/)||[])[1];const pts=extra?extra.slice():[[px,py]];
+    /* 이 번호에 딸린 들르는 곳(선택 장소 제외)과 가까운 식당까지 한 화면에 */
+    const keys=extra?[...svg.querySelectorAll('g.p[data-k]')].filter(q=>extra.some(([a,b])=>{const m=/translate\(([-\d.]+) ([-\d.]+)\)/.exec(q.getAttribute('transform'));return m&&Math.abs(+m[1]-a)<.5&&Math.abs(+m[2]-b)<.5})).map(q=>q.dataset.k):[g.dataset&&g.dataset.k];
+    svg.querySelectorAll('g.sub:not(.opt)').forEach(q=>{if(keys.includes(q.dataset.par)){const m=/translate\(([-\d.]+) ([-\d.]+)\)/.exec(q.getAttribute('transform'));if(m)pts.push([+m[1],+m[2]])}});
+    if(dm)OVDET.forEach(([d,ll])=>{if(String(d)===dm){const q=ovP(...ll);if(Math.hypot(q[0]-px,q[1]-py)<40)pts.push(q)}});
+    const xs=pts.map(q=>q[0]),ys=pts.map(q=>q[1]);const x0=Math.min(...xs)-6,x1=Math.max(...xs)+6,y0=Math.min(...ys)-5,y1=Math.max(...ys)+5;
+    let s1=Math.min(OVX.W*.55/Math.max(1,x1-x0),OVX.H*.55/Math.max(1,y1-y0));s1=Math.max(solo?14:12,Math.min(60,s1));if(g.classList.contains('hotel'))s1=24;
     return {s:s1,cx:(x0+x1)/2,cy:(y0+y1)/2}};
   w._goto=(s1,x1,y1)=>flyTo(s1,x1,y1);
   w._clear=()=>{pts.clear();pin=null;last=null;if(gest){cancelAnimationFrame(tw);gest=false;inn.classList.remove('mv');commit()}};
@@ -1419,7 +1447,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v6.4</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v6.5</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
