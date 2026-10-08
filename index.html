@@ -473,6 +473,7 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .ovsvg .p .n{fill:#fff;font-size:34px;font-weight:800;text-anchor:middle;font-family:var(--body)}
 .ovsvg .l{font-size:46px;font-weight:800;fill:#191F28;paint-order:stroke;stroke:#fff;stroke-width:12px;stroke-linejoin:round;font-family:var(--body);transition:opacity .2s}
 .ovsvg .l .s{font-size:34px;font-weight:600;fill:#6B7684}
+.ovsvg .apt rect{fill:#333D4B;stroke:#fff;stroke-width:7}.ovsvg .apt .pl{fill:#fff}.ovsvg .apt text.l{font-weight:800}
 .ovsvg .hotel rect{fill:#E5323B;stroke:#fff;stroke-width:7}
 .ovsvg .hotel text{fill:#fff;font-size:36px;font-weight:800;text-anchor:middle;font-family:var(--body)}
 .ovsvg .hotel text.l{fill:#E5323B;font-size:44px;text-anchor:end}
@@ -1114,7 +1115,9 @@ function ovSvg(){let r='',pins='';
     r+=`<g class="r d${d}" data-len="${len.toFixed(0)}" data-n="1"><path class="rl${dash?' dash':''}" d="M${x1.toFixed(2)} ${y1.toFixed(2)} Q${cx.toFixed(2)} ${cy.toFixed(2)} ${x2.toFixed(2)} ${y2.toFixed(2)}"/>${ovChev(x1,y1,cx,cy,x2,y2,[.5],0,'s1')}${ovChev(x1,y1,cx,cy,x2,y2,[.3,.7],0,'s2')}${ovChev(x1,y1,cx,cy,x2,y2,[.14,.5,.86],0,'s3')}</g>`});
   const pinG=(cls,d,k,n,t,sub,ax,ay,rr)=>{const [x,y]=ovP(...(OVPT[k]||k));const anc=ax>0?'start':ax<0?'end':'middle';const lx=ax*(rr+18),ly=ay>0?rr+62:ay<0?(sub?-rr-66:-rr-20):14;
     return `<g class="p d${d}${cls}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><circle r="${rr}"/><text class="n" y="${rr*.4|0}">${n}</text><text class="l" x="${lx}" y="${ly}" text-anchor="${anc}">${t}${sub?`<tspan class="s" x="${lx}" dy="46">${sub}</tspan>`:''}</text></g></g>`};
-  OVPIN.forEach(([d,k,n,t,sub,ax,ay])=>{pins+=pinG(k==='ximen'?' xm':'',d,k,n,t,sub,ax,ay,30)});
+  OVPIN.forEach(([d,k,n,t,sub,ax,ay])=>{let g=pinG(k==='ximen'?' xm':k==='airport'?' apt':'',d,k,n,t,sub,ax,ay,k==='airport'?34:30);
+    if(k==='airport')g=g.replace(/<circle r="34"\/><text class="n"[^>]*>[^<]*<\/text>/,'<rect x="-34" y="-34" width="68" height="68" rx="16"/><path class="pl" transform="rotate(45) translate(-24 -24) scale(2)" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>');
+    pins+=g});
   OVDET.forEach(([d,ll,t,sub,ax,ay,o,n])=>{pins+=pinG(' det'+(o?' opt':''),d,ll,n||'',t,sub,ax,ay,30)});
   const [dx0,dy0]=ovP(OVD.x0,OVD.y1),[dx1,dy1]=ovP(OVD.x1,OVD.y0);
   let det=`<rect class="sea" x="-4000" y="-4000" width="10000" height="10000"/>${OVBASE}`;
