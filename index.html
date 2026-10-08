@@ -1250,7 +1250,7 @@ const OVDET=[[1,[121.5003,25.0363],'샤오왕주과 (점심)','숙소에서 걸�
 
 const OVWALK=[[2,[121.5013,25.0333],[121.5036,25.0410],'걸어서 20분','택시 5분 · 약 1.4km',1],
  [1,[121.5013,25.0333],[121.5003,25.0363],'','',1,-.25],[1,[121.5003,25.0363],[121.4992,25.0380],'','',1,0],[1,[121.4992,25.0380],[121.5013,25.0333],'숙소까지 5분','',-1,.45]];
-const OVSUB=[[2,121.6931,25.2088,'여왕머리 바위',1],[2,121.7771,25.0411,'닭날개 볶음밥',1],[2,121.7742,25.0398,'징안 출렁다리',-1],[2,121.8452,25.1097,'땅콩아이스크림',-1],[2,121.8441,25.1081,'아메이차루',-1],[3,121.5490,24.8620,'꼬마기차 타는 곳',1],[3,121.5476,24.8487,'우라이 폭포',1],[3,121.5497,24.8647,'산지메이스우 (점심)',-1],[3,121.5068,25.0420,'홍러우',-1,1],[3,121.5076,25.0421,'무지개 횡단보도',1,1],[3,121.5058,25.0441,'완녠빌딩',-1,1],[3,121.5056,25.0430,'돈키호테',-1,1],[3,121.5077,25.0438,'아종면선',1,1],[3,121.5078,25.04325,'망고빙수',1,1],[3,121.5079,25.0452,'행복당 밀크티',1,1],[3,121.5097,25.0446,'지하상가 입구',1,1],[3,121.5205,25.0527,'치이카와 매장',1,1]];
+const OVSUB=[[2,121.6931,25.2088,'여왕머리 바위',1],[2,121.7771,25.0411,'닭날개 볶음밥',1],[2,121.7742,25.0398,'징안 출렁다리',-1],[2,121.8439,25.1100,'땅콩아이스크림',-1],[2,121.8441,25.1081,'아메이차루',-1],[3,121.5490,24.8620,'꼬마기차 타는 곳',1],[3,121.5476,24.8487,'우라이 폭포',1],[3,121.5497,24.8647,'산지메이스우 (점심)',-1],[3,121.5068,25.0420,'홍러우',-1,1],[3,121.5076,25.0421,'무지개 횡단보도',1,1],[3,121.5058,25.0441,'완녠빌딩',-1,1],[3,121.5056,25.0430,'돈키호테',-1,1],[3,121.5077,25.0438,'아종면선',1,1],[3,121.5078,25.04325,'망고빙수',1,1],[3,121.5079,25.0452,'행복당 밀크티',1,1],[3,121.5097,25.0446,'지하상가 입구',1,1],[3,121.5205,25.0527,'치이카와 매장',1,1]];
 const OVDG=[['완화구',121.492,25.026],['중정구',121.516,25.026],['다안구',121.543,25.024],['신이구',121.580,25.027],['중산구',121.534,25.061],['다퉁구',121.513,25.062],['쑹산구',121.560,25.061]];
 const OVMRT=[['#0070BD',[[121.4999,25.0354],[121.5082,25.0421],[121.5172,25.0462],[121.5232,25.0448],[121.5328,25.0423],[121.5438,25.0416],[121.5513,25.0414],[121.5577,25.0413],[121.5651,25.0411],[121.5764,25.0408],[121.5824,25.0450]]],
  ['#E3002C',[[121.5172,25.0462],[121.5162,25.0414],[121.5183,25.0326],[121.5287,25.0339],[121.5353,25.0330],[121.5434,25.0330],[121.5525,25.0333],[121.5637,25.0331],[121.5706,25.0328]]],
@@ -1314,6 +1314,9 @@ function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>
      b.innerHTML='<g class="ps"><rect x="'+(-wd/2)+'" y="-110" width="'+wd+'" height="58" rx="29"/><text y="-80" dominant-baseline="central">'+ns+'</text></g>';L.appendChild(b);const rr=vis(b.querySelector('rect'));if(rr)placed.push({r:rr,o:b})})}}
   const dp=vr('--dp');
   if(dp>.3)inn.querySelectorAll('.ovsvg .p.det circle').forEach(c=>{const r=vis(c);if(r)placed.push({r,o:c.closest('g.p')})});
+  /* 들르는 곳 점 자리를 먼저 잡아 두면 번호 이름이 반대쪽으로 비켜 감 */
+  if(dp>.3)all('.ovsvg g.sub:not(.opt)',1).forEach(g=>{const rc=vis(g.querySelector('circle'));if(!rc)return;const par=g.dataset.par&&inn.querySelector('.ovsvg g.p[data-k="'+g.dataset.par+'"]');const pc=par&&vis(par.querySelector('circle'));
+    if(pc&&Math.hypot((rc.left+rc.right)/2-(pc.left+pc.right)/2,(rc.top+rc.bottom)/2-(pc.top+pc.bottom)/2)<30)return;placed.push({r:{left:rc.left-4,right:rc.right+4,top:rc.top-4,bottom:rc.bottom+4},o:g})});
   all('.ovsvg .hotel .l',1).forEach(e=>place(e,false));
   all('.ovsvg .p:not(.det) .l',1).forEach(e=>place(e,true));
   /* 들르는 곳: 부모 번호 핀과 너무 가깝거나 자리가 없으면 점 대신 번호 옆 목록으로 */
@@ -1400,7 +1403,11 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
     svg.querySelectorAll('g.sub:not(.opt)').forEach(q=>{if(keys.includes(q.dataset.par)){const m=/translate\(([-\d.]+) ([-\d.]+)\)/.exec(q.getAttribute('transform'));if(m)pts.push([+m[1],+m[2]])}});
     if(dm)OVDET.forEach(([d,ll])=>{if(String(d)===dm){const q=ovP(...ll);if(Math.hypot(q[0]-px,q[1]-py)<40)pts.push(q)}});
     const xs=pts.map(q=>q[0]),ys=pts.map(q=>q[1]);const x0=Math.min(...xs)-6,x1=Math.max(...xs)+6,y0=Math.min(...ys)-5,y1=Math.max(...ys)+5;
-    let s1=Math.min(OVX.W*.55/Math.max(1,x1-x0),OVX.H*.55/Math.max(1,y1-y0));s1=Math.max(solo?14:12,Math.min(60,s1));if(g.classList.contains('hotel'))s1=24;
+    const fit=Math.min(OVX.W*.78/Math.max(1,x1-x0),OVX.H*.72/Math.max(1,y1-y0));
+    /* 들르는 곳끼리·번호와 최소 48px 떨어질 때까지 확대 (화면에 다 들어오는 한도 안에서) */
+    let dmin=1e9;for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const d=Math.hypot(pts[i][0]-pts[j][0],pts[i][1]-pts[j][1]);if(d>.3&&d<dmin)dmin=d}
+    const pxu=(vp.clientWidth||390)/OVX.W,sep=dmin<1e9?64/(dmin*pxu):0;
+    let s1=Math.max(solo?14:12,Math.min(fit,Math.max(sep,14)));s1=Math.min(OVMAX,s1);if(g.classList.contains('hotel'))s1=24;
     return {s:s1,cx:(x0+x1)/2,cy:(y0+y1)/2}};
   w._goto=(s1,x1,y1)=>flyTo(s1,x1,y1);
   w._clear=()=>{pts.clear();pin=null;last=null;if(gest){cancelAnimationFrame(tw);gest=false;inn.classList.remove('mv');commit()}};
@@ -1447,7 +1454,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v6.5</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v6.6</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
