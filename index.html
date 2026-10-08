@@ -959,7 +959,7 @@ html,button,a,[role=button],.bottombar{touch-action:manipulation}
 .ovsvg .sub.d2 circle{stroke:#F07C1E}.ovsvg .sub.d3 circle{stroke:#1FA463}
 
 .ovsvg .sub text{font-size:34px;font-weight:600;fill:#4E5968;paint-order:stroke;stroke:#fff;stroke-width:9px;stroke-linejoin:round;font-family:var(--body)}
-.ovm[data-f="0"] .ovsvg .sub{display:none}
+
 
 .ripw,.walks .ripw,.wbtn .ripw{background:none!important;padding:0!important;margin:0!important;border:0!important;box-shadow:none!important;font-size:0!important;width:auto!important;height:auto!important}
 
@@ -967,8 +967,8 @@ html,button,a,[role=button],.bottombar{touch-action:manipulation}
 
 /* 전체 보기는 큰 동선만: 세부 장소·이동수단·부제는 일차를 고르거나 일차 지도에서 */
 .ovm[data-f="0"] .ovsvg :is(.mdg,.wl){display:none}
-.ovm[data-f="0"] .ovsvg .p.up .l,.ovm-in.lo .ovsvg .p.up .l{transform:translateY(40px)}
-.ovm[data-f="0"] .ovsvg .p .l .s{display:none}
+.ovm[data-f="0"] .ovm-in:not(.dpv) .ovsvg .p.up .l,.ovm-in.lo .ovsvg .p.up .l{transform:translateY(40px)}
+.ovm[data-f="0"] .ovm-in:not(.dpv) .ovsvg .p .l .s{opacity:0}
 
 .ovm-f{grid-template-columns:minmax(0,1.6fr) repeat(4,minmax(0,1fr));gap:5px}
 
@@ -978,7 +978,7 @@ html,button,a,[role=button],.bottombar{touch-action:manipulation}
 .ovm-in.dpv .ovsvg .p.det:not(.hid) .ps circle,.ovm-in.dpv .ovsvg .p.det:not(.hid) .ps .n{pointer-events:auto;cursor:pointer}
 
 .ovsvg .plist{font-size:30px;font-weight:600;fill:#6B7684;paint-order:stroke;stroke:#fff;stroke-width:8px;stroke-linejoin:round;font-family:var(--body);opacity:var(--dp)}
-.ovm[data-f="0"] .ovsvg .plist{display:none}
+
 .ovsvg .sub.opt circle{fill:#E3F5EA;stroke:#8FD3A8;stroke-width:4px;stroke-dasharray:none}
 .ovsvg .sub.opt text{font-size:30px;fill:#6B7684;font-weight:600}
 
@@ -986,6 +986,11 @@ html,button,a,[role=button],.bottombar{touch-action:manipulation}
 .ovsvg .pk.d1 .ps rect{fill:#3182F6}.ovsvg .pk.d2 .ps rect{fill:#F07C1E}.ovsvg .pk.d3 .ps rect{fill:#1FA463}
 .ovsvg .pk text{font-size:34px;font-weight:800;text-anchor:middle;font-family:var(--body);fill:#fff}
 .ovsvg .pk .ps rect,.ovsvg .pk .ps text{pointer-events:auto;cursor:pointer}
+
+.ovsvg .l,.ovsvg .sub text,.ovsvg .wl{transition:opacity .32s ease,transform .45s cubic-bezier(.22,.8,.25,1)!important}
+.ovsvg .p.subx .l .s{transition:opacity .3s ease}
+.ovm-in.dpv .ovsvg .p.subx .l .s{opacity:0}
+.ovsvg .p.subx .plist{font-size:32px;fill:#6B7684}
 </style>
 </head>
 <body>
@@ -1265,8 +1270,8 @@ function ovSvg(){let r='',pins='',mls='';
     if(ml){const qx=(x1+2*cx+x2)/4,qy=(y1+2*cy+y2)/4;let nx=-dy/len,ny=dx/len;if(rad<0){nx=-nx;ny=-ny}mls+=`<g class="r d${d} mdg" data-i="${oi}" transform="translate(${qx.toFixed(1)} ${qy.toFixed(1)})"><g class="ps"><text class="ml" x="${(nx*40).toFixed(0)}" y="${(ny*40+(ny<0?-14:12)).toFixed(0)}" text-anchor="${Math.abs(nx)<.4?'middle':nx>0?'start':'end'}">${ml.split('|')[0]}${ml.includes('|')?`<tspan class="s" x="${(nx*40).toFixed(0)}" dy="34">${ml.split('|')[1]}</tspan>`:''}</text></g></g>`}
     r+=`<g class="r d${d}" data-i="${oi}" data-len="${len.toFixed(0)}" data-n="1"><path class="rl${dash?' dash':''}" d="M${x1.toFixed(2)} ${y1.toFixed(2)} Q${cx.toFixed(2)} ${cy.toFixed(2)} ${x2.toFixed(2)} ${y2.toFixed(2)}"/>${ovChev(x1,y1,cx,cy,x2,y2,[.5],0,'s1')}${ovChev(x1,y1,cx,cy,x2,y2,[.3,.7],0,'s2')}${ovChev(x1,y1,cx,cy,x2,y2,[.14,.5,.86],0,'s3')}</g>`});
   const pinG=(cls,d,k,n,t,sub,ax,ay,rr)=>{const [x,y]=ovP(...(OVPT[k]||k));const anc=ax>0?'start':ax<0?'end':'middle';const lx=ax*(rr+18),ly=ay>0?rr+62:ay<0?(sub?-rr-66:-rr-20):14;
-    return `<g class="p d${d}${cls}${ay<0&&sub?' up':''}"${typeof k==='string'?` data-k="${k}"`:''} transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><circle r="${rr}"/><text class="n" y="1" dominant-baseline="central">${n}</text><text class="l" x="${lx}" y="${ly}" text-anchor="${anc}">${t}${sub?`<tspan class="s" x="${lx}" dy="46">${sub}</tspan>`:''}</text>${cls.includes('det')?'':`<text class="plist" x="${lx}" y="${ay<0?rr+44:ly+(sub?86:44)}" text-anchor="${anc}"></text>`}</g></g>`};
-  OVPIN.forEach(([d,k,n,t,sub,ax,ay])=>{let g=pinG(k==='ximen'?' xm':k==='airport'?' apt':'',d,k,n,t,sub,ax,ay,k==='airport'?34:30);
+    return `<g class="p d${d}${cls}${ay<0&&sub?' up':''}"${typeof k==='string'?` data-k="${k}"`:''} transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><g class="ps"><circle r="${rr}"/><text class="n" y="1" dominant-baseline="central">${n}</text><text class="l" x="${lx}" y="${ly}" text-anchor="${anc}">${t}${sub?`<tspan class="s" x="${lx}" dy="46">${sub}</tspan>`:''}</text>${cls.includes('det')?'':`<text class="plist" x="${lx}" y="${cls.includes('subx')?ly+46:ay<0?rr+44:ly+(sub?86:44)}" text-anchor="${anc}"></text>`}</g></g>`};
+  OVPIN.forEach(([d,k,n,t,sub,ax,ay])=>{let g=pinG(k==='ximen'?' xm':k==='airport'?' apt':k==='wulai'?' subx':'',d,k,n,t,sub,ax,ay,k==='airport'?34:30);
     if(k==='airport')g=g.replace(/<circle r="34"\/><text class="n"[^>]*>[^<]*<\/text>/,'<rect x="-34" y="-34" width="68" height="68" rx="16"/><path class="pl" transform="rotate(45) translate(-24 -24) scale(2)" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>');
     pins+=g});
   OVDET.forEach(([d,ll,t,sub,ax,ay,o,n])=>{pins+=pinG(' det'+(o?' opt':''),d,ll,n||'',t,sub,ax,ay,24)});
@@ -1295,13 +1300,14 @@ function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>
   const own=e=>e.closest('g.p,g.hotel,g.st,g.dg,g.wkg,g.mdg,g.sub,g.cl')||e;
   const over=(r,o)=>placed.some(q=>q.o!==o&&r.left<q.r.right+pad&&r.right>q.r.left-pad&&r.top<q.r.bottom+pad&&r.bottom>q.r.top-pad);
   const vis=e=>{const r=e.getBoundingClientRect();return r.width>0?r:null};
-  const setX=(e,x,a)=>{e.setAttribute('x',x);e.setAttribute('text-anchor',a);e.querySelectorAll('tspan').forEach(t=>t.setAttribute('x',x))};
-  inn.querySelectorAll('.ovsvg .flp').forEach(e=>{setX(e,e.dataset.ox,e.dataset.oa);e.classList.remove('flp')});
-  const flip=e=>{if(!e.dataset.ox){e.dataset.ox=e.getAttribute('x')||'0';e.dataset.oa=e.getAttribute('text-anchor')||'middle'}const ox=e.dataset.ox,oa=e.dataset.oa;if(oa==='middle'||ox==='0')return false;setX(e,String(-parseFloat(ox)),oa==='start'?'end':'start');e.classList.add('flp');return true};
-  const unflip=e=>{if(e.classList.contains('flp')){setX(e,e.dataset.ox,e.dataset.oa);e.classList.remove('flp')}};
+  /* 글자를 비켜야 하면 자리를 바꾸지 않고 옆으로 미끄러지듯 옮김 (원래 자리 기준으로 계산) */
+  const SH=new Map(),prevT=new Map();
+  const noT=e=>e.style.setProperty('transition','none','important');inn.querySelectorAll('.ovsvg .flp').forEach(e=>{prevT.set(e,e.style.transform);noT(e);e.style.transform=''});
+  const shifted=(e,r)=>{const a=e.getAttribute('text-anchor')||'middle',ox=parseFloat(e.getAttribute('x')||'0');if(a==='middle'||!ox)return null;let bw=0;try{bw=e.getBBox().width}catch(_){}if(!bw)return null;
+    const dx=a==='start'?-2*ox-bw:-2*ox+bw,k=r.width/bw;return {dx,r:{left:r.left+dx*k,right:r.right+dx*k,top:r.top,bottom:r.bottom,width:r.width}}};
   const act=e=>{if(f==='0'||!f)return true;const g=e.closest('.p,.r');return !g||g.classList.contains('d'+f)};
-  const place=(e,canFlip)=>{if(isH(e))return;let r=vis(e);if(!r)return;const o=own(e);if(!over(r,o)){placed.push({r,o});return}
-    if(canFlip&&flip(e)){r=vis(e);if(r&&!over(r,o)){placed.push({r,o});return}unflip(e)}H.add(e)};
+  const place=(e,canFlip)=>{if(isH(e))return;const r=vis(e);if(!r)return;const o=own(e);if(!over(r,o)){placed.push({r,o});return}
+    const sf=canFlip&&shifted(e,r);if(sf&&!over(sf.r,o)){placed.push({r:sf.r,o});SH.set(e,sf.dx);return}H.add(e)};
   const all=(sel,v)=>v<.3?[]:[...inn.querySelectorAll(sel)].sort((a,b)=>act(b)-act(a));
   inn.querySelectorAll('.ovsvg .hotel rect').forEach(e=>{const r=vis(e);if(r)placed.push({r,o:own(e)})});
   all('.ovsvg .p:not(.det)',1).forEach(g=>{const c=g.querySelector('circle,rect');const r=c&&vis(c);if(!r)return;const R={left:r.left-2,right:r.right+2,top:r.top-2,bottom:r.bottom+2};if(over(R,g))H.add(g);else placed.push({r,o:g})});
@@ -1326,13 +1332,16 @@ function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>
     const toList=()=>{H.add(g);if(pc&&!g.classList.contains('opt')){if(!lists.has(par))lists.set(par,[]);lists.get(par).push(t.textContent)}};
     if(pc&&Math.hypot((rc.left+rc.right)/2-(pc.left+pc.right)/2,(rc.top+rc.bottom)/2-(pc.top+pc.bottom)/2)<30)return toList();
     const R={left:rc.left-3,right:rc.right+3,top:rc.top-3,bottom:rc.bottom+3};if(over(R,g))return toList();
-    unflip(t);let rt=vis(t);if(rt&&over(rt,g)){if(flip(t)){rt=vis(t);if(rt&&over(rt,g)){unflip(t);rt=null}}else rt=null}
+    let rt=vis(t);if(rt&&over(rt,g)){const sf=shifted(t,rt);if(sf&&!over(sf.r,g)){rt=sf.r;SH.set(t,sf.dx)}else rt=null}
     if(!rt)return toList();placed.push({r:rc,o:g},{r:rt,o:g})});
   inn.querySelectorAll('.ovsvg g.p .plist').forEach(t=>{const L=lists.get(t.closest('g.p'))||[];const s=L.length>3?L.slice(0,2).join(' · ')+' 외 '+(L.length-2)+'곳':L.join(' · ');if(t.textContent!==s)t.textContent=s});
   all('.ovsvg .p .plist',dp).forEach(e=>place(e,false));
   [['.ovsvg .ml',1],['.ovsvg .p.det .l',dp],['.ovsvg .wl',vr('--dw')],['.ovsvg .st text',dp],['.ovsvg .dg text',vr('--dz')],['.ovsvg .cl text',1]].forEach(([sel,v])=>all(sel,v).forEach(e=>place(e,/det|wl/.test(sel))));
   all('.ovsvg .ar',1).forEach(a=>{if(isH(a))return;const c=a.querySelector('.arc');const r=c&&vis(c);if(!r)return;if(over(r,a))H.add(a);else placed.push({r,o:a})});
-  inn.querySelectorAll('.ovsvg .hid').forEach(e=>{if(!H.has(e))e.classList.remove('hid')});H.forEach(e=>{if(!e.classList.contains('hid'))e.classList.add('hid')})}
+  inn.querySelectorAll('.ovsvg .hid').forEach(e=>{if(!H.has(e))e.classList.remove('hid')});H.forEach(e=>{if(!e.classList.contains('hid'))e.classList.add('hid')});
+  /* 미끄러짐 반영: 이전 위치에서 새 위치로만 움직이고, 그대로면 가만히 */
+  const T=new Set([...prevT.keys(),...SH.keys()]);T.forEach(e=>{noT(e);e.style.transform=prevT.get(e)||''});if(T.size)void inn.getBoundingClientRect(),T.forEach(e=>void getComputedStyle(e).transform);
+  T.forEach(e=>{e.style.removeProperty('transition');const d=SH.get(e);e.style.transform=d?'translateX('+d.toFixed(1)+'px)':'';e.classList.toggle('flp',!!d)})}
 const OVJ=[];let ovRaf=0;function ovTick(now){for(let i=OVJ.length-1;i>=0;i--){const j=OVJ[i];if(now<j.t0){continue}const k=Math.min(1,(now-j.t0)/j.du),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;try{j.f(e);if(k>=1){j.end&&j.end();OVJ.splice(i,1)}}catch(_){OVJ.splice(i,1)}}ovRaf=OVJ.length?requestAnimationFrame(ovTick):0}
 let OVW=null;function ovJob(t0,du,f,end){f(0);OVJ.push({t0,du,f,end,w:OVW});if(!ovRaf)ovRaf=requestAnimationFrame(ovTick)}
 function ovStop(w){for(let i=OVJ.length-1;i>=0;i--){const j=OVJ[i];if(j.w===w){j.f(1);j.end&&j.end();OVJ.splice(i,1)}}}
@@ -1352,7 +1361,7 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
    <button type="button" class="ovm-h" aria-label="숙소로 가기"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 8.2 9 3.3l6 4.9V15a.8.8 0 0 1-.8.8H11v-4.2H7v4.2H3.8A.8.8 0 0 1 3 15Z" fill="currentColor"/></svg></button><div class="ovm-zb"><button type="button" data-z="1" aria-label="확대"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3.5v11M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" data-z="-1" aria-label="축소"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" class="zfit" data-z="0" aria-label="전체 보기"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 7V4a1 1 0 0 1 1-1h3M11 3h3a1 1 0 0 1 1 1v3M15 11v3a1 1 0 0 1-1 1h-3M7 15H4a1 1 0 0 1-1-1v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div></div>
    
    ${solo?'':`<div class="ovm-f">${['대표 동선','1일차','2일차','3일차','4일차'].map((t,i)=>`<button type="button" data-f="${i}" class="${i?'':'on'}" style="--c:${i?OVC[i-1]:'var(--ink)'}">${t}</button>`).join('')}</div>`}
-   <p class="ovm-hint"><span class="ovm-tip">번호를 누르면 그곳을 확대해요 · 한 번 더 누르면 처음으로</span><br><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="1" y1="5" x2="29" y2="5" stroke="#B4BAC2" stroke-width="5"/><line x1="1" y1="5" x2="29" y2="5" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/></svg>지하철</span><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="2" y1="5" x2="28" y2="5" stroke="#6B7684" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/></svg>숙소로 돌아가는 길</span><br><span class="ovm-approx">지도의 위치와 경로는 대략이에요</span></p>`;
+   <p class="ovm-hint"><span class="ovm-tip">번호를 누르면 들르는 곳까지 크게 보여요 · 한 번 더 누르면 처음으로</span><br><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="1" y1="5" x2="29" y2="5" stroke="#B4BAC2" stroke-width="5"/><line x1="1" y1="5" x2="29" y2="5" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/></svg>지하철</span><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="2" y1="5" x2="28" y2="5" stroke="#6B7684" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/></svg>숙소로 돌아가는 길</span><br><span class="ovm-approx">지도의 위치와 경로는 대략이에요</span></p>`;
   w.querySelectorAll('.ovm-f button').forEach(b=>b.addEventListener('click',()=>{if(w.dataset.f===b.dataset.f){const fb=w.querySelector('.ovm-zb button[data-z="0"]');if(fb)fb.click();return}w.dataset.f=b.dataset.f;if(w._fly)w._fly(+b.dataset.f);ovDraw(w,b.dataset.f);w.querySelectorAll('.ovm-f button').forEach(x=>x.classList.toggle('on',x===b));requestAnimationFrame(()=>ovCollide(w,w.querySelector('.ovm-in')))}));
   /* pinch / drag zoom */
   let tapPin=null,tapAt=null,tapped=null;let cq=0;const RG=[...w.querySelectorAll('.ovsvg g.r[data-len]')];const OVMAX=80,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in'),svg=w.querySelector('.ovsvg');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
@@ -1454,7 +1463,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v6.6</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v6.7</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
