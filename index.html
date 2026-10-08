@@ -903,12 +903,19 @@ body{word-break:keep-all;overflow-wrap:break-word}
 .badge.pastb{background:#B0B8C1!important;color:#fff!important}
 /* schedule now */
 .sched li.past{opacity:.42;filter:grayscale(1)}
-.sched li.now{background:#F2F7FF;border-radius:14px;box-shadow:inset 0 0 0 1.5px var(--jade);margin:4px -8px;padding:12px 8px}
+.sched li.now{background:none;box-shadow:none;margin:0;isolation:isolate}
+.sched li.now::after{content:'';position:absolute;inset:3px -10px 3px -10px;border-radius:14px;background:#EEF5FF;z-index:-1}
+.sched li.now time{color:var(--jade)!important;font-weight:800}
+.sched li.now .chip.rowroute{background:#fff;color:var(--jade);box-shadow:inset 0 0 0 1.5px var(--jade)}
+.sched li.now .dot{box-shadow:none}
+.sched li.now .dot::after,.sched li.now .dot::before{content:'';position:absolute;inset:0;border-radius:50%;border:1.5px solid var(--jade);background:none;animation:ripple 2.4s ease-out infinite;will-change:transform,opacity}
+.sched li.now .dot::before{animation-delay:1.2s}
+@keyframes ripple{0%{transform:scale(1);opacity:.8}100%{transform:scale(2.8);opacity:0}}
 .sched li.now .nowtag{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 8px;font-size:12.5px;box-shadow:0 2px 6px rgba(49,130,246,.3)}
 .sched li.now .nowtag i{position:relative;width:7px;height:7px;border-radius:50%;background:#fff}.sched li.now .nowtag i::after{content:'';position:absolute;inset:0;border-radius:50%;background:#fff;animation:ringOut 1.6s ease-out infinite}
 @keyframes livePulse2{0%{box-shadow:0 0 0 0 rgba(255,255,255,.8)}80%{box-shadow:0 0 0 6px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
 .sched li.nextup .nowtag{background:var(--paper);color:var(--jade);box-shadow:inset 0 0 0 1.5px var(--jade)}
-@media (prefers-reduced-motion:reduce){.nc-live i::after,.sched li.now .nowtag i::after,.sched li.now .dot::after{animation:none;display:none}}
+@media (prefers-reduced-motion:reduce){.nc-live i::after,.sched li.now .nowtag i::after,.sched li.now .dot::after,.sched li.now .dot::before{animation:none;display:none}}
 </style>
 </head>
 <body>
@@ -1385,7 +1392,7 @@ function markNow(){const ni=nowInfo();document.querySelectorAll('.sched li.past'
   const tag=(li,txt,cls)=>{if(!li)return;li.classList.add(cls);const s=el('span','nowtag');s.innerHTML=txt;li.appendChild(s)};
   const find=r=>r&&(lis.length===DAYS[todayIdx].sched.length?lis[r.i]:null)||r&&lis.find(li=>{const t=li.querySelector('time');return t&&toMin(t.textContent)===r.t&&li.textContent.includes(r.title.slice(0,4))});
   const cl=find(ni.cur);if(cl){const ci=lis.indexOf(cl);lis.forEach((li,j)=>li.classList.toggle('past',j<ci))}
-  tag(cl,'<i></i>지금','now');tag(find(ni.nxt),'다음','nextup')}
+  if(cl)cl.classList.add('now');tag(find(ni.nxt),'다음','nextup')}
 setInterval(()=>{if(!document.hidden)markNow()},60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)markNow()});
 const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;const FS_KEY='tw-big';function setBig(on){document.documentElement.classList.toggle('big',on);document.querySelectorAll('.fsbtn').forEach(b=>{b.setAttribute('aria-pressed',on?'true':'false');b.querySelector('em').textContent=on?'글씨 보통':'글씨 크게'});try{localStorage.setItem(FS_KEY,on?'1':'0')}catch(e){}}
 function fsBtn(){const b=el('button','fsbtn','<b>가</b><em>글씨 크게</em>');b.type='button';b.addEventListener('click',()=>setBig(!document.documentElement.classList.contains('big')));return b}
