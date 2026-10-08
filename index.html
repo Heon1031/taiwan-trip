@@ -10,7 +10,7 @@
 <meta name="description" content="2026년 11월 7일~10일 여섯 식구 첫 해외여행 · 대만 3박 4일 안내서">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="여섯 식구 첫 해외여행">
 <meta property="og:title" content="여섯 식구 첫 해외여행 · 대만 3박 4일 안내서">
@@ -1281,8 +1281,8 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   /* pinch / drag zoom */
   let cq=0;const OVMAX=80,vp=w.querySelector('.ovm-vp'),inn=w.querySelector('.ovm-in'),svg=w.querySelector('.ovsvg');let sc=1,tx=0,ty=0;const pts=new Map();let pin=null,last=null,lastTap=0;
   const clamp=()=>{const W=vp.clientWidth,H=vp.clientHeight;sc=Math.min(OVMAX,Math.max(1,sc));tx=Math.min(0,Math.max(W-W*sc,tx));ty=Math.min(0,Math.max(H-H*sc,ty))};
-  let gest=false,csc=1,ctx=0,cty=0,wt=0;
-  const commit=()=>{const W=vp.clientWidth||1,H=vp.clientHeight||1;csc=sc;ctx=tx;cty=ty;inn.style.transform='';svg.setAttribute('viewBox',`${(-tx/(W*sc)*OVX.W).toFixed(2)} ${(-ty/(H*sc)*OVX.H).toFixed(2)} ${(OVX.W/sc).toFixed(2)} ${(OVX.H/sc).toFixed(2)}`);inn.style.setProperty('--k',(ovF(sc)/sc).toFixed(4));{const pu=W/OVX.W*sc;inn.style.setProperty('--ka',(9/(32*pu)).toFixed(5));inn.style.setProperty('--kl',(1/pu).toFixed(5));svg.querySelectorAll('g.r[data-len]').forEach(g=>{const L=g.dataset.len*pu;g.dataset.n=L<150?'1':L<360?'2':'3'})}inn.style.setProperty('--dq',Math.min(1,Math.max(0,(sc-22)/6)).toFixed(3));inn.classList.toggle('lo',!solo&&sc<1.8);inn.style.setProperty('--dz',Math.min(1,Math.max(0,(sc-2.6)/1.8)).toFixed(3));inn.style.setProperty('--dp',Math.min(1,Math.max(0,(sc-6)/2)).toFixed(3));inn.style.setProperty('--dw',Math.min(1,Math.max(0,(sc-11)/3)).toFixed(3));vp.classList.toggle('zoomed',sc>1.01);if(!cq){cq=requestAnimationFrame(()=>{cq=0;ovCollide(w,inn)})}};
+  let gest=false,csc=1,ctx=0,cty=0,wt=0,noCol=false;
+  const commit=()=>{const W=vp.clientWidth||1,H=vp.clientHeight||1;csc=sc;ctx=tx;cty=ty;inn.style.transform='';svg.setAttribute('viewBox',`${(-tx/(W*sc)*OVX.W).toFixed(2)} ${(-ty/(H*sc)*OVX.H).toFixed(2)} ${(OVX.W/sc).toFixed(2)} ${(OVX.H/sc).toFixed(2)}`);inn.style.setProperty('--k',(ovF(sc)/sc).toFixed(4));{const pu=W/OVX.W*sc;inn.style.setProperty('--ka',(9/(32*pu)).toFixed(5));inn.style.setProperty('--kl',(1/pu).toFixed(5));svg.querySelectorAll('g.r[data-len]').forEach(g=>{const L=g.dataset.len*pu;g.dataset.n=L<150?'1':L<360?'2':'3'})}inn.style.setProperty('--dq',Math.min(1,Math.max(0,(sc-22)/6)).toFixed(3));inn.classList.toggle('lo',!solo&&sc<1.8);inn.style.setProperty('--dz',Math.min(1,Math.max(0,(sc-2.6)/1.8)).toFixed(3));inn.style.setProperty('--dp',Math.min(1,Math.max(0,(sc-6)/2)).toFixed(3));inn.style.setProperty('--dw',Math.min(1,Math.max(0,(sc-11)/3)).toFixed(3));vp.classList.toggle('zoomed',sc>1.01);if(!noCol&&!cq){cq=requestAnimationFrame(()=>{cq=0;ovCollide(w,inn)})}};
   let raf=0;const apply=()=>{clamp();if(!gest){if(raf){cancelAnimationFrame(raf);raf=0}commit();return}if(raf)return;raf=requestAnimationFrame(()=>{raf=0;const s2=sc/csc;inn.style.transform=`translate(${(tx-s2*ctx).toFixed(1)}px,${(ty-s2*cty).toFixed(1)}px) scale(${s2.toFixed(4)})`})};
   const endGest=()=>{gest=false;inn.classList.remove('mv');if(raf){cancelAnimationFrame(raf);raf=0}commit()};
   const zoomAt=(f,cx,cy)=>{const ns=Math.min(OVMAX,Math.max(1,sc*f));tx=cx-(cx-tx)*ns/sc;ty=cy-(cy-ty)*ns/sc;sc=ns;apply()};
@@ -1306,10 +1306,10 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   vp.addEventListener('wheel',e=>{if(!e.ctrlKey&&sc<=1.01&&e.deltaY>0)return;e.preventDefault();gest=true;inn.classList.add('mv');clearTimeout(wt);wt=setTimeout(endGest,180);const [x,y]=rel(e);zoomAt(e.deltaY<0?1.15:1/1.15,x,y)},{passive:false});
   w.querySelectorAll('.ovm-zb button').forEach(b=>b.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;if(b.dataset.z==='0'){flyTo(home.s,W/2-home.cx*W*home.s,H/2-home.cy*H*home.s);return}if(+b.dataset.z>0)zoomAt(2,W/2,H/2);else zoomAt(1/2,W/2,H/2)}));
   let tw=0;const flyTo=(s1,x1,y1)=>{touched=true;const W=vp.clientWidth,H=vp.clientHeight;
-    const s0=sc,x0=tx,y0=ty;cancelAnimationFrame(tw);gest=true;inn.classList.add('mv');const T=performance.now(),D=650;
+    const s0=sc,x0=tx,y0=ty;cancelAnimationFrame(tw);const big=s1/s0>2.5||s0/s1>2.5;if(!big){gest=true;inn.classList.add('mv')}const T=performance.now(),D=big?750:650;
     const step=now=>{const k=Math.min(1,(now-T)/D),e=1-Math.pow(1-k,3);const ls=Math.exp(Math.log(s0)+(Math.log(s1)-Math.log(s0))*e);
-      const f=(ls-s0)/(s1-s0||1);sc=ls;tx=x0+(x1-x0)*(s1===s0?e:f);ty=y0+(y1-y0)*(s1===s0?e:f);clamp();const s2=sc/csc;inn.style.transform=`translate(${(tx-s2*ctx).toFixed(1)}px,${(ty-s2*cty).toFixed(1)}px) scale(${s2.toFixed(4)})`;
-      if(k<1)tw=requestAnimationFrame(step);else endGest()};tw=requestAnimationFrame(step)};
+      const f=(ls-s0)/(s1-s0||1);sc=ls;tx=x0+(x1-x0)*(s1===s0?e:f);ty=y0+(y1-y0)*(s1===s0?e:f);clamp();if(big){if(k<1){noCol=true;commit();noCol=false}else{gest=false;commit()}}else{const s2=sc/csc;inn.style.transform=`translate(${(tx-s2*ctx).toFixed(1)}px,${(ty-s2*cty).toFixed(1)}px) scale(${s2.toFixed(4)})`}
+      if(k<1)tw=requestAnimationFrame(step);else if(!big)endGest()};tw=requestAnimationFrame(step)};
   {const hb=w.querySelector('.ovm-h');if(hb)hb.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;const [hx,hy]=ovP(...OVPT.hotel);const s1=6;flyTo(s1,W/2-hx/OVX.W*W*s1,H/2-hy/OVX.H*H*s1)})}
   return w}
 
@@ -1334,10 +1334,10 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
    <div class="lay menu kmenu kmenu-a"><b>새로고침</b><b>링크 복사</b><b>공유하기</b><b class="hl">다른 브라우저로 열기</b></div>
    <div class="lay ksh kmenu-i"><div class="apps"><span class="sf"><i></i>Safari</span><span class="cr"><i></i>Chrome</span><span><i></i>Whale</span><span><i></i>메시지</span><span><i></i>메일</span></div><b>복사</b><b>읽기 목록에 추가</b><b>더 보기</b></div>
    <div class="lay menu cmenu"><div class="ir"><span>→</span><span>☆</span><span>⤓</span><span>ⓘ</span><span>↻</span></div><b>새 탭</b><b>새 시크릿 탭</b><b>방문 기록</b><b>다운로드</b><b>북마크</b><b class="hl">홈 화면에 추가</b><b>설정</b></div>
-   <div class="lay shs"><div class="hd"><img src="icon-192.png?v=2" alt=""><div><b>여섯 식구 첫 해외여행</b><span>heon1031.github.io</span></div><em>✕</em></div><div class="row"><span><i></i>AirDrop</span><span><i></i>메시지</span><span><i></i>메일</span><span><i></i>메모</span></div><div class="grp"><b>복사</b><b>읽기 목록에 추가</b><b>북마크 추가</b><b class="hl">홈 화면에 추가 <em>⊞</em></b></div></div>
-   <div class="lay dlg"><div><b class="tt">홈 화면에 추가</b><div class="rw"><img src="icon-192.png?v=2" alt=""><span class="in">대만 여행</span></div><div class="bs"><span>취소</span><span>추가</span></div></div></div>
-   <div class="lay iadd" style="inset:0"><div class="nav"><span class="rb">✕</span><b>홈 화면에 추가</b><span class="rb ok">✓</span></div><div class="card"><img src="icon-192.png?v=2" alt=""><div><b>대만 여행</b><br><span style="color:#8B95A1">heon1031.github.io</span></div></div><div class="card tg"><span>웹 앱으로 열기</span><i></i></div></div>
-   <div class="sc home"><span><i></i>전화</span><span><i></i>카톡</span><span><i></i>카메라</span><span><i></i>사진</span><span><i></i>지도</span><span><i></i>날씨</span><span class="me"><img src="icon-192.png?v=2" alt="">대만 여행</span></div>
+   <div class="lay shs"><div class="hd"><img src="icon-192.png?v=3" alt=""><div><b>여섯 식구 첫 해외여행</b><span>heon1031.github.io</span></div><em>✕</em></div><div class="row"><span><i></i>AirDrop</span><span><i></i>메시지</span><span><i></i>메일</span><span><i></i>메모</span></div><div class="grp"><b>복사</b><b>읽기 목록에 추가</b><b>북마크 추가</b><b class="hl">홈 화면에 추가 <em>⊞</em></b></div></div>
+   <div class="lay dlg"><div><b class="tt">홈 화면에 추가</b><div class="rw"><img src="icon-192.png?v=3" alt=""><span class="in">대만 여행</span></div><div class="bs"><span>취소</span><span>추가</span></div></div></div>
+   <div class="lay iadd" style="inset:0"><div class="nav"><span class="rb">✕</span><b>홈 화면에 추가</b><span class="rb ok">✓</span></div><div class="card"><img src="icon-192.png?v=3" alt=""><div><b>대만 여행</b><br><span style="color:#8B95A1">heon1031.github.io</span></div></div><div class="card tg"><span>웹 앱으로 열기</span><i></i></div></div>
+   <div class="sc home"><span><i></i>전화</span><span><i></i>카톡</span><span><i></i>카메라</span><span><i></i>사진</span><span><i></i>지도</span><span><i></i>날씨</span><span class="me"><img src="icon-192.png?v=3" alt="">대만 여행</span></div>
    <i class="tap"></i></div>
   <ol class="a2h-steps"></ol>
   <p class="a2h-note">카톡 안에서는 추가가 안 돼요. 꼭 다른 브라우저로 열어서 추가해 주세요.</p>`;
@@ -1350,7 +1350,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v2.1</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v2.3</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
@@ -1446,7 +1446,6 @@ let cur=null;
 let homeY=0;function show(id,fromPop){if(!built[id])id='home';
   if(cur==='home'&&id!=='home')homeY=window.scrollY;
   {const sl=built[id].querySelector('.ovslot[data-f]');if(sl)sl.replaceWith(buildOvMap(sl.dataset.f,sl._cap))}
-  {const sm0=built[id].querySelector('.ovm.solo .ovsvg');if(sm0&&cur!==id)sm0.style.display='none'}
   panels.replaceChildren(built[id]);if(IOS)built[id].querySelectorAll('.ovm:not(.solo) .ovsvg').forEach(sv=>{sv.style.display='none';requestAnimationFrame(()=>{sv.style.display=''})});{const P=built[id];if(!RM&&P.animate)P.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:380,easing:'cubic-bezier(.25,.7,.3,1)'});const sm=P.querySelector('.ovm.solo');
     if(sm){const sv=sm.querySelector('.ovsvg');setTimeout(()=>{if(sv.style.display){sv.style.display='';if(!RM&&sv.animate)sv.animate([{opacity:0},{opacity:1}],{duration:200})}},RM?0:250)}}
   const home=id==='home';topbar.hidden=home;bottombar.hidden=home;document.querySelector('.wrap').classList.toggle('has-bottom',!home);
