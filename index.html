@@ -1299,10 +1299,10 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   const dayFit=d=>{const ps=[];OVR.forEach(r=>{if(r[0]===d){ps.push(ovP(...OVPT[r[1]]),ovP(...OVPT[r[2]]))}});OVPIN.forEach(r=>{if((' '+r[0]+' ').includes(' '+d+' ')||String(r[0]).includes('d'+d))ps.push(ovP(...OVPT[r[1]]))});OVDET.forEach(r=>{if(r[0]===d)ps.push(ovP(...r[1]))});
     const xs=ps.map(q=>q[0]),ys=ps.map(q=>q[1]);const px0=Math.min(...xs),px1=Math.max(...xs),py0=Math.min(...ys),py1=Math.max(...ys);
     /* 화면 비율: 왼쪽 라벨 4% · 오른쪽 라벨 14% · 오른쪽 버튼 11% · 위아래 12% 여유. 지도 끝에 붙어도 버튼에 안 가리게 맞춤 */
-    const L=.04,R=.14,B=.11,V=.12;let best=null;
-    for(let k=OVMAX;k>=1;k/=1.04){const vw=OVX.W/k,vh=OVX.H/k;let vx=(px0+px1)/2+(R-L)*vw/2-(1-B)*vw/2,vy=(py0+py1)/2-vh/2;
-      vx=Math.min(OVX.W-vw,Math.max(0,vx));vy=Math.min(OVX.H-vh,Math.max(0,vy));
-      if(px0>=vx+L*vw&&px1<=vx+(1-B-R)*vw&&py0>=vy+V*vh&&py1<=vy+(1-V)*vh){best={s:k,cx:(vx+vw/2)/OVX.W,cy:(vy+vh/2)/OVX.H};break}}
+    const S=.24,V=.14,M=.14;let best=null;
+    for(let k=OVMAX;k>=1;k/=1.04){const vw=OVX.W/k,vh=OVX.H/k;let vx=(px0+px1)/2-vw/2,vy=(py0+py1)/2-vh/2;
+      vx=Math.min(OVX.W-vw+M*vw,Math.max(-M*vw,vx));vy=Math.min(OVX.H-vh+M*vh,Math.max(-M*vh,vy));
+      if((px0>=vx+S*vw&&px1<=vx+(1-S)*vw&&py0>=vy+V*vh&&py1<=vy+(1-V)*vh)||k/1.04<1){best={s:k,cx:(vx+vw/2)/OVX.W,cy:(vy+vh/2)/OVX.H};break}}
     return best||{s:1,cx:.5,cy:.5}};
   if(solo)Object.assign(home,dayFit(+solo));
   let touched=false;const goHome=()=>{const W=vp.clientWidth,H=vp.clientHeight;if(!W)return;sc=home.s;tx=W*home.ux-home.cx*W*sc;ty=H/2-home.cy*H*sc;apply()};
@@ -1371,7 +1371,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v4.0</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v4.1</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
