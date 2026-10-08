@@ -1063,9 +1063,9 @@ function themePanel(k){const [zh,t,html]=THEMES[k];const p=el('section','panel')
   const get=v=>{const [a,b]=v.split(':');return (a==='P'?PLACES:FOODS)[b]};
   const chip=(txt)=>{const v=TLINK[txt];const d=v&&get(v);if(!d)return document.createTextNode(txt);const b=el('button','tlink');b.type='button';b.textContent=txt;b.addEventListener('click',()=>openSheet(d));return b};
   if(k==='eat'){const ERA=[['옛날부터','원주민의 산골 음식','대나무 통에 지은 밥과 산나물. 우라이는 원주민 타이얄족 마을이에요.',['chicken']],
-    ['1600년대~','푸젠·광둥 이주민의 밥상','간장에 졸인 고기덮밥과 길거리 간식이 이때 뿌리를 내렸어요.',['lurou','gopchang','sausage','wing','pepper','peanut']],
+    ['1600년대~','푸젠·광둥 이주민의 밥상','간장에 졸인 고기덮밥과 길거리 간식이 이때 뿌리를 내렸어요.',['lurou','sausage','wing','peanut','pepper','gopchang']],
     ['1895~1945','일본 통치 시대','빙수 같은 단 음식 문화가 이때 들어왔어요.',['mango']],
-    ['1949년~','중국 각지에서 온 사람들','쓰촨의 매운 국수·훠궈, 광둥의 딤섬이 대만식으로 바뀌었어요.',['beef','kiki','charsiu','hotpot']],
+    ['1949년~','중국 각지에서 온 사람들','쓰촨의 매운 국수·훠궈, 광둥의 딤섬이 대만식으로 바뀌었어요.',['kiki','beef','charsiu','hotpot']],
     ['요즘','대만에서 생긴 새 맛','버블티는 1980년대 대만에서 처음 나왔어요.',['boba']]];
     const SN={chicken:'죽통밥·산나물',lurou:'루러우판',gopchang:'곱창국수',charsiu:'딤섬'};const box=el('div','eras');ERA.forEach(([y,t,d,ks])=>{const sec=el('section','era'+(ks.length===1?' one':''));sec.innerHTML=`<div class="eh"><span class="ey">${y}</span><b>${t}</b></div><p class="ed">${d}</p>`;const row=el('div','erow');
       ks.forEach(fk=>{const fd=FOODS[fk];if(!fd)return;const b=el('button','eth');b.type='button';b.innerHTML=`<img src="${fd.img}" alt="" loading="lazy"><span class="en">${esc(SN[fk]||fd.title.replace(/ \(.*\)/,''))}</span><span class="edy">${esc((fd.lbl||'').split(' · ')[0])}</span>`;b.addEventListener('click',()=>openSheet(fd));row.appendChild(b)});
