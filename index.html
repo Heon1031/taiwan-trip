@@ -953,6 +953,11 @@ html body .pay,html body .what .pay{font-size:11.5px;font-weight:600;padding:0 6
 .panel.warm{position:absolute;left:0;right:0;top:0;opacity:0;pointer-events:none}
 
 html,button,a,[role=button],.bottombar{touch-action:manipulation}
+
+.fr .tz{display:block;font-style:normal;font-size:12.5px;font-weight:500;color:var(--muted);margin-top:2px;white-space:nowrap}
+
+.fr i.fdur{display:flex;flex-direction:column;align-items:center;gap:2px;font-style:normal;align-self:center;padding:14px 0 0}
+.fr i.fdur em{font-style:normal;font-size:12.5px;font-weight:600;color:var(--sub);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -1155,7 +1160,9 @@ const TRIP=['2026-11-07','2026-11-08','2026-11-09','2026-11-10'];
 function tpeNow(){const n=window.__NOW?new Date(window.__NOW):new Date();const t=new Date(n.getTime()+8*3600000);return {date:t.getUTCFullYear()+'-'+String(t.getUTCMonth()+1).padStart(2,'0')+'-'+String(t.getUTCDate()).padStart(2,'0'),min:t.getUTCHours()*60+t.getUTCMinutes()}}
 const todayIdx=TRIP.indexOf(tpeNow().date);
 const FLIGHTS={go:[['부산팀','아버지 · 어머니 · 헌진','제주항공 7C6151','김해','09:35','타오위안 T1','11:15','AE9Y2Q'],['서울팀','헌주 · 수경','진에어 LJ0171','인천 T2','09:35','타오위안 T1','11:30','EYYSN2'],['혜영','혼자 따로 출발','에어부산 BX575','김해','15:00','타오위안 T2','16:40','KKLB6B']],back:[['부산팀 4명','아버지 · 어머니 · 헌진 · 혜영','제주항공 7C6152','타오위안 T1','12:15','김해','15:45','AE9Y2Q (혜영은 따로 예약)'],['서울팀','헌주 · 수경','제주항공 7C6102','타오위안 T1','13:35','인천 T1','17:00','UCBRXP']]};
-function fltList(k){return `<div class="flts">${FLIGHTS[k].map(([who,ppl,no,a,at,b,bt,pnr])=>`<div class="flt"><div class="fh"><b>${who}</b><small>${ppl}</small><span class="fno">${no}</span></div><div class="fr"><div><small>${a}</small><strong>${at}</strong></div><i aria-hidden="true">✈</i><div class="to"><small>${b}</small><strong>${bt}</strong></div></div>${pnr?`<div class="pnr"><span>예약번호</span><b>${pnr}</b></div>`:''}</div>`).join('')}</div>`}
+const tzl=(ap,t)=>{if(!/타오위안/.test(ap))return '<em class="tz">한국 시간</em>';return '<em class="tz">대만 시간</em>'};
+const fdur=(a,at,b,bt)=>{const k=(ap,t)=>{const [h,m]=t.split(':');return (+h+(/타오위안/.test(ap)?1:0))*60+(+m)};const d=k(b,bt)-k(a,at);return `${Math.floor(d/60)}시간${d%60?' '+d%60+'분':''}`};
+function fltList(k){return `<div class="flts">${FLIGHTS[k].map(([who,ppl,no,a,at,b,bt,pnr])=>`<div class="flt"><div class="fh"><b>${who}</b><small>${ppl}</small><span class="fno">${no}</span></div><div class="fr"><div><small>${a}</small><strong>${at}</strong>${tzl(a,at)}</div><i class="fdur"><span aria-hidden="true">✈</span><em>${fdur(a,at,b,bt)}</em></i><div class="to"><small>${b}</small><strong>${bt}</strong>${tzl(b,bt)}</div></div>${pnr?`<div class="pnr"><span>예약번호</span><b>${pnr}</b></div>`:''}</div>`).join('')}</div>`}
 
 function tile(key,src){const d=src[key];const b=el('button','tile');b.type='button';
   b.innerHTML=`<div class="ph">${d.img?`<img src="${d.img}" alt="${esc(d.title)}" loading="lazy" decoding="async">`:`<div class="zhname">${esc(d.zhTile)}</div>`}</div><span class="lbl">${esc(d.lbl)}</span><span class="ttl">${esc(d.title)}</span><span class="more go">자세히 보기</span>`;
@@ -1170,7 +1177,7 @@ function hotelPanel(){const h=PLACES.hotel;const p=el('section','panel');p.inner
   <div class="ir"><span>전화</span><div><b>+886-2-2306-6777</b><small>호텔 프런트</small></div></div></div>
   <div class="hbtns"><button type="button" class="hb1" id="hTaxi">택시 기사님께 보여주기</button><a class="hb2" href="tel:+886223066777">전화 걸기</a><a class="hb2" href="${h.gm}" target="_blank" rel="noopener">구글 지도</a></div>`;
   p.querySelector('#hTaxi').addEventListener('click',()=>openCard(CARDS.find(c=>c.ko==='숙소로 가주세요')));return p}
-function flightPanel(){const p=el('section','panel');p.innerHTML=`<span class="kicker">필요할 때 보세요</span><h2>비행기 정보</h2><p class="lead">부산팀·서울팀 비행기는 모두 타오위안 공항 <b>제1터미널(T1)</b>이에요. 시간은 모두 그 나라 현지 시각이에요. 대만은 한국보다 1시간 늦어요.</p><h3 class="h3" data-zh="去">한국 → 대만 · 11월 7일(토)</h3>${fltList('go')}<h3 class="h3" data-zh="回">대만 → 한국 · 11월 10일(화)</h3>${fltList('back')}<div class="note">공항에는 출발 2시간 전까지 도착해요. 한국으로 가는 날은 08:20 호텔 앞에서 밴을 타요.</div>`;return p}
+function flightPanel(){const p=el('section','panel');p.innerHTML=`<span class="kicker">필요할 때 보세요</span><h2>비행기 정보</h2><p class="lead"><b>비행기표 시간 그대로</b>예요. 출발은 한국 시계, 도착은 대만 시계예요. 대만이 <b>1시간 느려서</b> 비행시간은 그 차이를 넣어 계산했어요.</p><h3 class="h3" data-zh="去">한국 → 대만 · 11월 7일(토)</h3>${fltList('go')}<h3 class="h3" data-zh="回">대만 → 한국 · 11월 10일(화)</h3>${fltList('back')}<div class="note">공항엔 출발 2시간 전 도착 · 돌아가는 날 08:20 호텔 앞 밴</div>`;return p}
 const TLINK={'용산사':'P:longshan','시먼딩':'P:ximen','중정기념당':'P:cks','101 전망대':'P:t101','예류':'P:yehliu','우라이':'P:wulai','지우펀':'P:jiufen','스펀':'P:shifen','라오허제 야시장':'P:raohe',
  '루러우판 · 맑은 고깃국':'F:lurou','계란두부 튀김':'F:kiki','우육면':'F:beef','흑돼지 소시지':'F:sausage','닭날개 볶음밥':'F:wing','땅콩 아이스크림롤':'F:peanut','후추빵':'F:pepper','차슈번 · 새우만두':'F:charsiu','토종닭 · 산나물':'F:chicken','곱창국수':'F:gopchang','흑당 버블티':'F:boba','반반 냄비':'F:hotpot','눈꽃빙수':'F:mango'};
 function themePanel(k){const [zh,t,html]=THEMES[k];const p=el('section','panel');p.innerHTML=`<span class="kicker">필요할 때 보세요</span><h2>${t}</h2><div class="theme" style="margin-top:18px">${html}</div>`;
@@ -1380,7 +1387,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v5.0</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v5.3</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
