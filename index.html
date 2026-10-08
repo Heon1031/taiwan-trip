@@ -951,11 +951,15 @@ html body .pay,html body .what .pay{font-size:11.5px;font-weight:600;padding:0 6
 #panels{position:relative}
 .panel.off{position:absolute;left:0;right:0;top:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none;content-visibility:hidden}
 .panel.warm{position:absolute;left:0;right:0;top:0;opacity:0;pointer-events:none}
+
+.ovm-hint{display:none!important}
+html,button,a,[role=button],.bottombar{touch-action:manipulation}
 </style>
 </head>
 <body>
 
-<div id="splash" aria-hidden="true"><div class="sp-scene"><img class="sp-globe" src="img/globe2.png" alt="" onerror="this.remove()"><div class="sp-rider"><div class="sp-bub"><span class="sp-msg"></span></div><svg class="sp-tail" viewBox="0 0 30 26" aria-hidden="true"><path d="M13 1.5 C13 9 9 16 1.5 23.5 C10 21 18 14 24 1.5" fill="#fff" stroke="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M11 -1 H26 V2.6 H11Z" fill="#fff"/></svg><img class="sp-char" src="img/splash.png?v=2" alt="" onerror="this.remove()"></div></div></div><script>(function(){var m=["설레는 마음 싣는 중…","여권은 챙기셨죠?","캐리어 바퀴 굴리는 중…","오늘의 맛집 데우는 중…","가족 단톡방 확인 중…","지도 펼치는 중…","창가 자리 고르는 중…","사진 찍을 준비 됐나요?"];var e=document.querySelector("#splash .sp-msg");if(e){e.textContent=m[Math.floor(Math.random()*m.length)];}})()</script>
+<div id="splash" aria-hidden="true"><div class="sp-scene"><img class="sp-globe" src="img/globe2.png" alt="" onerror="this.remove()"><div class="sp-rider"><div class="sp-bub"><span class="sp-msg"></span></div><svg class="sp-tail" viewBox="0 0 30 26" aria-hidden="true"><path d="M13 1.5 C13 9 9 16 1.5 23.5 C10 21 18 14 24 1.5" fill="#fff" stroke="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M11 -1 H26 V2.6 H11Z" fill="#fff"/></svg><img class="sp-char" src="img/splash.png?v=2" alt="" onerror="this.remove()"></div></div></div><script>setTimeout(function(){var s=document.getElementById("splash");if(s){s.classList.add("out");setTimeout(function(){if(s.parentNode)s.remove()},900)}},6000)</script>
+<script>(function(){var m=["설레는 마음 싣는 중…","여권은 챙기셨죠?","캐리어 바퀴 굴리는 중…","오늘의 맛집 데우는 중…","가족 단톡방 확인 중…","지도 펼치는 중…","창가 자리 고르는 중…","사진 찍을 준비 됐나요?"];var e=document.querySelector("#splash .sp-msg");if(e){e.textContent=m[Math.floor(Math.random()*m.length)];}})()</script>
 <div class="wrap">
   <div class="topbar" id="topbar" hidden><button type="button" class="back" id="backBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-5.5h4V20"/></svg>처음으로</button><span class="where" id="where"></span></div>
   <main id="panels"></main>
@@ -1096,7 +1100,7 @@ const FOODS={
 };
 const DAYS=[
  {id:'day1',smap:{'11:15': 'https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%20%E7%AC%AC%E4%B8%80%E8%88%AA%E5%BB%88', '14:00': 'https://www.google.com/maps/search/?api=1&query=%E5%B0%8F%E7%8E%8B%E7%85%AE%E7%93%9C%20%E8%8F%AF%E8%A5%BF%E8%A1%9717-4%E8%99%9F', '14:50': 'https://www.google.com/maps/search/?api=1&query=%E8%89%8B%E8%88%BA%E9%BE%8D%E5%B1%B1%E5%AF%BA', '15:15': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97', '16:30': 'https://www.google.com/maps/search/?api=1&query=%E4%B8%AD%E6%AD%A3%E7%B4%80%E5%BF%B5%E5%A0%82', '17:30': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97101%E8%A7%80%E6%99%AF%E5%8F%B0', '19:30': 'https://www.google.com/maps/search/?api=1&query=KiKi%E9%A4%90%E5%BB%B3%20ATT%204%20FUN%20%E4%BF%A1%E7%BE%A9%E5%BA%97', '21:15': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97','13:50': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97'},gmap:'https://www.google.com/maps/dir/?api=1&origin=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97%20%E8%89%8B%E8%88%BA%E5%A4%A7%E9%81%93167%E8%99%9F&destination=KiKi%E9%A4%90%E5%BB%B3%20ATT%204%20FUN%20%E4%BF%A1%E7%BE%A9%E5%BA%97&travelmode=driving&waypoints=%E5%B0%8F%E7%8E%8B%E7%85%AE%E7%93%9C%20%E8%8F%AF%E8%A5%BF%E8%A1%9717-4%E8%99%9F%7C%E4%B8%AD%E6%AD%A3%E7%B4%80%E5%BF%B5%E5%A0%82%7C%E5%8F%B0%E5%8C%97101%E8%A7%80%E6%99%AF%E5%8F%B0',tab:'1일차',date:'11월 7일 토요일',zhd:'十一月七日 星期六',title:'타이베이 300년, 하루의 시간 여행',lead:'청나라 이주민이 처음 터를 잡은 완화의 옛 절 용산사에서 출발해, 근현대 대만의 상징 중정기념당을 지나, 오늘의 타이베이를 한눈에 내려다보는 101 전망대까지. 도시가 걸어온 300년을 하루에 따라가요.',map:'img/day1.jpg',cap:'번호 순서대로 다녀요.',
-  sched:[['09:35','김해공항 출발','제주항공 7C6151 · 서울팀은 인천에서 진에어 LJ0171'],['11:15','타오위안 공항 1터미널 도착','서울팀은 11:30 도착 · 공항에서 만나요'],['13:00','밴으로 숙소까지','40~50분','move'],['13:50','호텔 로비에 캐리어 맡기기','체크인은 15:00부터 · 점심·용산사 다녀와서'],['13:52','걸어서 식당까지','8분','move'],['14:00','점심 · 샤오왕주과','루러우판과 맑은 고깃국','meal'],['14:45','걸어서 용산사로','3분','move'],['14:50','용산사 구경','15~20분'],['15:10','걸어서 숙소로','5분','move'],['15:15','체크인하고 쉬기','맡긴 캐리어 찾아 방으로'],['16:15','택시로 중정기념당','10분 · 약 1만 원','move'],['16:30','중정기념당','17:00 정각 본당 밖 계단 앞 의장대 시범 (비 오면 없음)'],['17:15','지하철 또는 택시(우버)로 101까지','빨간선 직통 10분 · 택시 약 1만 원','move'],['17:30','101 전망대 야경',''],['19:20','걸어서 키키까지','3분','move'],['19:30','저녁 · 키키 레스토랑','혜영이도 여기서 만나요 · 늦으면 자리가 취소돼요','meal'],['21:15','택시로 숙소까지','20분 · 약 1.3만 원','move']],
+  sched:[['08:35','김해공항 출발','한국 시간 09:35 · 제주항공 7C6151 · 서울팀은 인천에서 진에어 LJ0171'],['11:15','타오위안 공항 1터미널 도착','서울팀은 11:30 도착 · 공항에서 만나요'],['13:00','밴으로 숙소까지','40~50분','move'],['13:50','호텔 로비에 캐리어 맡기기','체크인은 15:00부터 · 점심·용산사 다녀와서'],['13:52','걸어서 식당까지','8분','move'],['14:00','점심 · 샤오왕주과','루러우판과 맑은 고깃국','meal'],['14:45','걸어서 용산사로','3분','move'],['14:50','용산사 구경','15~20분'],['15:10','걸어서 숙소로','5분','move'],['15:15','체크인하고 쉬기','맡긴 캐리어 찾아 방으로'],['16:15','택시로 중정기념당','10분 · 약 1만 원','move'],['16:30','중정기념당','17:00 정각 본당 밖 계단 앞 의장대 시범 (비 오면 없음)'],['17:15','지하철 또는 택시(우버)로 101까지','빨간선 직통 10분 · 택시 약 1만 원','move'],['17:30','101 전망대 야경',''],['19:20','걸어서 키키까지','3분','move'],['19:30','저녁 · 키키 레스토랑','혜영이도 여기서 만나요 · 늦으면 자리가 취소돼요','meal'],['21:15','택시로 숙소까지','20분 · 약 1.3만 원','move']],
   places:['longshan','cks','t101'],foods:['lurou','kiki']},
  {id:'day2',smap:{'06:30': 'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97', '10:50': 'https://www.google.com/maps/search/?api=1&query=%E7%89%9B%E5%BA%97%E7%B2%BE%E7%87%89%E7%89%9B%E8%82%89%E9%BA%B5%20%E6%98%86%E6%98%8E%E8%A1%9791%E8%99%9F', '13:00': 'https://www.google.com/maps/search/?api=1&query=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92', '15:00': 'https://www.google.com/maps/search/?api=1&query=%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97', '17:15': 'https://www.google.com/maps/search/?api=1&query=%E4%B9%9D%E4%BB%BD%E8%80%81%E8%A1%97', '20:00': 'https://www.google.com/maps/search/?api=1&query=%E6%B7%BB%E5%A5%BD%E9%81%8B%20%E6%9D%BE%E5%B1%B1%E8%BB%8A%E7%AB%99%E5%BA%97', '20:50': 'https://www.google.com/maps/search/?api=1&query=%E9%A5%92%E6%B2%B3%E8%A1%97%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82'},walks:[['예류 지질공원','https://www.google.com/maps/dir/?api=1&origin=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%20%E9%81%8A%E5%AE%A2%E4%B8%AD%E5%BF%83&destination=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%20%E9%81%8A%E5%AE%A2%E4%B8%AD%E5%BF%83&travelmode=walking&waypoints=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%20%E8%95%88%E7%8B%80%E5%B2%A9%7C%E9%87%8E%E6%9F%B3%20%E5%A5%B3%E7%8E%8B%E9%A0%AD%7C%E9%87%8E%E6%9F%B3%20%E4%BB%99%E5%A5%B3%E9%9E%8B','yehliu'],['스펀 옛거리','https://www.google.com/maps/dir/?api=1&origin=%E5%8D%81%E5%88%86%E8%BB%8A%E7%AB%99&destination=%E5%8D%81%E5%88%86%E6%BA%9C%E5%93%A5%E7%87%92%E7%83%A4%E9%9B%9E%E7%BF%85%E5%8C%85%E9%A3%AF%20%E6%96%B0%E5%8C%97%E5%B8%82%E5%B9%B3%E6%BA%AA%E5%8D%80%E5%8D%81%E5%88%86%E8%A1%9752%E8%99%9F&travelmode=walking&waypoints=%E5%90%89%E7%A5%A5%E5%A4%A9%E7%87%88%20%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%7C%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%20%E9%BB%91%E8%B1%AC%E8%82%89%E9%A6%99%E8%85%B8','shifen'], ['지우펀 마을','https://www.google.com/maps/dir/?api=1&origin=7-ELEVEN%20%E4%B9%9D%E4%BB%BD%E9%96%80%E5%B8%82&destination=%E6%98%87%E5%B9%B3%E6%88%B2%E9%99%A2%20%E6%96%B0%E5%8C%97%E5%B8%82%E7%91%9E%E8%8A%B3%E5%8D%80&travelmode=walking&waypoints=%E9%98%BF%E7%8F%A0%E9%9B%AA%E5%9C%A8%E7%87%92%20%E4%B9%9D%E4%BB%BD%7C%E9%98%BF%E5%A6%B9%E8%8C%B6%E6%A8%93%20%E4%B9%9D%E4%BB%BD','jiufen']],gmap:'https://www.google.com/maps/dir/?api=1&origin=%E7%89%9B%E5%BA%97%E7%B2%BE%E7%87%89%E7%89%9B%E8%82%89%E9%BA%B5%20%E6%98%86%E6%98%8E%E8%A1%9791%E8%99%9F&destination=%E9%A5%92%E6%B2%B3%E8%A1%97%E8%A7%80%E5%85%89%E5%A4%9C%E5%B8%82&travelmode=driving&waypoints=%E9%87%8E%E6%9F%B3%E5%9C%B0%E8%B3%AA%E5%85%AC%E5%9C%92%7C%E5%8D%81%E5%88%86%E8%80%81%E8%A1%97%7C%E4%B9%9D%E4%BB%BD%E8%80%81%E8%A1%97',tab:'2일차',date:'11월 8일 일요일',zhd:'十一月八日 星期日',title:'바다가 빚고, 탄광이 키운 북쪽 해안',lead:'수천 년 파도가 깎아 낸 예류의 버섯 바위에서 시작해, 석탄을 나르던 철길 위로 소원 천등을 띄우는 스펀을 지나, 금광 붐이 남긴 산비탈 마을 지우펀의 홍등 야경을 보고, 라오허제 야시장에서 하루를 마무리해요.',map:'img/day2.jpg',cap:'바닷가에서 산골까지, 북쪽 해안을 한 바퀴 돌아요.',
   sched:[['06:30','호텔 조식','06:30 오픈 · 5층 뷔페','meal'],['10:30','걸어서 또는 택시(우버)로 우육면집까지','걸어서 20분(평지) · 택시(우버) 5분 약 7천 원 · 그날 컨디션 보고 정해요','move'],['10:50','점심 · 뉴뎬 우육면','11:00 오픈 · 번호표 받고 기다리기','meal'],['12:00','밴 타고 출발','식당 앞 탑승 · 예류까지 약 1시간 · 밴투어 8시간 코스예요','move'],['13:00','예류 지질공원','바닷바람이 세요 · 약 1시간'],['14:00','밴으로 스펀까지','약 1시간','move'],['15:00','스펀 · 천등 날리기','닭날개 볶음밥 · 흑돼지 소시지'],['16:15','밴으로 지우펀까지','약 1시간','move'],['17:15','지우펀','해 진 뒤 홍등 야경 · 찻집에서 쉬어 가기'],['19:00','밴으로 송산역까지','약 1시간','move'],['20:00','저녁 · 팀호완','차슈번과 딤섬 · 2차는 야시장에서','meal'],['20:50','라오허제 야시장','후추빵 · 약재갈비탕 · 컷과일'],['21:50','택시로 숙소까지','25분 · 약 2.1만 원','move']],
@@ -1270,7 +1274,7 @@ function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>
     if(e.closest('.hid'))return;const r=vis(e);if(!r)return;const o=own(e);if(over(r,o))e.classList.add('hid');else placed.push({r,o})});
   const ars=[...inn.querySelectorAll('.ovsvg .ar')].sort((a,b)=>act(b)-act(a));
   ars.forEach(a=>{if(a.closest('.hid'))return;const c=a.querySelector('.arc');const r=c&&vis(c);if(!r)return;if(over(r,a))a.classList.add('hid');else placed.push({r,o:a})})}
-const OVJ=[];let ovRaf=0;function ovTick(now){for(let i=OVJ.length-1;i>=0;i--){const j=OVJ[i];if(now<j.t0){continue}const k=Math.min(1,(now-j.t0)/j.du),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;j.f(e);if(k>=1){j.end&&j.end();OVJ.splice(i,1)}}ovRaf=OVJ.length?requestAnimationFrame(ovTick):0}
+const OVJ=[];let ovRaf=0;function ovTick(now){for(let i=OVJ.length-1;i>=0;i--){const j=OVJ[i];if(now<j.t0){continue}const k=Math.min(1,(now-j.t0)/j.du),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;try{j.f(e);if(k>=1){j.end&&j.end();OVJ.splice(i,1)}}catch(_){OVJ.splice(i,1)}}ovRaf=OVJ.length?requestAnimationFrame(ovTick):0}
 let OVW=null;function ovJob(t0,du,f,end){f(0);OVJ.push({t0,du,f,end,w:OVW});if(!ovRaf)ovRaf=requestAnimationFrame(ovTick)}
 function ovStop(w){for(let i=OVJ.length-1;i>=0;i--){const j=OVJ[i];if(j.w===w){j.f(1);j.end&&j.end();OVJ.splice(i,1)}}}
 function ovDraw(w,f){ovStop(w);OVW=w;if(!f||f==='0')return;const NS='http://www.w3.org/2000/svg',svg=w.querySelector('.ovsvg');const T0=performance.now()+30;let t=0;
@@ -1312,9 +1316,9 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   let touched=false;const goHome=()=>{const W=vp.clientWidth,H=vp.clientHeight;if(!W)return;sc=home.s;tx=W*home.ux-home.cx*W*sc;ty=H/2-home.cy*H*sc;apply()};
   if('ResizeObserver' in window){new ResizeObserver(()=>{if(!vp.clientWidth)return;if(!touched){solo?goHome():(sc=1,tx=0,ty=0,apply())}else apply()}).observe(vp)}
   vp.addEventListener('pointerdown',()=>{touched=true},true);
-  const rel=e=>{const r=vp.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top]};
+  const rel=e=>{const r=vp.getBoundingClientRect();const z=(r.width/(vp.clientWidth||r.width))||1;return [(e.clientX-r.left)/z,(e.clientY-r.top)/z]};
   {const go=w.querySelector('.ovm-go');if(go)go.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;const g=OVGO[solo];const [px,py]=ovP(g[2],g[3]);const cx=px/OVX.W*W,cy=py/OVX.H*H;sc=g[4];tx=W/2-cx*sc;ty=H/2-cy*sc;touched=true;apply()})}
-  vp.addEventListener('pointerdown',e=>{if(e.target.closest('.ovm-zb,.ovm-go,.ovm-h'))return;pts.set(e.pointerId,rel(e));pty=e.pointerType;dir=0;st0=rel(e);gest=true;inn.classList.add('mv');try{vp.setPointerCapture(e.pointerId)}catch(_){}
+  vp.addEventListener('pointerdown',e=>{if(e.target.closest('.ovm-zb,.ovm-go,.ovm-h'))return;cancelAnimationFrame(tw);pts.set(e.pointerId,rel(e));pty=e.pointerType;dir=0;st0=rel(e);gest=true;inn.classList.add('mv');try{vp.setPointerCapture(e.pointerId)}catch(_){}
     if(pts.size===2){const [a,b]=[...pts.values()];pin={d:Math.hypot(a[0]-b[0],a[1]-b[1]),s:sc,mx:(a[0]+b[0])/2,my:(a[1]+b[1])/2}}else{last=rel(e)}});
   vp.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,rel(e));
     if(pts.size===2&&pin){const [a,b]=[...pts.values()];const d=Math.hypot(a[0]-b[0],a[1]-b[1]);const cx=(a[0]+b[0])/2,cy=(a[1]+b[1])/2;tx+=cx-pin.mx;ty+=cy-pin.my;pin.mx=cx;pin.my=cy;zoomAt((pin.s*d/pin.d)/sc,cx,cy);e.preventDefault()}
@@ -1332,6 +1336,7 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
       if(k<1)tw=requestAnimationFrame(step);else if(!big)endGest()};tw=requestAnimationFrame(step)};
   {const hb=w.querySelector('.ovm-h');if(hb)hb.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;const [hx,hy]=ovP(...OVPT.hotel);const s1=6;flyTo(s1,W/2-hx/OVX.W*W*s1,H/2-hy/OVX.H*H*s1)})}
   w._fly=f=>{const W=vp.clientWidth,H=vp.clientHeight;if(!W)return;const t=f?dayFit(f):{s:1,cx:.5,cy:.5,ux:.5};flyTo(t.s,W/2-t.cx*W*t.s,H/2-t.cy*H*t.s)};
+  w._clear=()=>{pts.clear();pin=null;last=null;if(gest){cancelAnimationFrame(tw);gest=false;inn.classList.remove('mv');commit()}};
   w._reset=()=>{cancelAnimationFrame(tw);pts.clear();pin=null;last=null;lastTap=0;if(raf){cancelAnimationFrame(raf);raf=0}gest=false;inn.classList.remove('mv');const was=touched;touched=false;if(was&&vp.clientWidth){if(solo)goHome();else{sc=1;tx=0;ty=0;apply()}}};
   vp.addEventListener('lostpointercapture',e=>{if(e.target===vp&&pts.has(e.pointerId))up(e)});
   /* iOS: 화면 전환 직후 터치 영역 정보가 늦게 갱신돼 지도 터치가 페이지 스크롤로 먹히는 문제 방지 */
@@ -1369,13 +1374,13 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   const ol=w.querySelector('.a2h-steps');
   const draw=()=>{const st=A2H[w.dataset.os],cur=A2HSTEP[+w.dataset.f];ol.innerHTML=st.map((t,i)=>`<li class="${cur===i+1?'on':''}">${t}</li>`).join('')};
   
-  draw();let tm=0;const run=()=>{clearInterval(tm);tm=setInterval(()=>{if(!w.isConnected){clearInterval(tm);return}w.dataset.f=String(+w.dataset.f%7+1);draw()},1900)};run();
+  draw();let tm=0;const run=()=>{clearInterval(tm);tm=setInterval(()=>{if(!w.isConnected||pop.hidden){clearInterval(tm);return}w.dataset.f=String(+w.dataset.f%7+1);draw()},1900)};run();
   w.querySelectorAll('.a2h-tabs button').forEach(b=>b.addEventListener('click',()=>{w.dataset.os=b.dataset.os;w.dataset.f='1';draw();run()}));
   ol.addEventListener('click',e=>{const li=e.target.closest('li');if(!li)return;const n=[...ol.children].indexOf(li);w.dataset.f=String([1,2,4,6][n]);draw();run()});
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v4.4</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v4.6</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
@@ -1457,7 +1462,10 @@ function markNow(){const ni=nowInfo();document.querySelectorAll('.sched li.past'
   const find=r=>r&&(lis.length===DAYS[todayIdx].sched.length?lis[r.i]:null)||r&&lis.find(li=>{const t=li.querySelector('time');return t&&toMin(t.textContent)===r.t&&li.textContent.includes(r.title.slice(0,4))});
   const cl=find(ni.cur);if(cl){const ci=lis.indexOf(cl);lis.forEach((li,j)=>li.classList.toggle('past',j<ci))}
   if(cl)cl.classList.add('now');{const nx=find(ni.nxt);if(nx)nx.classList.add('nextup')}}
-setInterval(()=>{if(!document.hidden)markNow()},60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)markNow()});
+let swNew=false;const dayChanged=()=>TRIP.indexOf(tpeNow().date)!==todayIdx;
+setInterval(()=>{if(document.hidden)return;if(dayChanged()&&!layers.length){location.reload();return}markNow()},60000);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)return;if((dayChanged()||swNew)&&!layers.length){location.reload();return}markNow();try{navigator.serviceWorker&&navigator.serviceWorker.getRegistration().then(r=>r&&r.update()).catch(()=>{})}catch(e){}});
+try{if(navigator.serviceWorker)navigator.serviceWorker.addEventListener('controllerchange',()=>{swNew=true})}catch(e){}
 document.addEventListener('touchstart',()=>{},{passive:true});
 {const SEL='.sched li[role=button],.tile,.tc,.eth,.aqb,.zh,.wbtn,.chip,.totop,.nowcard,.daybtn,.row';let pe=null,pt=0;const off=()=>{if(!pe)return;const e=pe;pe=null;setTimeout(()=>e.classList.remove('pressed'),Math.max(0,200-(Date.now()-pt)))};
  document.addEventListener('pointerdown',e=>{const t=e.target.closest(SEL);if(!t)return;off();pe=t;pt=Date.now();t.classList.add('pressed');
@@ -1471,7 +1479,7 @@ let cur=null;
 let homeY=0;function show(id,fromPop){if(!built[id])id='home';
   if(cur==='home'&&id!=='home')homeY=window.scrollY;
   {const sl=built[id].querySelector('.ovslot[data-f]');if(sl)sl.replaceWith(buildOvMap(sl.dataset.f,sl._cap))}
-  if(built[id].parentNode!==panels)panels.appendChild(built[id]);for(const ch of panels.children)ch.classList.toggle('off',ch!==built[id]);if(IOS)built[id].querySelectorAll('.ovm:not(.solo) .ovsvg').forEach(sv=>{sv.style.display='none';requestAnimationFrame(()=>{sv.style.display=''})});{const P=built[id];if(!RM&&P.animate)P.animate([{opacity:0},{opacity:1}],{duration:380,easing:'cubic-bezier(.25,.7,.3,1)'});const sm=P.querySelector('.ovm.solo');if(sm&&sm._reset)requestAnimationFrame(()=>sm._reset());
+  built[id].classList.remove('warm');if(built[id].parentNode!==panels)panels.appendChild(built[id]);for(const ch of panels.children)ch.classList.toggle('off',ch!==built[id]);if(IOS)built[id].querySelectorAll('.ovm:not(.solo) .ovsvg').forEach(sv=>{sv.style.display='none';requestAnimationFrame(()=>{sv.style.display=''})});{const P=built[id];if(!RM&&P.animate)P.animate([{opacity:0},{opacity:1}],{duration:380,easing:'cubic-bezier(.25,.7,.3,1)'});const sm=P.querySelector('.ovm.solo');if(sm&&sm._reset)requestAnimationFrame(()=>sm._reset());P.querySelectorAll('.ovm:not(.solo)').forEach(m=>m._clear&&m._clear());
     if(sm){const sv=sm.querySelector('.ovsvg');setTimeout(()=>{if(sv.style.display){sv.style.display='';if(!RM&&sv.animate)sv.animate([{opacity:0},{opacity:1}],{duration:200})}},RM?0:250)}}
   const home=id==='home';topbar.hidden=home;bottombar.hidden=home;document.querySelector('.wrap').classList.toggle('has-bottom',!home);
   $('#where').textContent=NAMES[id];
@@ -1480,8 +1488,8 @@ let homeY=0;function show(id,fromPop){if(!built[id])id='home';
     setBtn(prevBtn,prevTo,i===1?homeL:prevL(`${i-1}일차`));
     setBtn(nextBtn,nextTo,i<4?nextL(`${i+1}일차`):homeR);}
   else{const HELP=['flight','hotel','cards','info','eat','see','taiwan'],HN={hotel:'숙소 정보',flight:'비행기 정보',cards:'중국어 카드',info:'알아둘 것 · 긴급',taiwan:'대만은 어떤 나라',see:'둘러보는 대만',eat:'맛보는 대만'};const hi=HELP.indexOf(id);prevTo='home';nextTo=hi>=0&&hi<HELP.length-1?HELP[hi+1]:'home';setBtn(prevBtn,prevTo,homeL);setBtn(nextBtn,nextTo,nextTo==='home'?homeR:nextL(HN[nextTo]));}
-  if(home){window.scrollTo(0,homeY);requestAnimationFrame(()=>window.scrollTo(0,homeY))}else window.scrollTo(0,0);markNow();if(todayIdx>=0&&id===DAYS[todayIdx].id){const nl=built[id].querySelector('.sched li.now')||built[id].querySelector('.sched li.nextup');if(nl)setTimeout(()=>{const y=nl.getBoundingClientRect().top+window.scrollY-140;window.scrollTo({top:Math.max(0,y),behavior:'smooth'})},250)}
-  if(!fromPop){try{if(cur===null)history.replaceState({p:id},'','#'+id);else if(cur!==id)history.pushState({p:id},'','#'+id)}catch(e){}}
+  if(home){window.scrollTo(0,homeY);requestAnimationFrame(()=>window.scrollTo(0,homeY))}else window.scrollTo(0,0);markNow();if(todayIdx>=0&&id===DAYS[todayIdx].id){const nl=built[id].querySelector('.sched li.now')||built[id].querySelector('.sched li.nextup');if(nl)setTimeout(()=>{if(cur!==id)return;const y=nl.getBoundingClientRect().top+window.scrollY-140;window.scrollTo({top:Math.max(0,y),behavior:'smooth'})},250)}
+  if(!fromPop){try{if(cur===null)history.replaceState({p:id},'','#'+id);else if(cur!==id)hpush({p:id},'#'+id)}catch(e){}}
   cur=id;
 }
 panels.addEventListener('click',e=>{const wb=e.target.closest('.wbtn');if(wb){openSheet(PLACES[wb.dataset.place],{route:true});return}const f=e.target.closest('.map');if(!f)return;const img=f.querySelector('img');openViewer(img.getAttribute('src'),img.alt)});
@@ -1492,10 +1500,10 @@ show((location.hash||'').slice(1)||'home');
 {const sp=document.getElementById('splash');
   /* 로딩 화면 동안 다른 화면을 미리 한 번씩 그려둠 → 처음 넘길 때도 바로 반응 */
   let warmed=false;const warm=()=>{const ids=[...DAYS.map(d=>d.id),'see','eat','taiwan','info','hotel','flight','cards'].filter(i=>i!==cur&&built[i]);
-    const step=()=>{const id=ids.shift();if(!id){warmed=true;return}const P=built[id];const sl=P.querySelector('.ovslot[data-f]');if(sl)sl.replaceWith(buildOvMap(sl.dataset.f,sl._cap));
+    const step=()=>{let id=ids.shift();while(id&&id===cur)id=ids.shift();if(!id){warmed=true;return}const P=built[id];const sl=P.querySelector('.ovslot[data-f]');if(sl)sl.replaceWith(buildOvMap(sl.dataset.f,sl._cap));
       if(P.parentNode!==panels){P.classList.add('warm');panels.appendChild(P)}else{P.classList.remove('off');P.classList.add('warm')}void P.offsetHeight;
       const ims=[...P.querySelectorAll('img')].map(im=>{im.loading='eager';return im.decode?im.decode().catch(()=>{}):null});
-      Promise.race([Promise.all(ims),new Promise(r=>setTimeout(r,1200))]).then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{P.classList.remove('warm');if(cur!==id)P.classList.add('off');else P.classList.remove('off');step()})))};step()};
+      Promise.race([Promise.all(ims),new Promise(r=>setTimeout(r,1200))]).then(()=>requestAnimationFrame(()=>requestAnimationFrame(()=>{P.classList.remove('warm');if(cur!==id)P.classList.add('off');else P.classList.remove('off');setTimeout(step,0)})))};step()};
   /* 상세 화면(장소·음식) 사진도 로딩 화면 뒤에서 미리 받아둠 */
   const prefetch=()=>{const set=new Set();[...document.scripts].forEach(sc=>(sc.textContent.match(/img\/[\w-]+\.(?:jpg|png|webp)/g)||[]).forEach(u=>set.add(u)));const q=[...set];
     const nx=()=>{const u=q.shift();if(!u)return;const im=new Image();im.onload=im.onerror=()=>setTimeout(nx,30);im.src=u};for(let k=0;k<3;k++)nx()};setTimeout(prefetch,300);
@@ -1520,6 +1528,7 @@ sheet.addEventListener('scroll',sheadSync,{passive:true});
   sheet.addEventListener('touchstart',e=>{if(sheet.scrollTop>0||e.touches.length>1){y0=null;return}y0=e.touches[0].clientY;dy=0;v=0;drag=false;ly=y0;lt=performance.now()},{passive:true});
   sheet.addEventListener('touchmove',e=>{if(y0==null)return;const y=e.touches[0].clientY;dy=y-y0;if(!drag){if(dy>6&&sheet.scrollTop<=0){drag=true;sheet.style.transition='none';pop.style.transition='none';y0=y-1;dy=1}else if(dy<-4){y0=null;return}else return}
     if(drag){e.preventDefault();const now=performance.now();v=.7*v+.3*((y-ly)/Math.max(1,now-lt));ly=y;lt=now;const d=Math.max(0,dy);sheet.style.transform=`translateY(${d}px)`;bg(Math.min(1,d/H()))}},{passive:false});
+  sheet.addEventListener('touchcancel',()=>{y0=null;if(!drag)return;drag=false;dy=0;sheet.style.transition='transform .42s cubic-bezier(.22,.75,.25,1)';pop.style.transition='background-color .42s linear';sheet.style.transform='';bg(0);setTimeout(()=>{sheet.style.transition='';pop.style.transition='';pop.style.backgroundColor=''},440)});
   sheet.addEventListener('touchend',()=>{if(!drag){y0=null;return}drag=false;y0=null;const ease='cubic-bezier(.22,.75,.25,1)';
     if(dy>H()*.28||(v>.55&&dy>30)){const rest=H()-dy,du=Math.max(180,Math.min(380,rest/Math.max(v,1.2)));sheet.style.transition=`transform ${du}ms ${ease}`;pop.style.transition=`background-color ${du}ms linear`;sheet.style.transform='translateY(100%)';bg(1);
       setTimeout(()=>{closeTop();sheet.style.transition='';sheet.style.transform='';pop.style.transition='';pop.style.backgroundColor=''},du+20)}
@@ -1537,9 +1546,11 @@ try{history.scrollRestoration='manual'}catch(e){}
 function lockBody(){lockY=window.scrollY;const b=document.body.style;b.position='fixed';b.top=(-lockY)+'px';b.left='0';b.right='0';b.width='100%';document.documentElement.classList.add('lock')}
 function unlockBody(){const b=document.body.style;b.position='';b.top='';b.left='';b.right='';b.width='';document.documentElement.classList.remove('lock');window.scrollTo(0,lockY)}
 pop.addEventListener('touchmove',e=>{if(!e.target.closest('.sheet'))e.preventDefault()},{passive:false});
-function openLayer(fn){if(!layers.length)lockBody();let h=false;try{history.pushState({p:cur,layer:1},'',location.hash);h=true}catch(e){}layers.push({fn,h})}
+/* 닫기(history.back)가 처리되기 전에 새 기록을 넣으면 순서가 꼬이므로, 처리될 때까지 미뤄서 넣음 */
+let histQ=[];const hpush=(st,u)=>{if(skipPop>0){histQ.push([st,u]);return}try{history.pushState(st,'',u)}catch(e){}};
+function openLayer(fn){if(!layers.length)lockBody();hpush({p:cur,layer:1},'#'+cur);layers.push({fn,h:true})}
 function closeTop(fromPop){const L=layers.pop();if(!L)return;L.fn();if(!layers.length)unlockBody();if(fromPop!==true&&L.h){skipPop++;try{history.back()}catch(e){skipPop--}}}
-window.addEventListener('popstate',e=>{if(skipPop){skipPop--;return}if(layers.length){closeTop(true);return}const id=(e.state&&e.state.p)||(location.hash||'').slice(1)||'home';show(id,true)});
+window.addEventListener('popstate',e=>{if(skipPop){skipPop--;if(!skipPop&&histQ.length){const q=histQ;histQ=[];q.forEach(([st,u])=>{try{history.pushState(st,'',u)}catch(_){}})}return}if(layers.length){closeTop(true);return}const id=(e.state&&e.state.p)||(location.hash||'').slice(1)||'home';show(id,true)});
 
 /* map viewer: pinch / drag / double-tap / wheel / buttons */
 const zv=$('#zv'),zst=$('#zvStage'),zim=$('#zvImg');let zs=1,zx=0,zy=0,zfit=1;const ptr=new Map();let pinch=null,lastTap=0,tapPt=null;
@@ -1549,7 +1560,7 @@ function zapply(){zclamp();zim.style.transform=`translate(${zx}px,${zy}px) scale
 function zfitNow(){const W=zst.clientWidth,H=zst.clientHeight;zfit=Math.min(W/zim.naturalWidth,H/zim.naturalHeight);zs=zfit;zx=0;zy=0;zapply()}
 function zoomAt(px,py,ns){ns=Math.max(zfit,Math.min(zfit*6,ns));zx=px-(px-zx)*(ns/zs);zy=py-(py-zy)*(ns/zs);zs=ns;zapply()}
 function rel(e){const r=zst.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
-function openViewer(src,alt){zim.onload=zfitNow;zim.alt=alt||'지도';zim.src=src;zv.hidden=false;if(zim.complete&&zim.naturalWidth)zfitNow();$('#zvClose').focus();openLayer(()=>{zv.hidden=true})}
+function openViewer(src,alt){ptr.clear();pinch=null;lastTap=0;if(zim.getAttribute('src')!==src)zim.removeAttribute('src');zim.onload=zfitNow;zim.alt=alt||'지도';zim.src=src;zv.hidden=false;if(zim.complete&&zim.naturalWidth)zfitNow();$('#zvClose').focus();openLayer(()=>{zv.hidden=true})}
 $('#zvClose').addEventListener('click',()=>closeTop());
 $('#zvIn').addEventListener('click',()=>zoomAt(zst.clientWidth/2,zst.clientHeight/2,zs*1.6));
 $('#zvOut').addEventListener('click',()=>zoomAt(zst.clientWidth/2,zst.clientHeight/2,zs/1.6));
