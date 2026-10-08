@@ -879,8 +879,8 @@ body{word-break:keep-all;overflow-wrap:break-word}
 .tile,.tc,.eth,.aqb,.zh,.wbtn,.chip,.totop,.nowcard,.daybtn,.row{transition:transform .12s ease}
 .tile:active,.tc:active,.eth:active,.aqb:active,.zh:active,.wbtn:active,.chip:active,.totop:active,.nowcard:active,.daybtn:active,.row:active{transform:scale(.97)}
 .sched li:not(.move){isolation:isolate}
-.sched li:not(.move):not(.now):active::after{content:'';position:absolute;inset:3px -10px;border-radius:14px;background:rgba(25,31,40,.05);z-index:-1}
-.sched li.now:active::after{background:#E0ECFF}
+.sched li[role=button]:not(.now):active::after{content:'';position:absolute;inset:3px -10px;border-radius:14px;background:rgba(25,31,40,.05);z-index:-1}
+.sched li.now[role=button]:active::after{background:#E0ECFF}
 button,a,.sched li,.tile,.tc,.eth,.daybtn,.zh,.chip,.aqb,.nowcard,.ovm-vp{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .sched li.now .dot{position:relative}.sched li.now .dot::after{content:'';position:absolute;inset:-2px;border-radius:50%;background:rgba(49,130,246,.45);animation:ringOut 1.8s ease-out infinite;will-change:transform,opacity}
 @keyframes ringOut{0%{transform:scale(1);opacity:.9}80%,100%{transform:scale(2.6);opacity:0}}
@@ -1237,8 +1237,8 @@ function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>
   const ars=[...inn.querySelectorAll('.ovsvg .ar')].sort((a,b)=>act(b)-act(a));
   ars.forEach(a=>{if(a.closest('.hid'))return;const c=a.querySelector('.arc');const r=c&&vis(c);if(!r)return;if(over(r,a))a.classList.add('hid');else placed.push({r,o:a})})}
 function ovDraw(w,f){if(!f||f==='0'||RM)return;let t=0;const NS='http://www.w3.org/2000/svg',svg=w.querySelector('.ovsvg');
-  const draw=(el,du,dl,done)=>{let L=0;try{L=el.getTotalLength()}catch(e){}if(!L){done&&done();return}el.style.transition='none';el.style.strokeDasharray=L+' '+L;el.style.strokeDashoffset=L;el.getBoundingClientRect();
-    requestAnimationFrame(()=>{el.style.transition='stroke-dashoffset '+du+'ms ease-in-out '+dl+'ms';el.style.strokeDashoffset='0'});
+  const draw=(el,du,dl,done)=>{let L=0;try{L=el.getTotalLength()}catch(e){}if(!L){done&&done();return}el.style.transition='none';el.style.strokeDasharray=L+'px '+L+'px';el.style.strokeDashoffset=L+'px';el.getBoundingClientRect();
+    requestAnimationFrame(()=>{el.style.transition='stroke-dashoffset '+du+'ms ease-in-out '+dl+'ms';el.style.strokeDashoffset='0px'});
     setTimeout(()=>{el.style.transition='';el.style.strokeDasharray='';el.style.strokeDashoffset='';done&&done()},dl+du+120)};
   w.querySelectorAll('.ovsvg g.r.d'+f+'[data-len]').forEach(g=>{const p=g.querySelector('.rl');if(!p)return;const L=+g.dataset.len||300,du=Math.min(420,Math.max(200,L*.55));
     if(!p.classList.contains('dash'))draw(p,du,t);
@@ -1403,7 +1403,7 @@ function markNow(){const ni=nowInfo();document.querySelectorAll('.sched li.past'
   const cl=find(ni.cur);if(cl){const ci=lis.indexOf(cl);lis.forEach((li,j)=>li.classList.toggle('past',j<ci))}
   if(cl)cl.classList.add('now');{const nx=find(ni.nxt);if(nx)nx.classList.add('nextup')}}
 setInterval(()=>{if(!document.hidden)markNow()},60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)markNow()});
-const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;const FS_KEY='tw-big';function setBig(on){document.documentElement.classList.toggle('big',on);document.querySelectorAll('.fsbtn').forEach(b=>{b.setAttribute('aria-pressed',on?'true':'false');b.querySelector('em').textContent=on?'글씨 보통':'글씨 크게'});try{localStorage.setItem(FS_KEY,on?'1':'0')}catch(e){}}
+document.addEventListener('touchstart',()=>{},{passive:true});const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;const FS_KEY='tw-big';function setBig(on){document.documentElement.classList.toggle('big',on);document.querySelectorAll('.fsbtn').forEach(b=>{b.setAttribute('aria-pressed',on?'true':'false');b.querySelector('em').textContent=on?'글씨 보통':'글씨 크게'});try{localStorage.setItem(FS_KEY,on?'1':'0')}catch(e){}}
 function fsBtn(){const b=el('button','fsbtn','<b>가</b><em>글씨 크게</em>');b.type='button';b.addEventListener('click',()=>setBig(!document.documentElement.classList.contains('big')));return b}
 $('#topbar').appendChild(fsBtn());built.home.querySelector('.hello').appendChild(fsBtn());
 try{setBig(localStorage.getItem(FS_KEY)==='1')}catch(e){setBig(false)}
