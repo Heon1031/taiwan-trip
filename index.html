@@ -668,10 +668,11 @@ html.big .bottombar .in{zoom:1.06}
 .areas b{grid-row:1/3;font-size:15px;font-weight:800;color:var(--jade)}
 .areas span{font-size:15px;font-weight:700;color:var(--ink)}
 .areas small{grid-column:2;font-size:14px;color:var(--muted);line-height:1.5}
-.aq{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
-.aqb{border:0;background:var(--paper);border-radius:999px;padding:10px 10px;flex:1 1 auto;font:inherit;font-size:14px;white-space:nowrap;text-align:center;color:var(--sub);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.aqb b{color:var(--jade);font-weight:800}
+.aq{display:flex;flex-wrap:wrap;gap:6px;margin:-2px 0 14px}
+.aqb{border:1px solid var(--rule);background:var(--paper);border-radius:999px;padding:5px 11px;font:inherit;font-size:13.5px;white-space:nowrap;color:var(--sub);cursor:pointer}
+.aqb b{font-weight:500;color:inherit}
 
+.totop{display:flex;align-items:center;gap:4px;margin:6px auto 0;border:1px solid var(--rule);background:var(--paper);color:var(--sub);border-radius:999px;padding:8px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}.totop svg{width:16px;height:16px}
 .a2hlink{display:block;margin:18px auto 4px;border:0;background:none;font:inherit;font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:8px}
 .a2h{margin-top:6px}
 .a2h-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--tint);padding:4px;border-radius:12px}
@@ -1278,7 +1279,7 @@ function homePanel(){const p=el('section','panel');
   const BUB='<span class="thumb bub zhc"><span class="zc zc2"><b>110·119</b><i>알아둘 것</i></span></span>';
   [['비행기 · 숙소'],['flight','img/flight.jpg','비행기 정보','편명 · 시간 · 예약번호'],['hotel','img/hotel.jpg','숙소 정보','택시 카드 · 주소, 전화, 체크인'],['카드'],['cards','ZHC','중국어 카드','말이 안 통할 때 보여주는 카드'],['info',null,'알아둘 것 · 긴급 연락처','날씨 · 돈 · 긴급 전화'],['여행지 이야기'],['eat','img/f_beef.jpg','이번 여행에서 맛보는 대만','우육면, 딤섬, 훠궈, 야시장 간식'],['see','img/longshan.jpg','이번 여행에서 둘러보는 대만','옛 도심부터 바다와 산까지'],['taiwan','img/cks.jpg','대만은 어떤 나라','나라 이름, 말과 글, 역사']].forEach(([id,im,t,sub])=>{if(im===undefined){h.appendChild(el('div','hgrp',esc(id)));return}const b=el('button','daybtn hrow');b.type='button';b.innerHTML=`${im==='PLANE'?PLANE:im==='ZHC'?ZHC:im?`<span class="thumb"><img src="${im}" alt="" loading="lazy"></span>`:BUB}<span class="txt">${t}<small>${sub}</small></span><span class="arrow">›</span>`;b.addEventListener('click',()=>show(id));h.appendChild(b)});
   p.appendChild(h);
-  {const b=el('button','a2hlink','휴대폰 바탕화면에 앱으로 추가하는 방법');b.type='button';b.addEventListener('click',openA2H);p.appendChild(b)}
+  {const b=el('button','a2hlink','휴대폰 바탕화면에 앱으로 추가하는 방법');b.type='button';b.addEventListener('click',openA2H);p.appendChild(b);const t=el('button','totop','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>맨 위로');t.type='button';t.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));p.appendChild(t)}
   return p}
 
 function dayPanel(d){const p=el('section','panel');
@@ -1344,7 +1345,8 @@ $('#topbar').appendChild(fsBtn());built.home.querySelector('.hello').appendChild
 try{setBig(localStorage.getItem(FS_KEY)==='1')}catch(e){setBig(false)}
 if('serviceWorker' in navigator&&/github\.io$/.test(location.hostname)){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
 let cur=null;
-function show(id,fromPop){if(!built[id])id='home';
+let homeY=0;function show(id,fromPop){if(!built[id])id='home';
+  if(cur==='home'&&id!=='home')homeY=window.scrollY;
   panels.replaceChildren(built[id]);
   const home=id==='home';topbar.hidden=home;bottombar.hidden=home;document.querySelector('.wrap').classList.toggle('has-bottom',!home);
   $('#where').textContent=NAMES[id];
@@ -1353,7 +1355,7 @@ function show(id,fromPop){if(!built[id])id='home';
     setBtn(prevBtn,prevTo,i===1?homeL:prevL(`${i-1}일차`));
     setBtn(nextBtn,nextTo,i<4?nextL(`${i+1}일차`):homeR);}
   else{const HELP=['flight','hotel','cards','info','eat','see','taiwan'],HN={hotel:'숙소 정보',flight:'비행기 정보',cards:'중국어 카드',info:'알아둘 것',taiwan:'대만은 어떤 나라',see:'둘러보는 대만',eat:'맛보는 대만'};const hi=HELP.indexOf(id);prevTo='home';nextTo=hi>=0&&hi<HELP.length-1?HELP[hi+1]:'home';setBtn(prevBtn,prevTo,homeL);setBtn(nextBtn,nextTo,nextTo==='home'?homeR:nextL(HN[nextTo]));}
-  window.scrollTo(0,0);markNow();if(todayIdx>=0&&id===DAYS[todayIdx].id){const nl=built[id].querySelector('.sched li.now')||built[id].querySelector('.sched li.nextup');if(nl)setTimeout(()=>{const y=nl.getBoundingClientRect().top+window.scrollY-140;window.scrollTo({top:Math.max(0,y),behavior:'smooth'})},250)}
+  if(home){window.scrollTo(0,homeY);requestAnimationFrame(()=>window.scrollTo(0,homeY))}else window.scrollTo(0,0);markNow();if(todayIdx>=0&&id===DAYS[todayIdx].id){const nl=built[id].querySelector('.sched li.now')||built[id].querySelector('.sched li.nextup');if(nl)setTimeout(()=>{const y=nl.getBoundingClientRect().top+window.scrollY-140;window.scrollTo({top:Math.max(0,y),behavior:'smooth'})},250)}
   if(!fromPop){try{if(cur===null)history.replaceState({p:id},'','#'+id);else if(cur!==id)history.pushState({p:id},'','#'+id)}catch(e){}}
   cur=id;
 }
