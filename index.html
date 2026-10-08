@@ -482,7 +482,7 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .ovm.solo{margin-top:20px}
 .ovm.solo[data-f="1"] .ovsvg :is(.r,.p):not(.d1),.ovm.solo[data-f="2"] .ovsvg :is(.r,.p):not(.d2),.ovm.solo[data-f="3"] .ovsvg :is(.r,.p):not(.d3),.ovm.solo[data-f="4"] .ovsvg :is(.r,.p):not(.d4){display:none}
 .ovm.solo .ovm-hint{padding-top:12px}
-.ovm-h{position:absolute;left:10px;bottom:10px;width:34px;height:34px;border-radius:12px;border:0;background:#E5323B;color:#fff;font-size:16px;font-weight:800;box-shadow:0 1px 4px rgba(0,0,0,.2);cursor:pointer;z-index:2}
+.ovm-h{position:absolute;left:10px;top:10px;width:34px;height:34px;border-radius:12px;border:0;background:#E5323B;color:#fff;font-size:16px;font-weight:800;box-shadow:0 1px 4px rgba(0,0,0,.2);cursor:pointer;z-index:2}
 .ovm-zb{position:absolute;right:10px;bottom:10px;display:grid;gap:6px}
 .ovm-zb button{width:34px;height:34px;border-radius:12px;border:0;background:rgba(255,255,255,.92);box-shadow:0 1px 4px rgba(0,0,0,.15);font-size:22px;font-weight:700;color:var(--ink);cursor:pointer;line-height:1}
 .ovm-f{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding:12px 12px 4px}
@@ -1261,7 +1261,7 @@ function ovDraw(w,f){ovStop(w);OVW=w;if(!f||f==='0')return;const NS='http://www.
     t+=du+30})}
 function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.dataset.f=solo||'0';
   w.innerHTML=`<div class="ovm-vp"><div class="ovm-in${solo?'':' lo'}">${ovSvg()}</div>
-   <button type="button" class="ovm-h" aria-label="숙소로"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3.5v11M13 3.5v11M5 9h8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg></button><div class="ovm-zb"><button type="button" data-z="1" aria-label="확대"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3.5v11M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" data-z="-1" aria-label="축소"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button></div></div>
+   <button type="button" class="ovm-h" aria-label="숙소로"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3.5v11M13 3.5v11M5 9h8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg></button><div class="ovm-zb"><button type="button" data-z="1" aria-label="확대"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3.5v11M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" data-z="-1" aria-label="축소"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" class="zfit" data-z="0" aria-label="전체 보기"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 7V4a1 1 0 0 1 1-1h3M11 3h3a1 1 0 0 1 1 1v3M15 11v3a1 1 0 0 1-1 1h-3M7 15H4a1 1 0 0 1-1-1v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div></div>
    ${OVGO[solo]?`<button type="button" class="ovm-go${OVGO[solo][5]?' top':''}" style="--gc:${OVC[solo-1]}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2" fill="currentColor"/><path d="M10 21l2-6 3 3v4M8 12l2-4h4l2 4 2 1M12 8l-1 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${OVGO[solo][0]}<br><em>${OVGO[solo][1]} ›</em></span></button>`:''}
    ${solo?'':`<div class="ovm-f">${['전체','1일차','2일차','3일차','4일차'].map((t,i)=>`<button type="button" data-f="${i}" class="${i?'':'on'}" style="--c:${i?OVC[i-1]:'var(--ink)'}">${t}</button>`).join('')}</div>`}
    <p class="ovm-hint">${solo&&cap?cap+'<br>':''}<span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="1" y1="5" x2="29" y2="5" stroke="#B4BAC2" stroke-width="5"/><line x1="1" y1="5" x2="29" y2="5" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/></svg>지하철</span><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="2" y1="5" x2="28" y2="5" stroke="#6B7684" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/></svg>숙소로 돌아가는 길</span><br><span class="ovm-approx">지도의 위치와 경로는 대략이에요</span></p>`;
@@ -1292,12 +1292,13 @@ function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.datase
   const up=e=>{pts.delete(e.pointerId);if(pts.size<2)pin=null;if(pts.size===1)last=[...pts.values()][0];if(!pts.size){last=null;if(gest)endGest()}};
   vp.addEventListener('pointerup',up);vp.addEventListener('pointercancel',up);
   vp.addEventListener('wheel',e=>{if(!e.ctrlKey&&sc<=1.01&&e.deltaY>0)return;e.preventDefault();gest=true;inn.classList.add('mv');clearTimeout(wt);wt=setTimeout(endGest,180);const [x,y]=rel(e);zoomAt(e.deltaY<0?1.15:1/1.15,x,y)},{passive:false});
-  w.querySelectorAll('.ovm-zb button').forEach(b=>b.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;if(+b.dataset.z>0)zoomAt(2,W/2,H/2);else zoomAt(1/2,W/2,H/2)}));
-  {const hb=w.querySelector('.ovm-h');let tw=0;if(hb)hb.addEventListener('click',()=>{touched=true;const W=vp.clientWidth,H=vp.clientHeight;const [hx,hy]=ovP(...OVPT.hotel);const s1=6,x1=W/2-hx/OVX.W*W*s1,y1=H/2-hy/OVX.H*H*s1;
+  w.querySelectorAll('.ovm-zb button').forEach(b=>b.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;if(b.dataset.z==='0'){flyTo(home.s,W/2-home.cx*W*home.s,H/2-home.cy*H*home.s);return}if(+b.dataset.z>0)zoomAt(2,W/2,H/2);else zoomAt(1/2,W/2,H/2)}));
+  let tw=0;const flyTo=(s1,x1,y1)=>{touched=true;const W=vp.clientWidth,H=vp.clientHeight;
     const s0=sc,x0=tx,y0=ty;cancelAnimationFrame(tw);gest=true;inn.classList.add('mv');const T=performance.now(),D=650;
     const step=now=>{const k=Math.min(1,(now-T)/D),e=1-Math.pow(1-k,3);const ls=Math.exp(Math.log(s0)+(Math.log(s1)-Math.log(s0))*e);
       const f=(ls-s0)/(s1-s0||1);sc=ls;tx=x0+(x1-x0)*(s1===s0?e:f);ty=y0+(y1-y0)*(s1===s0?e:f);clamp();const s2=sc/csc;inn.style.transform=`translate(${(tx-s2*ctx).toFixed(1)}px,${(ty-s2*cty).toFixed(1)}px) scale(${s2.toFixed(4)})`;
-      if(k<1)tw=requestAnimationFrame(step);else endGest()};tw=requestAnimationFrame(step)})}
+      if(k<1)tw=requestAnimationFrame(step);else endGest()};tw=requestAnimationFrame(step)};
+  {const hb=w.querySelector('.ovm-h');if(hb)hb.addEventListener('click',()=>{const W=vp.clientWidth,H=vp.clientHeight;const [hx,hy]=ovP(...OVPT.hotel);const s1=6;flyTo(s1,W/2-hx/OVX.W*W*s1,H/2-hy/OVX.H*H*s1)})}
   return w}
 
 const A2H={a:['카톡에서 링크 누르기','오른쪽 아래 ⋮ → ‘다른 브라우저로 열기’','크롬 ⋮ → ‘홈 화면에 추가’','‘추가’ → 바탕화면에 아이콘 완성'],
@@ -1337,7 +1338,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v1.5</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v1.6</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
