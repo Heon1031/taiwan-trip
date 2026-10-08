@@ -958,7 +958,7 @@ html,button,a,[role=button],.bottombar{touch-action:manipulation}
 <body>
 
 <div id="splash" aria-hidden="true"><div class="sp-scene"><img class="sp-globe" src="img/globe2.png" alt="" onerror="this.remove()"><div class="sp-rider"><div class="sp-bub"><span class="sp-msg"></span></div><svg class="sp-tail" viewBox="0 0 30 26" aria-hidden="true"><path d="M13 1.5 C13 9 9 16 1.5 23.5 C10 21 18 14 24 1.5" fill="#fff" stroke="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M11 -1 H26 V2.6 H11Z" fill="#fff"/></svg><img class="sp-char" src="img/splash.png?v=2" alt="" onerror="this.remove()"></div></div></div><script>setTimeout(function(){var s=document.getElementById("splash");if(s){s.classList.add("out");setTimeout(function(){if(s.parentNode)s.remove()},900)}},6000)</script>
-<script>(function(){var m=["설레는 마음 싣는 중…","여권은 챙기셨죠?","캐리어 바퀴 굴리는 중…","오늘의 맛집 데우는 중…","가족 단톡방 확인 중…","지도 펼치는 중…","창가 자리 고르는 중…","사진 찍을 준비 됐나요?"];var e=document.querySelector("#splash .sp-msg");if(e){e.textContent=m[Math.floor(Math.random()*m.length)];}})()</script>
+<script>(function(){var m=["설레는 마음 싣는 중…","여권은 챙기셨죠?","캐리어 바퀴 굴리는 중…","오늘의 맛집 데우는 중…","가족 단톡방 확인 중…","지도 펼치는 중…","창가 자리 고르는 중…","사진 찍을 준비 됐나요?","버블티 펄 삶는 중…","우육면 국물 우리는 중…","망고빙수 얼음 가는 중…","딤섬 찜기 데우는 중…","천등에 소원 적는 중…","지우펀 홍등 켜는 중…","101 전망대 불 켜는 중…","꼬마기차 출발 준비 중…","야시장 줄 서는 중…","편한 신발 신으셨죠?","작은 우산도 챙겨요","가족사진 포즈 연습 중…","대만 달러 세는 중…","비행기 창문 닦는 중…"];var e=document.querySelector("#splash .sp-msg");if(e){e.textContent=m[Math.floor(Math.random()*m.length)];}})()</script>
 <div class="wrap">
   <div class="topbar" id="topbar" hidden><button type="button" class="back" id="backBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-5.5h4V20"/></svg>처음으로</button><span class="where" id="where"></span></div>
   <main id="panels"></main>
@@ -1379,7 +1379,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v4.7</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v4.8</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
