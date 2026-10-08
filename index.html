@@ -926,6 +926,7 @@ button,a,.sched li,.tile,.tc,.eth,.daybtn,.zh,.chip,.aqb,.nowcard,.ovm-vp{-webki
 @keyframes livePulse2{0%{box-shadow:0 0 0 0 rgba(255,255,255,.8)}80%{box-shadow:0 0 0 6px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
 .sched li.nextup .nowtag{background:var(--paper);color:var(--jade);box-shadow:inset 0 0 0 1.5px var(--jade)}
 @media (prefers-reduced-motion:no-such){.nc-live i::after,.sched li.now .nowtag i::after,.sched li.now .dot::after,.sched li.now .dot::before{animation:none;display:none}}
+.ovm-h,.ovm-zb button{display:grid;place-items:center;padding:0;line-height:1;font-family:var(--body)}.ovm-zb button svg,.ovm-h svg{width:18px;height:18px;display:block}
 </style>
 </head>
 <body>
@@ -1245,8 +1246,9 @@ function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>
   const ars=[...inn.querySelectorAll('.ovsvg .ar')].sort((a,b)=>act(b)-act(a));
   ars.forEach(a=>{if(a.closest('.hid'))return;const c=a.querySelector('.arc');const r=c&&vis(c);if(!r)return;if(over(r,a))a.classList.add('hid');else placed.push({r,o:a})})}
 const OVJ=[];let ovRaf=0;function ovTick(now){for(let i=OVJ.length-1;i>=0;i--){const j=OVJ[i];if(now<j.t0){continue}const k=Math.min(1,(now-j.t0)/j.du),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;j.f(e);if(k>=1){j.end&&j.end();OVJ.splice(i,1)}}ovRaf=OVJ.length?requestAnimationFrame(ovTick):0}
-function ovJob(t0,du,f,end){f(0);OVJ.push({t0,du,f,end});if(!ovRaf)ovRaf=requestAnimationFrame(ovTick)}
-function ovDraw(w,f){if(!f||f==='0')return;const NS='http://www.w3.org/2000/svg',svg=w.querySelector('.ovsvg');const T0=performance.now()+30;let t=0;
+let OVW=null;function ovJob(t0,du,f,end){f(0);OVJ.push({t0,du,f,end,w:OVW});if(!ovRaf)ovRaf=requestAnimationFrame(ovTick)}
+function ovStop(w){for(let i=OVJ.length-1;i>=0;i--){const j=OVJ[i];if(j.w===w){j.f(1);j.end&&j.end();OVJ.splice(i,1)}}}
+function ovDraw(w,f){ovStop(w);OVW=w;if(!f||f==='0')return;const NS='http://www.w3.org/2000/svg',svg=w.querySelector('.ovsvg');const T0=performance.now()+30;let t=0;
   const draw=(el,du,dl,done)=>{let L=0;try{L=el.getTotalLength()}catch(e){}if(!L){done&&done();return}el.style.strokeDasharray=L+'px '+L+'px';
     ovJob(T0+dl,du,e=>{el.style.strokeDashoffset=(L*(1-e))+'px'},()=>{el.style.strokeDasharray='';el.style.strokeDashoffset='';done&&done()})};
   const vb=svg.viewBox.baseVal,zoomed=vb&&vb.width<OVX.W*.6;const inView=p=>{let L=0;try{L=p.getTotalLength()}catch(e){return true}let n=0;for(let i=0;i<=16;i++){const q=p.getPointAtLength(L*i/16);if(q.x>=vb.x&&q.x<=vb.x+vb.width&&q.y>=vb.y&&q.y<=vb.y+vb.height)n++}return n>=6};
@@ -1259,7 +1261,7 @@ function ovDraw(w,f){if(!f||f==='0')return;const NS='http://www.w3.org/2000/svg'
     t+=du+30})}
 function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.dataset.f=solo||'0';
   w.innerHTML=`<div class="ovm-vp"><div class="ovm-in${solo?'':' lo'}">${ovSvg()}</div>
-   <button type="button" class="ovm-h" aria-label="숙소로">H</button><div class="ovm-zb"><button type="button" data-z="1" aria-label="확대">+</button><button type="button" data-z="-1" aria-label="축소">−</button></div></div>
+   <button type="button" class="ovm-h" aria-label="숙소로"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3.5v11M13 3.5v11M5 9h8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg></button><div class="ovm-zb"><button type="button" data-z="1" aria-label="확대"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3.5v11M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" data-z="-1" aria-label="축소"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button></div></div>
    ${OVGO[solo]?`<button type="button" class="ovm-go${OVGO[solo][5]?' top':''}" style="--gc:${OVC[solo-1]}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2" fill="currentColor"/><path d="M10 21l2-6 3 3v4M8 12l2-4h4l2 4 2 1M12 8l-1 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${OVGO[solo][0]}<br><em>${OVGO[solo][1]} ›</em></span></button>`:''}
    ${solo?'':`<div class="ovm-f">${['전체','1일차','2일차','3일차','4일차'].map((t,i)=>`<button type="button" data-f="${i}" class="${i?'':'on'}" style="--c:${i?OVC[i-1]:'var(--ink)'}">${t}</button>`).join('')}</div>`}
    <p class="ovm-hint">${solo&&cap?cap+'<br>':''}<span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="1" y1="5" x2="29" y2="5" stroke="#B4BAC2" stroke-width="5"/><line x1="1" y1="5" x2="29" y2="5" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/></svg>지하철</span><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="2" y1="5" x2="28" y2="5" stroke="#6B7684" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/></svg>숙소로 돌아가는 길</span><br><span class="ovm-approx">지도의 위치와 경로는 대략이에요</span></p>`;
@@ -1335,7 +1337,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v1.3</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v1.5</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
