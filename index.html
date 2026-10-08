@@ -927,10 +927,22 @@ button,a,.sched li,.tile,.tc,.eth,.daybtn,.zh,.chip,.aqb,.nowcard,.ovm-vp{-webki
 .sched li.nextup .nowtag{background:var(--paper);color:var(--jade);box-shadow:inset 0 0 0 1.5px var(--jade)}
 @media (prefers-reduced-motion:no-such){.nc-live i::after,.sched li.now .nowtag i::after,.sched li.now .dot::after,.sched li.now .dot::before{animation:none;display:none}}
 .ovm-h,.ovm-zb button{display:grid;place-items:center;padding:0;line-height:1;font-family:var(--body)}.ovm-zb button svg,.ovm-h svg{width:18px;height:18px;display:block}
+.ovm-h{width:auto!important;padding:0 11px 0 9px!important;display:flex!important;align-items:center;gap:4px;font-size:14px!important;font-weight:800}.ovm-h svg{width:17px!important;height:17px!important}.ovsvg .hotel .hs{fill:#fff}
+#splash{position:fixed;inset:0;z-index:100;background:var(--paper,#fff);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:opacity .8s ease,visibility .8s}
+#splash img{width:150px;height:auto;margin-bottom:14px;transform-origin:50% 90%;animation:spSway 3.8s ease-in-out infinite}
+#splash b{font-size:21px;font-weight:800;letter-spacing:-.02em;color:var(--ink,#191F28)}
+#splash small{font-size:14px;color:var(--muted,#6B7684)}#splash .sp-msg{margin-top:14px;font-size:14.5px;font-weight:600;color:var(--sub,#4E5968);letter-spacing:-.01em;animation:spMsg .6s ease .15s both}@keyframes spMsg{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.sp-dots{display:flex;gap:6px;margin-top:16px}
+.sp-dots span{width:7px;height:7px;border-radius:50%;background:var(--jade,#3182F6);opacity:.25;animation:spDot 1.8s ease-in-out infinite}
+.sp-dots span:nth-child(2){animation-delay:.3s}.sp-dots span:nth-child(3){animation-delay:.6s}
+@keyframes spSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg) translateY(-2px)}}
+@keyframes spDot{0%,100%{opacity:.25}40%{opacity:1}}
+#splash.out{opacity:0;visibility:hidden}
 </style>
 </head>
 <body>
 
+<div id="splash" aria-hidden="true"><img src="img/splash.png?v=2" alt="" onerror="this.remove()"><i class="sp-dots"><span></span><span></span><span></span></i><small class="sp-msg"></small></div><script>(function(){var m=["설레는 마음 싣는 중…","여권은 챙기셨죠?","캐리어 바퀴 굴리는 중…","오늘의 맛집 데우는 중…","가족 단톡방 확인 중…","지도 펼치는 중…","비행기 창가 자리 고르는 중…","사진 찍을 준비 됐나요?"];var e=document.querySelector("#splash .sp-msg");if(e)e.textContent=m[Math.floor(Math.random()*m.length)]})()</script>
 <div class="wrap">
   <div class="topbar" id="topbar" hidden><button type="button" class="back" id="backBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M10 20v-5.5h4V20"/></svg>처음으로</button><span class="where" id="where"></span></div>
   <main id="panels"></main>
@@ -1180,7 +1192,7 @@ const OVR=[[1,'airport','hotel',-.12,0],[1,'hotel','cks',.35,0],[1,'cks','t101',
  [4,'hotel','airport',-.12,0]];
 const OVPIN=[[1,'cks','3','중정기념당','',0,1],[1,'t101','4','타이베이 101','키키 저녁',1,0],
  [2,'yehliu','2','예류 지질공원','',1,0],[2,'shifen','3','스펀','천등',1,0],[2,'jiufen','4','지우펀','홍등 야경',1,0],[2,'raohe','5','라오허제 야시장','팀호완',1,-1],
- [3,'wulai','1','우라이','꼬마기차·폭포',1,0],[3,'ximen','2','시먼딩','자유시간',0,-1],
+ [3,'wulai','1','우라이','꼬마기차·폭포',1,0],[3,'ximen','2','시먼딩','자유시간',1,-1],
  ['4 d1','airport','✈','타오위안 공항 T1','',1,-1]];
 const OVD={x0:121.48,x1:121.60,y0:25.015,y1:25.068};
 const OVDET=[[1,[121.5003,25.0363],'샤오왕주과 (점심)','숙소에서 걸어서 8분',1,0,0,'1'],[1,[121.4999,25.0372],'용산사','식당에서 걸어서 3분',-1,0,0,'2'],[2,[121.5036,25.0410],'뉴뎬 우육면 (점심)','',-1,0,0,'1'],[3,[121.5086,25.0428],'우라오궈 (저녁)','19:00',1,0,0,'3']];
@@ -1222,7 +1234,7 @@ function ovSvg(){let r='',pins='';
   spots+='</g>';walks+='</g>';det+='</g>';
   const [hx,hy]=ovP(...OVPT.hotel);
   const defs='';
-  return `<svg class="ovsvg" viewBox="0 0 ${OVX.W} ${OVX.H}" preserveAspectRatio="none" role="img" aria-label="여행 동선 지도"><defs>${defs}</defs>${det}${r}${walks}${pins}${spots}<g class="hotel" transform="translate(${hx.toFixed(1)} ${hy.toFixed(1)})"><g class="ps"><rect x="-30" y="-30" width="60" height="60" rx="12"/><text y="14">H</text><text class="l" x="-46" y="14" text-anchor="end">숙소</text></g></g></svg>`}
+  return `<svg class="ovsvg" viewBox="0 0 ${OVX.W} ${OVX.H}" preserveAspectRatio="none" role="img" aria-label="여행 동선 지도"><defs>${defs}</defs>${det}${r}${walks}${pins}${spots}<g class="hotel" transform="translate(${hx.toFixed(1)} ${hy.toFixed(1)})"><g class="ps"><rect x="-30" y="-30" width="60" height="60" rx="12"/><path class="hs" transform="translate(-27 -27) scale(3)" d="M3 8.2 9 3.3l6 4.9V15a.8.8 0 0 1-.8.8H11v-4.2H7v4.2H3.8A.8.8 0 0 1 3 15Z"/><text class="l" x="-46" y="14" text-anchor="end">숙소</text></g></g></svg>`}
 const ovF=sc=>Math.min(1.5,.8+.05*(sc-1));
 function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>parseFloat(inn.style.getPropertyValue(n)||'0');
   const own=e=>e.closest('g.p,g.hotel,g.spot,g.st,g.dg,g.wkg');
@@ -1261,7 +1273,7 @@ function ovDraw(w,f){ovStop(w);OVW=w;if(!f||f==='0')return;const NS='http://www.
     t+=du+30})}
 function buildOvMap(solo,cap){const w=el('div','ovm'+(solo?' solo':''));w.dataset.f=solo||'0';
   w.innerHTML=`<div class="ovm-vp"><div class="ovm-in${solo?'':' lo'}">${ovSvg()}</div>
-   <button type="button" class="ovm-h" aria-label="숙소로"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M5 3.5v11M13 3.5v11M5 9h8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg></button><div class="ovm-zb"><button type="button" data-z="1" aria-label="확대"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3.5v11M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" data-z="-1" aria-label="축소"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" class="zfit" data-z="0" aria-label="전체 보기"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 7V4a1 1 0 0 1 1-1h3M11 3h3a1 1 0 0 1 1 1v3M15 11v3a1 1 0 0 1-1 1h-3M7 15H4a1 1 0 0 1-1-1v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div></div>
+   <button type="button" class="ovm-h" aria-label="숙소로 가기"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 8.2 9 3.3l6 4.9V15a.8.8 0 0 1-.8.8H11v-4.2H7v4.2H3.8A.8.8 0 0 1 3 15Z" fill="currentColor"/></svg><span>숙소</span></button><div class="ovm-zb"><button type="button" data-z="1" aria-label="확대"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3.5v11M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" data-z="-1" aria-label="축소"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 9h11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg></button><button type="button" class="zfit" data-z="0" aria-label="전체 보기"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 7V4a1 1 0 0 1 1-1h3M11 3h3a1 1 0 0 1 1 1v3M15 11v3a1 1 0 0 1-1 1h-3M7 15H4a1 1 0 0 1-1-1v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></button></div></div>
    ${OVGO[solo]?`<button type="button" class="ovm-go${OVGO[solo][5]?' top':''}" style="--gc:${OVC[solo-1]}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="13" cy="4" r="2" fill="currentColor"/><path d="M10 21l2-6 3 3v4M8 12l2-4h4l2 4 2 1M12 8l-1 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${OVGO[solo][0]}<br><em>${OVGO[solo][1]} ›</em></span></button>`:''}
    ${solo?'':`<div class="ovm-f">${['전체','1일차','2일차','3일차','4일차'].map((t,i)=>`<button type="button" data-f="${i}" class="${i?'':'on'}" style="--c:${i?OVC[i-1]:'var(--ink)'}">${t}</button>`).join('')}</div>`}
    <p class="ovm-hint">${solo&&cap?cap+'<br>':''}<span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="1" y1="5" x2="29" y2="5" stroke="#B4BAC2" stroke-width="5"/><line x1="1" y1="5" x2="29" y2="5" stroke="#fff" stroke-width="2" stroke-dasharray="4 4"/></svg>지하철</span><span class="ovm-lg"><svg viewBox="0 0 30 10" aria-hidden="true"><line x1="2" y1="5" x2="28" y2="5" stroke="#6B7684" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"/></svg>숙소로 돌아가는 길</span><br><span class="ovm-approx">지도의 위치와 경로는 대략이에요</span></p>`;
@@ -1338,7 +1350,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v1.6</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v2.1</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
@@ -1453,6 +1465,7 @@ prevBtn.addEventListener('click',()=>prevTo&&show(prevTo));
 nextBtn.addEventListener('click',()=>nextTo&&show(nextTo));
 $('#backBtn').addEventListener('click',()=>show('home'));
 show((location.hash||'').slice(1)||'home');
+{const sp=document.getElementById('splash');if(sp){const t0=(performance.timing&&performance.timing.navigationStart)||0;const left=Math.max(0,1400-(Date.now()-t0));setTimeout(()=>{sp.classList.add('out');setTimeout(()=>sp.remove(),900)},left)}}
 {const idle=window.requestIdleCallback||(fn=>setTimeout(fn,300));const q=DAYS.map(d=>d.id);const next=()=>{const id=q.shift();if(!id)return;const P=built[id],sl=P&&P.querySelector('.ovslot[data-f]');if(sl&&cur!==id)sl.replaceWith(buildOvMap(sl.dataset.f,sl._cap));idle(next,{timeout:3000})};setTimeout(()=>idle(next,{timeout:3000}),1200)}
 
 /* ---------- popups ---------- */
@@ -1465,12 +1478,15 @@ function openSheet(d,o){const wasOpen=!pop.hidden;const R=!!(o&&o.route);const R
 const closeSheet=closeTop;
 function sheadSync(){const h=sheet.querySelector('.shead');if(!h)return;const im=sheet.classList.contains('hasimg')?sheet.querySelector(':scope > img'):null;const th=im?im.offsetHeight-64:48;h.classList.toggle('solid',sheet.scrollTop>th)}
 sheet.addEventListener('scroll',sheadSync,{passive:true});
-(()=>{let y0=null,dy=0,drag=false;
-  sheet.addEventListener('touchstart',e=>{if(sheet.scrollTop>0||e.touches.length>1){y0=null;return}y0=e.touches[0].clientY;dy=0;drag=false},{passive:true});
-  sheet.addEventListener('touchmove',e=>{if(y0==null)return;dy=e.touches[0].clientY-y0;if(!drag){if(dy>8&&sheet.scrollTop<=0){drag=true;sheet.style.transition='none'}else if(dy<-4){y0=null;return}else return}
-    if(drag){e.preventDefault();sheet.style.transform=`translateY(${Math.max(0,dy)}px)`}},{passive:false});
-  sheet.addEventListener('touchend',()=>{if(!drag){y0=null;return}drag=false;y0=null;sheet.style.transition='transform .2s ease';
-    if(dy>110){sheet.style.transform='translateY(100%)';setTimeout(()=>{closeTop();sheet.style.transition='';sheet.style.transform=''},190)}else{sheet.style.transform='';setTimeout(()=>{sheet.style.transition=''},210)}});
+(()=>{let y0=null,dy=0,drag=false,lt=0,ly=0,v=0;const H=()=>sheet.offsetHeight||600;
+  const bg=k=>{pop.style.backgroundColor=`rgba(20,26,24,${(.45*(1-k)).toFixed(3)})`};
+  sheet.addEventListener('touchstart',e=>{if(sheet.scrollTop>0||e.touches.length>1){y0=null;return}y0=e.touches[0].clientY;dy=0;v=0;drag=false;ly=y0;lt=performance.now()},{passive:true});
+  sheet.addEventListener('touchmove',e=>{if(y0==null)return;const y=e.touches[0].clientY;dy=y-y0;if(!drag){if(dy>6&&sheet.scrollTop<=0){drag=true;sheet.style.transition='none';pop.style.transition='none';y0=y-1;dy=1}else if(dy<-4){y0=null;return}else return}
+    if(drag){e.preventDefault();const now=performance.now();v=.7*v+.3*((y-ly)/Math.max(1,now-lt));ly=y;lt=now;const d=Math.max(0,dy);sheet.style.transform=`translateY(${d}px)`;bg(Math.min(1,d/H()))}},{passive:false});
+  sheet.addEventListener('touchend',()=>{if(!drag){y0=null;return}drag=false;y0=null;const ease='cubic-bezier(.22,.75,.25,1)';
+    if(dy>H()*.28||(v>.55&&dy>30)){const rest=H()-dy,du=Math.max(180,Math.min(380,rest/Math.max(v,1.2)));sheet.style.transition=`transform ${du}ms ${ease}`;pop.style.transition=`background-color ${du}ms linear`;sheet.style.transform='translateY(100%)';bg(1);
+      setTimeout(()=>{closeTop();sheet.style.transition='';sheet.style.transform='';pop.style.transition='';pop.style.backgroundColor=''},du+20)}
+    else{sheet.style.transition=`transform .42s ${ease}`;pop.style.transition='background-color .42s linear';sheet.style.transform='';bg(0);setTimeout(()=>{sheet.style.transition='';pop.style.transition='';pop.style.backgroundColor=''},440)}});
 })();
 pop.addEventListener('click',e=>{if(e.target===pop){closeTop();return}const a=e.target.closest('a.rlink');if(a){e.preventDefault();const im=a.querySelector('img');openViewer(a.getAttribute('href'),im?im.alt:'')}});
 const cov=$('#cardOv');
