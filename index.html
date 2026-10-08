@@ -668,6 +668,10 @@ html.big .bottombar .in{zoom:1.06}
 .areas b{grid-row:1/3;font-size:15px;font-weight:800;color:var(--jade)}
 .areas span{font-size:15px;font-weight:700;color:var(--ink)}
 .areas small{grid-column:2;font-size:14px;color:var(--muted);line-height:1.5}
+.aq{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px}
+.aqb{border:0;background:var(--paper);border-radius:999px;padding:10px 10px;flex:1 1 auto;font:inherit;font-size:14px;white-space:nowrap;text-align:center;color:var(--sub);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.aqb b{color:var(--jade);font-weight:800}
+
 .a2hlink{display:block;margin:18px auto 4px;border:0;background:none;font:inherit;font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:8px}
 .a2h{margin-top:6px}
 .a2h-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--tint);padding:4px;border-radius:12px}
@@ -1095,6 +1099,8 @@ function themePanel(k){const [zh,t,html]=THEMES[k];const p=el('section','panel')
     const SN={chicken:'죽통밥·산나물',lurou:'루러우판',gopchang:'곱창국수',charsiu:'딤섬'};const box=el('div','eras');ERA.forEach(([y,t,d,ks])=>{const sec=el('section','era'+(ks.length===1?' one':''));sec.innerHTML=`<div class="eh"><span class="ey">${y}</span><b>${t}</b></div><p class="ed">${d}</p>`;const row=el('div','erow');
       ks.forEach(fk=>{const fd=FOODS[fk];if(!fd)return;const b=el('button','eth');b.type='button';b.innerHTML=`<img src="${fd.img}" alt="" loading="lazy"><span class="en">${esc(SN[fk]||fd.title.replace(/ \(.*\)/,''))}</span><span class="edy">${esc((fd.lbl||'').split(' · ')[0])}</span>`;b.addEventListener('click',()=>openSheet(fd));row.appendChild(b)});
       sec.appendChild(row);box.appendChild(sec)});p.querySelector('.theme').appendChild(box);return p}
+  const ar=p.querySelector('.areas');if(ar){const row=el('div','aq');ar.querySelectorAll(':scope>div').forEach(dv=>{const t=dv.querySelector('b').textContent,l=dv.querySelector('span').textContent,x=dv.querySelector('small').textContent;
+    const b=el('button','aqb');b.type='button';b.innerHTML=`<b>${esc(t)}</b>이란?`;b.addEventListener('click',()=>openSheet({title:t+'이란?',lbl:l,text:[x]}));row.appendChild(b)});ar.replaceWith(row)}
   const ul=p.querySelector('.theme ul');
   if(ul&&(k==='see'||k==='eat')){const box=el('div','tg');
     ul.querySelectorAll('li').forEach(li=>{const head=li.querySelector('b').textContent,sub=(li.querySelector('small')||{}).textContent||'',tx=li.querySelector('span').textContent.trim();
