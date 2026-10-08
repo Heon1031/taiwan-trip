@@ -880,8 +880,12 @@ body{word-break:keep-all;overflow-wrap:break-word}
 .tile,.tc,.eth,.aqb,.zh,.wbtn,.chip,.totop,.nowcard,.daybtn,.row{transition:transform .12s ease}
 .tile.pressed,.tc.pressed,.eth.pressed,.aqb.pressed,.zh.pressed,.wbtn.pressed,.chip.pressed,.totop.pressed,.nowcard.pressed,.daybtn.pressed,.row.pressed{transform:scale(.97)}
 .sched li:not(.move){isolation:isolate}
-.sched li[role=button].pressed:not(.now)::after{content:'';position:absolute;inset:3px -10px;border-radius:14px;background:rgba(25,31,40,.05);z-index:-1}
-.sched li.now[role=button].pressed::after{background:#E0ECFF}
+.ripw{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;z-index:0}
+.sched li>.ripw{inset:3px -10px;border-radius:14px;z-index:-1}
+.rip{position:absolute;border-radius:50%;background:rgba(49,130,246,.16);transform:scale(0);opacity:1;animation:rip .6s cubic-bezier(.2,.8,.2,1) forwards;pointer-events:none}
+@keyframes rip{to{transform:scale(1);opacity:0}}
+.tile,.tc,.eth,.daybtn,.zh,.nowcard,.aqb,.totop,.chip,.wbtn,.row{position:relative}
+
 button,a,.sched li,.tile,.tc,.eth,.daybtn,.zh,.chip,.aqb,.nowcard,.ovm-vp{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 .sched li.now .dot{position:relative}.sched li.now .dot::after{content:'';position:absolute;inset:-2px;border-radius:50%;background:rgba(49,130,246,.45);animation:ringOut 1.8s ease-out infinite;will-change:transform,opacity}
 @keyframes ringOut{0%{transform:scale(1);opacity:.9}80%,100%{transform:scale(2.6);opacity:0}}
@@ -943,6 +947,8 @@ button,a,.sched li,.tile,.tc,.eth,.daybtn,.zh,.chip,.aqb,.nowcard,.ovm-vp{-webki
 </div>
 
 <script>
+const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /* ---------- content ---------- */
 const PLACES={
  hotel:{gm:'https://www.google.com/maps/search/?api=1&query=%E5%8F%B0%E5%8C%97%E5%87%B1%E9%81%94%E5%A4%A7%E9%A3%AF%E5%BA%97',img:'img/hotel.jpg',lbl:'숙소',title:'시저 메트로 타이베이',zh:'台北凱達大飯店',key:'타이베이가 처음 시작된 동네, 완화(萬華)의 호텔',
@@ -1239,7 +1245,7 @@ function ovCollide(w,inn){const placed=[],pad=1;const f=w.dataset.f;const vr=n=>
   ars.forEach(a=>{if(a.closest('.hid'))return;const c=a.querySelector('.arc');const r=c&&vis(c);if(!r)return;if(over(r,a))a.classList.add('hid');else placed.push({r,o:a})})}
 const OVJ=[];let ovRaf=0;function ovTick(now){for(let i=OVJ.length-1;i>=0;i--){const j=OVJ[i];if(now<j.t0){continue}const k=Math.min(1,(now-j.t0)/j.du),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;j.f(e);if(k>=1){j.end&&j.end();OVJ.splice(i,1)}}ovRaf=OVJ.length?requestAnimationFrame(ovTick):0}
 function ovJob(t0,du,f,end){f(0);OVJ.push({t0,du,f,end});if(!ovRaf)ovRaf=requestAnimationFrame(ovTick)}
-function ovDraw(w,f){if(!f||f==='0'||RM)return;const NS='http://www.w3.org/2000/svg',svg=w.querySelector('.ovsvg');const T0=performance.now()+30;let t=0;
+function ovDraw(w,f){if(!f||f==='0')return;const NS='http://www.w3.org/2000/svg',svg=w.querySelector('.ovsvg');const T0=performance.now()+30;let t=0;
   const draw=(el,du,dl,done)=>{let L=0;try{L=el.getTotalLength()}catch(e){}if(!L){done&&done();return}el.style.strokeDasharray=L+'px '+L+'px';
     ovJob(T0+dl,du,e=>{el.style.strokeDashoffset=(L*(1-e))+'px'},()=>{el.style.strokeDasharray='';el.style.strokeDashoffset='';done&&done()})};
   w.querySelectorAll('.ovsvg g.r.d'+f+'[data-len]').forEach(g=>{const p=g.querySelector('.rl');if(!p)return;const L=+g.dataset.len||300,du=Math.min(420,Math.max(200,L*.55));
@@ -1339,7 +1345,7 @@ function homePanel(){const p=el('section','panel');
   const BUB='<span class="thumb bub zhc"><span class="zc zc2"><b>110·119</b><i>알아둘 것</i></span></span>';
   [['비행기 · 숙소'],['flight','img/flight.jpg','비행기 정보','편명 · 시간 · 예약번호'],['hotel','img/hotel.jpg','숙소 정보','택시 카드 · 주소, 전화, 체크인'],['카드'],['cards','ZHC','중국어 카드','말이 안 통할 때 보여주는 카드'],['info',null,'알아둘 것 · 긴급 연락처','날씨 · 돈 · 긴급 전화'],['여행지 이야기'],['eat','img/f_beef.jpg','이번 여행에서 맛보는 대만','우육면, 딤섬, 훠궈, 야시장 간식'],['see','img/longshan.jpg','이번 여행에서 둘러보는 대만','옛 도심부터 바다와 산까지'],['taiwan','img/cks.jpg','대만은 어떤 나라','나라 이름, 말과 글, 역사']].forEach(([id,im,t,sub])=>{if(im===undefined){h.appendChild(el('div','hgrp',esc(id)));return}const b=el('button','daybtn hrow');b.type='button';b.innerHTML=`${im==='PLANE'?PLANE:im==='ZHC'?ZHC:im?`<span class="thumb"><img src="${im}" alt="" loading="lazy" decoding="async"></span>`:BUB}<span class="txt">${t}<small>${sub}</small></span><span class="arrow">›</span>`;b.addEventListener('click',()=>show(id));h.appendChild(b)});
   p.appendChild(h);
-  {const b=el('button','a2hlink','휴대폰 바탕화면에 앱으로 추가하는 방법');b.type='button';b.addEventListener('click',openA2H);p.appendChild(b);const t=el('button','totop','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>맨 위로');t.type='button';t.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));p.appendChild(t);p.appendChild(el('p','ver','업데이트 10/8 21:40'))}
+  {const b=el('button','a2hlink','휴대폰 바탕화면에 앱으로 추가하는 방법');b.type='button';b.addEventListener('click',openA2H);p.appendChild(b);const t=el('button','totop','<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>맨 위로');t.type='button';t.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));p.appendChild(t);p.appendChild(el('p','ver','업데이트 10/8 22:10'+(RM?' · 동작 줄이기 켜짐':'')))}
   return p}
 
 function dayPanel(d){const p=el('section','panel');
@@ -1407,8 +1413,9 @@ function markNow(){const ni=nowInfo();document.querySelectorAll('.sched li.past'
 setInterval(()=>{if(!document.hidden)markNow()},60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)markNow()});
 document.addEventListener('touchstart',()=>{},{passive:true});
 {const SEL='.sched li[role=button],.tile,.tc,.eth,.aqb,.zh,.wbtn,.chip,.totop,.nowcard,.daybtn,.row';let pe=null,pt=0;const off=()=>{if(!pe)return;const e=pe;pe=null;setTimeout(()=>e.classList.remove('pressed'),Math.max(0,120-(Date.now()-pt)))};
- document.addEventListener('pointerdown',e=>{const t=e.target.closest(SEL);if(!t)return;off();pe=t;pt=Date.now();t.classList.add('pressed')},{passive:true});
- ['pointerup','pointercancel'].forEach(n=>document.addEventListener(n,off,{passive:true}));document.addEventListener('scroll',off,{passive:true,capture:true})}const IOS=/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);const RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;const FS_KEY='tw-big';function setBig(on){document.documentElement.classList.toggle('big',on);document.querySelectorAll('.fsbtn').forEach(b=>{b.setAttribute('aria-pressed',on?'true':'false');b.querySelector('em').textContent=on?'글씨 보통':'글씨 크게'});try{localStorage.setItem(FS_KEY,on?'1':'0')}catch(e){}}
+ document.addEventListener('pointerdown',e=>{const t=e.target.closest(SEL);if(!t)return;off();pe=t;pt=Date.now();t.classList.add('pressed');
+   let w=t.querySelector(':scope>.ripw');if(!w){w=document.createElement('span');w.className='ripw';t.appendChild(w)}const r=w.getBoundingClientRect(),d=Math.max(r.width,r.height)*2.2;const c=document.createElement('i');c.className='rip';c.style.width=c.style.height=d+'px';c.style.left=(e.clientX-r.left-d/2)+'px';c.style.top=(e.clientY-r.top-d/2)+'px';w.appendChild(c);setTimeout(()=>c.remove(),650)},{passive:true});
+ ['pointerup','pointercancel'].forEach(n=>document.addEventListener(n,off,{passive:true}));document.addEventListener('scroll',off,{passive:true,capture:true})}const FS_KEY='tw-big';function setBig(on){document.documentElement.classList.toggle('big',on);document.querySelectorAll('.fsbtn').forEach(b=>{b.setAttribute('aria-pressed',on?'true':'false');b.querySelector('em').textContent=on?'글씨 보통':'글씨 크게'});try{localStorage.setItem(FS_KEY,on?'1':'0')}catch(e){}}
 function fsBtn(){const b=el('button','fsbtn','<b>가</b><em>글씨 크게</em>');b.type='button';b.addEventListener('click',()=>setBig(!document.documentElement.classList.contains('big')));return b}
 $('#topbar').appendChild(fsBtn());built.home.querySelector('.hello').appendChild(fsBtn());
 try{setBig(localStorage.getItem(FS_KEY)==='1')}catch(e){setBig(false)}
