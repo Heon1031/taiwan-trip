@@ -401,7 +401,7 @@ h1,h2,h3{font-family:var(--body);font-weight:700;letter-spacing:-.03em}
 .sched .chip svg{width:14px;height:14px;flex:none}
 .sched .chip.rowroute{background:var(--jade);color:#fff}
 .sheet img.fit{object-fit:contain;max-height:none;background:#fff}
-.sched .ok{font-size:12px;font-weight:700;color:#0E7A4F;background:#E3F6EC;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap;vertical-align:2px}
+.sched .ok,.info-card .ok{font-size:12px;font-weight:700;color:#0E7A4F;background:#E3F6EC;border-radius:6px;padding:1px 6px;margin-left:4px;white-space:nowrap;vertical-align:2px}
 .sheet .opts{display:grid;gap:14px;margin:16px 0}
 .sheet .optc{border-radius:16px;overflow:hidden;background:var(--paper);border:1px solid var(--rule)}
 .sheet .optc img{width:100%;height:180px;object-fit:cover;max-height:none;display:block}
@@ -1213,7 +1213,7 @@ function hotelPanel(){const h=PLACES.hotel;const p=el('section','panel');p.inner
   <div class="info-card"><div class="ir"><span>호텔</span><div><b>시저 메트로 타이베이</b><small class="zhs">台北凱達大飯店</small></div></div>
   <div class="ir"><span>주소</span><div><b class="zhs2">台北市萬華區艋舺大道167號</b><small>용산사역 근처 · 용산사까지 걸어서 5분</small></div></div>
   <div class="ir"><span>시간</span><div><b>체크인 15:00 · 체크아웃 12:00</b><small>첫날은 14시쯤 도착해 로비에 캐리어를 먼저 맡겨요</small></div></div>
-  <div class="ir"><span>방</span><div><b>4인실 · 2인실 (같은 호텔)</b><small>4인실: 아버지 · 어머니 · 헌진 · 혜영 (조식 포함)<br>2인실: 헌주 · 수경</small></div></div>
+  <div class="ir"><span>방</span><div><b>4인실 · 2인실 (같은 호텔) <span class="ok">예약 확정</span></b><small>4인실: 아버지 · 어머니 · 헌진 · 혜영 (조식 포함)<br>예약번호 710173239</small><small>2인실: 헌주 · 수경<br>예약번호 514-2883034</small></div></div>
   <div class="ir"><span>전화</span><div><b>+886-2-2306-6777</b><small>호텔 프런트</small></div></div></div>
   <div class="hbtns"><button type="button" class="hb1" id="hTaxi">택시 기사님께 보여주기</button><a class="hb2" href="tel:+886223066777">전화 걸기</a><a class="hb2" href="${h.gm}" target="_blank" rel="noopener">구글 지도</a></div>`;
   p.querySelector('#hTaxi').addEventListener('click',()=>openCard(CARDS.find(c=>c.ko==='숙소로 가주세요')));return p}
@@ -1482,7 +1482,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v7.4</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v7.5</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
