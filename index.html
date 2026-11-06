@@ -1041,6 +1041,8 @@ html,button,a,[role=button],.bottombar{touch-action:manipulation}
 html.big .ovm-key{font-size:12.5px}
 .ovm-hint{font-weight:600;color:var(--sub)}
 </style>
+</head>
+<body>
 
 <div id="splash" aria-hidden="true"><div class="sp-scene"><img class="sp-globe" src="img/globe2.png" alt="" onerror="this.remove()"><div class="sp-rider"><div class="sp-bub"><span class="sp-msg"></span></div><svg class="sp-tail" viewBox="0 0 30 26" aria-hidden="true"><path d="M13 1.5 C13 9 9 16 1.5 23.5 C10 21 18 14 24 1.5" fill="#fff" stroke="none" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M11 -1 H26 V2.6 H11Z" fill="#fff"/></svg><img class="sp-char" src="img/splash.png?v=2" alt="" onerror="this.remove()"></div></div></div><script>setTimeout(function(){var s=document.getElementById("splash");if(s){s.classList.add("out");setTimeout(function(){if(s.parentNode)s.remove()},900)}},6000)</script>
 <script>(function(){var m=["설레는 마음 싣는 중…","여권은 챙기셨죠?","캐리어 바퀴 굴리는 중…","오늘의 맛집 데우는 중…","가족 단톡방 확인 중…","지도 펼치는 중…","창가 자리 고르는 중…","사진 찍을 준비 됐나요?","버블티 펄 삶는 중…","우육면 국물 우리는 중…","망고빙수 얼음 가는 중…","후추빵 화덕 데우는 중…","천등에 소원 적는 중…","지우펀 홍등 켜는 중…","101 전망대 불 켜는 중…","꼬마기차 출발 준비 중…","야시장 줄 서는 중…","편한 신발 신으셨죠?","작은 우산도 챙겨요","가족사진 포즈 연습 중…","대만 달러 세는 중…","비행기 창문 닦는 중…"];var e=document.querySelector("#splash .sp-msg");if(e){e.textContent=m[Math.floor(Math.random()*m.length)];}})()</script>
@@ -1522,7 +1524,7 @@ function a2hBox(){const ua=navigator.userAgent,os=/iPhone|iPad|iPod/.test(ua)?(/
   return w}
 function openA2H(){openSheet({title:'바탕화면에 앱으로 추가하기',lbl:'1분이면 돼요',text:[]});const i=sheet.querySelector('.in');if(i)i.appendChild(a2hBox())}
 function homePanel(){const p=el('section','panel');
-  p.innerHTML=`<div class="hello"><span class="ver">v8.4</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="wxbox" hidden><div class="wxgrid"></div></div><div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
+  p.innerHTML=`<div class="hello"><span class="ver">v8.5</span><h1 class="h1m"><span>여섯 식구 첫 해외여행</span><img class="mascot" src="img/hello.png?v=2" alt="" onerror="this.remove()"></h1><p class="sub1">대만 3박 4일 안내서</p><p>2026년 11월 7일(토) ~ 10일(화)</p></div>${todayIdx>=0?`<button type="button" class="nowcard" id="nowCard"></button>`:''}<div class="wxbox" hidden><div class="wxgrid"></div></div><div class="ask" data-zh="日程">어느 날 일정을 볼까요?</div>`;
   const nc=p.querySelector('#nowCard');if(nc)nc.addEventListener('click',()=>show(DAYS[todayIdx].id));
   const g=el('div','daybtns');
   [['토','타이베이 300년, 하루의 시간 여행','용산사 · 중정기념당 · 101 야경'],['일','바다가 빚고, 탄광이 키운 북쪽 해안','예류 · 스펀 · 지우펀'],['월','타이야족의 온천 마을과 대만의 명동','우라이 꼬마기차와 폭포 · 시먼딩'],['화','다시 만날 날을 약속하며','공항에서 6명이 함께 마지막 아점']].forEach(([w,t,s],i)=>{
@@ -1562,7 +1564,7 @@ function cardsPanel(){const p=el('section','panel');p.innerHTML=`<span class="ki
   p.appendChild(g);p.appendChild(el('div','note','<b>택시 탈 때</b>는 \'숙소로 가주세요\' 카드를 보여주세요. 주소가 함께 나와요.'));return p}
 function infoPanel(){const p=el('section','panel');
   p.innerHTML=`<span class="kicker">떠나시기 전에</span><h2>꼭 알아둘 것</h2>
-  <div class="tip"><h3>날씨와 옷차림</h3><ul><li>11/3 예보: 여행 내내 선선하고 비가 자주 와요. 낮 22~26도, 아침저녁 19~21도예요.</li><li>2일차 바닷가(예류·지우펀)는 비바람이 세요. 우비와 바람막이를 꼭 챙겨요.</li><li>반팔에 얇은 긴팔을 겹쳐 입고, 가디건이나 얇은 패딩을 챙겨요. 실내 에어컨이 세요.</li><li>양우산(햇빛·비 겸용)과 모자, 미끄럽지 않은 편한 신발</li></ul></div>
+  <div class="tip"><h3>날씨와 옷차림</h3><ul><li>11/6 예보: 7일은 선선하고 가끔 비, 8일은 낮 26~29도로 잠깐 따뜻해요.</li><li>9~10일은 찬 바람이 다시 불어 낮 21~24도, 아침 17~20도로 쌀쌀해요. 3일차 우라이는 산속이라 더 추워요.</li><li>거의 매일 짧은 비가 와요. 우비와 바람막이를 늘 챙겨요.</li><li>반팔에 얇은 긴팔을 겹쳐 입고, 가디건이나 얇은 패딩을 챙겨요. 실내 에어컨이 세요.</li><li>양우산(햇빛·비 겸용)과 모자, 미끄럽지 않은 편한 신발</li></ul></div>
   <div class="tip"><h3>음식</h3><ul><li>고수(향이 강한 풀)가 자주 들어가요. 싫으면 '고수 빼주세요' 카드를 보여주세요.</li><li>매운 요리는 '안 맵게' 카드를 보여주세요.</li><li>수돗물은 바로 마시지 말고 편의점 생수를 드세요.</li></ul></div>
   <div class="tip"><h3>돈</h3><ul><li>대만 돈은 '달러(NT$)'예요. 1달러가 약 42원이에요.</li><li>야시장 간식이나 작은 가게는 현금만 받기도 해요.</li><li>팁은 안 줘도 돼요. 앉아서 먹는 식당 중엔 계산서에 봉사료 10%가 붙는 곳도 있어요. 하루 종일 다닌 밴 기사님께만 NT$300~500 정도 드려도 좋아요.</li></ul></div>
   <div class="tip"><h3>시간과 전기</h3><ul><li>한국보다 1시간 늦어요. 휴대폰 시계는 저절로 바뀌어요.</li><li>콘센트 모양이 달라요(11자). 충전할 땐 어댑터를 끼워요.</li></ul></div>
